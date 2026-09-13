@@ -1268,26 +1268,21 @@
                 }, 350);
             }
 
-            // Trigger glitch ONLY when entering viewport (scrolling to section)
+            // Trigger glitch ONLY once when first entering viewport, then disconnect so it never re-glitches
             const cardObserver = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
                     const card = entry.target;
-                    if (entry.isIntersecting) {
-                        // Glitch only on entrance
-                        if (!card._hasGlitchEntered) {
-                            card._hasGlitchEntered = true;
-                            const siblings = Array.from(card.parentElement ? card.parentElement.children : []);
-                            const siblingIndex = siblings.indexOf(card);
-                            const delay = Math.max(0, siblingIndex) * 45;
+                    if (entry.isIntersecting && !card._hasGlitchEntered) {
+                        card._hasGlitchEntered = true;
+                        cardObserver.unobserve(card);
 
-                            setTimeout(() => {
-                                triggerCardGlitch(card);
-                            }, Math.min(delay, 200));
-                        }
-                    } else {
-                        // Reset when scrolled out of view so it can glitch on next re-entrance
-                        card._hasGlitchEntered = false;
-                        card.classList.remove('bw-glitch-a', 'bw-glitch-b');
+                        const siblings = Array.from(card.parentElement ? card.parentElement.children : []);
+                        const siblingIndex = siblings.indexOf(card);
+                        const delay = Math.max(0, siblingIndex) * 45;
+
+                        setTimeout(() => {
+                            triggerCardGlitch(card);
+                        }, Math.min(delay, 200));
                     }
                 });
             }, {
@@ -1297,11 +1292,6 @@
 
             allCards.forEach(card => {
                 cardObserver.observe(card);
-
-                // Interactive mouse hover micro-burst
-                card.addEventListener('mouseenter', () => {
-                    triggerCardGlitch(card);
-                });
             });
         })();
     </script>

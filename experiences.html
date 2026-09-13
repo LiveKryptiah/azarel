@@ -1007,14 +1007,10 @@
             const cardObserver = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
                     const card = entry.target;
-                    if (entry.isIntersecting) {
-                        if (!card._hasGlitchEntered) {
-                            card._hasGlitchEntered = true;
-                            triggerCardGlitch(card);
-                        }
-                    } else {
-                        card._hasGlitchEntered = false;
-                        card.classList.remove('bw-glitch-a', 'bw-glitch-b');
+                    if (entry.isIntersecting && !card._hasGlitchEntered) {
+                        card._hasGlitchEntered = true;
+                        cardObserver.unobserve(card);
+                        triggerCardGlitch(card);
                     }
                 });
             }, {
@@ -1024,7 +1020,6 @@
 
             allCards.forEach(card => {
                 cardObserver.observe(card);
-                card.addEventListener('mouseenter', () => triggerCardGlitch(card));
             });
         })();
     </script>

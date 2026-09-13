@@ -1293,10 +1293,8 @@ resource &quot;cloudflare_tunnel_config&quot; &quot;zero_trust_ingress&quot; {
                         if (!card._hasGlitchEntered) {
                             card._hasGlitchEntered = true;
                             triggerCardGlitch(card);
+                            cardObserver.unobserve(card);
                         }
-                    } else {
-                        card._hasGlitchEntered = false;
-                        card.classList.remove('bw-glitch-a', 'bw-glitch-b');
                     }
                 });
             }, {
@@ -1306,7 +1304,6 @@ resource &quot;cloudflare_tunnel_config&quot; &quot;zero_trust_ingress&quot; {
 
             allCards.forEach(card => {
                 cardObserver.observe(card);
-                card.addEventListener('mouseenter', () => triggerCardGlitch(card));
             });
         })();
     </script>

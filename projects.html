@@ -351,7 +351,7 @@
     <!-- Background Telemetry Tags -->
     <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden select-none">
         <div class="absolute top-28 left-8 hidden lg:block text-[10px] font-mono text-white/20">
-            + [ARCHIVE: 08 DEPLOYED] // 2024-2026
+            + [ARCHIVE: 12 DEPLOYED] // 2024-2026
         </div>
         <div class="absolute top-1/3 right-12 hidden xl:block text-[10px] font-mono text-white/20">
             [SYS_INTEGRITY] ➔ VERIFIED
@@ -456,12 +456,12 @@
                 <div class="flex items-center justify-center gap-1.5 overflow-x-auto w-full md:w-auto pb-0.5 md:pb-0 scrollbar-none">
                     <button class="filter-btn active px-3.5 py-1 rounded-full text-xs font-mono border border-white/20 transition-all shrink-0 flex items-center gap-1.5" data-filter="all">
                         <span>All Builds</span>
-                        <span class="text-[10px] bg-white/20 text-black px-1.5 py-0.2 rounded-full font-bold">8</span>
+                        <span class="text-[10px] bg-white/20 text-black px-1.5 py-0.2 rounded-full font-bold">12</span>
                     </button>
                     <button class="filter-btn px-3 py-1 rounded-full text-xs font-mono border border-white/10 text-neutral-400 hover:text-white hover:border-white/30 transition-all shrink-0 flex items-center gap-1.5" data-filter="website">
                         <i data-lucide="globe" class="w-3 h-3"></i>
                         <span>Websites</span>
-                        <span class="text-[10px] bg-white/10 text-neutral-300 px-1.5 py-0.2 rounded-full font-bold">2</span>
+                        <span class="text-[10px] bg-white/10 text-neutral-300 px-1.5 py-0.2 rounded-full font-bold">6</span>
                     </button>
                     <button class="filter-btn px-3 py-1 rounded-full text-xs font-mono border border-white/10 text-neutral-400 hover:text-white hover:border-white/30 transition-all shrink-0 flex items-center gap-1.5" data-filter="app">
                         <i data-lucide="smartphone" class="w-3 h-3"></i>
@@ -506,22 +506,22 @@
                     </div>
                     <span class="text-neutral-600">•</span>
                     <div>
-                        <span id="filtered-count" class="text-white font-bold">8</span> OF 8 DEPLOYMENTS
+                        <span id="filtered-count" class="text-white font-bold">12</span> OF 12 DEPLOYMENTS
                     </div>
                 </div>
 
                 <!-- Cards Grid -->
                 <div id="projects-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
-                    <!-- ==================== 01. SYSTEM: LGU-OS ==================== -->
-                    <article class="project-card glass-card p-6 md:p-8 flex flex-col justify-between futuristic-reveal" data-category="system" data-tags="golang postgresql docker redis tailwind municipal enterprise system">
+                    <!-- ==================== 01. WEBSITE: TAXMAP ALPHA ==================== -->
+                    <article class="project-card glass-card p-5 sm:p-7 flex flex-col justify-between futuristic-reveal" data-category="website" data-tags="cadastral gis leaflet geospatial postgresql postgis vercel web website taxmap">
                         <div>
                             <!-- Header Meta -->
-                            <div class="flex items-start justify-between gap-4 mb-4">
+                            <div class="flex items-start justify-between gap-4 mb-3">
                                 <div class="flex items-center gap-2.5">
                                     <span class="w-7 h-7 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center font-dot font-black text-xs text-white">01</span>
                                     <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono tracking-wider bg-white/10 border border-white/20 text-neutral-200 uppercase">
-                                        SYSTEM
+                                        WEBSITE
                                     </span>
                                 </div>
                                 <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-400">
@@ -532,39 +532,175 @@
 
                             <!-- Title & Subtitle -->
                             <h2 class="font-dot text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
-                                LGU-OS — Municipal Cloud & Civil Operations Core
+                                TaxMap Alpha — Provincial Assessor & Cadastral GIS
                             </h2>
-                            <p class="text-xs sm:text-sm text-neutral-400 leading-relaxed mb-6 font-sans">
-                                Distributed civil administration portal unifying municipal property tax processing, digital civil registry issuance, business permitting, and automated land parcel GIS records into an encrypted government operating hub.
+                            <p class="text-xs sm:text-sm text-neutral-400 leading-relaxed mb-4 font-sans">
+                                Real-time provincial land parcel cadastral mapping, automated tax classification, and geospatial query engine engineered for local government assessors.
                             </p>
 
-                            <!-- Interactive Telemetry Mockup Box -->
-                            <div class="telemetry-code rounded-xl p-4 mb-6 text-xs text-neutral-300 font-mono space-y-2">
-                                <div class="flex items-center justify-between border-b border-white/10 pb-2 text-[11px] text-neutral-400">
-                                    <span class="flex items-center gap-1.5"><i data-lucide="terminal" class="w-3.5 h-3.5"></i> daemon@lgu-node-01:~#</span>
-                                    <span class="text-white">99.98% SLA</span>
+                            <!-- Cyber Glass Browser Mockup (Web Design Display) -->
+                            <div class="rounded-xl border border-white/15 bg-black/90 overflow-hidden mb-5 shadow-2xl group/browser">
+                                <!-- Browser Chrome Topbar -->
+                                <div class="px-3.5 py-2.5 bg-white/[0.04] border-b border-white/10 flex items-center justify-between gap-2 select-none">
+                                    <div class="flex items-center gap-1.5">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
+                                        <span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
+                                        <span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
+                                    </div>
+                                    <!-- Address Pill -->
+                                    <div class="flex items-center gap-1.5 px-3 py-0.5 rounded-md bg-white/[0.05] border border-white/10 text-[10px] sm:text-[11px] font-mono text-neutral-300 max-w-[200px] sm:max-w-[280px] truncate">
+                                        <i data-lucide="lock" class="w-3 h-3 text-white/50 shrink-0"></i>
+                                        <span class="truncate">taxmap-alpha.vercel.app</span>
+                                    </div>
+                                    <!-- Status -->
+                                    <div class="flex items-center gap-1.5 text-[10px] font-mono text-white/80 bg-white/10 px-2 py-0.5 rounded-full border border-white/15">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+                                        <span>LIVE</span>
+                                    </div>
                                 </div>
-                                <div class="grid grid-cols-3 gap-2 pt-1 text-center">
-                                    <div class="p-2 rounded bg-white/[0.03] border border-white/5">
-                                        <div class="text-[10px] text-neutral-400">CITIZENS SERVED</div>
-                                        <div class="font-dot text-sm font-bold text-white mt-0.5">42,850+</div>
+
+                                <!-- Browser Viewport with Scaled Web Design -->
+                                <div class="browser-viewport relative w-full h-[260px] sm:h-[300px] bg-neutral-950 overflow-hidden">
+                                    <div class="iframe-wrapper w-[1024px] h-[640px] origin-top-left transform pointer-events-none select-none transition-opacity duration-300">
+                                        <iframe 
+                                            src="https://taxmap-alpha.vercel.app/" 
+                                            class="w-full h-full border-0 bg-neutral-900" 
+                                            loading="lazy" 
+                                            title="TaxMap Alpha Web Design"
+                                            tabindex="-1"
+                                        ></iframe>
                                     </div>
-                                    <div class="p-2 rounded bg-white/[0.03] border border-white/5">
-                                        <div class="text-[10px] text-neutral-400">QUERY LATENCY</div>
-                                        <div class="font-dot text-sm font-bold text-white mt-0.5">&lt; 118ms</div>
-                                    </div>
-                                    <div class="p-2 rounded bg-white/[0.03] border border-white/5">
-                                        <div class="text-[10px] text-neutral-400">AUDIT HASHES</div>
-                                        <div class="font-dot text-sm font-bold text-white mt-0.5">SHA-256</div>
+
+                                    <!-- Hover Actions Glass Overlay -->
+                                    <div class="absolute inset-0 bg-black/60 backdrop-blur-[2px] opacity-0 group-hover/browser:opacity-100 transition-opacity duration-200 flex flex-col items-center justify-center gap-3 p-4">
+                                        <button onclick="openWebPreviewModal('https://taxmap-alpha.vercel.app/', 'TaxMap Alpha — Provincial Assessor & Cadastral GIS')" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white text-black font-bold text-xs hover:bg-neutral-200 transition-all shadow-lg active:scale-95">
+                                            <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+                                            <span>Interactive Fullscreen Preview</span>
+                                        </button>
+                                        <a href="https://taxmap-alpha.vercel.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 text-white font-mono text-xs transition-all">
+                                            <span>Visit Live Site</span>
+                                            <i data-lucide="external-link" class="w-3 h-3"></i>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Key Engineering Highlights -->
-                            <ul class="space-y-2 mb-6 text-xs text-neutral-300 font-sans">
+                            <ul class="space-y-1.5 mb-5 text-xs text-neutral-300 font-sans">
                                 <li class="flex items-start gap-2">
                                     <i data-lucide="check" class="w-3.5 h-3.5 text-white shrink-0 mt-0.5"></i>
-                                    <span>High-throughput multi-tenant role-based access control (RBAC) with cryptographic audit logs.</span>
+                                    <span>High-precision cadastral polygon mapping with real-time tax assessment calculations.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 text-white shrink-0 mt-0.5"></i>
+                                    <span>Sub-second geospatial parcel spatial queries and automated tax certificate exports.</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <!-- Tech Stack Pills -->
+                            <div class="flex flex-wrap gap-1.5 mb-5 pt-3.5 border-t border-white/[0.08]">
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Leaflet GIS</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">PostGIS</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Next.js</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Tailwind CSS</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Vercel</span>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="flex items-center gap-3">
+                                <button onclick="openSpecModal('taxmap')" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white text-black text-xs font-bold hover:bg-neutral-200 transition-all">
+                                    <i data-lucide="info" class="w-3.5 h-3.5"></i>
+                                    <span>Inspect System Specs</span>
+                                </button>
+                                <button onclick="openWebPreviewModal('https://taxmap-alpha.vercel.app/', 'TaxMap Alpha — Provincial Assessor & Cadastral GIS')" class="px-3 py-2.5 rounded-xl bg-white/[0.05] hover:bg-white/10 border border-white/10 text-white text-xs font-mono transition-all flex items-center justify-center" title="Open Interactive Preview">
+                                    <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+                                </button>
+                                <a href="https://taxmap-alpha.vercel.app/" target="_blank" rel="noopener noreferrer" class="px-3 py-2.5 rounded-xl bg-white/[0.05] hover:bg-white/10 border border-white/10 text-white text-xs font-mono transition-all flex items-center justify-center" title="Visit Live Site">
+                                    <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ==================== 02. WEBSITE: LGU-OS ==================== -->
+                    <article class="project-card glass-card p-5 sm:p-7 flex flex-col justify-between futuristic-reveal" data-category="website" data-tags="municipal civil-registry workflow rbac government cloud vercel web website lgu">
+                        <div>
+                            <!-- Header Meta -->
+                            <div class="flex items-start justify-between gap-4 mb-3">
+                                <div class="flex items-center gap-2.5">
+                                    <span class="w-7 h-7 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center font-dot font-black text-xs text-white">02</span>
+                                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono tracking-wider bg-white/10 border border-white/20 text-neutral-200 uppercase">
+                                        WEBSITE
+                                    </span>
+                                </div>
+                                <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-400">
+                                    <span class="w-2 h-2 rounded-full bg-white"></span>
+                                    <span>PRODUCTION LIVE</span>
+                                </div>
+                            </div>
+
+                            <!-- Title & Subtitle -->
+                            <h2 class="font-dot text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
+                                LGU Operations OS — Municipal Cloud & Civil Core
+                            </h2>
+                            <p class="text-xs sm:text-sm text-neutral-400 leading-relaxed mb-4 font-sans">
+                                Distributed civil administration portal unifying municipal property tax processing, civil registry document issuance, and automated government operating workflows.
+                            </p>
+
+                            <!-- Cyber Glass Browser Mockup (Web Design Display) -->
+                            <div class="rounded-xl border border-white/15 bg-black/90 overflow-hidden mb-5 shadow-2xl group/browser">
+                                <!-- Browser Chrome Topbar -->
+                                <div class="px-3.5 py-2.5 bg-white/[0.04] border-b border-white/10 flex items-center justify-between gap-2 select-none">
+                                    <div class="flex items-center gap-1.5">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
+                                        <span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
+                                        <span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
+                                    </div>
+                                    <!-- Address Pill -->
+                                    <div class="flex items-center gap-1.5 px-3 py-0.5 rounded-md bg-white/[0.05] border border-white/10 text-[10px] sm:text-[11px] font-mono text-neutral-300 max-w-[200px] sm:max-w-[280px] truncate">
+                                        <i data-lucide="lock" class="w-3 h-3 text-white/50 shrink-0"></i>
+                                        <span class="truncate">lgu-green.vercel.app</span>
+                                    </div>
+                                    <!-- Status -->
+                                    <div class="flex items-center gap-1.5 text-[10px] font-mono text-white/80 bg-white/10 px-2 py-0.5 rounded-full border border-white/15">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+                                        <span>LIVE</span>
+                                    </div>
+                                </div>
+
+                                <!-- Browser Viewport with Scaled Web Design -->
+                                <div class="browser-viewport relative w-full h-[260px] sm:h-[300px] bg-neutral-950 overflow-hidden">
+                                    <div class="iframe-wrapper w-[1024px] h-[640px] origin-top-left transform pointer-events-none select-none transition-opacity duration-300">
+                                        <iframe 
+                                            src="https://lgu-green.vercel.app/" 
+                                            class="w-full h-full border-0 bg-neutral-900" 
+                                            loading="lazy" 
+                                            title="LGU Operations OS Web Design"
+                                            tabindex="-1"
+                                        ></iframe>
+                                    </div>
+
+                                    <!-- Hover Actions Glass Overlay -->
+                                    <div class="absolute inset-0 bg-black/60 backdrop-blur-[2px] opacity-0 group-hover/browser:opacity-100 transition-opacity duration-200 flex flex-col items-center justify-center gap-3 p-4">
+                                        <button onclick="openWebPreviewModal('https://lgu-green.vercel.app/', 'LGU Operations OS — Municipal Cloud & Civil Core')" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white text-black font-bold text-xs hover:bg-neutral-200 transition-all shadow-lg active:scale-95">
+                                            <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+                                            <span>Interactive Fullscreen Preview</span>
+                                        </button>
+                                        <a href="https://lgu-green.vercel.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 text-white font-mono text-xs transition-all">
+                                            <span>Visit Live Site</span>
+                                            <i data-lucide="external-link" class="w-3 h-3"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Key Engineering Highlights -->
+                            <ul class="space-y-1.5 mb-5 text-xs text-neutral-300 font-sans">
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 text-white shrink-0 mt-0.5"></i>
+                                    <span>High-throughput multi-tenant role-based access control with cryptographic audit logs.</span>
                                 </li>
                                 <li class="flex items-start gap-2">
                                     <i data-lucide="check" class="w-3.5 h-3.5 text-white shrink-0 mt-0.5"></i>
@@ -575,283 +711,481 @@
 
                         <div>
                             <!-- Tech Stack Pills -->
-                            <div class="flex flex-wrap gap-1.5 mb-6 pt-4 border-t border-white/[0.08]">
+                            <div class="flex flex-wrap gap-1.5 mb-5 pt-3.5 border-t border-white/[0.08]">
                                 <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Golang</span>
                                 <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">PostgreSQL</span>
                                 <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Docker</span>
-                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Redis</span>
                                 <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Tailwind</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Vercel</span>
                             </div>
 
                             <!-- Action Buttons -->
                             <div class="flex items-center gap-3">
-                                <button onclick="openSpecModal('lgu-os')" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white text-black text-xs font-bold hover:bg-neutral-200 transition-all">
+                                <button onclick="openSpecModal('lgu-web')" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white text-black text-xs font-bold hover:bg-neutral-200 transition-all">
                                     <i data-lucide="info" class="w-3.5 h-3.5"></i>
                                     <span>Inspect System Specs</span>
                                 </button>
-                                <a href="contact.html" class="px-3 py-2.5 rounded-xl bg-white/[0.05] hover:bg-white/10 border border-white/10 text-white text-xs font-mono transition-all flex items-center justify-center" title="Request Architecture Walkthrough">
+                                <button onclick="openWebPreviewModal('https://lgu-green.vercel.app/', 'LGU Operations OS — Municipal Cloud & Civil Core')" class="px-3 py-2.5 rounded-xl bg-white/[0.05] hover:bg-white/10 border border-white/10 text-white text-xs font-mono transition-all flex items-center justify-center" title="Open Interactive Preview">
+                                    <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+                                </button>
+                                <a href="https://lgu-green.vercel.app/" target="_blank" rel="noopener noreferrer" class="px-3 py-2.5 rounded-xl bg-white/[0.05] hover:bg-white/10 border border-white/10 text-white text-xs font-mono transition-all flex items-center justify-center" title="Visit Live Site">
                                     <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
                                 </a>
                             </div>
                         </div>
                     </article>
 
-                    <!-- ==================== 02. SYSTEM: SENTINEL TELEMETRY DAEMON ==================== -->
-                    <article class="project-card glass-card p-6 md:p-8 flex flex-col justify-between futuristic-reveal" data-category="system" data-tags="rust timescaledb prometheus grafana ebpf daemon telemetry system">
+                    <!-- ==================== 03. WEBSITE: DIWA WIRE ==================== -->
+                    <article class="project-card glass-card p-5 sm:p-7 flex flex-col justify-between futuristic-reveal" data-category="website" data-tags="intelligence news real-time broadcast government media vercel web website diwa">
                         <div>
                             <!-- Header Meta -->
-                            <div class="flex items-start justify-between gap-4 mb-4">
-                                <div class="flex items-center gap-2.5">
-                                    <span class="w-7 h-7 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center font-dot font-black text-xs text-white">02</span>
-                                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono tracking-wider bg-white/10 border border-white/20 text-neutral-200 uppercase">
-                                        SYSTEM
-                                    </span>
-                                </div>
-                                <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-400">
-                                    <span class="w-2 h-2 rounded-full bg-white"></span>
-                                    <span>DAEMON ACTIVE</span>
-                                </div>
-                            </div>
-
-                            <!-- Title & Subtitle -->
-                            <h2 class="font-dot text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
-                                Sentinel — Edge Infrastructure Daemon & eBPF Telemetry
-                            </h2>
-                            <p class="text-xs sm:text-sm text-neutral-400 leading-relaxed mb-6 font-sans">
-                                Distributed node monitor engineered in Rust for kernel-level socket inspection, hardware performance anomalies, and instant failover execution across multi-region server clusters.
-                            </p>
-
-                            <!-- Interactive Telemetry Mockup Box -->
-                            <div class="telemetry-code rounded-xl p-4 mb-6 text-xs text-neutral-300 font-mono space-y-2">
-                                <div class="flex items-center justify-between border-b border-white/10 pb-2 text-[11px] text-neutral-400">
-                                    <span class="flex items-center gap-1.5"><i data-lucide="cpu" class="w-3.5 h-3.5"></i> sentinel-node-cluster.local</span>
-                                    <span class="text-white font-mono">0.04% CPU</span>
-                                </div>
-                                <div class="grid grid-cols-3 gap-2 pt-1 text-center">
-                                    <div class="p-2 rounded bg-white/[0.03] border border-white/5">
-                                        <div class="text-[10px] text-neutral-400">EVENT STREAM</div>
-                                        <div class="font-dot text-sm font-bold text-white mt-0.5">500k/sec</div>
-                                    </div>
-                                    <div class="p-2 rounded bg-white/[0.03] border border-white/5">
-                                        <div class="text-[10px] text-neutral-400">ALERT DISPATCH</div>
-                                        <div class="font-dot text-sm font-bold text-white mt-0.5">&lt; 0.8ms</div>
-                                    </div>
-                                    <div class="p-2 rounded bg-white/[0.03] border border-white/5">
-                                        <div class="text-[10px] text-neutral-400">MEM OVERHEAD</div>
-                                        <div class="font-dot text-sm font-bold text-white mt-0.5">4.2 MB</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Key Engineering Highlights -->
-                            <ul class="space-y-2 mb-6 text-xs text-neutral-300 font-sans">
-                                <li class="flex items-start gap-2">
-                                    <i data-lucide="check" class="w-3.5 h-3.5 text-white shrink-0 mt-0.5"></i>
-                                    <span>Kernel eBPF tracepoints capture packet drops without touching application memory.</span>
-                                </li>
-                                <li class="flex items-start gap-2">
-                                    <i data-lucide="check" class="w-3.5 h-3.5 text-white shrink-0 mt-0.5"></i>
-                                    <span>Encrypted peer-to-peer heartbeat mesh with automated DNS failover triggers.</span>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div>
-                            <!-- Tech Stack Pills -->
-                            <div class="flex flex-wrap gap-1.5 mb-6 pt-4 border-t border-white/[0.08]">
-                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Rust</span>
-                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">eBPF</span>
-                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">TimescaleDB</span>
-                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Prometheus</span>
-                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Grafana</span>
-                            </div>
-
-                            <!-- Action Buttons -->
-                            <div class="flex items-center gap-3">
-                                <button onclick="openSpecModal('sentinel')" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white text-black text-xs font-bold hover:bg-neutral-200 transition-all">
-                                    <i data-lucide="info" class="w-3.5 h-3.5"></i>
-                                    <span>Inspect System Specs</span>
-                                </button>
-                                <a href="contact.html" class="px-3 py-2.5 rounded-xl bg-white/[0.05] hover:bg-white/10 border border-white/10 text-white text-xs font-mono transition-all flex items-center justify-center" title="Request Architecture Walkthrough">
-                                    <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- ==================== 03. AUTOMATION: APEX ETL MESH ==================== -->
-                    <article class="project-card glass-card p-6 md:p-8 flex flex-col justify-between futuristic-reveal" data-category="automation" data-tags="python playwright celery redis duckdb etl web scraper automation">
-                        <div>
-                            <!-- Header Meta -->
-                            <div class="flex items-start justify-between gap-4 mb-4">
+                            <div class="flex items-start justify-between gap-4 mb-3">
                                 <div class="flex items-center gap-2.5">
                                     <span class="w-7 h-7 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center font-dot font-black text-xs text-white">03</span>
                                     <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono tracking-wider bg-white/10 border border-white/20 text-neutral-200 uppercase">
-                                        AUTOMATION
+                                        WEBSITE
                                     </span>
                                 </div>
                                 <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-400">
                                     <span class="w-2 h-2 rounded-full bg-white"></span>
-                                    <span>MESH PIPELINE RUNNING</span>
+                                    <span>PRODUCTION LIVE</span>
                                 </div>
                             </div>
 
                             <!-- Title & Subtitle -->
                             <h2 class="font-dot text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
-                                Apex — Headless Scraping & Web Intelligence Mesh
+                                DiWA Wire — National Agencies Knowledge Wire
                             </h2>
-                            <p class="text-xs sm:text-sm text-neutral-400 leading-relaxed mb-6 font-sans">
-                                Resilient distributed crawling cluster with dynamic TLS fingerprint spoofing, adaptive anti-bot bypassing, and live streaming ETL ingestion into analytical columnar data stores.
+                            <p class="text-xs sm:text-sm text-neutral-400 leading-relaxed mb-4 font-sans">
+                                Real-time official state intelligence and multi-agency news distribution platform delivering low-latency bulletins, disaster alerts, and gazette announcements.
                             </p>
 
-                            <!-- Interactive Telemetry Mockup Box -->
-                            <div class="telemetry-code rounded-xl p-4 mb-6 text-xs text-neutral-300 font-mono space-y-2">
-                                <div class="flex items-center justify-between border-b border-white/10 pb-2 text-[11px] text-neutral-400">
-                                    <span class="flex items-center gap-1.5"><i data-lucide="layers" class="w-3.5 h-3.5"></i> worker_pool: 32 headless instances</span>
-                                    <span class="text-white">99.4% BYPASS</span>
+                            <!-- Cyber Glass Browser Mockup (Web Design Display) -->
+                            <div class="rounded-xl border border-white/15 bg-black/90 overflow-hidden mb-5 shadow-2xl group/browser">
+                                <!-- Browser Chrome Topbar -->
+                                <div class="px-3.5 py-2.5 bg-white/[0.04] border-b border-white/10 flex items-center justify-between gap-2 select-none">
+                                    <div class="flex items-center gap-1.5">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
+                                        <span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
+                                        <span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
+                                    </div>
+                                    <!-- Address Pill -->
+                                    <div class="flex items-center gap-1.5 px-3 py-0.5 rounded-md bg-white/[0.05] border border-white/10 text-[10px] sm:text-[11px] font-mono text-neutral-300 max-w-[200px] sm:max-w-[280px] truncate">
+                                        <i data-lucide="lock" class="w-3 h-3 text-white/50 shrink-0"></i>
+                                        <span class="truncate">diwa-rho.vercel.app</span>
+                                    </div>
+                                    <!-- Status -->
+                                    <div class="flex items-center gap-1.5 text-[10px] font-mono text-white/80 bg-white/10 px-2 py-0.5 rounded-full border border-white/15">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+                                        <span>LIVE</span>
+                                    </div>
                                 </div>
-                                <div class="grid grid-cols-3 gap-2 pt-1 text-center">
-                                    <div class="p-2 rounded bg-white/[0.03] border border-white/5">
-                                        <div class="text-[10px] text-neutral-400">INGEST DAILY</div>
-                                        <div class="font-dot text-sm font-bold text-white mt-0.5">2.4M items</div>
+
+                                <!-- Browser Viewport with Scaled Web Design -->
+                                <div class="browser-viewport relative w-full h-[260px] sm:h-[300px] bg-neutral-950 overflow-hidden">
+                                    <div class="iframe-wrapper w-[1024px] h-[640px] origin-top-left transform pointer-events-none select-none transition-opacity duration-300">
+                                        <iframe 
+                                            src="https://diwa-rho.vercel.app/" 
+                                            class="w-full h-full border-0 bg-neutral-900" 
+                                            loading="lazy" 
+                                            title="DiWA Wire Web Design"
+                                            tabindex="-1"
+                                        ></iframe>
                                     </div>
-                                    <div class="p-2 rounded bg-white/[0.03] border border-white/5">
-                                        <div class="text-[10px] text-neutral-400">TRANSFORM TIME</div>
-                                        <div class="font-dot text-sm font-bold text-white mt-0.5">0.02s/batch</div>
-                                    </div>
-                                    <div class="p-2 rounded bg-white/[0.03] border border-white/5">
-                                        <div class="text-[10px] text-neutral-400">PROXY ROTATE</div>
-                                        <div class="font-dot text-sm font-bold text-white mt-0.5">Adaptive</div>
+
+                                    <!-- Hover Actions Glass Overlay -->
+                                    <div class="absolute inset-0 bg-black/60 backdrop-blur-[2px] opacity-0 group-hover/browser:opacity-100 transition-opacity duration-200 flex flex-col items-center justify-center gap-3 p-4">
+                                        <button onclick="openWebPreviewModal('https://diwa-rho.vercel.app/', 'DiWA Wire — National Agencies Knowledge Wire')" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white text-black font-bold text-xs hover:bg-neutral-200 transition-all shadow-lg active:scale-95">
+                                            <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+                                            <span>Interactive Fullscreen Preview</span>
+                                        </button>
+                                        <a href="https://diwa-rho.vercel.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 text-white font-mono text-xs transition-all">
+                                            <span>Visit Live Site</span>
+                                            <i data-lucide="external-link" class="w-3 h-3"></i>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Key Engineering Highlights -->
-                            <ul class="space-y-2 mb-6 text-xs text-neutral-300 font-sans">
+                            <ul class="space-y-1.5 mb-5 text-xs text-neutral-300 font-sans">
                                 <li class="flex items-start gap-2">
                                     <i data-lucide="check" class="w-3.5 h-3.5 text-white shrink-0 mt-0.5"></i>
-                                    <span>Automated CAPTCHA token solver and browser canvas noise injection for 99.4% bypass.</span>
+                                    <span>Real-time news ingestion pipeline with multi-agency verification and push notifications.</span>
                                 </li>
                                 <li class="flex items-start gap-2">
                                     <i data-lucide="check" class="w-3.5 h-3.5 text-white shrink-0 mt-0.5"></i>
-                                    <span>Dead-letter recovery queues with automatic schema mutation warnings.</span>
+                                    <span>High-availability edge architecture built to withstand severe disaster traffic spikes.</span>
                                 </li>
                             </ul>
                         </div>
 
                         <div>
                             <!-- Tech Stack Pills -->
-                            <div class="flex flex-wrap gap-1.5 mb-6 pt-4 border-t border-white/[0.08]">
-                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Python</span>
-                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Playwright</span>
-                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Celery</span>
-                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Redis</span>
-                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">DuckDB</span>
+                            <div class="flex flex-wrap gap-1.5 mb-5 pt-3.5 border-t border-white/[0.08]">
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Next.js 14</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">TypeScript</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Tailwind CSS</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Edge Functions</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Vercel</span>
                             </div>
 
                             <!-- Action Buttons -->
                             <div class="flex items-center gap-3">
-                                <button onclick="openSpecModal('apex')" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white text-black text-xs font-bold hover:bg-neutral-200 transition-all">
+                                <button onclick="openSpecModal('diwa')" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white text-black text-xs font-bold hover:bg-neutral-200 transition-all">
                                     <i data-lucide="info" class="w-3.5 h-3.5"></i>
                                     <span>Inspect System Specs</span>
                                 </button>
-                                <a href="contact.html" class="px-3 py-2.5 rounded-xl bg-white/[0.05] hover:bg-white/10 border border-white/10 text-white text-xs font-mono transition-all flex items-center justify-center" title="Request Architecture Walkthrough">
+                                <button onclick="openWebPreviewModal('https://diwa-rho.vercel.app/', 'DiWA Wire — National Agencies Knowledge Wire')" class="px-3 py-2.5 rounded-xl bg-white/[0.05] hover:bg-white/10 border border-white/10 text-white text-xs font-mono transition-all flex items-center justify-center" title="Open Interactive Preview">
+                                    <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+                                </button>
+                                <a href="https://diwa-rho.vercel.app/" target="_blank" rel="noopener noreferrer" class="px-3 py-2.5 rounded-xl bg-white/[0.05] hover:bg-white/10 border border-white/10 text-white text-xs font-mono transition-all flex items-center justify-center" title="Visit Live Site">
                                     <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
                                 </a>
                             </div>
                         </div>
                     </article>
 
-                    <!-- ==================== 04. AUTOMATION: LEDGERFLOW ==================== -->
-                    <article class="project-card glass-card p-6 md:p-8 flex flex-col justify-between futuristic-reveal" data-category="automation" data-tags="nodejs typescript fastify stripe postgresql webhook ledger automation">
+                    <!-- ==================== 04. WEBSITE: OPENFLOW WORK OS ==================== -->
+                    <article class="project-card glass-card p-5 sm:p-7 flex flex-col justify-between futuristic-reveal" data-category="website" data-tags="work-os postgresql jsonb sqlite enterprise kanban automation vercel web website openflow">
                         <div>
                             <!-- Header Meta -->
-                            <div class="flex items-start justify-between gap-4 mb-4">
+                            <div class="flex items-start justify-between gap-4 mb-3">
                                 <div class="flex items-center gap-2.5">
                                     <span class="w-7 h-7 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center font-dot font-black text-xs text-white">04</span>
                                     <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono tracking-wider bg-white/10 border border-white/20 text-neutral-200 uppercase">
-                                        AUTOMATION
+                                        WEBSITE
                                     </span>
                                 </div>
                                 <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-400">
                                     <span class="w-2 h-2 rounded-full bg-white"></span>
-                                    <span>RECONCILING 24/7</span>
+                                    <span>PRODUCTION LIVE</span>
                                 </div>
                             </div>
 
                             <!-- Title & Subtitle -->
                             <h2 class="font-dot text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
-                                LedgerFlow — Multi-Currency Webhook Reconciliation Suite
+                                OpenFlow Work OS — Distributed Enterprise Operations Hub
                             </h2>
-                            <p class="text-xs sm:text-sm text-neutral-400 leading-relaxed mb-6 font-sans">
-                                Idempotent webhook ingest and double-entry financial reconciliation engine synchronizing Stripe, PayPal, and banking APIs with zero discrepancy.
+                            <p class="text-xs sm:text-sm text-neutral-400 leading-relaxed mb-4 font-sans">
+                                High-velocity enterprise project and operations suite featuring hybrid PostgreSQL JSONB and local SQLite synchronization for instantaneous task management.
                             </p>
 
-                            <!-- Interactive Telemetry Mockup Box -->
-                            <div class="telemetry-code rounded-xl p-4 mb-6 text-xs text-neutral-300 font-mono space-y-2">
-                                <div class="flex items-center justify-between border-b border-white/10 pb-2 text-[11px] text-neutral-400">
-                                    <span class="flex items-center gap-1.5"><i data-lucide="zap" class="w-3.5 h-3.5"></i> webhook_ingress: 12,000 req/min</span>
-                                    <span class="text-white">0 ERRORS</span>
+                            <!-- Cyber Glass Browser Mockup (Web Design Display) -->
+                            <div class="rounded-xl border border-white/15 bg-black/90 overflow-hidden mb-5 shadow-2xl group/browser">
+                                <!-- Browser Chrome Topbar -->
+                                <div class="px-3.5 py-2.5 bg-white/[0.04] border-b border-white/10 flex items-center justify-between gap-2 select-none">
+                                    <div class="flex items-center gap-1.5">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
+                                        <span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
+                                        <span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
+                                    </div>
+                                    <!-- Address Pill -->
+                                    <div class="flex items-center gap-1.5 px-3 py-0.5 rounded-md bg-white/[0.05] border border-white/10 text-[10px] sm:text-[11px] font-mono text-neutral-300 max-w-[200px] sm:max-w-[280px] truncate">
+                                        <i data-lucide="lock" class="w-3 h-3 text-white/50 shrink-0"></i>
+                                        <span class="truncate">open-flow-roan.vercel.app</span>
+                                    </div>
+                                    <!-- Status -->
+                                    <div class="flex items-center gap-1.5 text-[10px] font-mono text-white/80 bg-white/10 px-2 py-0.5 rounded-full border border-white/15">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+                                        <span>LIVE</span>
+                                    </div>
                                 </div>
-                                <div class="grid grid-cols-3 gap-2 pt-1 text-center">
-                                    <div class="p-2 rounded bg-white/[0.03] border border-white/5">
-                                        <div class="text-[10px] text-neutral-400">RECONCILED</div>
-                                        <div class="font-dot text-sm font-bold text-white mt-0.5">$4.2M USD</div>
+
+                                <!-- Browser Viewport with Scaled Web Design -->
+                                <div class="browser-viewport relative w-full h-[260px] sm:h-[300px] bg-neutral-950 overflow-hidden">
+                                    <div class="iframe-wrapper w-[1024px] h-[640px] origin-top-left transform pointer-events-none select-none transition-opacity duration-300">
+                                        <iframe 
+                                            src="https://open-flow-roan.vercel.app/" 
+                                            class="w-full h-full border-0 bg-neutral-900" 
+                                            loading="lazy" 
+                                            title="OpenFlow Work OS Web Design"
+                                            tabindex="-1"
+                                        ></iframe>
                                     </div>
-                                    <div class="p-2 rounded bg-white/[0.03] border border-white/5">
-                                        <div class="text-[10px] text-neutral-400">IDEMPOTENCY</div>
-                                        <div class="font-dot text-sm font-bold text-white mt-0.5">100% Lock</div>
-                                    </div>
-                                    <div class="p-2 rounded bg-white/[0.03] border border-white/5">
-                                        <div class="text-[10px] text-neutral-400">DISPUTE LAG</div>
-                                        <div class="font-dot text-sm font-bold text-white mt-0.5">&lt; 350ms</div>
+
+                                    <!-- Hover Actions Glass Overlay -->
+                                    <div class="absolute inset-0 bg-black/60 backdrop-blur-[2px] opacity-0 group-hover/browser:opacity-100 transition-opacity duration-200 flex flex-col items-center justify-center gap-3 p-4">
+                                        <button onclick="openWebPreviewModal('https://open-flow-roan.vercel.app/', 'OpenFlow Work OS — Distributed Operations Hub')" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white text-black font-bold text-xs hover:bg-neutral-200 transition-all shadow-lg active:scale-95">
+                                            <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+                                            <span>Interactive Fullscreen Preview</span>
+                                        </button>
+                                        <a href="https://open-flow-roan.vercel.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 text-white font-mono text-xs transition-all">
+                                            <span>Visit Live Site</span>
+                                            <i data-lucide="external-link" class="w-3 h-3"></i>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Key Engineering Highlights -->
-                            <ul class="space-y-2 mb-6 text-xs text-neutral-300 font-sans">
+                            <ul class="space-y-1.5 mb-5 text-xs text-neutral-300 font-sans">
                                 <li class="flex items-start gap-2">
                                     <i data-lucide="check" class="w-3.5 h-3.5 text-white shrink-0 mt-0.5"></i>
-                                    <span>Distributed atomic Redis locks preventing double-credit and concurrent retry exploits.</span>
+                                    <span>Optimistic client-state mutations with instantaneous offline-first SQLite sync.</span>
                                 </li>
                                 <li class="flex items-start gap-2">
                                     <i data-lucide="check" class="w-3.5 h-3.5 text-white shrink-0 mt-0.5"></i>
-                                    <span>Real-time ops alerts dispatched straight to Discord/Slack with transaction replay tools.</span>
+                                    <span>Modular board engines with automated Kanban pipeline stages and sprint telemetry.</span>
                                 </li>
                             </ul>
                         </div>
 
                         <div>
                             <!-- Tech Stack Pills -->
-                            <div class="flex flex-wrap gap-1.5 mb-6 pt-4 border-t border-white/[0.08]">
-                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Node.js</span>
+                            <div class="flex flex-wrap gap-1.5 mb-5 pt-3.5 border-t border-white/[0.08]">
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">React 18</span>
                                 <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">TypeScript</span>
-                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Fastify</span>
-                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">PostgreSQL</span>
-                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Stripe API</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">PostgreSQL JSONB</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Tailwind CSS</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Vercel</span>
                             </div>
 
                             <!-- Action Buttons -->
                             <div class="flex items-center gap-3">
-                                <button onclick="openSpecModal('ledgerflow')" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white text-black text-xs font-bold hover:bg-neutral-200 transition-all">
+                                <button onclick="openSpecModal('openflow')" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white text-black text-xs font-bold hover:bg-neutral-200 transition-all">
                                     <i data-lucide="info" class="w-3.5 h-3.5"></i>
                                     <span>Inspect System Specs</span>
                                 </button>
-                                <a href="contact.html" class="px-3 py-2.5 rounded-xl bg-white/[0.05] hover:bg-white/10 border border-white/10 text-white text-xs font-mono transition-all flex items-center justify-center" title="Request Architecture Walkthrough">
+                                <button onclick="openWebPreviewModal('https://open-flow-roan.vercel.app/', 'OpenFlow Work OS — Distributed Operations Hub')" class="px-3 py-2.5 rounded-xl bg-white/[0.05] hover:bg-white/10 border border-white/10 text-white text-xs font-mono transition-all flex items-center justify-center" title="Open Interactive Preview">
+                                    <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+                                </button>
+                                <a href="https://open-flow-roan.vercel.app/" target="_blank" rel="noopener noreferrer" class="px-3 py-2.5 rounded-xl bg-white/[0.05] hover:bg-white/10 border border-white/10 text-white text-xs font-mono transition-all flex items-center justify-center" title="Visit Live Site">
                                     <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
                                 </a>
                             </div>
                         </div>
                     </article>
 
-                    <!-- ==================== 05. APP: CITIZEN DRRM SYNC ==================== -->
-                    <article class="project-card glass-card p-6 md:p-8 flex flex-col justify-between futuristic-reveal" data-category="app" data-tags="react native sqlite watermelon tailwind mobile offline mesh app">
+                    <!-- ==================== 05. WEBSITE: SCHOOL OS ==================== -->
+                    <article class="project-card glass-card p-5 sm:p-7 flex flex-col justify-between futuristic-reveal" data-category="website" data-tags="education portal grades student-information school-os lms vercel web website schooldash">
+                        <div>
+                            <!-- Header Meta -->
+                            <div class="flex items-start justify-between gap-4 mb-3">
+                                <div class="flex items-center gap-2.5">
+                                    <span class="w-7 h-7 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center font-dot font-black text-xs text-white">05</span>
+                                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono tracking-wider bg-white/10 border border-white/20 text-neutral-200 uppercase">
+                                        WEBSITE
+                                    </span>
+                                </div>
+                                <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-400">
+                                    <span class="w-2 h-2 rounded-full bg-white"></span>
+                                    <span>PRODUCTION LIVE</span>
+                                </div>
+                            </div>
+
+                            <!-- Title & Subtitle -->
+                            <h2 class="font-dot text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
+                                School OS — Rizal NHS Institutional Academic Portal
+                            </h2>
+                            <p class="text-xs sm:text-sm text-neutral-400 leading-relaxed mb-4 font-sans">
+                                Academic management and student information system handling digital grading computation, attendance analytics, teacher loads, and parent notifications.
+                            </p>
+
+                            <!-- Cyber Glass Browser Mockup (Web Design Display) -->
+                            <div class="rounded-xl border border-white/15 bg-black/90 overflow-hidden mb-5 shadow-2xl group/browser">
+                                <!-- Browser Chrome Topbar -->
+                                <div class="px-3.5 py-2.5 bg-white/[0.04] border-b border-white/10 flex items-center justify-between gap-2 select-none">
+                                    <div class="flex items-center gap-1.5">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
+                                        <span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
+                                        <span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
+                                    </div>
+                                    <!-- Address Pill -->
+                                    <div class="flex items-center gap-1.5 px-3 py-0.5 rounded-md bg-white/[0.05] border border-white/10 text-[10px] sm:text-[11px] font-mono text-neutral-300 max-w-[200px] sm:max-w-[280px] truncate">
+                                        <i data-lucide="lock" class="w-3 h-3 text-white/50 shrink-0"></i>
+                                        <span class="truncate">school-dash-94jv.vercel.app</span>
+                                    </div>
+                                    <!-- Status -->
+                                    <div class="flex items-center gap-1.5 text-[10px] font-mono text-white/80 bg-white/10 px-2 py-0.5 rounded-full border border-white/15">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+                                        <span>LIVE</span>
+                                    </div>
+                                </div>
+
+                                <!-- Browser Viewport with Scaled Web Design -->
+                                <div class="browser-viewport relative w-full h-[260px] sm:h-[300px] bg-neutral-950 overflow-hidden">
+                                    <div class="iframe-wrapper w-[1024px] h-[640px] origin-top-left transform pointer-events-none select-none transition-opacity duration-300">
+                                        <iframe 
+                                            src="https://school-dash-94jv.vercel.app/" 
+                                            class="w-full h-full border-0 bg-neutral-900" 
+                                            loading="lazy" 
+                                            title="School OS Portal Web Design"
+                                            tabindex="-1"
+                                        ></iframe>
+                                    </div>
+
+                                    <!-- Hover Actions Glass Overlay -->
+                                    <div class="absolute inset-0 bg-black/60 backdrop-blur-[2px] opacity-0 group-hover/browser:opacity-100 transition-opacity duration-200 flex flex-col items-center justify-center gap-3 p-4">
+                                        <button onclick="openWebPreviewModal('https://school-dash-94jv.vercel.app/', 'School OS — Rizal NHS Institutional Academic Portal')" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white text-black font-bold text-xs hover:bg-neutral-200 transition-all shadow-lg active:scale-95">
+                                            <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+                                            <span>Interactive Fullscreen Preview</span>
+                                        </button>
+                                        <a href="https://school-dash-94jv.vercel.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 text-white font-mono text-xs transition-all">
+                                            <span>Visit Live Site</span>
+                                            <i data-lucide="external-link" class="w-3 h-3"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Key Engineering Highlights -->
+                            <ul class="space-y-1.5 mb-5 text-xs text-neutral-300 font-sans">
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 text-white shrink-0 mt-0.5"></i>
+                                    <span>DepEd-compliant grading computation engine with automated report card generation.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 text-white shrink-0 mt-0.5"></i>
+                                    <span>Role-based portals for administrators, teachers, and students with real-time analytics.</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <!-- Tech Stack Pills -->
+                            <div class="flex flex-wrap gap-1.5 mb-5 pt-3.5 border-t border-white/[0.08]">
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Next.js</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">TypeScript</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">PostgreSQL</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Tailwind CSS</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Vercel</span>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="flex items-center gap-3">
+                                <button onclick="openSpecModal('schooldash')" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white text-black text-xs font-bold hover:bg-neutral-200 transition-all">
+                                    <i data-lucide="info" class="w-3.5 h-3.5"></i>
+                                    <span>Inspect System Specs</span>
+                                </button>
+                                <button onclick="openWebPreviewModal('https://school-dash-94jv.vercel.app/', 'School OS — Rizal NHS Institutional Academic Portal')" class="px-3 py-2.5 rounded-xl bg-white/[0.05] hover:bg-white/10 border border-white/10 text-white text-xs font-mono transition-all flex items-center justify-center" title="Open Interactive Preview">
+                                    <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+                                </button>
+                                <a href="https://school-dash-94jv.vercel.app/" target="_blank" rel="noopener noreferrer" class="px-3 py-2.5 rounded-xl bg-white/[0.05] hover:bg-white/10 border border-white/10 text-white text-xs font-mono transition-all flex items-center justify-center" title="Visit Live Site">
+                                    <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ==================== 06. WEBSITE: AZAREL PLATFORM ==================== -->
+                    <article class="project-card glass-card p-5 sm:p-7 flex flex-col justify-between futuristic-reveal" data-category="website" data-tags="cyberpunk tailwind dark-mode edge performance portfolio vercel web website azarel">
+                        <div>
+                            <!-- Header Meta -->
+                            <div class="flex items-start justify-between gap-4 mb-3">
+                                <div class="flex items-center gap-2.5">
+                                    <span class="w-7 h-7 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center font-dot font-black text-xs text-white">06</span>
+                                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono tracking-wider bg-white/10 border border-white/20 text-neutral-200 uppercase">
+                                        WEBSITE
+                                    </span>
+                                </div>
+                                <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-400">
+                                    <span class="w-2 h-2 rounded-full bg-white"></span>
+                                    <span>PRODUCTION LIVE</span>
+                                </div>
+                            </div>
+
+                            <!-- Title & Subtitle -->
+                            <h2 class="font-dot text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
+                                Azarel Platform — High-Performance Edge Digital HQ
+                            </h2>
+                            <p class="text-xs sm:text-sm text-neutral-400 leading-relaxed mb-4 font-sans">
+                                Flagship production digital headquarters engineered with monochromatic cyber-glass aesthetics, spatial 3D card physics, and sub-second edge response times.
+                            </p>
+
+                            <!-- Cyber Glass Browser Mockup (Web Design Display) -->
+                            <div class="rounded-xl border border-white/15 bg-black/90 overflow-hidden mb-5 shadow-2xl group/browser">
+                                <!-- Browser Chrome Topbar -->
+                                <div class="px-3.5 py-2.5 bg-white/[0.04] border-b border-white/10 flex items-center justify-between gap-2 select-none">
+                                    <div class="flex items-center gap-1.5">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
+                                        <span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
+                                        <span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
+                                    </div>
+                                    <!-- Address Pill -->
+                                    <div class="flex items-center gap-1.5 px-3 py-0.5 rounded-md bg-white/[0.05] border border-white/10 text-[10px] sm:text-[11px] font-mono text-neutral-300 max-w-[200px] sm:max-w-[280px] truncate">
+                                        <i data-lucide="lock" class="w-3 h-3 text-white/50 shrink-0"></i>
+                                        <span class="truncate">azarel.vercel.app</span>
+                                    </div>
+                                    <!-- Status -->
+                                    <div class="flex items-center gap-1.5 text-[10px] font-mono text-white/80 bg-white/10 px-2 py-0.5 rounded-full border border-white/15">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+                                        <span>LIVE</span>
+                                    </div>
+                                </div>
+
+                                <!-- Browser Viewport with Scaled Web Design -->
+                                <div class="browser-viewport relative w-full h-[260px] sm:h-[300px] bg-neutral-950 overflow-hidden">
+                                    <div class="iframe-wrapper w-[1024px] h-[640px] origin-top-left transform pointer-events-none select-none transition-opacity duration-300">
+                                        <iframe 
+                                            src="https://azarel.vercel.app/" 
+                                            class="w-full h-full border-0 bg-neutral-900" 
+                                            loading="lazy" 
+                                            title="Azarel Platform Web Design"
+                                            tabindex="-1"
+                                        ></iframe>
+                                    </div>
+
+                                    <!-- Hover Actions Glass Overlay -->
+                                    <div class="absolute inset-0 bg-black/60 backdrop-blur-[2px] opacity-0 group-hover/browser:opacity-100 transition-opacity duration-200 flex flex-col items-center justify-center gap-3 p-4">
+                                        <button onclick="openWebPreviewModal('https://azarel.vercel.app/', 'Azarel Platform — High-Performance Edge Digital HQ')" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white text-black font-bold text-xs hover:bg-neutral-200 transition-all shadow-lg active:scale-95">
+                                            <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+                                            <span>Interactive Fullscreen Preview</span>
+                                        </button>
+                                        <a href="https://azarel.vercel.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 text-white font-mono text-xs transition-all">
+                                            <span>Visit Live Site</span>
+                                            <i data-lucide="external-link" class="w-3 h-3"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Key Engineering Highlights -->
+                            <ul class="space-y-1.5 mb-5 text-xs text-neutral-300 font-sans">
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 text-white shrink-0 mt-0.5"></i>
+                                    <span>100/100 Lighthouse performance metrics with zero layout shift and atomic CSS.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 text-white shrink-0 mt-0.5"></i>
+                                    <span>Dynamic telemetry animations, custom ASCII/dot font typography, and one-shot entrance glitches.</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <!-- Tech Stack Pills -->
+                            <div class="flex flex-wrap gap-1.5 mb-5 pt-3.5 border-t border-white/[0.08]">
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">HTML5</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Tailwind CSS</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Lucide Icons</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Vercel Edge</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Canvas API</span>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="flex items-center gap-3">
+                                <button onclick="openSpecModal('azarel-core')" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white text-black text-xs font-bold hover:bg-neutral-200 transition-all">
+                                    <i data-lucide="info" class="w-3.5 h-3.5"></i>
+                                    <span>Inspect System Specs</span>
+                                </button>
+                                <button onclick="openWebPreviewModal('https://azarel.vercel.app/', 'Azarel Platform — High-Performance Edge Digital HQ')" class="px-3 py-2.5 rounded-xl bg-white/[0.05] hover:bg-white/10 border border-white/10 text-white text-xs font-mono transition-all flex items-center justify-center" title="Open Interactive Preview">
+                                    <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+                                </button>
+                                <a href="https://azarel.vercel.app/" target="_blank" rel="noopener noreferrer" class="px-3 py-2.5 rounded-xl bg-white/[0.05] hover:bg-white/10 border border-white/10 text-white text-xs font-mono transition-all flex items-center justify-center" title="Visit Live Site">
+                                    <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ==================== 07. APP: CITIZEN DRRM SYNC ==================== -->
+                    <article class="project-card glass-card p-6 md:p-8 flex flex-col justify-between futuristic-reveal" data-category="app" data-tags="react native sqlite watermelon tailwind mobile offline mesh app drrm">
                         <div>
                             <!-- Header Meta -->
                             <div class="flex items-start justify-between gap-4 mb-4">
                                 <div class="flex items-center gap-2.5">
-                                    <span class="w-7 h-7 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center font-dot font-black text-xs text-white">05</span>
+                                    <span class="w-7 h-7 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center font-dot font-black text-xs text-white">07</span>
                                     <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono tracking-wider bg-white/10 border border-white/20 text-neutral-200 uppercase">
                                         APP
                                     </span>
@@ -928,13 +1262,13 @@
                         </div>
                     </article>
 
-                    <!-- ==================== 06. APP: FLEETPULSE TELEMATICS ==================== -->
-                    <article class="project-card glass-card p-6 md:p-8 flex flex-col justify-between futuristic-reveal" data-category="app" data-tags="flutter dart websockets googlemaps firebase mobile fleet app">
+                    <!-- ==================== 08. APP: FLEETPULSE TELEMATICS ==================== -->
+                    <article class="project-card glass-card p-6 md:p-8 flex flex-col justify-between futuristic-reveal" data-category="app" data-tags="flutter dart websockets googlemaps firebase mobile fleet app fleetpulse">
                         <div>
                             <!-- Header Meta -->
                             <div class="flex items-start justify-between gap-4 mb-4">
                                 <div class="flex items-center gap-2.5">
-                                    <span class="w-7 h-7 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center font-dot font-black text-xs text-white">06</span>
+                                    <span class="w-7 h-7 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center font-dot font-black text-xs text-white">08</span>
                                     <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono tracking-wider bg-white/10 border border-white/20 text-neutral-200 uppercase">
                                         APP
                                     </span>
@@ -1011,15 +1345,98 @@
                         </div>
                     </article>
 
-                    <!-- ==================== 07. WEBSITE: QUANTUM VAULT ==================== -->
-                    <article class="project-card glass-card p-6 md:p-8 flex flex-col justify-between futuristic-reveal" data-category="website" data-tags="nextjs typescript tailwind framer supabase zero-trust web website">
+                    <!-- ==================== 09. SYSTEM: SENTINEL ==================== -->
+                    <article class="project-card glass-card p-6 md:p-8 flex flex-col justify-between futuristic-reveal" data-category="system" data-tags="rust timescaledb prometheus grafana ebpf daemon telemetry system sentinel">
                         <div>
                             <!-- Header Meta -->
                             <div class="flex items-start justify-between gap-4 mb-4">
                                 <div class="flex items-center gap-2.5">
-                                    <span class="w-7 h-7 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center font-dot font-black text-xs text-white">07</span>
+                                    <span class="w-7 h-7 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center font-dot font-black text-xs text-white">09</span>
                                     <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono tracking-wider bg-white/10 border border-white/20 text-neutral-200 uppercase">
-                                        WEBSITE
+                                        SYSTEM
+                                    </span>
+                                </div>
+                                <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-400">
+                                    <span class="w-2 h-2 rounded-full bg-white"></span>
+                                    <span>DAEMON ACTIVE</span>
+                                </div>
+                            </div>
+
+                            <!-- Title & Subtitle -->
+                            <h2 class="font-dot text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
+                                Sentinel — Edge Infrastructure Daemon & eBPF Telemetry
+                            </h2>
+                            <p class="text-xs sm:text-sm text-neutral-400 leading-relaxed mb-6 font-sans">
+                                Distributed node monitor engineered in Rust for kernel-level socket inspection, hardware performance anomalies, and instant failover execution across multi-region server clusters.
+                            </p>
+
+                            <!-- Interactive Telemetry Mockup Box -->
+                            <div class="telemetry-code rounded-xl p-4 mb-6 text-xs text-neutral-300 font-mono space-y-2">
+                                <div class="flex items-center justify-between border-b border-white/10 pb-2 text-[11px] text-neutral-400">
+                                    <span class="flex items-center gap-1.5"><i data-lucide="cpu" class="w-3.5 h-3.5"></i> sentinel-node-cluster.local</span>
+                                    <span class="text-white font-mono">0.04% CPU</span>
+                                </div>
+                                <div class="grid grid-cols-3 gap-2 pt-1 text-center">
+                                    <div class="p-2 rounded bg-white/[0.03] border border-white/5">
+                                        <div class="text-[10px] text-neutral-400">EVENT STREAM</div>
+                                        <div class="font-dot text-sm font-bold text-white mt-0.5">500k/sec</div>
+                                    </div>
+                                    <div class="p-2 rounded bg-white/[0.03] border border-white/5">
+                                        <div class="text-[10px] text-neutral-400">ALERT DISPATCH</div>
+                                        <div class="font-dot text-sm font-bold text-white mt-0.5">&lt; 0.8ms</div>
+                                    </div>
+                                    <div class="p-2 rounded bg-white/[0.03] border border-white/5">
+                                        <div class="text-[10px] text-neutral-400">MEM OVERHEAD</div>
+                                        <div class="font-dot text-sm font-bold text-white mt-0.5">4.2 MB</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Key Engineering Highlights -->
+                            <ul class="space-y-2 mb-6 text-xs text-neutral-300 font-sans">
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 text-white shrink-0 mt-0.5"></i>
+                                    <span>Kernel eBPF tracepoints capture packet drops without touching application memory.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 text-white shrink-0 mt-0.5"></i>
+                                    <span>Encrypted peer-to-peer heartbeat mesh with automated DNS failover triggers.</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <!-- Tech Stack Pills -->
+                            <div class="flex flex-wrap gap-1.5 mb-6 pt-4 border-t border-white/[0.08]">
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Rust</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">eBPF</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">TimescaleDB</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Prometheus</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Grafana</span>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="flex items-center gap-3">
+                                <button onclick="openSpecModal('sentinel')" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white text-black text-xs font-bold hover:bg-neutral-200 transition-all">
+                                    <i data-lucide="info" class="w-3.5 h-3.5"></i>
+                                    <span>Inspect System Specs</span>
+                                </button>
+                                <a href="contact.html" class="px-3 py-2.5 rounded-xl bg-white/[0.05] hover:bg-white/10 border border-white/10 text-white text-xs font-mono transition-all flex items-center justify-center" title="Request Architecture Walkthrough">
+                                    <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ==================== 10. SYSTEM: QUANTUM VAULT ==================== -->
+                    <article class="project-card glass-card p-6 md:p-8 flex flex-col justify-between futuristic-reveal" data-category="system" data-tags="nextjs typescript tailwind framer supabase zero-trust web system security quantum">
+                        <div>
+                            <!-- Header Meta -->
+                            <div class="flex items-start justify-between gap-4 mb-4">
+                                <div class="flex items-center gap-2.5">
+                                    <span class="w-7 h-7 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center font-dot font-black text-xs text-white">10</span>
+                                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono tracking-wider bg-white/10 border border-white/20 text-neutral-200 uppercase">
+                                        SYSTEM
                                     </span>
                                 </div>
                                 <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-400">
@@ -1033,7 +1450,7 @@
                                 Quantum Vault — Zero-Trust Security & Key Management Portal
                             </h2>
                             <p class="text-xs sm:text-sm text-neutral-400 leading-relaxed mb-6 font-sans">
-                                High-performance client-side encrypted web portal designed for enterprise security officers to audit cryptographic key rotations, hardware tokens, and zero-trust perimeter policies.
+                                High-performance client-side encrypted portal designed for enterprise security officers to audit cryptographic key rotations, hardware tokens, and zero-trust perimeter policies.
                             </p>
 
                             <!-- Interactive Telemetry Mockup Box -->
@@ -1066,7 +1483,7 @@
                                 </li>
                                 <li class="flex items-start gap-2">
                                     <i data-lucide="check" class="w-3.5 h-3.5 text-white shrink-0 mt-0.5"></i>
-                                    <span>Full cyber glass aesthetics with micro-interactions optimized for zero layout shift (CLS: 0).</span>
+                                    <span>Full cyber glass aesthetics with micro-interactions optimized for zero layout shift.</span>
                                 </li>
                             </ul>
                         </div>
@@ -1094,49 +1511,49 @@
                         </div>
                     </article>
 
-                    <!-- ==================== 08. WEBSITE: OMNICOMMERCE ==================== -->
-                    <article class="project-card glass-card p-6 md:p-8 flex flex-col justify-between futuristic-reveal" data-category="website" data-tags="astro vue shopify cloudflare ecommerce web website">
+                    <!-- ==================== 11. AUTOMATION: APEX ETL MESH ==================== -->
+                    <article class="project-card glass-card p-6 md:p-8 flex flex-col justify-between futuristic-reveal" data-category="automation" data-tags="python playwright celery redis duckdb etl web scraper automation apex">
                         <div>
                             <!-- Header Meta -->
                             <div class="flex items-start justify-between gap-4 mb-4">
                                 <div class="flex items-center gap-2.5">
-                                    <span class="w-7 h-7 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center font-dot font-black text-xs text-white">08</span>
+                                    <span class="w-7 h-7 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center font-dot font-black text-xs text-white">11</span>
                                     <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono tracking-wider bg-white/10 border border-white/20 text-neutral-200 uppercase">
-                                        WEBSITE
+                                        AUTOMATION
                                     </span>
                                 </div>
                                 <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-400">
                                     <span class="w-2 h-2 rounded-full bg-white"></span>
-                                    <span>EDGE ACCELERATED</span>
+                                    <span>MESH PIPELINE RUNNING</span>
                                 </div>
                             </div>
 
                             <!-- Title & Subtitle -->
                             <h2 class="font-dot text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
-                                OmniCommerce — Ultra-Fast Headless Storefront & Checkout
+                                Apex — Headless Scraping & Web Intelligence Mesh
                             </h2>
                             <p class="text-xs sm:text-sm text-neutral-400 leading-relaxed mb-6 font-sans">
-                                Edge-rendered headless commerce frontend connected to Shopify Storefront API via Cloudflare Workers, achieving instantaneous sub-200ms global page transitions.
+                                Resilient distributed crawling cluster with dynamic TLS fingerprint spoofing, adaptive anti-bot bypassing, and live streaming ETL ingestion into analytical columnar data stores.
                             </p>
 
                             <!-- Interactive Telemetry Mockup Box -->
                             <div class="telemetry-code rounded-xl p-4 mb-6 text-xs text-neutral-300 font-mono space-y-2">
                                 <div class="flex items-center justify-between border-b border-white/10 pb-2 text-[11px] text-neutral-400">
-                                    <span class="flex items-center gap-1.5"><i data-lucide="shopping-bag" class="w-3.5 h-3.5"></i> edge_cdn: Cloudflare Global Workers</span>
-                                    <span class="text-white">+3.8x CONV</span>
+                                    <span class="flex items-center gap-1.5"><i data-lucide="layers" class="w-3.5 h-3.5"></i> worker_pool: 32 headless instances</span>
+                                    <span class="text-white">99.4% BYPASS</span>
                                 </div>
                                 <div class="grid grid-cols-3 gap-2 pt-1 text-center">
                                     <div class="p-2 rounded bg-white/[0.03] border border-white/5">
-                                        <div class="text-[10px] text-neutral-400">GLOBAL TTFB</div>
-                                        <div class="font-dot text-sm font-bold text-white mt-0.5">180ms</div>
+                                        <div class="text-[10px] text-neutral-400">INGEST DAILY</div>
+                                        <div class="font-dot text-sm font-bold text-white mt-0.5">2.4M items</div>
                                     </div>
                                     <div class="p-2 rounded bg-white/[0.03] border border-white/5">
-                                        <div class="text-[10px] text-neutral-400">CART MUTATION</div>
-                                        <div class="font-dot text-sm font-bold text-white mt-0.5">Optimistic</div>
+                                        <div class="text-[10px] text-neutral-400">TRANSFORM TIME</div>
+                                        <div class="font-dot text-sm font-bold text-white mt-0.5">0.02s/batch</div>
                                     </div>
                                     <div class="p-2 rounded bg-white/[0.03] border border-white/5">
-                                        <div class="text-[10px] text-neutral-400">IMAGE COMPRESS</div>
-                                        <div class="font-dot text-sm font-bold text-white mt-0.5">AVIF / WebP</div>
+                                        <div class="text-[10px] text-neutral-400">PROXY ROTATE</div>
+                                        <div class="font-dot text-sm font-bold text-white mt-0.5">Adaptive</div>
                                     </div>
                                 </div>
                             </div>
@@ -1145,11 +1562,11 @@
                             <ul class="space-y-2 mb-6 text-xs text-neutral-300 font-sans">
                                 <li class="flex items-start gap-2">
                                     <i data-lucide="check" class="w-3.5 h-3.5 text-white shrink-0 mt-0.5"></i>
-                                    <span>Optimistic client state UI allowing shoppers to checkout in 2 clicks without screen flashes.</span>
+                                    <span>Automated CAPTCHA token solver and browser canvas noise injection for 99.4% bypass.</span>
                                 </li>
                                 <li class="flex items-start gap-2">
                                     <i data-lucide="check" class="w-3.5 h-3.5 text-white shrink-0 mt-0.5"></i>
-                                    <span>Dynamic localized multi-currency conversion with automatic geo-IP routing.</span>
+                                    <span>Dead-letter recovery queues with automatic schema mutation warnings.</span>
                                 </li>
                             </ul>
                         </div>
@@ -1157,16 +1574,99 @@
                         <div>
                             <!-- Tech Stack Pills -->
                             <div class="flex flex-wrap gap-1.5 mb-6 pt-4 border-t border-white/[0.08]">
-                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Astro</span>
-                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Vue 3</span>
-                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Shopify API</span>
-                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Cloudflare Workers</span>
-                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Tailwind</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Python</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Playwright</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Celery</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Redis</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">DuckDB</span>
                             </div>
 
                             <!-- Action Buttons -->
                             <div class="flex items-center gap-3">
-                                <button onclick="openSpecModal('omni')" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white text-black text-xs font-bold hover:bg-neutral-200 transition-all">
+                                <button onclick="openSpecModal('apex')" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white text-black text-xs font-bold hover:bg-neutral-200 transition-all">
+                                    <i data-lucide="info" class="w-3.5 h-3.5"></i>
+                                    <span>Inspect System Specs</span>
+                                </button>
+                                <a href="contact.html" class="px-3 py-2.5 rounded-xl bg-white/[0.05] hover:bg-white/10 border border-white/10 text-white text-xs font-mono transition-all flex items-center justify-center" title="Request Architecture Walkthrough">
+                                    <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ==================== 12. AUTOMATION: LEDGERFLOW ==================== -->
+                    <article class="project-card glass-card p-6 md:p-8 flex flex-col justify-between futuristic-reveal" data-category="automation" data-tags="nodejs typescript fastify stripe postgresql webhook ledger automation ledgerflow">
+                        <div>
+                            <!-- Header Meta -->
+                            <div class="flex items-start justify-between gap-4 mb-4">
+                                <div class="flex items-center gap-2.5">
+                                    <span class="w-7 h-7 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center font-dot font-black text-xs text-white">12</span>
+                                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono tracking-wider bg-white/10 border border-white/20 text-neutral-200 uppercase">
+                                        AUTOMATION
+                                    </span>
+                                </div>
+                                <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-400">
+                                    <span class="w-2 h-2 rounded-full bg-white"></span>
+                                    <span>RECONCILING 24/7</span>
+                                </div>
+                            </div>
+
+                            <!-- Title & Subtitle -->
+                            <h2 class="font-dot text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
+                                LedgerFlow — Multi-Currency Webhook Reconciliation Suite
+                            </h2>
+                            <p class="text-xs sm:text-sm text-neutral-400 leading-relaxed mb-6 font-sans">
+                                Idempotent webhook ingest and double-entry financial reconciliation engine synchronizing Stripe, PayPal, and banking APIs with zero discrepancy.
+                            </p>
+
+                            <!-- Interactive Telemetry Mockup Box -->
+                            <div class="telemetry-code rounded-xl p-4 mb-6 text-xs text-neutral-300 font-mono space-y-2">
+                                <div class="flex items-center justify-between border-b border-white/10 pb-2 text-[11px] text-neutral-400">
+                                    <span class="flex items-center gap-1.5"><i data-lucide="zap" class="w-3.5 h-3.5"></i> webhook_ingress: 12,000 req/min</span>
+                                    <span class="text-white">0 ERRORS</span>
+                                </div>
+                                <div class="grid grid-cols-3 gap-2 pt-1 text-center">
+                                    <div class="p-2 rounded bg-white/[0.03] border border-white/5">
+                                        <div class="text-[10px] text-neutral-400">RECONCILED</div>
+                                        <div class="font-dot text-sm font-bold text-white mt-0.5">$4.2M USD</div>
+                                    </div>
+                                    <div class="p-2 rounded bg-white/[0.03] border border-white/5">
+                                        <div class="text-[10px] text-neutral-400">IDEMPOTENCY</div>
+                                        <div class="font-dot text-sm font-bold text-white mt-0.5">100% Lock</div>
+                                    </div>
+                                    <div class="p-2 rounded bg-white/[0.03] border border-white/5">
+                                        <div class="text-[10px] text-neutral-400">DISPUTE LAG</div>
+                                        <div class="font-dot text-sm font-bold text-white mt-0.5">&lt; 350ms</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Key Engineering Highlights -->
+                            <ul class="space-y-2 mb-6 text-xs text-neutral-300 font-sans">
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 text-white shrink-0 mt-0.5"></i>
+                                    <span>Distributed atomic Redis locks preventing double-credit and concurrent retry exploits.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 text-white shrink-0 mt-0.5"></i>
+                                    <span>Real-time ops alerts dispatched straight to Discord/Slack with transaction replay tools.</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <!-- Tech Stack Pills -->
+                            <div class="flex flex-wrap gap-1.5 mb-6 pt-4 border-t border-white/[0.08]">
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Node.js</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">TypeScript</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Fastify</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">PostgreSQL</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Stripe API</span>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="flex items-center gap-3">
+                                <button onclick="openSpecModal('ledgerflow')" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white text-black text-xs font-bold hover:bg-neutral-200 transition-all">
                                     <i data-lucide="info" class="w-3.5 h-3.5"></i>
                                     <span>Inspect System Specs</span>
                                 </button>
@@ -1260,6 +1760,40 @@
         </div>
     </div>
 
+    <!-- ==================== INTERACTIVE FULLSCREEN WEB PREVIEW MODAL ==================== -->
+    <div id="web-preview-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-2 sm:p-6 bg-black/90 backdrop-blur-2xl transition-opacity duration-300">
+        <div class="relative w-full max-w-6xl h-[92vh] glass-card border border-white/25 rounded-2xl flex flex-col shadow-2xl overflow-hidden bg-neutral-950">
+            <!-- Browser Bar -->
+            <div class="px-4 py-3 border-b border-white/10 bg-black/80 flex items-center justify-between gap-4 select-none">
+                <div class="flex items-center gap-2 min-w-0">
+                    <div class="flex items-center gap-1.5 shrink-0">
+                        <span class="w-3 h-3 rounded-full bg-white/20"></span>
+                        <span class="w-3 h-3 rounded-full bg-white/20"></span>
+                        <span class="w-3 h-3 rounded-full bg-white/20"></span>
+                    </div>
+                    <div class="ml-3 hidden sm:flex items-center gap-2 px-3 py-1 rounded-lg bg-white/[0.06] border border-white/10 text-xs font-mono text-neutral-300 min-w-0">
+                        <i data-lucide="lock" class="w-3 h-3 text-white/50 shrink-0"></i>
+                        <span id="preview-modal-url" class="truncate max-w-xs sm:max-w-md">https://taxmap-alpha.vercel.app/</span>
+                    </div>
+                    <span id="preview-modal-title" class="hidden md:inline-block font-dot text-xs text-white truncate max-w-xs ml-2">TaxMap Alpha</span>
+                </div>
+                <div class="flex items-center gap-2 shrink-0">
+                    <a id="preview-modal-ext-link" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs font-mono transition-all">
+                        <span>Open New Tab</span>
+                        <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                    </a>
+                    <button onclick="closeWebPreviewModal()" class="p-1.5 rounded-lg text-neutral-400 hover:text-white hover:bg-white/10 transition-colors" aria-label="Close preview">
+                        <i data-lucide="x" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Iframe Container -->
+            <div class="flex-1 w-full bg-black relative overflow-hidden">
+                <iframe id="preview-modal-iframe" src="" class="w-full h-full border-0 bg-neutral-900" allow="fullscreen" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+            </div>
+        </div>
+    </div>
+
     <!-- ==================== FOOTER ==================== -->
     <footer class="border-t border-white/[0.08] bg-black py-12 relative z-10 text-xs font-mono text-neutral-500">
         <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
@@ -1296,65 +1830,95 @@
 
         // Project Specifications Database
         const projectSpecs = {
-            'lgu-os': {
-                title: 'LGU-OS — Municipal Cloud & Civil Operations Engine',
-                discipline: 'DISTRIBUTED SYSTEM',
+            'taxmap': {
+                title: 'TaxMap Alpha — Provincial Assessor & Cadastral GIS',
+                discipline: 'GEOSPATIAL WEB SYSTEM',
+                metrics: 'Sub-second Polygon Query • PostGIS Spatial Index • Automated Tax Assessment',
+                overview: 'Enterprise cadastral mapping and property tax assessment platform deployed for provincial assessor offices to manage municipal land classifications, boundaries, and real property valuations.',
+                architecture: 'Engineered with Next.js and Leaflet GIS on the frontend, interfaced with PostgreSQL/PostGIS for sub-second spatial queries. Implements real-time boundary polygon rendering, automated parcel valuation formulas, and instant PDF tax declaration exports.',
+                challenges: 'Handling thousands of complex land parcel geometries on mobile and low-spec assessor laptops without frame drops required spatial index clustering and vector tile caching.',
+                deliverables: [
+                    'Interactive Cadastral GIS Vector Parcel Explorer',
+                    'Automated Real Property Tax (RPT) Valuation Engine',
+                    'Cryptographic Assessor Document & Certificate Exporter',
+                    'Municipal Jurisdiction & Boundary Layer Switcher'
+                ],
+                stack: ['Leaflet GIS', 'PostgreSQL', 'PostGIS', 'Next.js', 'Tailwind CSS', 'Vercel']
+            },
+            'lgu-web': {
+                title: 'LGU Operations OS — Municipal Cloud & Civil OS',
+                discipline: 'GOVERNMENT OPERATING SYSTEM',
                 metrics: '42,850+ Citizens Served • < 118ms Latency • 99.98% SLA',
-                overview: 'LGU-OS was architected to replace outdated, manual paper-based local government processing with an immutable, high-throughput civil administration portal.',
+                overview: 'LGU-OS was architected to modernize local government administrative operations with an encrypted, high-throughput civil administration portal and document issuance engine.',
                 architecture: 'Built using Golang for microservice speed and type safety, paired with a clustered PostgreSQL instance featuring row-level encryption. Redis handles ephemeral citizen queue token generation, while Docker containers ensure rapid deployment across government server nodes.',
-                challenges: 'Navigating unstable local power grids and network dropouts required designing a local WAL (Write-Ahead Logging) sync cache that guarantees civil registry transactions never duplicate or corrupt during sudden outages.',
+                challenges: 'Designing a local WAL (Write-Ahead Logging) sync cache that guarantees civil registry transactions never duplicate or corrupt during sudden local power grid or network outages.',
                 deliverables: [
                     'Multi-Tenant Municipal Property Tax Assessment Engine',
                     'Cryptographic Barcode Issuance for Civil Registry Documents',
                     'Real-Time Citizen Queue Management with SMS Pings',
                     'Auditable Land Parcel GIS & Ownership Registry'
                 ],
-                stack: ['Golang', 'PostgreSQL', 'Docker', 'Redis', 'Tailwind CSS']
+                stack: ['Golang', 'PostgreSQL', 'Docker', 'Redis', 'Tailwind CSS', 'Vercel']
             },
-            'sentinel': {
-                title: 'Sentinel — Infrastructure Telemetry & Daemon Sentinel',
-                discipline: 'SYSTEMS INFRASTRUCTURE',
-                metrics: '500,000 events/sec • < 0.8ms Dispatch • 4.2 MB RAM',
-                overview: 'A zero-overhead Linux daemon engineered in Rust that taps into kernel-level eBPF tracepoints to observe network socket degradation, memory leaks, and malicious binary execution.',
-                architecture: 'Compiled directly to bare-metal binaries with zero garbage collection pauses. Emits high-frequency telemetry metrics into TimescaleDB time-series storage and triggers automated DNS traffic rerouting before hardware failures manifest.',
-                challenges: 'Achieving sub-millisecond anomaly detection without utilizing more than 0.5% of host CPU required writing ring-buffer memory handlers and lock-free concurrency queues.',
+            'diwa': {
+                title: 'DiWA Wire — Republic of the Philippines National Agencies Wire',
+                discipline: 'NATIONAL INTELLIGENCE & MEDIA PLATFORM',
+                metrics: 'Zero-Downtime Edge Cache • Multi-Agency Aggregation • Sub-300ms Delivery',
+                overview: 'Real-time official state intelligence and multi-agency news distribution platform delivering low-latency presidential bulletins, disaster emergency broadcasts, and official gazette announcements.',
+                architecture: 'Constructed on Next.js 14 App Router and Supabase with edge function distribution. Employs multi-tier cryptographic verification for publishing officers and instant static regeneration at edge nodes.',
+                challenges: 'Maintaining 100% uptime during national emergencies and super typhoons when public bandwidth and concurrent traffic spike exponentially.',
                 deliverables: [
-                    'eBPF Socket Snooping & Drop Detection Engine',
-                    'Encrypted Peer-to-Peer Heartbeat Mesh',
-                    'Sub-Millisecond Automated DNS Failover Trigger',
-                    'Prometheus & Grafana Exporter Daemon'
+                    'Multi-Agency Real-Time Gazette Broadcast Stream',
+                    'Verified Official Bulletin & Emergency Alert Ingress',
+                    'Sub-300ms Global Edge Content Delivery Network',
+                    'Accessible Low-Bandwidth High-Contrast Reader Mode'
                 ],
-                stack: ['Rust', 'eBPF', 'TimescaleDB', 'Prometheus', 'Grafana API']
+                stack: ['Next.js 14', 'TypeScript', 'Supabase', 'Tailwind CSS', 'Edge Functions', 'Vercel']
             },
-            'apex': {
-                title: 'Apex — Headless Scraping & Web Intelligence Mesh',
-                discipline: 'AUTONOMOUS PIPELINE',
-                metrics: '2.4M records/day • 99.4% Bypass Rate • 0.02s Transform',
-                overview: 'A distributed web intelligence cluster engineered to scrape, normalize, and extract millions of data records daily across hostile web environments with aggressive anti-bot defenses.',
-                architecture: 'Powered by Python Playwright running in headless container clusters, orchestrated via Celery and Redis. Scraping workers rotate dynamic residential IP pools, emulate authentic human biometric mouse curvatures, and pipe sanitized payloads directly into DuckDB.',
-                challenges: 'Evading multi-layered Cloudflare Turnstile, PerimeterX, and Akamai challenges required building dynamic canvas noise injection and TLS client hello fingerprint spoofing.',
+            'openflow': {
+                title: 'OpenFlow Work OS — Distributed Operations Hub',
+                discipline: 'ENTERPRISE WORK MANAGEMENT',
+                metrics: 'Hybrid JSONB + SQLite • Optimistic UI • 60 FPS Kanban Engine',
+                overview: 'High-velocity enterprise project and workflow management suite featuring hybrid PostgreSQL JSONB and local SQLite synchronization for zero-latency task management.',
+                architecture: 'Built with React 18 and TypeScript with optimistic client state mutations. Offline changes are logged to SQLite locally and bidirectionally reconciled against cloud PostgreSQL JSONB stores upon reconnection.',
+                challenges: 'Handling concurrent collaborative board edits from distributed remote teams without losing state or causing race-condition overwrite conflicts.',
                 deliverables: [
-                    'Adaptive Anti-Bot & Fingerprint Spoofing Subsystem',
-                    'Dynamic DOM Mutation Fallback Parser',
-                    'Distributed Celery Task Queue with Auto-Healing',
-                    'Live Columnar Data Warehouse Ingestion (DuckDB/S3)'
+                    'Virtual DOM High-Velocity Kanban & Sprint Boards',
+                    'Offline-First SQLite Cache with Redux CRDT Sync',
+                    'Dynamic PostgreSQL JSONB Flexible Field Schema Engine',
+                    'Automated Sprint Telemetry & Velocity Heatmaps'
                 ],
-                stack: ['Python', 'Playwright', 'Celery', 'Redis', 'DuckDB']
+                stack: ['React 18', 'TypeScript', 'PostgreSQL JSONB', 'SQLite', 'Tailwind CSS', 'Vercel']
             },
-            'ledgerflow': {
-                title: 'LedgerFlow — Webhook & Financial Reconciliation Suite',
-                discipline: 'FINANCIAL AUTOMATION',
-                metrics: '$4.2M Reconciled • 100% Idempotency • < 350ms Dispute Alert',
-                overview: 'High-velocity transaction ingestion pipeline designed to balance multi-currency balances across international payment gateways, eliminating charge discrepancies.',
-                architecture: 'Engineered in TypeScript on Node.js using Fastify for ultra-low overhead. Employs Redis Redlock distributed locking to guarantee idempotency across concurrent incoming webhook bursts.',
-                challenges: 'Preventing race conditions where multiple webhooks from different payment providers report contradictory dispute states simultaneously.',
+            'schooldash': {
+                title: 'School OS — Rizal NHS Institutional Academic Portal',
+                discipline: 'INSTITUTIONAL ACADEMIC OS',
+                metrics: 'DepEd Form-137 Compliance • Real-Time Gradebook • SMS Notification Bridge',
+                overview: 'Academic management and student information system handling digital grading computation, attendance analytics, teacher loads, and parent notifications.',
+                architecture: 'Full-stack Next.js and PostgreSQL system built on Prisma ORM. Encrypted role-based access control segregates permissions between administrative staff, department heads, teachers, students, and parents.',
+                challenges: 'Computing complex weighted DepEd grade computations across hundreds of sections and thousands of students simultaneously with zero calculation discrepancy.',
                 deliverables: [
-                    'Idempotent Event Ingestion Gateway (Stripe, PayPal, Adyen)',
-                    'Automated Double-Entry Ledger Bookkeeper',
-                    'Automated Forex Currency Real-Time Normalizer',
-                    'Dispute Early Warning System with Slack/Discord Hooks'
+                    'DepEd-Compliant Automated Report Card & Form Generation',
+                    'Teacher Workload & Class Schedule Orchestrator',
+                    'Parent SMS Alert Integration for Attendance & Advisory',
+                    'Student Digital Transcript & Performance Analytics'
                 ],
-                stack: ['Node.js', 'TypeScript', 'Fastify', 'PostgreSQL', 'Stripe API']
+                stack: ['Next.js', 'TypeScript', 'PostgreSQL', 'Prisma', 'Tailwind CSS', 'Vercel']
+            },
+            'azarel-core': {
+                title: 'Azarel Platform — High-Performance Edge Digital HQ',
+                discipline: 'FLAGSHIP EDGE ARCHITECTURE',
+                metrics: '100/100 Lighthouse • 0 Cumulative Layout Shift • Monochromatic Cyber Glass',
+                overview: 'Flagship production digital headquarters engineered with monochromatic cyber-glass aesthetics, spatial 3D card physics, and sub-second edge response times.',
+                architecture: 'Crafted with semantic HTML5 and customized Tailwind utility architecture. Uses hardware-accelerated CSS perspective matrices for 3D holographic reveals and one-shot glitch engines.',
+                challenges: 'Achieving rich visual immersion, canvas animations, and interactive mockups while maintaining perfect 100/100 Lighthouse performance and zero layout shifts.',
+                deliverables: [
+                    'Pure Monochromatic Cyber-Glass Design System',
+                    'One-Shot Scroll Entrance Glitch Observer Engine',
+                    'Full-Screen Embedded Web Design Viewport Modals',
+                    'Multi-Discipline Search & Real-Time Filtering Architecture'
+                ],
+                stack: ['HTML5', 'Tailwind CSS', 'Lucide Icons', 'Vercel Edge', 'Canvas API']
             },
             'drrm': {
                 title: 'Citizen DRRM Sync — Offline Evacuation & Disaster App',
@@ -1386,6 +1950,21 @@
                 ],
                 stack: ['Flutter', 'Dart', 'WebSockets', 'Google Maps SDK', 'Firebase']
             },
+            'sentinel': {
+                title: 'Sentinel — Infrastructure Telemetry & Daemon Sentinel',
+                discipline: 'SYSTEMS INFRASTRUCTURE',
+                metrics: '500,000 events/sec • < 0.8ms Dispatch • 4.2 MB RAM',
+                overview: 'A zero-overhead Linux daemon engineered in Rust that taps into kernel-level eBPF tracepoints to observe network socket degradation, memory leaks, and malicious binary execution.',
+                architecture: 'Compiled directly to bare-metal binaries with zero garbage collection pauses. Emits high-frequency telemetry metrics into TimescaleDB time-series storage and triggers automated DNS traffic rerouting before hardware failures manifest.',
+                challenges: 'Achieving sub-millisecond anomaly detection without utilizing more than 0.5% of host CPU required writing ring-buffer memory handlers and lock-free concurrency queues.',
+                deliverables: [
+                    'eBPF Socket Snooping & Drop Detection Engine',
+                    'Encrypted Peer-to-Peer Heartbeat Mesh',
+                    'Sub-Millisecond Automated DNS Failover Trigger',
+                    'Prometheus & Grafana Exporter Daemon'
+                ],
+                stack: ['Rust', 'eBPF', 'TimescaleDB', 'Prometheus', 'Grafana API']
+            },
             'quantum': {
                 title: 'Quantum Vault — Zero-Trust Security & Key Management Portal',
                 discipline: 'WEB PLATFORM',
@@ -1401,24 +1980,39 @@
                 ],
                 stack: ['Next.js 14', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Supabase']
             },
-            'omni': {
-                title: 'OmniCommerce — Ultra-Fast Headless Storefront & Checkout',
-                discipline: 'WEB PLATFORM',
-                metrics: '+3.8x Conversion • 180ms TTFB • Zero Layout Shift',
-                overview: 'Headless e-commerce architecture designed for ultra-hyped product drops and luxury brands requiring instantaneous load speeds and zero checkout friction.',
-                architecture: 'Built using Astro with island architecture for Vue 3 interactive cart elements. Edge-rendered across Cloudflare Workers directly against the Shopify Storefront GraphQL API.',
-                challenges: 'Achieving sub-200ms global TTFB while handling explosive flash-sale checkout spikes of 10,000+ simultaneous checkouts without cart drops.',
+            'apex': {
+                title: 'Apex — Headless Scraping & Web Intelligence Mesh',
+                discipline: 'AUTONOMOUS PIPELINE',
+                metrics: '2.4M records/day • 99.4% Bypass Rate • 0.02s Transform',
+                overview: 'A distributed web intelligence cluster engineered to scrape, normalize, and extract millions of data records daily across hostile web environments with aggressive anti-bot defenses.',
+                architecture: 'Powered by Python Playwright running in headless container clusters, orchestrated via Celery and Redis. Scraping workers rotate dynamic residential IP pools, emulate authentic human biometric mouse curvatures, and pipe sanitized payloads directly into DuckDB.',
+                challenges: 'Evading multi-layered Cloudflare Turnstile, PerimeterX, and Akamai challenges required building dynamic canvas noise injection and TLS client hello fingerprint spoofing.',
                 deliverables: [
-                    'Edge-Rendered SSR with Cloudflare Workers Cache Invalidation',
-                    'Optimistic Cart Mutations with Zero Page Reloads',
-                    'Automatic Geo-IP Currency & Tax Conversion',
-                    'High-DPI Responsive Image Pipeline with AVIF/WebP'
+                    'Adaptive Anti-Bot & Fingerprint Spoofing Subsystem',
+                    'Dynamic DOM Mutation Fallback Parser',
+                    'Distributed Celery Task Queue with Auto-Healing',
+                    'Live Columnar Data Warehouse Ingestion (DuckDB/S3)'
                 ],
-                stack: ['Astro', 'Vue 3', 'Shopify API', 'Cloudflare Workers', 'Tailwind']
+                stack: ['Python', 'Playwright', 'Celery', 'Redis', 'DuckDB']
+            },
+            'ledgerflow': {
+                title: 'LedgerFlow — Webhook & Financial Reconciliation Suite',
+                discipline: 'FINANCIAL AUTOMATION',
+                metrics: '$4.2M Reconciled • 100% Idempotency • < 350ms Dispute Alert',
+                overview: 'High-velocity transaction ingestion pipeline designed to balance multi-currency balances across international payment gateways, eliminating charge discrepancies.',
+                architecture: 'Engineered in TypeScript on Node.js using Fastify for ultra-low overhead. Employs Redis Redlock distributed locking to guarantee idempotency across concurrent incoming webhook bursts.',
+                challenges: 'Preventing race conditions where multiple webhooks from different payment providers report contradictory dispute states simultaneously.',
+                deliverables: [
+                    'Idempotent Event Ingestion Gateway (Stripe, PayPal, Adyen)',
+                    'Automated Double-Entry Ledger Bookkeeper',
+                    'Automated Forex Currency Real-Time Normalizer',
+                    'Dispute Early Warning System with Slack/Discord Hooks'
+                ],
+                stack: ['Node.js', 'TypeScript', 'Fastify', 'PostgreSQL', 'Stripe API']
             }
         };
 
-        // Open Modal Function
+        // Open Spec Modal Function
         function openSpecModal(key) {
             const spec = projectSpecs[key];
             if (!spec) return;
@@ -1481,20 +2075,76 @@
             lucide.createIcons();
         }
 
-        // Close Modal Function
+        // Close Spec Modal Function
         function closeSpecModal() {
             const modal = document.getElementById('project-modal');
-            modal.classList.add('hidden');
+            if (modal) modal.classList.add('hidden');
             document.body.style.overflow = '';
         }
 
-        // ESC key and backdrop click listener for modal
+        // Fullscreen Live Web Preview Modal
+        function openWebPreviewModal(url, title) {
+            const modal = document.getElementById('web-preview-modal');
+            const iframe = document.getElementById('preview-modal-iframe');
+            const urlSpan = document.getElementById('preview-modal-url');
+            const titleSpan = document.getElementById('preview-modal-title');
+            const extLink = document.getElementById('preview-modal-ext-link');
+
+            if (!modal || !iframe) return;
+
+            iframe.src = url;
+            if (urlSpan) urlSpan.textContent = url;
+            if (titleSpan) titleSpan.textContent = title || 'Live Preview';
+            if (extLink) extLink.href = url;
+
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            lucide.createIcons();
+        }
+
+        function closeWebPreviewModal() {
+            const modal = document.getElementById('web-preview-modal');
+            const iframe = document.getElementById('preview-modal-iframe');
+            if (!modal) return;
+
+            modal.classList.add('hidden');
+            if (iframe) iframe.src = '';
+            document.body.style.overflow = '';
+        }
+
+        // ESC key and backdrop click listener for modals
         window.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeSpecModal();
+            if (e.key === 'Escape') {
+                closeSpecModal();
+                closeWebPreviewModal();
+            }
         });
-        document.getElementById('project-modal').addEventListener('click', (e) => {
+        document.getElementById('project-modal')?.addEventListener('click', (e) => {
             if (e.target.id === 'project-modal') closeSpecModal();
         });
+        document.getElementById('web-preview-modal')?.addEventListener('click', (e) => {
+            if (e.target.id === 'web-preview-modal') closeWebPreviewModal();
+        });
+
+        // Dynamic Iframe Scaler for Miniature Desktop Web Design Previews
+        function updateIframeScales() {
+            const containers = document.querySelectorAll('.browser-viewport');
+            containers.forEach(container => {
+                const wrapper = container.querySelector('.iframe-wrapper');
+                if (!wrapper) return;
+                const containerWidth = container.clientWidth;
+                if (containerWidth === 0) return;
+                const targetWidth = 1024;
+                const scale = containerWidth / targetWidth;
+                wrapper.style.transform = `scale(${scale})`;
+                wrapper.style.transformOrigin = 'top left';
+                wrapper.style.width = `${targetWidth}px`;
+                wrapper.style.height = `${(container.clientHeight / scale)}px`;
+            });
+        }
+        window.addEventListener('resize', updateIframeScales);
+        window.addEventListener('DOMContentLoaded', updateIframeScales);
+        setTimeout(updateIframeScales, 200);
 
         // Filter and Search Logic
         const filterBtns = document.querySelectorAll('.filter-btn');
@@ -1551,6 +2201,7 @@
                 else if (currentFilter === 'automation') activeCategoryLabel.textContent = 'AUTOMATIONS ONLY';
 
                 updateProjectDisplay();
+                setTimeout(updateIframeScales, 60);
             });
         });
 
@@ -1558,6 +2209,7 @@
             searchInput.addEventListener('input', (e) => {
                 searchQuery = e.target.value.trim().toLowerCase();
                 updateProjectDisplay();
+                setTimeout(updateIframeScales, 60);
             });
         }
 
@@ -1571,6 +2223,7 @@
             });
             activeCategoryLabel.textContent = 'ALL ARCHIVES';
             updateProjectDisplay();
+            setTimeout(updateIframeScales, 60);
         }
 
         // 3D Spatial Holographic Reveal Observer
@@ -1621,12 +2274,12 @@
                 }, 350);
             }
 
-            // Trigger glitch ONLY when entering viewport (scrolling to section)
+            // Trigger glitch ONLY ONCE when entering viewport (scrolling to section)
             const cardObserver = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
                     const card = entry.target;
                     if (entry.isIntersecting) {
-                        // Glitch only on entrance
+                        // Glitch only on entrance once
                         if (!card._hasGlitchEntered) {
                             card._hasGlitchEntered = true;
                             const siblings = Array.from(card.parentElement ? card.parentElement.children : []);
@@ -1636,11 +2289,9 @@
                             setTimeout(() => {
                                 triggerCardGlitch(card);
                             }, Math.min(delay, 200));
+
+                            cardObserver.unobserve(card);
                         }
-                    } else {
-                        // Reset when scrolled out of view so it can glitch on next re-entrance
-                        card._hasGlitchEntered = false;
-                        card.classList.remove('bw-glitch-a', 'bw-glitch-b');
                     }
                 });
             }, {
@@ -1650,11 +2301,6 @@
 
             allCards.forEach(card => {
                 cardObserver.observe(card);
-
-                // Interactive mouse hover micro-burst
-                card.addEventListener('mouseenter', () => {
-                    triggerCardGlitch(card);
-                });
             });
         })();
     </script>

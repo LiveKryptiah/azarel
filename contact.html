@@ -893,12 +893,12 @@
                 }, 350);
             };
 
-            // Trigger glitch ONLY when entering viewport (scrolling to section)
+            // Trigger glitch ONLY ONCE when entering viewport (scrolling to section)
             const cardObserver = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
                     const card = entry.target;
                     if (entry.isIntersecting) {
-                        // Glitch only on entrance
+                        // Glitch only on entrance once
                         if (!card._hasGlitchEntered) {
                             card._hasGlitchEntered = true;
                             const siblings = Array.from(card.parentElement ? card.parentElement.children : []);
@@ -908,11 +908,9 @@
                             setTimeout(() => {
                                 triggerCardGlitch(card);
                             }, Math.min(delay, 200));
+
+                            cardObserver.unobserve(card);
                         }
-                    } else {
-                        // Reset when scrolled out of view so it can glitch on next re-entrance
-                        card._hasGlitchEntered = false;
-                        card.classList.remove('bw-glitch-a', 'bw-glitch-b');
                     }
                 });
             }, {
@@ -922,11 +920,6 @@
 
             allCards.forEach(card => {
                 cardObserver.observe(card);
-
-                // Interactive mouse hover micro-burst
-                card.addEventListener('mouseenter', () => {
-                    triggerCardGlitch(card);
-                });
             });
         })();
 
