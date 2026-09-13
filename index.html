@@ -1700,7 +1700,6 @@
 
                             <!-- Initiative Header -->
                             <div class="mb-4">
-                                <div class="text-xl mb-1 select-none">👋</div>
                                 <span class="text-[10px] font-mono uppercase tracking-wider text-neutral-400 block mb-1">Program Initiative</span>
                                 <h4 class="font-dot text-lg sm:text-xl font-bold text-white tracking-tight">Rayna v2 Documentation</h4>
                             </div>
@@ -3218,7 +3217,7 @@
             });
         })();
 
-        // ==================== 3D INTERACTIVE CYBER GLOBE ENGINE (Pure Canvas2D / No External Libs) ====================
+        // ==================== 3D MODERN DOTTED CYBER GLOBE ENGINE (Uniform Halftone Matrix) ====================
         (function init3DGlobeCanvas() {
             const canvas = document.getElementById('globe-3d-canvas');
             if (!canvas) return;
@@ -3233,10 +3232,10 @@
             let cx = 0;
             let cy = 0;
 
-            // Globe Orientation Angles
-            let rotY = 0.55; // Longitude rotation
-            let rotX = 0.38; // Latitude tilt (~22 degrees)
-            let velY = 0.0035; // Continuous auto-spin speed
+            // Globe Orientation: Tilted perspective matching reference screenshot
+            let rotY = 0.72; // Longitude angle showing Americas, Atlantic & Europe
+            let rotX = 0.35; // Latitude axial tilt (~20 degrees)
+            let velY = 0.0028; // Elegant continuous rotation speed
             let velX = 0;
             let isDragging = false;
             let prevMouseX = 0;
@@ -3276,17 +3275,15 @@
                 prevMouseX = e.clientX;
                 prevMouseY = e.clientY;
 
-                rotY += dx * 0.006;
-                rotX += dy * 0.006;
-                rotX = Math.max(-1.1, Math.min(1.1, rotX)); // Clamp vertical tilt
+                rotY += dx * 0.0055;
+                rotX += dy * 0.0055;
+                rotX = Math.max(-1.15, Math.min(1.15, rotX));
 
-                velY = dx * 0.002;
-                velX = dy * 0.002;
+                velY = dx * 0.0018;
+                velX = dy * 0.0018;
             });
 
-            window.addEventListener('mouseup', () => {
-                isDragging = false;
-            });
+            window.addEventListener('mouseup', () => { isDragging = false; });
 
             // Touch Support for Mobile
             canvas.addEventListener('touchstart', (e) => {
@@ -3307,57 +3304,88 @@
                 prevMouseX = e.touches[0].clientX;
                 prevMouseY = e.touches[0].clientY;
 
-                rotY += dx * 0.006;
-                rotX += dy * 0.006;
-                rotX = Math.max(-1.1, Math.min(1.1, rotX));
-                velY = dx * 0.002;
+                rotY += dx * 0.0055;
+                rotX += dy * 0.0055;
+                rotX = Math.max(-1.15, Math.min(1.15, rotX));
+                velY = dx * 0.0018;
             }, { passive: true });
 
-            window.addEventListener('touchend', () => {
-                isDragging = false;
-            });
+            window.addEventListener('touchend', () => { isDragging = false; });
 
-            // 1. Generate Realistic Continental Point-Cloud Coordinates
-            // Landmass clusters: [latMin, latMax, lonMin, lonMax, densityMultiplier]
-            const landClusters = [
+            // Continental Boundary Classifier for Uniform Dot Matrix
+            function isLand(lat, lon) {
                 // North America
-                [18, 70, -165, -55, 1.4],
-                [25, 50, -125, -70, 1.8], // USA core
+                if (52 <= lat && lat <= 72 && -168 <= lon && lon <= -130) return true; // Alaska
+                if (50 <= lat && lat <= 83 && -140 <= lon && lon <= -20) return true;  // Canada & Greenland
+                if (25 <= lat && lat <= 50 && -125 <= lon && lon <= -67) {
+                    if (lat < 30 && lon > -95 && lon < -80) return false; // Gulf cutout
+                    return true;
+                }
+                if (7 <= lat && lat <= 32 && -118 <= lon && lon <= -77) return true;   // Central America
+                if (15 <= lat && lat <= 26 && -85 <= lon && lon <= -65) return true;   // Caribbean
+
                 // South America
-                [-55, 12, -80, -35, 1.5],
+                if (-10 <= lat && lat <= 12 && -80 <= lon && lon <= -35) return true;
+                if (-25 <= lat && lat <= -10 && -75 <= lon && lon <= -35) return true;
+                if (-56 <= lat && lat <= -25 && -75 <= lon && lon <= -55) return true;
+
                 // Europe
-                [36, 70, -10, 42, 2.0],
+                if (55 <= lat && lat <= 71 && 5 <= lon && lon <= 32) return true;    // Scandinavia
+                if (50 <= lat && lat <= 59 && -10 <= lon && lon <= 2) return true;   // UK
+                if (36 <= lat && lat <= 55 && -10 <= lon && lon <= 35) return true;  // Western Europe
+                if (45 <= lat && lat <= 70 && 25 <= lon && lon <= 60) return true;   // Eastern Europe
+
                 // Africa
-                [-35, 37, -18, 52, 1.5],
+                if (15 <= lat && lat <= 37 && -17 <= lon && lon <= 40) return true;
+                if (4 <= lat && lat <= 15 && -17 <= lon && lon <= 12) return true;
+                if (-10 <= lat && lat <= 15 && 10 <= lon && lon <= 50) return true;
+                if (-35 <= lat && lat <= -10 && 12 <= lon && lon <= 38) return true;
+                if (-26 <= lat && lat <= -12 && 43 <= lon && lon <= 50) return true; // Madagascar
+
                 // Asia
-                [12, 75, 42, 145, 1.6],
-                [20, 45, 70, 122, 2.0], // East/South Asia core
-                // Japan / Philippines / Indonesia Island Arc
-                [30, 45, 130, 145, 2.2],
-                [-10, 20, 100, 130, 2.0],
+                if (50 <= lat && lat <= 75 && 40 <= lon && lon <= 180) return true;  // Siberia / Russia
+                if (12 <= lat && lat <= 42 && 35 <= lon && lon <= 62) return true;   // Middle East
+                if (8 <= lat && lat <= 38 && 68 <= lon && lon <= 92) return true;    // India
+                if (18 <= lat && lat <= 52 && 92 <= lon && lon <= 135) return true;  // China / East Asia
+                if (30 <= lat && lat <= 46 && 129 <= lon && lon <= 146) return true; // Japan
+                if (5 <= lat && lat <= 20 && 117 <= lon && lon <= 127) return true;  // Philippines
+                if (-11 <= lat && lat <= 7 && 95 <= lon && lon <= 142) return true;  // Indonesia / Malaysia
+
                 // Australia & NZ
-                [-44, -10, 112, 154, 1.4],
-                [-47, -35, 166, 178, 1.5]
-            ];
+                if (-39 <= lat && lat <= -11 && 113 <= lon && lon <= 154) return true;
+                if (-47 <= lat && lat <= -34 && 166 <= lon && lon <= 179) return true;
 
-            const globePoints = [];
-            const TOTAL_POINTS = 1600;
-
-            for (let i = 0; i < TOTAL_POINTS; i++) {
-                const cluster = landClusters[i % landClusters.length];
-                const latDeg = cluster[0] + Math.random() * (cluster[1] - cluster[0]);
-                const lonDeg = cluster[2] + Math.random() * (cluster[3] - cluster[2]);
-                const latRad = (latDeg * Math.PI) / 180;
-                const lonRad = (lonDeg * Math.PI) / 180;
-
-                // Spherical coordinates
-                const x = Math.cos(latRad) * Math.sin(lonRad);
-                const y = Math.sin(latRad);
-                const z = Math.cos(latRad) * Math.cos(lonRad);
-                globePoints.push({ x, y, z, latDeg, lonDeg });
+                return false;
             }
 
-            // 2. Telemetry Edge Cluster Pins
+            // Generate Uniform Spherical Dot Matrix Grid
+            const stepLat = 2.4;
+            const landPoints = [];
+            const oceanPoints = [];
+
+            for (let lat = -76; lat <= 86; lat += stepLat) {
+                const latRad = (lat * Math.PI) / 180;
+                const cosLat = Math.cos(latRad);
+                const stepLon = stepLat / Math.max(0.18, cosLat);
+
+                for (let lon = -180; lon < 180; lon += stepLon) {
+                    const lonRad = (lon * Math.PI) / 180;
+                    const x = Math.cos(latRad) * Math.sin(lonRad);
+                    const y = Math.sin(latRad);
+                    const z = Math.cos(latRad) * Math.cos(lonRad);
+
+                    if (isLand(lat, lon)) {
+                        landPoints.push({ x, y, z });
+                    } else {
+                        // Sample ocean dots for subtle structured grid
+                        if (Math.round(lat / stepLat) % 2 === 0 && Math.round(lon / stepLon) % 2 === 0) {
+                            oceanPoints.push({ x, y, z });
+                        }
+                    }
+                }
+            }
+
+            // Telemetry Edge Cluster Pins
             const edgeNodes = [
                 { name: 'TOKYO', lat: 35.67, lon: 139.65 },
                 { name: 'MANILA', lat: 14.60, lon: 120.98 },
@@ -3378,22 +3406,22 @@
                 };
             });
 
-            // 3D Rotation Math
+            // 3D Perspective Projection Function
             function project(x, y, z) {
-                // Rotate around Y axis
+                // Rotate around Y axis (longitude spin)
                 const cosY = Math.cos(rotY);
                 const sinY = Math.sin(rotY);
                 const x1 = x * cosY - z * sinY;
                 const z1 = z * cosY + x * sinY;
 
-                // Rotate around X axis (tilt)
+                // Rotate around X axis (axial tilt)
                 const cosX = Math.cos(rotX);
                 const sinX = Math.sin(rotX);
                 const y2 = y * cosX - z1 * sinX;
                 const z2 = z1 * cosX + y * sinX;
 
-                // Perspective projection
-                const fov = radius * 2.5;
+                // Perspective field of view
+                const fov = radius * 2.8;
                 const scale = fov / (fov + z2);
 
                 return {
@@ -3412,7 +3440,7 @@
                 // Apply continuous inertial rotation
                 if (!isDragging) {
                     rotY += velY;
-                    velY = velY * 0.96 + 0.0035 * 0.04; // Settle back to default speed
+                    velY = velY * 0.96 + 0.0028 * 0.04;
                     rotX += velX;
                     velX *= 0.94;
                 }
@@ -3423,17 +3451,17 @@
                     coordsDisplay.textContent = `ROT: ${((rotY * 180 / Math.PI) % 360).toFixed(1)}° • LAT: ${(rotX * 180 / Math.PI).toFixed(1)}°`;
                 }
 
-                // 1. Draw Outer Atmospheric Rim & Silhouette Glow
-                const grad = ctx.createRadialGradient(cx, cy, radius * 0.82, cx, cy, radius * 1.06);
+                // 1. Draw Atmospheric Radial Glow behind Sphere
+                const grad = ctx.createRadialGradient(cx, cy, radius * 0.85, cx, cy, radius * 1.08);
                 grad.addColorStop(0, 'rgba(255, 255, 255, 0.02)');
-                grad.addColorStop(0.85, 'rgba(255, 255, 255, 0.06)');
+                grad.addColorStop(0.85, 'rgba(255, 255, 255, 0.07)');
                 grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
                 ctx.fillStyle = grad;
                 ctx.beginPath();
-                ctx.arc(cx, cy, radius * 1.06, 0, Math.PI * 2);
+                ctx.arc(cx, cy, radius * 1.08, 0, Math.PI * 2);
                 ctx.fill();
 
-                // 2. Draw Latitude Wireframe Parallels
+                // 2. Draw Latitude Parallels Wireframe
                 const latSteps = [-60, -40, -20, 0, 20, 40, 60];
                 latSteps.forEach(latDeg => {
                     const latRad = (latDeg * Math.PI) / 180;
@@ -3448,10 +3476,10 @@
                         const z = ringRadius * Math.cos(lonRad);
                         const p = project(x, ringY, z);
 
-                        if (p.pz > -radius * 0.15) { // Only front / visible hemisphere
-                            const alpha = Math.max(0.04, Math.min(0.28, (p.pz + radius * 0.5) / (radius * 1.5)));
-                            ctx.strokeStyle = `rgba(255, 255, 255, ${alpha * 0.6})`;
-                            ctx.lineWidth = 1;
+                        if (p.pz > -radius * 0.12) {
+                            const alpha = Math.max(0.04, Math.min(0.24, (p.pz + radius * 0.4) / (radius * 1.4)));
+                            ctx.strokeStyle = `rgba(255, 255, 255, ${alpha * 0.5})`;
+                            ctx.lineWidth = 0.85;
                             if (first) {
                                 ctx.moveTo(p.px, p.py);
                                 first = false;
@@ -3465,7 +3493,7 @@
                     ctx.stroke();
                 });
 
-                // 3. Draw Longitude Wireframe Meridians
+                // 3. Draw Longitude Meridians Wireframe
                 for (let lonDeg = 0; lonDeg < 360; lonDeg += 30) {
                     const lonRad = (lonDeg * Math.PI) / 180;
                     ctx.beginPath();
@@ -3478,10 +3506,10 @@
                         const z = ringRadius * Math.cos(lonRad);
                         const p = project(x, y, z);
 
-                        if (p.pz > -radius * 0.1) {
-                            const alpha = Math.max(0.03, Math.min(0.25, (p.pz + radius * 0.5) / (radius * 1.5)));
-                            ctx.strokeStyle = `rgba(255, 255, 255, ${alpha * 0.5})`;
-                            ctx.lineWidth = 1;
+                        if (p.pz > -radius * 0.08) {
+                            const alpha = Math.max(0.03, Math.min(0.22, (p.pz + radius * 0.4) / (radius * 1.4)));
+                            ctx.strokeStyle = `rgba(255, 255, 255, ${alpha * 0.45})`;
+                            ctx.lineWidth = 0.85;
                             if (first) {
                                 ctx.moveTo(p.px, p.py);
                                 first = false;
@@ -3495,25 +3523,39 @@
                     ctx.stroke();
                 }
 
-                // 4. Draw Continental Dot Matrix Points
-                for (let i = 0; i < globePoints.length; i++) {
-                    const pt = globePoints[i];
+                // 4. Draw Subtle Ambient Ocean Dots (Faint Structured Matrix)
+                for (let i = 0; i < oceanPoints.length; i++) {
+                    const pt = oceanPoints[i];
                     const p = project(pt.x, pt.y, pt.z);
 
-                    // Front facing only
                     if (p.pz > 0) {
-                        const depthFactor = p.pz / radius; // 0 to 1
-                        const alpha = 0.18 + depthFactor * 0.78;
-                        const ptSize = Math.max(0.8, 1.0 + depthFactor * 1.4);
-
+                        const depthFactor = p.pz / radius;
+                        const alpha = 0.04 + depthFactor * 0.09;
                         ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
                         ctx.beginPath();
-                        ctx.arc(p.px, p.py, ptSize, 0, Math.PI * 2);
+                        ctx.arc(p.px, p.py, 0.75, 0, Math.PI * 2);
                         ctx.fill();
                     }
                 }
 
-                // 5. Draw Edge Telemetry Node Pins & Radiating Pings
+                // 5. Draw Modern Dotted Continental Landmasses (High-Contrast Halftone Matrix)
+                for (let i = 0; i < landPoints.length; i++) {
+                    const pt = landPoints[i];
+                    const p = project(pt.x, pt.y, pt.z);
+
+                    if (p.pz > 0) {
+                        const depthFactor = p.pz / radius; // 0 to 1
+                        const alpha = 0.22 + depthFactor * 0.78;
+                        const ptRadius = 0.95 + depthFactor * 0.65; // ~1.0px to 1.6px
+
+                        ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
+                        ctx.beginPath();
+                        ctx.arc(p.px, p.py, ptRadius, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                }
+
+                // 6. Draw Edge Node Telemetry Pins & Radiating Signal Waves
                 edgeNodes.forEach(node => {
                     const p = project(node.x, node.y, node.z);
 
