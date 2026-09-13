@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start a Project & Contact — Azarel</title>
+    <!-- Google Fonts: Doto (Dot Matrix), Plus Jakarta Sans, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Doto:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            base: '#000000',
+                            surface: '#09090b',
+                            card: '#0e0e11',
+                            border: 'rgba(255, 255, 255, 0.1)',
+                            borderHover: 'rgba(255, 255, 255, 0.25)'
+                        }
+                    },
+                    fontFamily: {
+                        dot: ['"Doto"', '"DotGothic16"', 'monospace'],
+                        sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Dot Font Utility */
+        .font-dot {
+            font-family: 'Doto', 'DotGothic16', monospace;
+            font-feature-settings: "ss01" on, "ss02" on;
+        }
+
+        /* Subtle Background Monochrome Grid */
+        .bg-grid-pattern {
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* Top Specular Sheen Reflection */
+        .nav-sheen::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.35) 50%, transparent 100%);
+            pointer-events: none;
+        }
+
+        /* Glassmorphism Card Style */
+        .glass-card {
+            background: rgba(14, 14, 17, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1.25rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 16px 40px -12px rgba(255, 255, 255, 0.08);
+        }
+
+        /* Top-left Specular Corner Highlight */
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25) 30%, rgba(255, 255, 255, 0.6) 50%, rgba(255, 255, 255, 0.25) 70%, transparent);
+            pointer-events: none;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 7px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-black text-white antialiased min-h-screen flex flex-col justify-between selection:bg-white selection:text-black">
+
+    <!-- Ambient Subtle Background Grid -->
+    <div class="fixed inset-0 bg-grid-pattern opacity-40 pointer-events-none z-0"></div>
+    <div class="fixed inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.06)_0%,transparent_65%)] pointer-events-none z-0"></div>
+
+    <!-- ==================== NAVIGATION BAR (Cyber Glass Segmented Dock) ==================== -->
+    <header class="sticky top-0 z-50 w-full border-b border-white/[0.08] bg-black/85 backdrop-blur-xl nav-sheen">
+        <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+            
+            <!-- Brand Logo with Dot Font -->
+            <a href="index.html" class="flex items-center gap-3 group">
+                <div class="w-8 h-8 rounded-lg bg-white/10 border border-white/20 p-[1px] flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
+                    <div class="w-full h-full bg-black rounded-[7px] flex items-center justify-center">
+                        <span class="font-dot font-black text-sm text-white tracking-widest">A</span>
+                    </div>
+                </div>
+                <span class="font-dot font-black text-xl tracking-wider text-white group-hover:text-neutral-300 transition-colors">
+                    AZAREL<span class="text-white">.</span>
+                </span>
+            </a>
+
+            <!-- Desktop Navigation: Cyber Glass Segmented Dock (Strictly 0 lines / 0 circles) -->
+            <nav class="hidden lg:flex items-center gap-1 p-1 rounded-full bg-white/[0.04] border border-white/[0.1] backdrop-blur-xl shadow-[inset_0_1px_1px_rgba(255,255,255,0.12)]">
+                <a href="services.html" class="px-4 py-1.5 rounded-full text-xs font-medium text-neutral-400 hover:text-white hover:bg-white/[0.08] transition-all">
+                    Services
+                </a>
+                <a href="projects.html" class="px-4 py-1.5 rounded-full text-xs font-medium text-neutral-400 hover:text-white hover:bg-white/[0.08] transition-all">
+                    Projects
+                </a>
+                <a href="experiences.html" class="px-4 py-1.5 rounded-full text-xs font-medium text-neutral-400 hover:text-white hover:bg-white/[0.08] transition-all">
+                    Experiences
+                </a>
+                <a href="resources.html" class="px-4 py-1.5 rounded-full text-xs font-medium text-neutral-400 hover:text-white hover:bg-white/[0.08] transition-all">
+                    Resources
+                </a>
+                <a href="recommendations.html" class="px-4 py-1.5 rounded-full text-xs font-medium text-neutral-400 hover:text-white hover:bg-white/[0.08] transition-all">
+                    Recommendations
+                </a>
+                <a href="pricing.html" class="px-4 py-1.5 rounded-full text-xs font-medium text-neutral-400 hover:text-white hover:bg-white/[0.08] transition-all">
+                    Pricing
+                </a>
+            </nav>
+
+            <!-- Right CTA Button: Start a Project (Active Solid State) -->
+            <div class="hidden sm:flex items-center gap-4">
+                <a href="contact.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-black text-sm font-bold shadow-[0_0_20px_rgba(255,255,255,0.35)] active:scale-95">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                    <span>Start a Project</span>
+                </a>
+            </div>
+
+            <!-- Mobile Hamburger Toggle -->
+            <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg text-neutral-400 hover:text-white hover:bg-white/[0.08] transition-colors" aria-label="Toggle navigation">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobile-menu" class="hidden lg:hidden border-t border-white/[0.08] bg-black px-6 py-5 space-y-1.5">
+            <a href="services.html" class="mobile-nav-link block text-sm font-medium text-neutral-300 hover:text-white px-4 py-2.5 rounded-xl hover:bg-white/[0.05] transition-all">Services</a>
+            <a href="projects.html" class="mobile-nav-link block text-sm font-medium text-neutral-300 hover:text-white px-4 py-2.5 rounded-xl hover:bg-white/[0.05] transition-all">Projects</a>
+            <a href="experiences.html" class="mobile-nav-link block text-sm font-medium text-neutral-300 hover:text-white px-4 py-2.5 rounded-xl hover:bg-white/[0.05] transition-all">Experiences</a>
+            <a href="resources.html" class="mobile-nav-link block text-sm font-medium text-neutral-300 hover:text-white px-4 py-2.5 rounded-xl hover:bg-white/[0.05] transition-all">Resources</a>
+            <a href="recommendations.html" class="mobile-nav-link block text-sm font-medium text-neutral-300 hover:text-white px-4 py-2.5 rounded-xl hover:bg-white/[0.05] transition-all">Recommendations</a>
+            <a href="pricing.html" class="mobile-nav-link block text-sm font-medium text-neutral-300 hover:text-white px-4 py-2.5 rounded-xl hover:bg-white/[0.05] transition-all">Pricing</a>
+            <div class="pt-3 border-t border-white/[0.08]">
+                <a href="contact.html" class="mobile-nav-link flex items-center justify-center gap-2 w-full px-5 py-3 rounded-full bg-white text-black text-sm font-bold hover:bg-neutral-200 transition-all">
+                    <i data-lucide="sparkles" class="w-4 h-4"></i>
+                    <span>Start a Project</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== MAIN CONTENT ==================== -->
+    <main class="relative z-10 flex-grow">
+
+        <!-- Centralized Header Section -->
+        <section class="pt-8 pb-6 border-b border-white/[0.08] bg-black/40 backdrop-blur-sm">
+            <div class="max-w-4xl mx-auto px-6 text-center">
+                <h1 data-scramble="true" class="font-dot text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white uppercase mb-3">
+                    START A PROJECT // DIRECT TRANSMISSION
+                </h1>
+                <p class="text-neutral-400 text-sm sm:text-base lg:text-lg leading-relaxed max-w-2xl mx-auto mb-8">
+                    Initiate a technical consultation, project blueprint, or engineering inquiry with Azarel.
+                </p>
+
+                <!-- 4 Quick Telemetry Cards -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto text-left">
+                    <div class="p-4 rounded-xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-md">
+                        <div class="text-[10px] font-mono text-neutral-500 uppercase tracking-widest mb-1">Response SLA</div>
+                        <div class="font-dot text-2xl font-bold text-white tracking-tight">&lt; 6 Hours</div>
+                        <div class="text-[11px] text-neutral-400 mt-0.5">Initial Assessment</div>
+                    </div>
+                    <div class="p-4 rounded-xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-md">
+                        <div class="text-[10px] font-mono text-neutral-500 uppercase tracking-widest mb-1">Live Timezone</div>
+                        <div class="font-dot text-2xl font-bold text-white tracking-tight" id="tz-time">00:00:00</div>
+                        <div class="text-[11px] text-neutral-400 mt-0.5">Manila / GMT+8</div>
+                    </div>
+                    <div class="p-4 rounded-xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-md">
+                        <div class="text-[10px] font-mono text-neutral-500 uppercase tracking-widest mb-1">Code Ownership</div>
+                        <div class="font-dot text-2xl font-bold text-white tracking-tight">100%</div>
+                        <div class="text-[11px] text-neutral-400 mt-0.5">Permissive / MIT</div>
+                    </div>
+                    <div class="p-4 rounded-xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-md">
+                        <div class="text-[10px] font-mono text-neutral-500 uppercase tracking-widest mb-1">Deployment</div>
+                        <div class="font-dot text-2xl font-bold text-white tracking-tight">Zero Bloat</div>
+                        <div class="text-[11px] text-neutral-400 mt-0.5">Production Ready</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Project Intake Terminal Section -->
+        <section class="py-12 relative">
+            <div class="max-w-4xl mx-auto px-6">
+
+                <!-- Main Glassmorphic Form Card -->
+                <div class="glass-card p-6 sm:p-10 border-white/20 shadow-2xl">
+                    <form id="project-form" onsubmit="handleProjectSubmit(event)" class="space-y-8">
+                        
+                        <!-- 1. Service Pillar Selection -->
+                        <div>
+                            <label class="block text-xs font-mono font-bold text-neutral-300 uppercase tracking-wider mb-3">
+                                01 // Select Technical Track
+                            </label>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5" id="track-selectors">
+                                <button type="button" onclick="selectTrack('Web Platform', this)" class="track-btn p-3 rounded-xl bg-white text-black font-semibold text-xs border border-white transition-all text-left flex items-center justify-between">
+                                    <span>Web Platforms</span>
+                                    <i data-lucide="globe" class="w-4 h-4"></i>
+                                </button>
+                                <button type="button" onclick="selectTrack('Scraping & ETL', this)" class="track-btn p-3 rounded-xl bg-white/[0.04] text-neutral-300 hover:text-white font-medium text-xs border border-white/[0.08] hover:border-white/20 transition-all text-left flex items-center justify-between">
+                                    <span>Automation & ETL</span>
+                                    <i data-lucide="bot" class="w-4 h-4"></i>
+                                </button>
+                                <button type="button" onclick="selectTrack('Mobile App', this)" class="track-btn p-3 rounded-xl bg-white/[0.04] text-neutral-300 hover:text-white font-medium text-xs border border-white/[0.08] hover:border-white/20 transition-all text-left flex items-center justify-between">
+                                    <span>Offline Mobile App</span>
+                                    <i data-lucide="smartphone" class="w-4 h-4"></i>
+                                </button>
+                                <button type="button" onclick="selectTrack('Database Optimization', this)" class="track-btn p-3 rounded-xl bg-white/[0.04] text-neutral-300 hover:text-white font-medium text-xs border border-white/[0.08] hover:border-white/20 transition-all text-left flex items-center justify-between">
+                                    <span>Database Tuning</span>
+                                    <i data-lucide="database" class="w-4 h-4"></i>
+                                </button>
+                                <button type="button" onclick="selectTrack('Architecture Audit', this)" class="track-btn p-3 rounded-xl bg-white/[0.04] text-neutral-300 hover:text-white font-medium text-xs border border-white/[0.08] hover:border-white/20 transition-all text-left flex items-center justify-between">
+                                    <span>Discovery / Audit</span>
+                                    <i data-lucide="shield-check" class="w-4 h-4"></i>
+                                </button>
+                                <button type="button" onclick="selectTrack('Custom Engineering', this)" class="track-btn p-3 rounded-xl bg-white/[0.04] text-neutral-300 hover:text-white font-medium text-xs border border-white/[0.08] hover:border-white/20 transition-all text-left flex items-center justify-between">
+                                    <span>Custom Sprint</span>
+                                    <i data-lucide="cpu" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+                            <input type="hidden" id="selected-track" value="Web Platform">
+                        </div>
+
+                        <!-- 2. Budget Range Selection (PHP) -->
+                        <div>
+                            <label class="block text-xs font-mono font-bold text-neutral-300 uppercase tracking-wider mb-3">
+                                02 // Approximate Budget Range (PHP)
+                            </label>
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5" id="budget-selectors">
+                                <button type="button" onclick="selectBudget('&lt; ₱5,000', this)" class="budget-btn p-3 rounded-xl bg-white/[0.04] text-neutral-300 hover:text-white font-medium text-xs border border-white/[0.08] hover:border-white/20 transition-all text-center">
+                                    &lt; ₱5,000
+                                </button>
+                                <button type="button" onclick="selectBudget('₱5,000 — ₱15,000', this)" class="budget-btn p-3 rounded-xl bg-white text-black font-semibold text-xs border border-white transition-all text-center">
+                                    ₱5,000 — ₱15,000
+                                </button>
+                                <button type="button" onclick="selectBudget('₱15,000 — ₱50,000', this)" class="budget-btn p-3 rounded-xl bg-white/[0.04] text-neutral-300 hover:text-white font-medium text-xs border border-white/[0.08] hover:border-white/20 transition-all text-center">
+                                    ₱15,000 — ₱50,000
+                                </button>
+                                <button type="button" onclick="selectBudget('Custom Enterprise', this)" class="budget-btn p-3 rounded-xl bg-white/[0.04] text-neutral-300 hover:text-white font-medium text-xs border border-white/[0.08] hover:border-white/20 transition-all text-center">
+                                    Custom / Enterprise
+                                </button>
+                            </div>
+                            <input type="hidden" id="selected-budget" value="₱5,000 — ₱15,000">
+                        </div>
+
+                        <!-- 3. Target Timeline Horizon -->
+                        <div>
+                            <label class="block text-xs font-mono font-bold text-neutral-300 uppercase tracking-wider mb-3">
+                                03 // Target Timeline Horizon
+                            </label>
+                            <div class="grid grid-cols-3 gap-2.5" id="timeline-selectors">
+                                <button type="button" onclick="selectTimeline('Urgent (&lt; 2 Weeks)', this)" class="timeline-btn p-3 rounded-xl bg-white/[0.04] text-neutral-300 hover:text-white font-medium text-xs border border-white/[0.08] hover:border-white/20 transition-all text-center">
+                                    Urgent (&lt; 2 Wks)
+                                </button>
+                                <button type="button" onclick="selectTimeline('Standard (1 Month)', this)" class="timeline-btn p-3 rounded-xl bg-white text-black font-semibold text-xs border border-white transition-all text-center">
+                                    Standard (1 Mo)
+                                </button>
+                                <button type="button" onclick="selectTimeline('Flexible Retainer', this)" class="timeline-btn p-3 rounded-xl bg-white/[0.04] text-neutral-300 hover:text-white font-medium text-xs border border-white/[0.08] hover:border-white/20 transition-all text-center">
+                                    Flexible Retainer
+                                </button>
+                            </div>
+                            <input type="hidden" id="selected-timeline" value="Standard (1 Month)">
+                        </div>
+
+                        <!-- 4. Client Details & Specification Inputs -->
+                        <div class="space-y-4 pt-4 border-t border-white/[0.08]">
+                            <label class="block text-xs font-mono font-bold text-neutral-300 uppercase tracking-wider mb-1">
+                                04 // Point of Contact & Specification
+                            </label>
+                            
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-[11px] font-mono text-neutral-400 uppercase tracking-wider mb-1.5">Your Name *</label>
+                                    <input type="text" id="contact-name" required placeholder="e.g. Alex Rivera" class="w-full px-4 py-3 rounded-xl bg-black/70 border border-white/[0.15] text-white placeholder-neutral-500 focus:outline-none focus:border-white transition-colors text-sm">
+                                </div>
+                                <div>
+                                    <label class="block text-[11px] font-mono text-neutral-400 uppercase tracking-wider mb-1.5">Work Email Address *</label>
+                                    <input type="email" id="contact-email" required placeholder="alex@company.com" class="w-full px-4 py-3 rounded-xl bg-black/70 border border-white/[0.15] text-white placeholder-neutral-500 focus:outline-none focus:border-white transition-colors text-sm">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-[11px] font-mono text-neutral-400 uppercase tracking-wider mb-1.5">Company / Organization / Project Name</label>
+                                <input type="text" id="contact-company" placeholder="e.g. Acme Systems or LGU Project" class="w-full px-4 py-3 rounded-xl bg-black/70 border border-white/[0.15] text-white placeholder-neutral-500 focus:outline-none focus:border-white transition-colors text-sm">
+                            </div>
+
+                            <div>
+                                <div class="flex items-center justify-between mb-1.5">
+                                    <label class="block text-[11px] font-mono text-neutral-400 uppercase tracking-wider">Project Specification / Bottleneck Description *</label>
+                                    <span class="text-[10px] font-mono text-neutral-500" id="char-counter">0 / 1000</span>
+                                </div>
+                                <textarea id="contact-message" rows="4" required oninput="updateCharCount(this)" placeholder="Describe what you want to build or automate. Include any current bottlenecks, target technologies, or reference systems..." class="w-full px-4 py-3 rounded-xl bg-black/70 border border-white/[0.15] text-white placeholder-neutral-500 focus:outline-none focus:border-white transition-colors text-sm leading-relaxed"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- 5. Submit Action Button -->
+                        <div class="pt-2">
+                            <button type="submit" class="w-full py-4 rounded-xl bg-white text-black font-extrabold text-xs uppercase tracking-wider hover:bg-neutral-200 transition-all shadow-xl active:scale-[0.99] flex items-center justify-center gap-2">
+                                <i data-lucide="send" class="w-4 h-4"></i>
+                                <span>Transmit Project Specification</span>
+                            </button>
+                            <p class="text-center text-[11px] text-neutral-500 mt-2.5 font-mono">
+                                Security verified. Non-disclosure agreement guaranteed.
+                            </p>
+                        </div>
+
+                    </form>
+                </div>
+
+                <!-- Direct Technical Channels Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
+                    <!-- Email Direct -->
+                    <div class="p-5 rounded-xl bg-white/[0.03] border border-white/[0.08] flex items-center justify-between gap-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center shrink-0">
+                                <i data-lucide="mail" class="w-5 h-5 text-white"></i>
+                            </div>
+                            <div>
+                                <div class="text-[10px] font-mono text-neutral-500 uppercase">Direct Email</div>
+                                <div class="text-xs font-semibold text-white font-mono">azarelclightnadal@gmail.com</div>
+                            </div>
+                        </div>
+                        <button onclick="copyEmail()" class="p-2 rounded-lg bg-white/[0.08] hover:bg-white/[0.15] text-white transition-colors" title="Copy email address">
+                            <i data-lucide="copy" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+
+                    <!-- GitHub Repository -->
+                    <div class="p-5 rounded-xl bg-white/[0.03] border border-white/[0.08] flex items-center justify-between gap-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center shrink-0">
+                                <i data-lucide="github" class="w-5 h-5 text-white"></i>
+                            </div>
+                            <div>
+                                <div class="text-[10px] font-mono text-neutral-500 uppercase">Code Repository</div>
+                                <div class="text-xs font-semibold text-white font-mono">github.com/LiveKryptiah</div>
+                            </div>
+                        </div>
+                        <a href="https://github.com/LiveKryptiah" target="_blank" rel="noopener" class="p-2 rounded-lg bg-white/[0.08] hover:bg-white/[0.15] text-white transition-colors" title="Open GitHub Profile">
+                            <i data-lucide="external-link" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==================== SUBMISSION TRANSMISSION MODAL ==================== -->
+    <div id="tx-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
+        <div class="glass-card max-w-md w-full p-6 sm:p-8 relative border-white/30 shadow-2xl text-center">
+            <div class="w-12 h-12 rounded-full bg-white/10 border border-white/20 flex items-center justify-center mx-auto mb-4">
+                <i data-lucide="check" class="w-6 h-6 text-white"></i>
+            </div>
+            <h3 class="font-dot text-xl font-bold text-white uppercase mb-2">TRANSMISSION CONFIRMED</h3>
+            <div class="text-[11px] font-mono text-neutral-400 p-3 rounded-lg bg-black/80 border border-white/10 mb-4 text-left space-y-1">
+                <div>[SYS-TX] PACKET VERIFIED: 100% OK</div>
+                <div id="tx-summary-line">[SCOPE] Track: Web Platform</div>
+                <div>[STATUS] Routing to Azarel's direct terminal queue</div>
+                <div>[SLA] Expected response within 6 hours</div>
+            </div>
+            <p class="text-xs text-neutral-300 leading-relaxed mb-6">
+                Thank you. Your project blueprint inquiry has been received. Azarel will review your technical specifications and respond directly via email.
+            </p>
+            <button onclick="closeTxModal()" class="w-full py-3 rounded-xl bg-white text-black font-bold text-xs uppercase tracking-wider hover:bg-neutral-200 transition-all shadow-xl active:scale-95">
+                Dismiss Terminal
+            </button>
+        </div>
+    </div>
+
+    <!-- Feedback Toast -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="px-5 py-3 rounded-xl bg-white text-black font-mono text-xs font-bold shadow-2xl flex items-center gap-2 border border-neutral-300">
+            <i data-lucide="check" class="w-4 h-4 text-black"></i>
+            <span id="toast-text">Email copied to clipboard.</span>
+        </div>
+    </div>
+
+    <!-- ==================== FOOTER (Centralized Black & White) ==================== -->
+    <footer class="border-t border-white/[0.08] bg-black pt-16 pb-12 relative z-10 text-neutral-400">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            
+            <!-- Brand & Mission -->
+            <div class="max-w-lg mx-auto space-y-4 mb-14">
+                <div class="flex items-center justify-center gap-2.5">
+                    <div class="w-7 h-7 rounded-md bg-white/10 border border-white/20 p-[1px] flex items-center justify-center">
+                        <div class="w-full h-full bg-black rounded-[5px] flex items-center justify-center">
+                            <span class="font-dot font-black text-xs text-white">A</span>
+                        </div>
+                    </div>
+                    <span class="font-dot font-black text-lg text-white">AZAREL.</span>
+                </div>
+
+                <p class="text-sm text-neutral-400 leading-relaxed max-w-md mx-auto">
+                    Engineering high-impact websites, internal systems, mobile apps, and automations that eliminate busywork and accelerate velocity.
+                </p>
+
+                <!-- Newsletter / Connect -->
+                <div class="pt-2">
+                    <div class="text-xs font-semibold text-neutral-300 mb-2.5">Stay Updated on Tech & Systems Insights</div>
+                    <form onsubmit="handleNewsletterSubmit(event)" class="flex items-center max-w-sm mx-auto shadow-lg">
+                        <input type="email" required placeholder="Enter Your Email" class="flex-1 px-4 py-2.5 rounded-l-full bg-white/[0.04] border border-white/[0.12] text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-white">
+                        <button type="submit" class="px-5 py-2.5 rounded-r-full bg-white text-black font-bold text-xs hover:bg-neutral-200 transition-colors">
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- 4 Link Columns -->
+            <div class="max-w-4xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-8 text-center sm:text-left pb-14 border-b border-white/[0.08] mb-8">
+                <div>
+                    <h5 class="text-xs font-semibold text-white uppercase tracking-wider mb-4">Navigation</h5>
+                    <ul class="space-y-2.5 text-xs">
+                        <li><a href="services.html" class="hover:text-white transition-colors">Services</a></li>
+                        <li><a href="projects.html" class="hover:text-white transition-colors">Projects</a></li>
+                        <li><a href="experiences.html" class="hover:text-white transition-colors">Experiences</a></li>
+                        <li><a href="resources.html" class="hover:text-white transition-colors">Resources</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-xs font-semibold text-white uppercase tracking-wider mb-4">Engagement</h5>
+                    <ul class="space-y-2.5 text-xs">
+                        <li><a href="recommendations.html" class="hover:text-white transition-colors">Recommendations</a></li>
+                        <li><a href="pricing.html" class="hover:text-white transition-colors">Pricing & Plans</a></li>
+                        <li><a href="contact.html" class="text-white font-semibold transition-colors">Start a Project</a></li>
+                        <li><a href="index.html#faq" class="hover:text-white transition-colors">Project FAQs</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-xs font-semibold text-white uppercase tracking-wider mb-4">Technologies</h5>
+                    <ul class="space-y-2.5 text-xs">
+                        <li><a href="services.html" class="hover:text-white transition-colors">Next.js & React</a></li>
+                        <li><a href="services.html" class="hover:text-white transition-colors">FastAPI & Python</a></li>
+                        <li><a href="services.html" class="hover:text-white transition-colors">PostgreSQL & Redis</a></li>
+                        <li><a href="services.html" class="hover:text-white transition-colors">Flutter & Mobile</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-xs font-semibold text-white uppercase tracking-wider mb-4">Connect</h5>
+                    <ul class="space-y-2.5 text-xs">
+                        <li><a href="https://github.com/LiveKryptiah" target="_blank" rel="noopener" class="hover:text-white transition-colors">GitHub</a></li>
+                        <li><a href="mailto:azarelclightnadal@gmail.com" class="hover:text-white transition-colors">Direct Email</a></li>
+                        <li><a href="contact.html" class="hover:text-white transition-colors">Project Intake</a></li>
+                        <li><a href="pricing.html" class="hover:text-white transition-colors">Custom Quote</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Copyright -->
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+                <div>
+                    Copyright 2026 Azarel Clight J. Nadal. All Rights Reserved.
+                </div>
+                <div class="flex items-center gap-4 text-neutral-400">
+                    <a href="https://github.com/LiveKryptiah" target="_blank" rel="noopener" class="hover:text-white transition-colors" aria-label="GitHub">
+                        <i data-lucide="github" class="w-4 h-4"></i>
+                    </a>
+                    <a href="mailto:azarelclightnadal@gmail.com" class="hover:text-white transition-colors" aria-label="Email">
+                        <i data-lucide="mail" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- ==================== JAVASCRIPT LOGIC ==================== -->
+    <script>
+        // Initialize Lucide icons
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+
+        // Mobile drawer toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        // Live GMT+8 Manila Clock
+        function updateTime() {
+            const timeEl = document.getElementById('tz-time');
+            if (!timeEl) return;
+            const now = new Date();
+            const options = { timeZone: 'Asia/Manila', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+            timeEl.textContent = new Intl.DateTimeFormat([], options).format(now);
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+
+        // Track Selector
+        function selectTrack(track, btn) {
+            document.getElementById('selected-track').value = track;
+            document.querySelectorAll('.track-btn').forEach(b => {
+                b.className = 'track-btn p-3 rounded-xl bg-white/[0.04] text-neutral-300 hover:text-white font-medium text-xs border border-white/[0.08] hover:border-white/20 transition-all text-left flex items-center justify-between';
+            });
+            btn.className = 'track-btn p-3 rounded-xl bg-white text-black font-semibold text-xs border border-white transition-all text-left flex items-center justify-between';
+        }
+
+        // Budget Selector
+        function selectBudget(budget, btn) {
+            document.getElementById('selected-budget').value = budget;
+            document.querySelectorAll('.budget-btn').forEach(b => {
+                b.className = 'budget-btn p-3 rounded-xl bg-white/[0.04] text-neutral-300 hover:text-white font-medium text-xs border border-white/[0.08] hover:border-white/20 transition-all text-center';
+            });
+            btn.className = 'budget-btn p-3 rounded-xl bg-white text-black font-semibold text-xs border border-white transition-all text-center';
+        }
+
+        // Timeline Selector
+        function selectTimeline(timeline, btn) {
+            document.getElementById('selected-timeline').value = timeline;
+            document.querySelectorAll('.timeline-btn').forEach(b => {
+                b.className = 'timeline-btn p-3 rounded-xl bg-white/[0.04] text-neutral-300 hover:text-white font-medium text-xs border border-white/[0.08] hover:border-white/20 transition-all text-center';
+            });
+            btn.className = 'timeline-btn p-3 rounded-xl bg-white text-black font-semibold text-xs border border-white transition-all text-center';
+        }
+
+        // Character counter
+        function updateCharCount(textarea) {
+            const counter = document.getElementById('char-counter');
+            if (counter) {
+                counter.textContent = `${textarea.value.length} / 1000`;
+            }
+        }
+
+        // Copy Email
+        function copyEmail() {
+            navigator.clipboard.writeText('azarelclightnadal@gmail.com').then(() => {
+                showToast('Email copied: azarelclightnadal@gmail.com');
+            });
+        }
+
+        // Toast feedback
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastText = document.getElementById('toast-text');
+            if (!toast || !toastText) return;
+            toastText.textContent = message;
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 3000);
+        }
+
+        // Form Submit & Modal
+        function handleProjectSubmit(e) {
+            e.preventDefault();
+            const track = document.getElementById('selected-track').value;
+            const budget = document.getElementById('selected-budget').value;
+            const timeline = document.getElementById('selected-timeline').value;
+            
+            const summaryLine = document.getElementById('tx-summary-line');
+            if (summaryLine) {
+                summaryLine.textContent = `[SCOPE] Track: ${track} | Budget: ${budget} | Timeline: ${timeline}`;
+            }
+
+            const modal = document.getElementById('tx-modal');
+            if (modal) modal.classList.remove('hidden');
+        }
+
+        function closeTxModal() {
+            const modal = document.getElementById('tx-modal');
+            if (modal) modal.classList.add('hidden');
+            document.getElementById('project-form').reset();
+            updateCharCount(document.getElementById('contact-message'));
+        }
+
+        function handleNewsletterSubmit(e) {
+            e.preventDefault();
+            showToast('Subscribed to Azarel Systems dispatch.');
+            e.target.reset();
+        }
+
+        // Read URL parameters on load
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const plan = urlParams.get('plan');
+            const scope = urlParams.get('scope');
+            const budget = urlParams.get('budget');
+
+            const messageBox = document.getElementById('contact-message');
+            if (plan && messageBox) {
+                messageBox.value = `Interested in engaging under the ${plan}. Let's discuss scope, deliverables, and start date.`;
+                updateCharCount(messageBox);
+            } else if (scope && budget && messageBox) {
+                messageBox.value = `Estimated Project Scope: ${scope}\nEstimated Budget: ${budget}\nLooking forward to aligning on specifications and kick-off.`;
+                updateCharCount(messageBox);
+            }
+        });
+    </script>
+</body>
+</html>

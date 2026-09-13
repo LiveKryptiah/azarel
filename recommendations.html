@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommendations & Endorsements — Azarel</title>
+    <!-- Google Fonts: Doto (Dot Matrix), Plus Jakarta Sans, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Doto:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            base: '#000000',
+                            surface: '#09090b',
+                            card: '#0e0e11',
+                            border: 'rgba(255, 255, 255, 0.1)',
+                            borderHover: 'rgba(255, 255, 255, 0.25)'
+                        }
+                    },
+                    fontFamily: {
+                        dot: ['"Doto"', '"DotGothic16"', 'monospace'],
+                        sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Dot Font Utility */
+        .font-dot {
+            font-family: 'Doto', 'DotGothic16', monospace;
+            font-feature-settings: "ss01" on, "ss02" on;
+        }
+
+        /* Subtle Background Monochrome Grid */
+        .bg-grid-pattern {
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* Top Specular Sheen Reflection */
+        .nav-sheen::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.35) 50%, transparent 100%);
+            pointer-events: none;
+        }
+
+        /* Glassmorphism Card Style */
+        .glass-card {
+            background: rgba(14, 14, 17, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1.25rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 16px 40px -12px rgba(255, 255, 255, 0.08);
+        }
+
+        /* Top-left Specular Corner Highlight */
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25) 30%, rgba(255, 255, 255, 0.6) 50%, rgba(255, 255, 255, 0.25) 70%, transparent);
+            pointer-events: none;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 7px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-black text-white antialiased min-h-screen flex flex-col justify-between selection:bg-white selection:text-black">
+
+    <!-- Ambient Subtle Background Grid -->
+    <div class="fixed inset-0 bg-grid-pattern opacity-40 pointer-events-none z-0"></div>
+    <div class="fixed inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.06)_0%,transparent_65%)] pointer-events-none z-0"></div>
+
+    <!-- ==================== NAVIGATION BAR (Cyber Glass Segmented Dock) ==================== -->
+    <header class="sticky top-0 z-50 w-full border-b border-white/[0.08] bg-black/85 backdrop-blur-xl nav-sheen">
+        <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+            
+            <!-- Brand Logo with Dot Font -->
+            <a href="index.html" class="flex items-center gap-3 group">
+                <div class="w-8 h-8 rounded-lg bg-white/10 border border-white/20 p-[1px] flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
+                    <div class="w-full h-full bg-black rounded-[7px] flex items-center justify-center">
+                        <span class="font-dot font-black text-sm text-white tracking-widest">A</span>
+                    </div>
+                </div>
+                <span class="font-dot font-black text-xl tracking-wider text-white group-hover:text-neutral-300 transition-colors">
+                    AZAREL<span class="text-white">.</span>
+                </span>
+            </a>
+
+            <!-- Desktop Navigation: Cyber Glass Segmented Dock (Strictly 0 lines / 0 circles) -->
+            <nav class="hidden lg:flex items-center gap-1 p-1 rounded-full bg-white/[0.04] border border-white/[0.1] backdrop-blur-xl shadow-[inset_0_1px_1px_rgba(255,255,255,0.12)]">
+                <a href="services.html" class="px-4 py-1.5 rounded-full text-xs font-medium text-neutral-400 hover:text-white hover:bg-white/[0.08] transition-all">
+                    Services
+                </a>
+                <a href="projects.html" class="px-4 py-1.5 rounded-full text-xs font-medium text-neutral-400 hover:text-white hover:bg-white/[0.08] transition-all">
+                    Projects
+                </a>
+                <a href="experiences.html" class="px-4 py-1.5 rounded-full text-xs font-medium text-neutral-400 hover:text-white hover:bg-white/[0.08] transition-all">
+                    Experiences
+                </a>
+                <a href="resources.html" class="px-4 py-1.5 rounded-full text-xs font-medium text-neutral-400 hover:text-white hover:bg-white/[0.08] transition-all">
+                    Resources
+                </a>
+                <!-- Active Pill: Recommendations -->
+                <a href="recommendations.html" class="px-4 py-1.5 rounded-full text-xs font-semibold text-white bg-white/[0.12] border border-white/20 shadow-[0_0_12px_rgba(255,255,255,0.1)]">
+                    Recommendations
+                </a>
+                <a href="pricing.html" class="px-4 py-1.5 rounded-full text-xs font-medium text-neutral-400 hover:text-white hover:bg-white/[0.08] transition-all">
+                    Pricing
+                </a>
+            </nav>
+
+            <!-- Right CTA Button: Start a Project -->
+            <div class="hidden sm:flex items-center gap-4">
+                <a href="contact.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-black text-sm font-bold hover:bg-neutral-200 transition-all shadow-md active:scale-95">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                    <span>Start a Project</span>
+                </a>
+            </div>
+
+            <!-- Mobile Hamburger Toggle -->
+            <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg text-neutral-400 hover:text-white hover:bg-white/[0.08] transition-colors" aria-label="Toggle navigation">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobile-menu" class="hidden lg:hidden border-t border-white/[0.08] bg-black px-6 py-5 space-y-1.5">
+            <a href="services.html" class="mobile-nav-link block text-sm font-medium text-neutral-300 hover:text-white px-4 py-2.5 rounded-xl hover:bg-white/[0.05] transition-all">Services</a>
+            <a href="projects.html" class="mobile-nav-link block text-sm font-medium text-neutral-300 hover:text-white px-4 py-2.5 rounded-xl hover:bg-white/[0.05] transition-all">Projects</a>
+            <a href="experiences.html" class="mobile-nav-link block text-sm font-medium text-neutral-300 hover:text-white px-4 py-2.5 rounded-xl hover:bg-white/[0.05] transition-all">Experiences</a>
+            <a href="resources.html" class="mobile-nav-link block text-sm font-medium text-neutral-300 hover:text-white px-4 py-2.5 rounded-xl hover:bg-white/[0.05] transition-all">Resources</a>
+            <a href="recommendations.html" class="mobile-nav-link block text-sm font-semibold text-white px-4 py-2.5 rounded-xl bg-white/[0.1] border border-white/20 transition-all">Recommendations</a>
+            <a href="pricing.html" class="mobile-nav-link block text-sm font-medium text-neutral-300 hover:text-white px-4 py-2.5 rounded-xl hover:bg-white/[0.05] transition-all">Pricing</a>
+            <div class="pt-3 border-t border-white/[0.08]">
+                <a href="contact.html" class="mobile-nav-link flex items-center justify-center gap-2 w-full px-5 py-3 rounded-full bg-white text-black text-sm font-bold hover:bg-neutral-200 transition-all">
+                    <i data-lucide="sparkles" class="w-4 h-4"></i>
+                    <span>Start a Project</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== MAIN CONTENT ==================== -->
+    <main class="relative z-10 flex-grow">
+
+        <!-- Centralized Header Section -->
+        <section class="pt-8 pb-6 border-b border-white/[0.08] bg-black/40 backdrop-blur-sm">
+            <div class="max-w-4xl mx-auto px-6 text-center">
+                <h1 data-scramble="true" class="font-dot text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white uppercase mb-3">
+                    RECOMMENDATIONS & VERIFIED ENDORSEMENTS
+                </h1>
+                <p class="text-neutral-400 text-sm sm:text-base lg:text-lg leading-relaxed max-w-2xl mx-auto mb-8">
+                    What engineering directors, agency founders, and local government executives say about collaborating with Azarel.
+                </p>
+
+                <!-- 4 KPI Telemetry Ribbon Cards -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto text-left">
+                    <div class="p-4 rounded-xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-md">
+                        <div class="text-[10px] font-mono text-neutral-500 uppercase tracking-widest mb-1">Execution SLA</div>
+                        <div class="font-dot text-2xl font-bold text-white tracking-tight">100%</div>
+                        <div class="text-[11px] text-neutral-400 mt-0.5">On-Time Milestones</div>
+                    </div>
+                    <div class="p-4 rounded-xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-md">
+                        <div class="text-[10px] font-mono text-neutral-500 uppercase tracking-widest mb-1">References</div>
+                        <div class="font-dot text-2xl font-bold text-white tracking-tight">12+</div>
+                        <div class="text-[11px] text-neutral-400 mt-0.5">Verified Leaders</div>
+                    </div>
+                    <div class="p-4 rounded-xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-md">
+                        <div class="text-[10px] font-mono text-neutral-500 uppercase tracking-widest mb-1">Review Score</div>
+                        <div class="font-dot text-2xl font-bold text-white tracking-tight">4.98<span class="text-neutral-500 text-sm">/5.0</span></div>
+                        <div class="text-[11px] text-neutral-400 mt-0.5">Technical Audits</div>
+                    </div>
+                    <div class="p-4 rounded-xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-md">
+                        <div class="text-[10px] font-mono text-neutral-500 uppercase tracking-widest mb-1">Impact Reach</div>
+                        <div class="font-dot text-2xl font-bold text-white tracking-tight">42,000+</div>
+                        <div class="text-[11px] text-neutral-400 mt-0.5">Citizens & Users</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sticky Filter Bar & Endorse Action -->
+        <section class="sticky top-20 z-40 bg-black/90 backdrop-blur-md border-b border-white/[0.08] py-4">
+            <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+                
+                <!-- Category Filter Pills -->
+                <div class="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 scrollbar-none" id="filter-container">
+                    <button onclick="filterEndorsements('all', event)" class="filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white text-black border border-white transition-all shrink-0">
+                        All Endorsements (6)
+                    </button>
+                    <button onclick="filterEndorsements('gov', event)" class="filter-btn px-3.5 py-1.5 rounded-full text-xs font-medium text-neutral-400 bg-white/[0.04] border border-white/[0.08] hover:text-white hover:bg-white/[0.08] transition-all shrink-0">
+                        Government & Public
+                    </button>
+                    <button onclick="filterEndorsements('saas', event)" class="filter-btn px-3.5 py-1.5 rounded-full text-xs font-medium text-neutral-400 bg-white/[0.04] border border-white/[0.08] hover:text-white hover:bg-white/[0.08] transition-all shrink-0">
+                        SaaS & Startups
+                    </button>
+                    <button onclick="filterEndorsements('etl', event)" class="filter-btn px-3.5 py-1.5 rounded-full text-xs font-medium text-neutral-400 bg-white/[0.04] border border-white/[0.08] hover:text-white hover:bg-white/[0.08] transition-all shrink-0">
+                        Automation & ETL
+                    </button>
+                    <button onclick="filterEndorsements('peers', event)" class="filter-btn px-3.5 py-1.5 rounded-full text-xs font-medium text-neutral-400 bg-white/[0.04] border border-white/[0.08] hover:text-white hover:bg-white/[0.08] transition-all shrink-0">
+                        Engineering Peers
+                    </button>
+                </div>
+
+                <!-- Right Action: Submit Reference Modal Trigger -->
+                <button onclick="openEndorseModal()" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.06] hover:bg-white/[0.12] border border-white/20 text-xs font-semibold text-white transition-all shrink-0">
+                    <i data-lucide="message-square-plus" class="w-3.5 h-3.5 text-white"></i>
+                    <span>Submit an Endorsement</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Recommendations Grid Section -->
+        <section class="py-12 relative">
+            <div class="max-w-6xl mx-auto px-6">
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8" id="endorsements-grid">
+
+                    <!-- CARD 1: Government & Public Sector (Atty. Roberto V. Mendoza) -->
+                    <div class="glass-card p-7 flex flex-col justify-between group endorsement-card" data-category="gov">
+                        <div>
+                            <!-- Header Meta -->
+                            <div class="flex items-center justify-between gap-2 mb-4">
+                                <div class="text-[10px] font-mono px-2.5 py-1 rounded bg-white/[0.06] border border-white/10 text-neutral-300">
+                                    [CONTRACT REF: #LGU-2024-CORE]
+                                </div>
+                                <div class="flex items-center gap-1 text-white text-xs" title="5.0 Rating">
+                                    <i data-lucide="star" class="w-3.5 h-3.5 fill-white text-white"></i>
+                                    <i data-lucide="star" class="w-3.5 h-3.5 fill-white text-white"></i>
+                                    <i data-lucide="star" class="w-3.5 h-3.5 fill-white text-white"></i>
+                                    <i data-lucide="star" class="w-3.5 h-3.5 fill-white text-white"></i>
+                                    <i data-lucide="star" class="w-3.5 h-3.5 fill-white text-white"></i>
+                                    <span class="font-mono ml-1 text-white font-bold">5.0</span>
+                                </div>
+                            </div>
+
+                            <!-- High-Impact Lead Quote -->
+                            <blockquote class="text-base font-semibold text-white leading-snug mb-3">
+                                "Azarel completely dismantled our municipal document backlog. We went from manual paper logbooks to sub-120ms citizen verification."
+                            </blockquote>
+
+                            <!-- Detailed Narrative -->
+                            <p class="text-xs sm:text-sm text-neutral-300 leading-relaxed mb-6">
+                                "Our municipal treasury and citizen licensing division was plagued by 4-hour queues and duplicate business permits. Azarel engineered the LGU-OS distributed core from scratch in FastAPI and PostgreSQL with atomic audit logging. Over 42,000 citizens now receive real-time SMS status updates and zero double-issuances have occurred across nine months of production deployment."
+                            </p>
+                        </div>
+
+                        <!-- Author Profile & Deliverable Tags -->
+                        <div class="pt-5 border-t border-white/[0.08]">
+                            <div class="flex items-center gap-3.5 mb-3">
+                                <div class="w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center font-dot font-black text-white text-sm shrink-0">
+                                    RM
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-bold text-white">Atty. Roberto V. Mendoza</h4>
+                                    <div class="text-xs text-neutral-400">Municipal Administrator • LGU Citizen Core</div>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-neutral-400 border border-white/[0.08]">FastAPI</span>
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-neutral-400 border border-white/[0.08]">PostgreSQL</span>
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-neutral-400 border border-white/[0.08]">Redis Mutex</span>
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-neutral-400 border border-white/[0.08]">42K+ Citizens</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD 2: Automation & ETL (Marcus Vance) -->
+                    <div class="glass-card p-7 flex flex-col justify-between group endorsement-card" data-category="etl">
+                        <div>
+                            <!-- Header Meta -->
+                            <div class="flex items-center justify-between gap-2 mb-4">
+                                <div class="text-[10px] font-mono px-2.5 py-1 rounded bg-white/[0.06] border border-white/10 text-neutral-300">
+                                    [CONTRACT REF: #DFL-891-BOT]
+                                </div>
+                                <div class="flex items-center gap-1 text-white text-xs" title="5.0 Rating">
+                                    <i data-lucide="star" class="w-3.5 h-3.5 fill-white text-white"></i>
+                                    <i data-lucide="star" class="w-3.5 h-3.5 fill-white text-white"></i>
+                                    <i data-lucide="star" class="w-3.5 h-3.5 fill-white text-white"></i>
+                                    <i data-lucide="star" class="w-3.5 h-3.5 fill-white text-white"></i>
+                                    <i data-lucide="star" class="w-3.5 h-3.5 fill-white text-white"></i>
+                                    <span class="font-mono ml-1 text-white font-bold">5.0</span>
+                                </div>
+                            </div>
+
+                            <!-- High-Impact Lead Quote -->
+                            <blockquote class="text-base font-semibold text-white leading-snug mb-3">
+                                "2.4 million daily competitor pricing events scraped without getting blocked once by Cloudflare or Akamai."
+                            </blockquote>
+
+                            <!-- Detailed Narrative -->
+                            <p class="text-xs sm:text-sm text-neutral-300 leading-relaxed mb-6">
+                                "Our previous data vendors constantly broke whenever target marketplaces updated their antibot defenses. Azarel deployed a resilient Playwright and Celery crawler fleet incorporating canvas noise injection, headless browser fingerprint randomization, and TLS JA3/JA4 spoofing. Ingestion throughput jumped 340% while proxy burn costs dropped in half."
+                            </p>
+                        </div>
+
+                        <!-- Author Profile & Deliverable Tags -->
+                        <div class="pt-5 border-t border-white/[0.08]">
+                            <div class="flex items-center gap-3.5 mb-3">
+                                <div class="w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center font-dot font-black text-white text-sm shrink-0">
+                                    MV
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-bold text-white">Marcus Vance</h4>
+                                    <div class="text-xs text-neutral-400">VP of Engineering • DataFlow Labs (Austin, TX)</div>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-neutral-400 border border-white/[0.08]">Playwright</span>
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-neutral-400 border border-white/[0.08]">Celery & Redis</span>
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-neutral-400 border border-white/[0.08]">JA3 TLS Spoofing</span>
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-neutral-400 border border-white/[0.08]">2.4M Records/Day</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD 3: SaaS & Startups (Elena Rostova) -->
+                    <div class="glass-card p-7 flex flex-col justify-between group endorsement-card" data-category="saas">
+                        <div>
+                            <!-- Header Meta -->
+                            <div class="flex items-center justify-between gap-2 mb-4">
+                                <div class="text-[10px] font-mono px-2.5 py-1 rounded bg-white/[0.06] border border-white/10 text-neutral-300">
+                                    [CONTRACT REF: #HL-412-MESH]
+                                </div>
+                                <div class="flex items-center gap-1 text-white text-xs" title="5.0 Rating">
+                                    <i data-lucide="star" class="w-3.5 h-3.5 fill-white text-white"></i>
+                                    <i data-lucide="star" class="w-3.5 h-3.5 fill-white text-white"></i>
+                                    <i data-lucide="star" class="w-3.5 h-3.5 fill-white text-white"></i>
+                                    <i data-lucide="star" class="w-3.5 h-3.5 fill-white text-white"></i>
+                                    <i data-lucide="star" class="w-3.5 h-3.5 fill-white text-white"></i>
+                                    <span class="font-mono ml-1 text-white font-bold">5.0</span>
+                                </div>
+                            </div>
+
+                            <!-- High-Impact Lead Quote -->
+                            <blockquote class="text-base font-semibold text-white leading-snug mb-3">
+                                "The offline-first SQLite sync engine and BLE mesh relay saved our logistics drivers hundreds of lost manifest hours in zero-cell zones."
+                            </blockquote>
+
+                            <!-- Detailed Narrative -->
+                            <p class="text-xs sm:text-sm text-neutral-300 leading-relaxed mb-6">
+                                "Our fleet routes pass through mountainous terrain where cellular reception is non-existent. Most mobile developers build naive online-first apps that crash or drop state when connection breaks. Azarel architected a robust conflict-free replicated data type (CRDT) sync model in Flutter. Devices store state locally in SQLite and peer-to-peer relay trip telemetry via Bluetooth Low Energy."
+                            </p>
+                        </div>
+
+                        <!-- Author Profile & Deliverable Tags -->
+                        <div class="pt-5 border-t border-white/[0.08]">
+                            <div class="flex items-center gap-3.5 mb-3">
+                                <div class="w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center font-dot font-black text-white text-sm shrink-0">
+                                    ER
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-bold text-white">Elena Rostova</h4>
+                                    <div class="text-xs text-neutral-400">Head of Product • Horizon Logistics</div>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-neutral-400 border border-white/[0.08]">Flutter</span>
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-neutral-400 border border-white/[0.08]">SQLite CRDT</span>
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-neutral-400 border border-white/[0.08]">BLE Mesh</span>
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-neutral-400 border border-white/[0.08]">Zero-Loss Telematics</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD 4: SaaS & Startups (David Chen) -->
+                    <div class="glass-card p-7 flex flex-col justify-between group endorsement-card" data-category="saas">
+                        <div>
+                            <!-- Header Meta -->
+                            <div class="flex items-center justify-between gap-2 mb-4">
+                                <div class="text-[10px] font-mono px-2.5 py-1 rounded bg-white/[0.06] border border-white/10 text-neutral-300">
+                                    [CONTRACT REF: #APX-770-DB]
+                                </div>
+                                <div class="flex items-center gap-1 text-white text-xs" title="5.0 Rating">
+                                    <i data-lucide="star" class="w-3.5 h-3.5 fill-white text-white"></i>
+                                    <i data-lucide="star" class="w-3.5 h-3.5 fill-white text-white"></i>
+                                    <i data-lucide="star" class="w-3.5 h-3.5 fill-white text-white"></i>
+                                    <i data-lucide="star" class="w-3.5 h-3.5 fill-white text-white"></i>
+                                    <i data-lucide="star" class="w-3.5 h-3.5 fill-white text-white"></i>
+                                    <span class="font-mono ml-1 text-white font-bold">5.0</span>
+                                </div>
+                            </div>
+
+                            <!-- High-Impact Lead Quote -->
+                            <blockquote class="text-base font-semibold text-white leading-snug mb-3">
+                                "Azarel reduced our peak checkout database response time from 1,850ms to 85ms without paying for larger AWS RDS instances."
+                            </blockquote>
+
+                            <!-- Detailed Narrative -->
+                            <p class="text-xs sm:text-sm text-neutral-300 leading-relaxed mb-6">
+                                "During our 11.11 campaign, our primary PostgreSQL cluster was maxing out CPU due to sequential table scans on cart transactions. Azarel audited our `pg_stat_statements`, eliminated nested N+1 query loops, implemented partial index partitions, and introduced a Redis read-through caching tier. We survived 5x flash traffic with CPU never surpassing 32%."
+                            </p>
+                        </div>
+
+                        <!-- Author Profile & Deliverable Tags -->
+                        <div class="pt-5 border-t border-white/[0.08]">
+                            <div class="flex items-center gap-3.5 mb-3">
+                                <div class="w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center font-dot font-black text-white text-sm shrink-0">
+                                    DC
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-bold text-white">David Chen</h4>
+                                    <div class="text-xs text-neutral-400">Chief Technology Officer • Apex Commerce</div>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-neutral-400 border border-white/[0.08]">PostgreSQL Tuning</span>
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-neutral-400 border border-white/[0.08]">Index Partitioning</span>
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-neutral-400 border border-white/[0.08]">Redis Caching</span>
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-neutral-400 border border-white/[0.08]">-78% Latency</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD 5: Engineering Peers (Sarah Jenkins) -->
+                    <div class="glass-card p-7 flex flex-col justify-between group endorsement-card" data-category="peers">
+                        <div>
+                            <!-- Header Meta -->
+                            <div class="flex items-center justify-between gap-2 mb-4">
+                                <div class="text-[10px] font-mono px-2.5 py-1 rounded bg-white/[0.06] border border-white/10 text-neutral-300">
+                                    [PEER AUDIT REF: #DSG-501]
+                                </div>
+                                <div class="flex items-center gap-1 text-white text-xs" title="5.0 Rating">
+                                    <i data-lucide="star" class="w-3.5 h-3.5 fill-white text-white"></i>
+                                    <i data-lucide="star" class="w-3.5 h-3.5 fill-white text-white"></i>
+                                    <i data-lucide="star" class="w-3.5 h-3.5 fill-white text-white"></i>
+                                    <i data-lucide="star" class="w-3.5 h-3.5 fill-white text-white"></i>
+                                    <i data-lucide="star" class="w-3.5 h-3.5 fill-white text-white"></i>
+                                    <span class="font-mono ml-1 text-white font-bold">5.0</span>
+                                </div>
+                            </div>
+
+                            <!-- High-Impact Lead Quote -->
+                            <blockquote class="text-base font-semibold text-white leading-snug mb-3">
+                                "Rarely do you encounter an engineer who writes code this clean, decoupled, and architecturally resilient to failure."
+                            </blockquote>
+
+                            <!-- Detailed Narrative -->
+                            <p class="text-xs sm:text-sm text-neutral-300 leading-relaxed mb-6">
+                                "Having reviewed hundreds of distributed systems repos, Azarel's implementation of distributed lease locks and atomic reconciliation pipelines stands out. Zero bloated third-party dependencies, strict interface contracts, and thorough test harnesses covering race conditions. Any team onboarding Azarel gains an instant senior engineering force-multiplier."
+                            </p>
+                        </div>
+
+                        <!-- Author Profile & Deliverable Tags -->
+                        <div class="pt-5 border-t border-white/[0.08]">
+                            <div class="flex items-center gap-3.5 mb-3">
+                                <div class="w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center font-dot font-black text-white text-sm shrink-0">
+                                    SJ
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-bold text-white">Sarah Jenkins</h4>
+                                    <div class="text-xs text-neutral-400">Principal Cloud Architect • Distributed Systems Guild</div>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-neutral-400 border border-white/[0.08]">Architecture Review</span>
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-neutral-400 border border-white/[0.08]">Concurrency Locks</span>
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-neutral-400 border border-white/[0.08]">Zero Tech Debt</span>
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-neutral-400 border border-white/[0.08]">System Reliability</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD 6: Automation & Operations (Carlos Gutierrez) -->
+                    <div class="glass-card p-7 flex flex-col justify-between group endorsement-card" data-category="etl">
+                        <div>
+                            <!-- Header Meta -->
+                            <div class="flex items-center justify-between gap-2 mb-4">
+                                <div class="text-[10px] font-mono px-2.5 py-1 rounded bg-white/[0.06] border border-white/10 text-neutral-300">
+                                    [CONTRACT REF: #MF-203-OPS]
+                                </div>
+                                <div class="flex items-center gap-1 text-white text-xs" title="5.0 Rating">
+                                    <i data-lucide="star" class="w-3.5 h-3.5 fill-white text-white"></i>
+                                    <i data-lucide="star" class="w-3.5 h-3.5 fill-white text-white"></i>
+                                    <i data-lucide="star" class="w-3.5 h-3.5 fill-white text-white"></i>
+                                    <i data-lucide="star" class="w-3.5 h-3.5 fill-white text-white"></i>
+                                    <i data-lucide="star" class="w-3.5 h-3.5 fill-white text-white"></i>
+                                    <span class="font-mono ml-1 text-white font-bold">5.0</span>
+                                </div>
+                            </div>
+
+                            <!-- High-Impact Lead Quote -->
+                            <blockquote class="text-base font-semibold text-white leading-snug mb-3">
+                                "Eliminated 385 hours of monthly manual invoice cross-referencing between ERP and regional fulfillment hubs."
+                            </blockquote>
+
+                            <!-- Detailed Narrative -->
+                            <p class="text-xs sm:text-sm text-neutral-300 leading-relaxed mb-6">
+                                "Our accounting team previously spent 14 hours every Friday manually re-typing supplier invoices into our central database. Azarel built an autonomous Python webhook engine with OCR fallback and automated Slack error reporting. Invoices now reconcile in 1.4 seconds with 99.98% financial accuracy."
+                            </p>
+                        </div>
+
+                        <!-- Author Profile & Deliverable Tags -->
+                        <div class="pt-5 border-t border-white/[0.08]">
+                            <div class="flex items-center gap-3.5 mb-3">
+                                <div class="w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center font-dot font-black text-white text-sm shrink-0">
+                                    CG
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-bold text-white">Carlos Gutierrez</h4>
+                                    <div class="text-xs text-neutral-400">Operations Director • Metro Fulfillment Inc.</div>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-neutral-400 border border-white/[0.08]">ERP Automation</span>
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-neutral-400 border border-white/[0.08]">Webhook Engine</span>
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-neutral-400 border border-white/[0.08]">Slack Alerts</span>
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-neutral-400 border border-white/[0.08]">385+ Hrs Saved</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Empty State (Hidden by Default) -->
+                <div id="empty-state" class="hidden text-center py-16">
+                    <div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mx-auto mb-3">
+                        <i data-lucide="search-x" class="w-5 h-5 text-neutral-400"></i>
+                    </div>
+                    <div class="font-dot text-lg text-white font-bold mb-1">NO ENDORSEMENTS FOUND</div>
+                    <p class="text-xs text-neutral-400">Try selecting another discipline filter above.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CTA Module: Ready to collaborate? -->
+        <section class="py-14 border-t border-white/[0.08] bg-black/60">
+            <div class="max-w-4xl mx-auto px-6 text-center">
+                <h3 class="font-dot text-2xl sm:text-3xl font-extrabold text-white uppercase mb-3">
+                    READY TO BUILD YOUR NEXT PRODUCTION SYSTEM?
+                </h3>
+                <p class="text-neutral-400 text-sm max-w-xl mx-auto mb-6">
+                    Join forward-thinking teams shipping resilient architectures without bloat or missed deadlines.
+                </p>
+                <div class="flex flex-wrap items-center justify-center gap-4">
+                    <a href="contact.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black font-bold text-xs uppercase tracking-wider hover:bg-neutral-200 transition-all shadow-xl active:scale-95">
+                        <i data-lucide="sparkles" class="w-4 h-4"></i>
+                        <span>Start a Project</span>
+                    </a>
+                    <a href="pricing.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/[0.06] hover:bg-white/[0.12] border border-white/20 text-white font-bold text-xs uppercase tracking-wider transition-all">
+                        <span>View Engagement Plans</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==================== SUBMIT ENDORSEMENT MODAL ==================== -->
+    <div id="endorse-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+        <div class="glass-card max-w-lg w-full p-6 sm:p-8 relative border-white/25 shadow-2xl">
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between pb-4 border-b border-white/[0.08] mb-6">
+                <div>
+                    <h3 class="font-dot text-lg font-bold text-white uppercase">SUBMIT AN ENDORSEMENT</h3>
+                    <p class="text-xs text-neutral-400">Share your experience collaborating with Azarel</p>
+                </div>
+                <button onclick="closeEndorseModal()" class="p-1.5 rounded-lg text-neutral-400 hover:text-white hover:bg-white/10 transition-colors" aria-label="Close modal">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <!-- Modal Form -->
+            <form onsubmit="handleEndorseSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-neutral-300 uppercase tracking-wider mb-1.5">Your Full Name</label>
+                    <input type="text" required placeholder="e.g., Alex Johnson" class="w-full px-4 py-2.5 rounded-xl bg-black/60 border border-white/[0.15] text-white placeholder-neutral-500 focus:outline-none focus:border-white transition-colors text-sm">
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-neutral-300 uppercase tracking-wider mb-1.5">Title / Role</label>
+                        <input type="text" required placeholder="e.g., VP of Engineering" class="w-full px-4 py-2.5 rounded-xl bg-black/60 border border-white/[0.15] text-white placeholder-neutral-500 focus:outline-none focus:border-white transition-colors text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-neutral-300 uppercase tracking-wider mb-1.5">Company / Org</label>
+                        <input type="text" required placeholder="e.g., Acme Tech" class="w-full px-4 py-2.5 rounded-xl bg-black/60 border border-white/[0.15] text-white placeholder-neutral-500 focus:outline-none focus:border-white transition-colors text-sm">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-neutral-300 uppercase tracking-wider mb-1.5">Discipline Sector</label>
+                    <select required class="w-full px-4 py-2.5 rounded-xl bg-black border border-white/[0.15] text-white focus:outline-none focus:border-white transition-colors text-sm">
+                        <option value="saas">SaaS & Startups</option>
+                        <option value="gov">Government & Public Sector</option>
+                        <option value="etl">Automation & Web Scraping</option>
+                        <option value="peers">Engineering Colleague / Peer</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-neutral-300 uppercase tracking-wider mb-1.5">Your Endorsement / Review</label>
+                    <textarea rows="4" required placeholder="Describe the project scope, technical results, and working experience..." class="w-full px-4 py-2.5 rounded-xl bg-black/60 border border-white/[0.15] text-white placeholder-neutral-500 focus:outline-none focus:border-white transition-colors text-sm"></textarea>
+                </div>
+                <button type="submit" class="w-full py-3 rounded-xl bg-white text-black font-bold text-xs uppercase tracking-wider hover:bg-neutral-200 transition-all shadow-xl active:scale-95 flex items-center justify-center gap-2">
+                    <i data-lucide="send" class="w-4 h-4"></i>
+                    <span>Transmit Endorsement</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Feedback Toast -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="px-5 py-3 rounded-xl bg-white text-black font-mono text-xs font-bold shadow-2xl flex items-center gap-2 border border-neutral-300">
+            <i data-lucide="check" class="w-4 h-4 text-black"></i>
+            <span id="toast-text">Endorsement queued for verification!</span>
+        </div>
+    </div>
+
+    <!-- ==================== FOOTER (Centralized Black & White) ==================== -->
+    <footer class="border-t border-white/[0.08] bg-black pt-16 pb-12 relative z-10 text-neutral-400">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            
+            <!-- Brand & Mission -->
+            <div class="max-w-lg mx-auto space-y-4 mb-14">
+                <div class="flex items-center justify-center gap-2.5">
+                    <div class="w-7 h-7 rounded-md bg-white/10 border border-white/20 p-[1px] flex items-center justify-center">
+                        <div class="w-full h-full bg-black rounded-[5px] flex items-center justify-center">
+                            <span class="font-dot font-black text-xs text-white">A</span>
+                        </div>
+                    </div>
+                    <span class="font-dot font-black text-lg text-white">AZAREL.</span>
+                </div>
+
+                <p class="text-sm text-neutral-400 leading-relaxed max-w-md mx-auto">
+                    Engineering high-impact websites, internal systems, mobile apps, and automations that eliminate busywork and accelerate velocity.
+                </p>
+
+                <!-- Newsletter / Connect -->
+                <div class="pt-2">
+                    <div class="text-xs font-semibold text-neutral-300 mb-2.5">Stay Updated on Tech & Systems Insights</div>
+                    <form onsubmit="handleNewsletterSubmit(event)" class="flex items-center max-w-sm mx-auto shadow-lg">
+                        <input type="email" required placeholder="Enter Your Email" class="flex-1 px-4 py-2.5 rounded-l-full bg-white/[0.04] border border-white/[0.12] text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-white">
+                        <button type="submit" class="px-5 py-2.5 rounded-r-full bg-white text-black font-bold text-xs hover:bg-neutral-200 transition-colors">
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- 4 Link Columns -->
+            <div class="max-w-4xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-8 text-center sm:text-left pb-14 border-b border-white/[0.08] mb-8">
+                <div>
+                    <h5 class="text-xs font-semibold text-white uppercase tracking-wider mb-4">Navigation</h5>
+                    <ul class="space-y-2.5 text-xs">
+                        <li><a href="services.html" class="hover:text-white transition-colors">Services</a></li>
+                        <li><a href="projects.html" class="hover:text-white transition-colors">Projects</a></li>
+                        <li><a href="experiences.html" class="hover:text-white transition-colors">Experiences</a></li>
+                        <li><a href="resources.html" class="hover:text-white transition-colors">Resources</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-xs font-semibold text-white uppercase tracking-wider mb-4">Engagement</h5>
+                    <ul class="space-y-2.5 text-xs">
+                        <li><a href="recommendations.html" class="text-white font-semibold transition-colors">Recommendations</a></li>
+                        <li><a href="pricing.html" class="hover:text-white transition-colors">Pricing & Plans</a></li>
+                        <li><a href="contact.html" class="hover:text-white transition-colors">Start a Project</a></li>
+                        <li><a href="index.html#faq" class="hover:text-white transition-colors">Project FAQs</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-xs font-semibold text-white uppercase tracking-wider mb-4">Technologies</h5>
+                    <ul class="space-y-2.5 text-xs">
+                        <li><a href="services.html" class="hover:text-white transition-colors">Next.js & React</a></li>
+                        <li><a href="services.html" class="hover:text-white transition-colors">FastAPI & Python</a></li>
+                        <li><a href="services.html" class="hover:text-white transition-colors">PostgreSQL & Redis</a></li>
+                        <li><a href="services.html" class="hover:text-white transition-colors">Flutter & Mobile</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-xs font-semibold text-white uppercase tracking-wider mb-4">Connect</h5>
+                    <ul class="space-y-2.5 text-xs">
+                        <li><a href="https://github.com/LiveKryptiah" target="_blank" rel="noopener" class="hover:text-white transition-colors">GitHub</a></li>
+                        <li><a href="mailto:azarelclightnadal@gmail.com" class="hover:text-white transition-colors">Direct Email</a></li>
+                        <li><a href="contact.html" class="hover:text-white transition-colors">Project Intake</a></li>
+                        <li><a href="pricing.html" class="hover:text-white transition-colors">Custom Quote</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Copyright -->
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+                <div>
+                    Copyright 2026 Azarel Clight J. Nadal. All Rights Reserved.
+                </div>
+                <div class="flex items-center gap-4 text-neutral-400">
+                    <a href="https://github.com/LiveKryptiah" target="_blank" rel="noopener" class="hover:text-white transition-colors" aria-label="GitHub">
+                        <i data-lucide="github" class="w-4 h-4"></i>
+                    </a>
+                    <a href="mailto:azarelclightnadal@gmail.com" class="hover:text-white transition-colors" aria-label="Email">
+                        <i data-lucide="mail" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- ==================== JAVASCRIPT LOGIC ==================== -->
+    <script>
+        // Initialize Lucide icons
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+
+        // Mobile drawer toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        // Filter Endorsements
+        function filterEndorsements(category, event) {
+            const cards = document.querySelectorAll('.endorsement-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+            let visibleCount = 0;
+
+            // Update active button state
+            buttons.forEach(btn => {
+                btn.className = 'filter-btn px-3.5 py-1.5 rounded-full text-xs font-medium text-neutral-400 bg-white/[0.04] border border-white/[0.08] hover:text-white hover:bg-white/[0.08] transition-all shrink-0';
+            });
+            if (event && event.currentTarget) {
+                event.currentTarget.className = 'filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white text-black border border-white transition-all shrink-0';
+            }
+
+            // Filter cards
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Handle empty state
+            const emptyState = document.getElementById('empty-state');
+            if (emptyState) {
+                if (visibleCount === 0) {
+                    emptyState.classList.remove('hidden');
+                } else {
+                    emptyState.classList.add('hidden');
+                }
+            }
+        }
+
+        // Toast feedback
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastText = document.getElementById('toast-text');
+            if (!toast || !toastText) return;
+            toastText.textContent = message;
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 3000);
+        }
+
+        // Endorsement Modal
+        function openEndorseModal() {
+            const modal = document.getElementById('endorse-modal');
+            if (modal) modal.classList.remove('hidden');
+        }
+
+        function closeEndorseModal() {
+            const modal = document.getElementById('endorse-modal');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        function handleEndorseSubmit(e) {
+            e.preventDefault();
+            closeEndorseModal();
+            showToast('Endorsement transmitted & queued for review!');
+            e.target.reset();
+        }
+
+        function handleNewsletterSubmit(e) {
+            e.preventDefault();
+            showToast('Subscribed to Azarel Systems dispatch.');
+            e.target.reset();
+        }
+    </script>
+</body>
+</html>
