@@ -115,6 +115,202 @@
         ::-webkit-scrollbar-thumb:hover {
             background: rgba(255, 255, 255, 0.4);
         }
+
+        /* ==================== PURE BLACK & WHITE CYBER CARD GLITCH ==================== */
+        @keyframes bw-card-tear-a {
+            0% {
+                transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1);
+                filter: brightness(1) contrast(1);
+            }
+            15% {
+                transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(-14px, 1.5px, 0) skewX(-3deg);
+                filter: brightness(2) contrast(2.6);
+            }
+            35% {
+                transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(16px, -2px, 0) skewX(3.5deg);
+                filter: brightness(0.5) contrast(2.2);
+            }
+            55% {
+                transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(-11px, 2px, 0) skewX(-2deg);
+                filter: brightness(2.2) contrast(2.8);
+            }
+            75% {
+                transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(8px, -1px, 0) skewX(1.5deg);
+                filter: brightness(0.8) contrast(1.6);
+            }
+            90% {
+                transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(-4px, 1px, 0) skewX(-0.8deg);
+                filter: brightness(1.2) contrast(1.3);
+            }
+            100% {
+                transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(0, 0, 0) skewX(0deg);
+                filter: brightness(1) contrast(1);
+            }
+        }
+
+        @keyframes bw-card-tear-b {
+            0% {
+                transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1);
+                filter: brightness(1) contrast(1);
+            }
+            15% {
+                transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(15px, -2px, 0) skewX(3.2deg);
+                filter: brightness(0.4) contrast(2.4);
+            }
+            35% {
+                transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(-16px, 1.5px, 0) skewX(-3.5deg);
+                filter: brightness(2.4) contrast(3);
+            }
+            55% {
+                transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(10px, 2px, 0) skewX(2deg);
+                filter: brightness(0.7) contrast(1.8);
+            }
+            75% {
+                transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(-7px, -1px, 0) skewX(-1.5deg);
+                filter: brightness(1.7) contrast(1.5);
+            }
+            90% {
+                transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(4px, 1px, 0) skewX(0.8deg);
+                filter: brightness(1.1) contrast(1.2);
+            }
+            100% {
+                transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(0, 0, 0) skewX(0deg);
+                filter: brightness(1) contrast(1);
+            }
+        }
+
+        /* Content Desynchronization Jitter inside Glitching Cards */
+        @keyframes bw-inner-desync {
+            0% { transform: translate3d(0, 0, 0); }
+            20% { transform: translate3d(9px, -1px, 0); }
+            40% { transform: translate3d(-10px, 1.5px, 0); }
+            60% { transform: translate3d(6px, -1px, 0); }
+            80% { transform: translate3d(-4px, 1px, 0); }
+            100% { transform: translate3d(0, 0, 0); }
+        }
+
+        /* Upper Horizontal Negative Inversion Tear Slice */
+        @keyframes bw-slice-tear-upper {
+            0% {
+                clip-path: inset(8% 0 72% 0);
+                transform: translate3d(-22px, 0, 0);
+                opacity: 0.95;
+            }
+            25% {
+                clip-path: inset(42% 0 32% 0);
+                transform: translate3d(24px, 0, 0);
+                opacity: 1;
+            }
+            50% {
+                clip-path: inset(14% 0 78% 0);
+                transform: translate3d(-26px, 0, 0);
+                opacity: 0.95;
+            }
+            75% {
+                clip-path: inset(68% 0 12% 0);
+                transform: translate3d(18px, 0, 0);
+                opacity: 1;
+            }
+            100% {
+                clip-path: inset(0 0 0 0);
+                transform: translate3d(0, 0, 0);
+                opacity: 0;
+            }
+        }
+
+        /* Lower Horizontal Negative Inversion Tear Slice */
+        @keyframes bw-slice-tear-lower {
+            0% {
+                clip-path: inset(58% 0 18% 0);
+                transform: translate3d(22px, 0, 0);
+                opacity: 0.95;
+            }
+            25% {
+                clip-path: inset(18% 0 62% 0);
+                transform: translate3d(-24px, 0, 0);
+                opacity: 1;
+            }
+            50% {
+                clip-path: inset(78% 0 6% 0);
+                transform: translate3d(20px, 0, 0);
+                opacity: 0.95;
+            }
+            75% {
+                clip-path: inset(34% 0 46% 0);
+                transform: translate3d(-18px, 0, 0);
+                opacity: 0.9;
+            }
+            100% {
+                clip-path: inset(0 0 0 0);
+                transform: translate3d(0, 0, 0);
+                opacity: 0;
+            }
+        }
+
+        /* Active Glitch State Classes */
+        .bw-glitch-a,
+        .bw-glitch-b {
+            position: relative !important;
+            border-color: #ffffff !important;
+            box-shadow: 
+                -10px 0 0 rgba(255, 255, 255, 0.85),
+                10px 0 0 rgba(255, 255, 255, 0.85),
+                0 0 35px rgba(255, 255, 255, 0.5),
+                inset 0 0 25px rgba(255, 255, 255, 0.35) !important;
+            z-index: 35 !important;
+        }
+
+        .bw-glitch-a {
+            animation: bw-card-tear-a 0.34s steps(3) both !important;
+        }
+
+        .bw-glitch-b {
+            animation: bw-card-tear-b 0.34s steps(3) both !important;
+        }
+
+        .bw-glitch-a > *,
+        .bw-glitch-b > * {
+            animation: bw-inner-desync 0.34s steps(2) both !important;
+        }
+
+        /* Dual-Band Black & White Negative Inversion Slices & CRT Scanlines */
+        .bw-glitch-a::before,
+        .bw-glitch-b::before {
+            content: '' !important;
+            position: absolute !important;
+            inset: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            pointer-events: none !important;
+            z-index: 60 !important;
+            border-radius: inherit !important;
+            backdrop-filter: invert(1) contrast(2.5) brightness(1.4) !important;
+            -webkit-backdrop-filter: invert(1) contrast(2.5) brightness(1.4) !important;
+            background: rgba(255, 255, 255, 0.18) !important;
+            animation: bw-slice-tear-lower 0.34s steps(2, start) both !important;
+        }
+
+        .bw-glitch-a::after,
+        .bw-glitch-b::after {
+            content: '' !important;
+            position: absolute !important;
+            inset: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            pointer-events: none !important;
+            z-index: 61 !important;
+            border-radius: inherit !important;
+            backdrop-filter: invert(1) contrast(2.8) brightness(1.6) !important;
+            -webkit-backdrop-filter: invert(1) contrast(2.8) brightness(1.6) !important;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(255, 255, 255, 0.45) 0px,
+                rgba(255, 255, 255, 0.45) 2px,
+                rgba(0, 0, 0, 0.7) 2px,
+                rgba(0, 0, 0, 0.7) 4px
+            ) !important;
+            animation: bw-slice-tear-upper 0.34s steps(2, start) both !important;
+        }
     </style>
 </head>
 <body class="bg-black text-white antialiased min-h-screen flex flex-col justify-between selection:bg-white selection:text-black">
@@ -758,6 +954,14 @@
                 if (exclusivePrice) exclusivePrice.textContent = '₱5,099';
                 if (exclusivePeriod) exclusivePeriod.textContent = '/sprint';
             }
+
+            // Trigger a subtle glitch recalibration across the 3 pricing cards
+            const pricingCards = document.querySelectorAll('.grid > .glass-card');
+            pricingCards.forEach((card, idx) => {
+                setTimeout(() => {
+                    if (typeof triggerCardGlitch === 'function') triggerCardGlitch(card);
+                }, idx * 45);
+            });
         }
 
         // Scope Calculator Logic
@@ -804,6 +1008,111 @@
 
             window.location.href = `contact.html?scope=${scopeParam}&budget=${budgetParam}`;
         }
+
+        // ==================== CYBERNETIC TEXT DECODER / SCRAMBLER ====================
+        (function initTextDecoder() {
+            const scrambleElements = document.querySelectorAll('[data-scramble="true"]');
+            const chars = '01ABCDEFGHIJKLMNOPQRSTUVWXYZ_#@!$%&<>/';
+
+            function scramble(element) {
+                if (element.dataset.scrambled === 'true') return;
+                element.dataset.scrambled = 'true';
+
+                const originalText = element.dataset.originalText || element.innerText.trim();
+                element.dataset.originalText = originalText;
+
+                let iteration = 0;
+                const totalIterations = 14;
+                const interval = setInterval(() => {
+                    element.innerText = originalText.split('').map((char, index) => {
+                        if (char === ' ' || char === '\n') return char;
+                        if (index < (iteration / totalIterations) * originalText.length) {
+                            return originalText[index];
+                        }
+                        return chars[Math.floor(Math.random() * chars.length)];
+                    }).join('');
+
+                    iteration++;
+                    if (iteration > totalIterations) {
+                        clearInterval(interval);
+                        element.innerText = originalText;
+                    }
+                }, 24);
+            }
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        scramble(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            scrambleElements.forEach(el => observer.observe(el));
+        })();
+
+        // ==================== PURE BLACK & WHITE HIGH-INTENSITY SECTION ENTRANCE GLITCH ====================
+        let triggerCardGlitch;
+        (function initCardScrollGlitch() {
+            const allCards = Array.from(document.querySelectorAll('.glass-card'));
+            if (!allCards.length) return;
+
+            let variantToggle = false;
+
+            triggerCardGlitch = function(card) {
+                if (!card) return;
+
+                const addClass = variantToggle ? 'bw-glitch-a' : 'bw-glitch-b';
+                const removeClass = variantToggle ? 'bw-glitch-b' : 'bw-glitch-a';
+                variantToggle = !variantToggle;
+
+                card.classList.remove(removeClass);
+                card.classList.remove(addClass);
+                void card.offsetWidth;
+                card.classList.add(addClass);
+
+                clearTimeout(card._glitchTimeout);
+                card._glitchTimeout = setTimeout(() => {
+                    card.classList.remove('bw-glitch-a', 'bw-glitch-b');
+                }, 350);
+            };
+
+            // Trigger glitch ONLY when entering viewport (scrolling to section)
+            const cardObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    const card = entry.target;
+                    if (entry.isIntersecting) {
+                        // Glitch only on entrance
+                        if (!card._hasGlitchEntered) {
+                            card._hasGlitchEntered = true;
+                            const siblings = Array.from(card.parentElement ? card.parentElement.children : []);
+                            const siblingIndex = siblings.indexOf(card);
+                            const delay = Math.max(0, siblingIndex) * 45;
+
+                            setTimeout(() => {
+                                triggerCardGlitch(card);
+                            }, Math.min(delay, 200));
+                        }
+                    } else {
+                        // Reset when scrolled out of view so it can glitch on next re-entrance
+                        card._hasGlitchEntered = false;
+                        card.classList.remove('bw-glitch-a', 'bw-glitch-b');
+                    }
+                });
+            }, {
+                threshold: 0.12,
+                rootMargin: '0px 0px -40px 0px'
+            });
+
+            allCards.forEach(card => {
+                cardObserver.observe(card);
+
+                // Interactive mouse hover micro-burst
+                card.addEventListener('mouseenter', () => {
+                    triggerCardGlitch(card);
+                });
+            });
+        })();
 
         // Toast feedback
         function showToast(message) {
