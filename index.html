@@ -1,0 +1,2628 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azarel — Websites • Systems • Apps • Automations</title>
+    <meta name="description" content="Azarel — Portfolio and digital engineering services. I build websites, internal systems, cross-platform apps, and automated workflows that make work faster and easier.">
+
+    <!-- Google Fonts: Doto (Dot Matrix), DotGothic16, Plus Jakarta Sans, Space Grotesk, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Doto:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            base: '#000000',
+                            surface: '#09090b',
+                            surfaceAlt: '#121215',
+                            card: '#0e0e11',
+                            border: 'rgba(255, 255, 255, 0.1)',
+                            borderHover: 'rgba(255, 255, 255, 0.25)',
+                            muted: '#a1a1aa',
+                            subtle: '#71717a'
+                        }
+                    },
+                    fontFamily: {
+                        dot: ['"Doto"', '"DotGothic16"', 'monospace'],
+                        sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
+                        heading: ['"Space Grotesk"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Strict Black & White Theme */
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::selection {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        /* Dot Font Utility */
+        .font-dot {
+            font-family: 'Doto', 'DotGothic16', monospace;
+            font-feature-settings: "ss01" on, "ss02" on;
+        }
+
+        /* Subtle Background Monochrome Grid */
+        .bg-grid-pattern {
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* Radial Vignette Mask */
+        .mask-radial {
+            mask-image: radial-gradient(ellipse 80% 60% at 50% 15%, black 35%, transparent 100%);
+            -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 15%, black 35%, transparent 100%);
+        }
+
+        /* Monochrome Ambient Glow */
+        .hero-glow {
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 750px;
+            height: 480px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 45%, rgba(0, 0, 0, 0) 75%);
+            filter: blur(80px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Glassmorphism with Top-Left Light Reflection */
+        .glass-card {
+            position: relative;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%), rgba(12, 12, 14, 0.8);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            border-top: 1px solid rgba(255, 255, 255, 0.35);
+            border-left: 1px solid rgba(255, 255, 255, 0.22);
+            box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.9), 
+                        inset 1px 1px 0px rgba(255, 255, 255, 0.25);
+            border-radius: 1.25rem;
+            overflow: hidden;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Top-Left Light Sheen Reflection */
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 240px;
+            height: 240px;
+            background: radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.05) 45%, transparent 75%);
+            pointer-events: none;
+            border-radius: inherit;
+            z-index: 2;
+            transition: opacity 0.35s ease;
+        }
+
+        .glass-card:hover {
+            border-top-color: rgba(255, 255, 255, 0.6);
+            border-left-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 24px 60px -10px rgba(0, 0, 0, 0.95), 
+                        0 0 40px -10px rgba(255, 255, 255, 0.15),
+                        inset 1px 1px 0px rgba(255, 255, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .glass-card:hover::before {
+            background: radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.32) 0%, rgba(255, 255, 255, 0.08) 50%, transparent 80%);
+        }
+
+        /* Smaller Sub-Card Glass Morph with Top-Left Specular Highlight */
+        .glass-subcard {
+            position: relative;
+            background: rgba(18, 18, 22, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-top: 1px solid rgba(255, 255, 255, 0.25);
+            border-left: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.18);
+            overflow: hidden;
+            border-radius: 0.85rem;
+        }
+
+        .glass-subcard::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 140px;
+            height: 140px;
+            background: radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.16) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* Concentric Radar Rings Animation */
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); opacity: 0.3; }
+            50% { transform: scale(1.03); opacity: 0.7; }
+            100% { transform: scale(0.95); opacity: 0.3; }
+        }
+
+        .animate-pulse-slow {
+            animation: pulse-ring 4s ease-in-out infinite;
+        }
+
+        /* Black Hole Gravitational Breathing Animation */
+        @keyframes blackhole-pulse {
+            0%, 100% {
+                transform: scale(1) rotate(0deg);
+                filter: contrast(125%) brightness(95%);
+            }
+            50% {
+                transform: scale(1.025) rotate(0.4deg);
+                filter: contrast(135%) brightness(110%);
+            }
+        }
+
+        .animate-blackhole-pulse {
+            animation: blackhole-pulse 10s ease-in-out infinite;
+        }
+
+        /* Custom Scrollbars */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Toast notification */
+        #toast {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        /* ==================== FUTURISTIC SCROLL & HUD TELEMETRY STYLES ==================== */
+
+
+        /* 3. Cybernetic Vertical Waypoint Rail (Desktop) */
+        #hud-waypoint-rail {
+            position: fixed;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 45;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.85rem;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .hud-node {
+            pointer-events: auto;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            cursor: pointer;
+            opacity: 0.35;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+        .hud-node:hover {
+            opacity: 0.85;
+            transform: translateX(-4px);
+        }
+        .hud-node.active {
+            opacity: 1;
+            transform: translateX(-6px);
+        }
+        .hud-node-label {
+            font-family: 'Doto', 'DotGothic16', monospace;
+            font-size: 10px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #a1a1aa;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(12px);
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+        .hud-node.active .hud-node-label {
+            color: #000000;
+            background: #ffffff;
+            font-weight: 800;
+            border-color: #ffffff;
+            box-shadow: 0 0 16px rgba(255, 255, 255, 0.5);
+        }
+        .hud-node-pip {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        .hud-node.active .hud-node-pip {
+            width: 8px;
+            height: 8px;
+            background: #ffffff;
+            box-shadow: 0 0 10px #ffffff, 0 0 20px rgba(255, 255, 255, 0.8);
+            border-color: #ffffff;
+        }
+
+        /* 4. 3D Spatial Holographic Reveal Animation */
+        .futuristic-reveal {
+            opacity: 0;
+            transform: perspective(1200px) translateY(42px) rotateX(6deg) scale(0.97);
+            transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform, opacity;
+        }
+        .futuristic-reveal.revealed {
+            opacity: 1;
+            transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1);
+        }
+        .reveal-delay-1 { transition-delay: 80ms; }
+        .reveal-delay-2 { transition-delay: 160ms; }
+        .reveal-delay-3 { transition-delay: 240ms; }
+        .reveal-delay-4 { transition-delay: 320ms; }
+
+        /* 5. Quantum Laser Perimeter Scan Sweep on Revealed Cards */
+        @keyframes laser-sweep-line {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            25% {
+                opacity: 1;
+            }
+            75% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(250%);
+                opacity: 0;
+            }
+        }
+        .scan-beam-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.85) 50%, transparent 100%);
+            box-shadow: 0 0 14px 2px #ffffff;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 30;
+        }
+        .glass-card.revealed .scan-beam-overlay,
+        .futuristic-reveal.revealed .scan-beam-overlay {
+            animation: laser-sweep-line 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* 6. Floating Telemetry Crosshairs & Coordinate Marks */
+        .telemetry-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.15em;
+            color: rgba(255, 255, 255, 0.22);
+            pointer-events: none;
+            user-select: none;
+            transition: transform 0.1s linear;
+        }
+
+        /* ==================== 7. PURE BLACK & WHITE HIGH-INTENSITY CYBER CARD GLITCH ==================== */
+        @keyframes bw-card-tear-a {
+            0% {
+                transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(0, 0, 0) skewX(0deg);
+                filter: brightness(1) contrast(1);
+            }
+            15% {
+                transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(-14px, 1.5px, 0) skewX(-3deg);
+                filter: brightness(2) contrast(2.6);
+            }
+            35% {
+                transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(16px, -2px, 0) skewX(3.5deg);
+                filter: brightness(0.5) contrast(2.2);
+            }
+            55% {
+                transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(-11px, 2px, 0) skewX(-2deg);
+                filter: brightness(2.2) contrast(2.8);
+            }
+            75% {
+                transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(8px, -1px, 0) skewX(1.5deg);
+                filter: brightness(0.8) contrast(1.6);
+            }
+            90% {
+                transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(-3px, 1px, 0) skewX(-0.8deg);
+                filter: brightness(1.3) contrast(1.2);
+            }
+            100% {
+                transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(0, 0, 0) skewX(0deg);
+                filter: brightness(1) contrast(1);
+            }
+        }
+
+        @keyframes bw-card-tear-b {
+            0% {
+                transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(0, 0, 0) skewX(0deg);
+                filter: brightness(1) contrast(1);
+            }
+            15% {
+                transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(15px, -2px, 0) skewX(3.2deg);
+                filter: brightness(0.4) contrast(2.4);
+            }
+            35% {
+                transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(-16px, 1.5px, 0) skewX(-3.5deg);
+                filter: brightness(2.4) contrast(3);
+            }
+            55% {
+                transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(10px, 2px, 0) skewX(2deg);
+                filter: brightness(0.7) contrast(1.8);
+            }
+            75% {
+                transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(-7px, -1px, 0) skewX(-1.5deg);
+                filter: brightness(1.7) contrast(1.5);
+            }
+            90% {
+                transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(4px, 1px, 0) skewX(0.8deg);
+                filter: brightness(1.1) contrast(1.2);
+            }
+            100% {
+                transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(0, 0, 0) skewX(0deg);
+                filter: brightness(1) contrast(1);
+            }
+        }
+
+        /* Content Desynchronization Jitter inside Glitching Cards */
+        @keyframes bw-inner-desync {
+            0% { transform: translate3d(0, 0, 0); }
+            20% { transform: translate3d(9px, -1px, 0); }
+            40% { transform: translate3d(-10px, 1.5px, 0); }
+            60% { transform: translate3d(6px, -1px, 0); }
+            80% { transform: translate3d(-4px, 1px, 0); }
+            100% { transform: translate3d(0, 0, 0); }
+        }
+
+        /* Upper Horizontal Negative Inversion Tear Slice */
+        @keyframes bw-slice-tear-upper {
+            0% {
+                clip-path: inset(8% 0 72% 0);
+                transform: translate3d(-22px, 0, 0);
+                opacity: 0.95;
+            }
+            25% {
+                clip-path: inset(42% 0 32% 0);
+                transform: translate3d(24px, 0, 0);
+                opacity: 1;
+            }
+            50% {
+                clip-path: inset(14% 0 78% 0);
+                transform: translate3d(-26px, 0, 0);
+                opacity: 0.95;
+            }
+            75% {
+                clip-path: inset(68% 0 12% 0);
+                transform: translate3d(18px, 0, 0);
+                opacity: 1;
+            }
+            100% {
+                clip-path: inset(0 0 0 0);
+                transform: translate3d(0, 0, 0);
+                opacity: 0;
+            }
+        }
+
+        /* Lower Horizontal Negative Inversion Tear Slice */
+        @keyframes bw-slice-tear-lower {
+            0% {
+                clip-path: inset(58% 0 18% 0);
+                transform: translate3d(22px, 0, 0);
+                opacity: 0.95;
+            }
+            25% {
+                clip-path: inset(18% 0 62% 0);
+                transform: translate3d(-24px, 0, 0);
+                opacity: 1;
+            }
+            50% {
+                clip-path: inset(78% 0 6% 0);
+                transform: translate3d(20px, 0, 0);
+                opacity: 0.95;
+            }
+            75% {
+                clip-path: inset(34% 0 46% 0);
+                transform: translate3d(-18px, 0, 0);
+                opacity: 0.9;
+            }
+            100% {
+                clip-path: inset(0 0 0 0);
+                transform: translate3d(0, 0, 0);
+                opacity: 0;
+            }
+        }
+
+        /* Active Glitch State Classes */
+        .bw-glitch-a,
+        .bw-glitch-b {
+            position: relative !important;
+            border-color: #ffffff !important;
+            box-shadow: 
+                -10px 0 0 rgba(255, 255, 255, 0.85),
+                10px 0 0 rgba(255, 255, 255, 0.85),
+                0 0 35px rgba(255, 255, 255, 0.5),
+                inset 0 0 25px rgba(255, 255, 255, 0.35) !important;
+            z-index: 35 !important;
+        }
+
+        .bw-glitch-a {
+            animation: bw-card-tear-a 0.34s steps(3) both !important;
+        }
+
+        .bw-glitch-b {
+            animation: bw-card-tear-b 0.34s steps(3) both !important;
+        }
+
+        .bw-glitch-a > *,
+        .bw-glitch-b > * {
+            animation: bw-inner-desync 0.34s steps(2) both !important;
+        }
+
+        /* Dual-Band Black & White Negative Inversion Slices & CRT Scanlines */
+        .bw-glitch-a::before,
+        .bw-glitch-b::before {
+            content: '' !important;
+            position: absolute !important;
+            inset: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            pointer-events: none !important;
+            z-index: 60 !important;
+            border-radius: inherit !important;
+            backdrop-filter: invert(1) contrast(2.5) brightness(1.4) !important;
+            -webkit-backdrop-filter: invert(1) contrast(2.5) brightness(1.4) !important;
+            background: rgba(255, 255, 255, 0.18) !important;
+            animation: bw-slice-tear-lower 0.34s steps(2, start) both !important;
+        }
+
+        .bw-glitch-a::after,
+        .bw-glitch-b::after {
+            content: '' !important;
+            position: absolute !important;
+            inset: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            pointer-events: none !important;
+            z-index: 61 !important;
+            border-radius: inherit !important;
+            backdrop-filter: invert(1) contrast(2.8) brightness(1.6) !important;
+            -webkit-backdrop-filter: invert(1) contrast(2.8) brightness(1.6) !important;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(255, 255, 255, 0.45) 0px,
+                rgba(255, 255, 255, 0.45) 2px,
+                rgba(0, 0, 0, 0.7) 2px,
+                rgba(0, 0, 0, 0.7) 4px
+            ) !important;
+            animation: bw-slice-tear-upper 0.34s steps(2, start) both !important;
+        }
+    </style>
+</head>
+<body class="relative min-h-screen text-white antialiased selection:bg-white selection:text-black">
+
+
+
+    <!-- Cybernetic Waypoint Rail (Fixed on Right Screen Edge) -->
+    <aside id="hud-waypoint-rail" class="hidden lg:flex" aria-label="Sector Waypoints">
+        <div class="px-2.5 py-1 rounded-md bg-black/70 border border-white/[0.1] text-[9px] font-mono text-neutral-400 mb-1 backdrop-blur-md tracking-wider">
+            SECTORS
+        </div>
+        <div class="hud-node active" data-target="#hero" onclick="navigateToSector('#hero')">
+            <span class="hud-node-label">01 // HERO</span>
+            <span class="hud-node-pip"></span>
+        </div>
+        <div class="hud-node" data-target="#services" onclick="navigateToSector('#services')">
+            <span class="hud-node-label">02 // SERVICES</span>
+            <span class="hud-node-pip"></span>
+        </div>
+        <div class="hud-node" data-target="#architect" onclick="navigateToSector('#architect')">
+            <span class="hud-node-label">03 // ARCHITECT</span>
+            <span class="hud-node-pip"></span>
+        </div>
+        <div class="hud-node" data-target="#console" onclick="navigateToSector('#console')">
+            <span class="hud-node-label">04 // CONSOLE</span>
+            <span class="hud-node-pip"></span>
+        </div>
+        <div class="hud-node" data-target="#impact" onclick="navigateToSector('#impact')">
+            <span class="hud-node-label">05 // IMPACT</span>
+            <span class="hud-node-pip"></span>
+        </div>
+        <div class="hud-node" data-target="#faq" onclick="navigateToSector('#faq')">
+            <span class="hud-node-label">06 // FAQ</span>
+            <span class="hud-node-pip"></span>
+        </div>
+        <div class="hud-node" data-target="#pricing" onclick="navigateToSector('#pricing')">
+            <span class="hud-node-label">07 // PRICING</span>
+            <span class="hud-node-pip"></span>
+        </div>
+        <div class="hud-node" data-target="#contact" onclick="navigateToSector('#contact')">
+            <span class="hud-node-label">08 // CONTACT</span>
+            <span class="hud-node-pip"></span>
+        </div>
+    </aside>
+
+    <!-- Global Background Elements -->
+    <div class="fixed inset-0 bg-grid-pattern mask-radial pointer-events-none z-0"></div>
+    <div class="hero-glow"></div>
+
+    <!-- Floating Background Parallax Telemetry Layer -->
+    <div id="parallax-telemetry-layer" class="fixed inset-0 pointer-events-none z-0 overflow-hidden select-none">
+        <div class="telemetry-tag absolute top-28 left-8 hidden lg:block" data-depth="0.12">
+            + [SYS_INIT: AZ-77] // 40.7128° N
+        </div>
+        <div class="telemetry-tag absolute top-1/3 right-12 hidden xl:block" data-depth="0.18">
+            [GRAV_WELL_FLUX] ➔ 0xFA92C
+        </div>
+        <div class="telemetry-tag absolute top-2/3 left-10 hidden xl:block" data-depth="0.15">
+            + [SECTOR_OPS: ACTIVE] // 120HZ
+        </div>
+        <div class="telemetry-tag absolute bottom-24 right-24 hidden lg:block" data-depth="0.1">
+            TERMINAL: COMMS_READY // 0x00FF
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 pointer-events-none flex items-center gap-3 px-5 py-3.5 rounded-full bg-white text-black font-semibold text-sm shadow-2xl shadow-white/20">
+        <i data-lucide="check-circle-2" class="w-4 h-4 text-black"></i>
+        <span id="toast-message">Simulation executed successfully</span>
+    </div>
+
+    <!-- ==================== HEADER / NAVBAR ==================== -->
+    <header class="sticky top-0 z-40 w-full border-b border-white/[0.08] bg-black/80 backdrop-blur-xl">
+        <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+            <!-- Brand Logo with Dot Font -->
+            <a href="#hero" class="flex items-center gap-3 group">
+                <div class="w-8 h-8 rounded-lg bg-white/10 border border-white/20 p-[1px] flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
+                    <div class="w-full h-full bg-black rounded-[7px] flex items-center justify-center">
+                        <span class="font-dot font-black text-sm text-white tracking-widest">A</span>
+                    </div>
+                </div>
+                <span class="font-dot font-black text-xl tracking-wider text-white group-hover:text-neutral-300 transition-colors">
+                    AZAREL<span class="text-white">.</span>
+                </span>
+            </a>
+
+            <!-- Desktop Navigation: Cyber Glass Segmented Dock -->
+            <nav class="hidden lg:flex items-center gap-1 p-1 rounded-full bg-white/[0.04] border border-white/[0.1] backdrop-blur-xl shadow-[inset_0_1px_1px_rgba(255,255,255,0.12)]">
+                <a href="services.html" class="px-4 py-1.5 rounded-full text-xs font-medium text-neutral-400 hover:text-white hover:bg-white/[0.08] transition-all">
+                    Services
+                </a>
+                <a href="projects.html" class="px-4 py-1.5 rounded-full text-xs font-medium text-neutral-400 hover:text-white hover:bg-white/[0.08] transition-all">
+                    Projects
+                </a>
+                <a href="experiences.html" class="px-4 py-1.5 rounded-full text-xs font-medium text-neutral-400 hover:text-white hover:bg-white/[0.08] transition-all">
+                    Experiences
+                </a>
+                <a href="resources.html" class="px-4 py-1.5 rounded-full text-xs font-medium text-neutral-400 hover:text-white hover:bg-white/[0.08] transition-all">
+                    Resources
+                </a>
+                <a href="recommendations.html" class="px-4 py-1.5 rounded-full text-xs font-medium text-neutral-400 hover:text-white hover:bg-white/[0.08] transition-all">
+                    Recommendations
+                </a>
+                <a href="pricing.html" class="px-4 py-1.5 rounded-full text-xs font-medium text-neutral-400 hover:text-white hover:bg-white/[0.08] transition-all">
+                    Pricing
+                </a>
+            </nav>
+
+            <!-- Right CTA Button: Start a Project -->
+            <div class="hidden sm:flex items-center gap-4">
+                <a href="contact.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-black text-xs xl:text-sm font-bold hover:bg-neutral-200 transition-all shadow-md active:scale-95">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                    <span>Start a Project</span>
+                </a>
+            </div>
+
+            <!-- Mobile Hamburger Toggle -->
+            <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg text-neutral-400 hover:text-white hover:bg-white/[0.08] transition-colors" aria-label="Toggle navigation">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobile-menu" class="hidden lg:hidden border-t border-white/[0.08] bg-black px-6 py-5 space-y-1.5">
+            <a href="services.html" class="mobile-nav-link block text-sm font-medium text-neutral-300 hover:text-white px-4 py-2.5 rounded-xl hover:bg-white/[0.05] transition-all">Services</a>
+            <a href="projects.html" class="mobile-nav-link block text-sm font-medium text-neutral-300 hover:text-white px-4 py-2.5 rounded-xl hover:bg-white/[0.05] transition-all">Projects</a>
+            <a href="experiences.html" class="mobile-nav-link block text-sm font-medium text-neutral-300 hover:text-white px-4 py-2.5 rounded-xl hover:bg-white/[0.05] transition-all">Experiences</a>
+            <a href="resources.html" class="mobile-nav-link block text-sm font-medium text-neutral-300 hover:text-white px-4 py-2.5 rounded-xl hover:bg-white/[0.05] transition-all">Resources</a>
+            <a href="recommendations.html" class="mobile-nav-link block text-sm font-medium text-neutral-300 hover:text-white px-4 py-2.5 rounded-xl hover:bg-white/[0.05] transition-all">Recommendations</a>
+            <a href="pricing.html" class="mobile-nav-link block text-sm font-medium text-neutral-300 hover:text-white px-4 py-2.5 rounded-xl hover:bg-white/[0.05] transition-all">Pricing</a>
+            <div class="pt-3 border-t border-white/[0.08]">
+                <a href="contact.html" class="mobile-nav-link flex items-center justify-center gap-2 w-full px-5 py-3 rounded-full bg-white text-black text-sm font-bold hover:bg-neutral-200 transition-all">
+                    <i data-lucide="sparkles" class="w-4 h-4"></i>
+                    <span>Start a Project</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative z-10">
+
+        <!-- ==================== HERO SECTION (Header Title in Dot Font & Ultra-HD Animated Black Hole) ==================== -->
+        <section id="hero" class="relative pt-28 pb-24 md:pt-40 md:pb-36 overflow-hidden text-center flex flex-col items-center justify-center min-h-[90vh]">
+            
+            <!-- Ultra-HD Finished Black Hole Background System -->
+            <div class="absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden -z-10 select-none">
+                <!-- Cosmic Background Ambient Diffuse Bloom -->
+                <div class="absolute w-[950px] h-[580px] rounded-full bg-white/[0.03] filter blur-[110px] pointer-events-none"></div>
+
+                <!-- Central Black Hole Composition Layer -->
+                <div class="relative w-full max-w-6xl aspect-[16/9] flex items-center justify-center">
+                    <!-- Layer 1: Pristine Finished 8K Black Hole Render -->
+                    <img src="./assets/blackhole.jpg" alt="Cinematic Gargantua Black Hole" 
+                         class="w-full h-full object-cover sm:object-contain select-none filter contrast-110 brightness-100 animate-blackhole-pulse">
+
+                    <!-- Layer 2: Seamless Dynamic Canvas (Fine Accretion Dust, Orbiting Stars & Matter Infall) -->
+                    <canvas id="blackhole-canvas" class="absolute inset-0 w-full h-full pointer-events-none"></canvas>
+                </div>
+
+                <!-- Natural Edge Gradient to blend seamlessly into pure black (#000000) -->
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/70 pointer-events-none"></div>
+                <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black pointer-events-none"></div>
+                <div class="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-black to-transparent pointer-events-none"></div>
+            </div>
+
+            <div class="max-w-4xl mx-auto px-6 flex flex-col items-center relative z-10 futuristic-reveal revealed">
+                
+                <!-- Badge -->
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/70 border border-white/[0.18] text-xs font-medium text-neutral-300 mb-8 backdrop-blur-md shadow-xl">
+                    <span class="w-2 h-2 rounded-full bg-white animate-ping"></span>
+                    <span class="font-mono uppercase tracking-widest text-[11px] text-neutral-300">Full-Stack & Workflow Automation Engineering</span>
+                </div>
+
+                <!-- Header Section Title in Dot Font -->
+                <h1 data-scramble="true" class="font-dot text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white max-w-4xl leading-[1.25] mb-8 uppercase drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
+                    Transforming Manual Friction Into High-Speed Digital Systems
+                </h1>
+
+                <!-- Subtitle -->
+                <p class="text-base sm:text-lg text-neutral-300 font-normal max-w-2xl leading-relaxed mb-10 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+                    I design and engineer custom web platforms, internal systems, mobile apps, and automated pipelines built to eliminate repetitive busywork and help businesses operate faster.
+                </p>
+
+                <!-- Primary CTA Buttons -->
+                <div class="flex flex-col sm:flex-row items-center gap-4">
+                    <a href="#contact" class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-white text-black font-bold text-sm hover:bg-neutral-200 transition-all shadow-2xl shadow-white/20 active:scale-95 flex items-center justify-center gap-2">
+                        <span>Get Started</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                    <a href="#console" class="w-full sm:w-auto px-7 py-3.5 rounded-full bg-black/60 hover:bg-white/[0.1] border border-white/[0.2] text-white font-medium text-sm transition-all flex items-center justify-center gap-2 backdrop-blur-md">
+                        <span>View Live Systems</span>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ==================== BENTO FEATURES (Glass Morphism with Top-Left Light Reflection) ==================== -->
+        <section id="services" class="py-24 relative border-t border-white/[0.08]">
+            <div class="max-w-5xl mx-auto px-6">
+                
+                <!-- Section Header -->
+                <div class="text-center max-w-3xl mx-auto mb-16 futuristic-reveal">
+                    <div class="inline-block px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.12] text-[11px] font-mono uppercase tracking-wider text-neutral-300 mb-3">
+                        Core Services & Capabilities
+                    </div>
+                    <h2 data-scramble="true" class="font-dot text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-4 uppercase">
+                        Innovative Engineering for Modern Operations
+                    </h2>
+                    <p class="text-neutral-400 text-base sm:text-lg leading-relaxed">
+                        I build custom websites, internal operations systems, cross-platform apps, and automated workflows engineered to save hours of manual effort.
+                    </p>
+                </div>
+
+                <!-- 2x2 Bento Grid (Glass morph with top-left specular reflection) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+
+                    <!-- BENTO CARD 1: Real-Time Performance & System Metrics -->
+                    <div class="glass-card p-7 lg:p-8 flex flex-col justify-between group futuristic-reveal reveal-delay-1">
+                        <div class="scan-beam-overlay"></div>
+                        <!-- Top Content -->
+                        <div class="mb-6 relative z-10">
+                            <div class="w-10 h-10 rounded-xl bg-white/[0.06] border border-white/[0.18] flex items-center justify-center text-white mb-4 shadow-sm group-hover:border-white/40 transition-colors">
+                                <i data-lucide="gauge" class="w-5 h-5 text-white"></i>
+                            </div>
+                            <h3 class="font-dot text-xl font-bold text-white mb-2 uppercase">High-Speed Web & System Architecture</h3>
+                            <p class="text-sm text-neutral-400 leading-relaxed">
+                                Custom web platforms and internal management portals built with optimized response times, responsive interfaces, and live telemetry data.
+                            </p>
+                        </div>
+
+                        <!-- Visual Widget: Mini metric cards in glass morph style with Dot Diagrams -->
+                        <div class="grid grid-cols-2 gap-3 pt-4 border-t border-white/[0.08] relative z-10">
+                            <!-- Mini Card 1 -->
+                            <div class="glass-subcard p-3.5">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-xs font-medium text-neutral-300 flex items-center gap-1.5">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-white"></span> API Latency
+                                    </span>
+                                    <span class="text-[10px] font-mono text-white">FAST</span>
+                                </div>
+                                <div class="text-lg font-heading font-bold text-white mb-1.5">24.6 ms</div>
+                                <!-- Dot-Matrix Sparkline Chart -->
+                                <svg class="w-full h-8 overflow-visible" viewBox="0 0 100 30">
+                                    <defs>
+                                        <pattern id="dot-grid-1" width="5" height="5" patternUnits="userSpaceOnUse">
+                                            <circle cx="2.5" cy="2.5" r="0.6" fill="rgba(255,255,255,0.14)"/>
+                                        </pattern>
+                                    </defs>
+                                    <!-- Dot Matrix Background Grid -->
+                                    <rect width="100" height="30" fill="url(#dot-grid-1)"/>
+                                    <!-- Dotted Trajectory Line -->
+                                    <path d="M0,25 Q20,20 40,15 T80,18 T100,8" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-dasharray="1 3.5" stroke-linecap="round"/>
+                                    <!-- Coordinate Dots -->
+                                    <circle cx="0" cy="25" r="1.8" fill="#ffffff"/>
+                                    <circle cx="20" cy="20" r="1.8" fill="#ffffff"/>
+                                    <circle cx="40" cy="15" r="2.2" fill="#ffffff"/>
+                                    <circle cx="60" cy="16" r="1.8" fill="#ffffff"/>
+                                    <circle cx="80" cy="18" r="1.8" fill="#ffffff"/>
+                                    <circle cx="100" cy="8" r="2.5" fill="#ffffff"/>
+                                </svg>
+                            </div>
+
+                            <!-- Mini Card 2 -->
+                            <div class="glass-subcard p-3.5">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-xs font-medium text-neutral-300 flex items-center gap-1.5">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-white"></span> Daily Events
+                                    </span>
+                                    <span class="text-[10px] font-mono text-white">+12%</span>
+                                </div>
+                                <div class="text-lg font-heading font-bold text-white mb-1.5">18,490</div>
+                                <!-- Dot-Matrix Sparkline Chart -->
+                                <svg class="w-full h-8 overflow-visible" viewBox="0 0 100 30">
+                                    <defs>
+                                        <pattern id="dot-grid-2" width="5" height="5" patternUnits="userSpaceOnUse">
+                                            <circle cx="2.5" cy="2.5" r="0.6" fill="rgba(255,255,255,0.14)"/>
+                                        </pattern>
+                                    </defs>
+                                    <!-- Dot Matrix Background Grid -->
+                                    <rect width="100" height="30" fill="url(#dot-grid-2)"/>
+                                    <!-- Dotted Trajectory Line -->
+                                    <path d="M0,22 Q25,28 50,14 T80,10 T100,4" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-dasharray="1 3.5" stroke-linecap="round"/>
+                                    <!-- Coordinate Dots -->
+                                    <circle cx="0" cy="22" r="1.8" fill="#ffffff"/>
+                                    <circle cx="25" cy="28" r="1.8" fill="#ffffff"/>
+                                    <circle cx="50" cy="14" r="2.2" fill="#ffffff"/>
+                                    <circle cx="80" cy="10" r="1.8" fill="#ffffff"/>
+                                    <circle cx="100" cy="4" r="2.5" fill="#ffffff"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BENTO CARD 2: Advanced Security & Fault Tolerance -->
+                    <div class="glass-card p-7 lg:p-8 flex flex-col justify-between group futuristic-reveal reveal-delay-2">
+                        <div class="scan-beam-overlay"></div>
+                        <!-- Top Content -->
+                        <div class="mb-6 relative z-10">
+                            <div class="w-10 h-10 rounded-xl bg-white/[0.06] border border-white/[0.18] flex items-center justify-center text-white mb-4 shadow-sm group-hover:border-white/40 transition-colors">
+                                <i data-lucide="shield-check" class="w-5 h-5 text-white"></i>
+                            </div>
+                            <h3 class="font-dot text-xl font-bold text-white mb-2 uppercase">Enterprise Reliability & Data Security</h3>
+                            <p class="text-sm text-neutral-400 leading-relaxed">
+                                Multi-layered role authentication, encrypted database credentials, transaction logging, and automated backup routines to keep data safe.
+                            </p>
+                        </div>
+
+                        <!-- Visual Centerpiece: Monochrome Dot Matrix Security Radar Diagram -->
+                        <div class="glass-subcard relative w-full h-44 flex items-center justify-center overflow-hidden">
+                            <!-- SVG Dotted Security Radar & Constellation Matrix -->
+                            <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 300 176">
+                                <defs>
+                                    <pattern id="sec-dot-matrix" width="9" height="9" patternUnits="userSpaceOnUse">
+                                        <circle cx="4.5" cy="4.5" r="0.75" fill="rgba(255,255,255,0.16)"/>
+                                    </pattern>
+                                </defs>
+                                <!-- Background Dot Grid -->
+                                <rect width="100%" height="100%" fill="url(#sec-dot-matrix)" opacity="0.75"/>
+
+                                <!-- Dotted Radial Crosshair Rays -->
+                                <line x1="150" y1="12" x2="150" y2="164" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" stroke-dasharray="1 5" stroke-linecap="round"/>
+                                <line x1="20" y1="88" x2="280" y2="88" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" stroke-dasharray="1 5" stroke-linecap="round"/>
+
+                                <!-- Concentric Dotted Circular Perimeter Rings -->
+                                <circle cx="150" cy="88" r="74" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="2" stroke-dasharray="1 6" stroke-linecap="round"/>
+                                <circle cx="150" cy="88" r="54" fill="none" stroke="rgba(255,255,255,0.38)" stroke-width="2" stroke-dasharray="1 5" stroke-linecap="round"/>
+                                <circle cx="150" cy="88" r="34" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-dasharray="1 4" stroke-linecap="round"/>
+
+                                <!-- Orbiting Constellation Dots -->
+                                <circle cx="150" cy="14" r="2.5" fill="#ffffff"/>
+                                <circle cx="150" cy="162" r="2.5" fill="#ffffff"/>
+                                <circle cx="76" cy="88" r="2.5" fill="#ffffff"/>
+                                <circle cx="224" cy="88" r="2.5" fill="#ffffff"/>
+                                <circle cx="98" cy="36" r="2" fill="rgba(255,255,255,0.9)"/>
+                                <circle cx="202" cy="36" r="2" fill="rgba(255,255,255,0.9)"/>
+                                <circle cx="98" cy="140" r="2" fill="rgba(255,255,255,0.9)"/>
+                                <circle cx="202" cy="140" r="2" fill="rgba(255,255,255,0.9)"/>
+                            </svg>
+
+                            <!-- Central Shield Badge with Dotted Border Frame -->
+                            <div class="relative z-10 w-16 h-16 rounded-2xl bg-gradient-to-b from-white/30 to-white/5 p-[1px] shadow-2xl shadow-white/20">
+                                <div class="w-full h-full bg-[#0a0a0c] rounded-2xl flex items-center justify-center border border-dotted border-white/50">
+                                    <i data-lucide="shield" class="w-7 h-7 text-white drop-shadow-[0_0_12px_rgba(255,255,255,0.8)]"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BENTO CARD 3: Intelligent Workflow Automation & Nodes -->
+                    <div class="glass-card p-7 lg:p-8 flex flex-col justify-between group futuristic-reveal reveal-delay-3">
+                        <div class="scan-beam-overlay"></div>
+                        <!-- Top Content -->
+                        <div class="mb-6 relative z-10">
+                            <div class="w-10 h-10 rounded-xl bg-white/[0.06] border border-white/[0.18] flex items-center justify-center text-white mb-4 shadow-sm group-hover:border-white/40 transition-colors">
+                                <i data-lucide="git-merge" class="w-5 h-5 text-white"></i>
+                            </div>
+                            <h3 class="font-dot text-xl font-bold text-white mb-2 uppercase">Automated Workflow Pipelines</h3>
+                            <p class="text-sm text-neutral-400 leading-relaxed">
+                                Eliminate manual copy-pasting across software. Connect form webhooks, CRM records, and databases into automated background pipelines.
+                            </p>
+                        </div>
+
+                        <!-- Visual Radar / Dotted Orbit Pipeline Diagram in Monochrome -->
+                        <div class="glass-subcard relative w-full h-44 flex items-center justify-center overflow-hidden">
+                            <!-- SVG Dotted Orbit System & Node Connectors -->
+                            <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 300 176">
+                                <defs>
+                                    <pattern id="flow-dot-matrix" width="9" height="9" patternUnits="userSpaceOnUse">
+                                        <circle cx="4.5" cy="4.5" r="0.75" fill="rgba(255,255,255,0.15)"/>
+                                    </pattern>
+                                </defs>
+                                <!-- Background Dot Grid -->
+                                <rect width="100%" height="100%" fill="url(#flow-dot-matrix)" opacity="0.7"/>
+
+                                <!-- Dotted Orbit Tracks -->
+                                <circle cx="150" cy="88" r="76" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="2" stroke-dasharray="1 7" stroke-linecap="round"/>
+                                <circle cx="150" cy="88" r="50" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="2" stroke-dasharray="1 5" stroke-linecap="round"/>
+                                <circle cx="150" cy="88" r="28" fill="none" stroke="rgba(255,255,255,0.48)" stroke-width="2" stroke-dasharray="1 4" stroke-linecap="round"/>
+
+                                <!-- Dotted Vector Connection Lines from Center to Orbit Nodes -->
+                                <line x1="150" y1="88" x2="105" y2="35" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-dasharray="1 5" stroke-linecap="round"/>
+                                <line x1="150" y1="88" x2="80" y2="135" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-dasharray="1 5" stroke-linecap="round"/>
+                                <line x1="150" y1="88" x2="225" y2="70" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-dasharray="1 5" stroke-linecap="round"/>
+
+                                <!-- In-flight Data Packet Dots -->
+                                <circle cx="127" cy="61" r="2.2" fill="#ffffff"/>
+                                <circle cx="115" cy="111" r="2.2" fill="#ffffff"/>
+                                <circle cx="187" cy="79" r="2.2" fill="#ffffff"/>
+                                <circle cx="150" cy="12" r="2" fill="rgba(255,255,255,0.85)"/>
+                                <circle cx="226" cy="88" r="2" fill="rgba(255,255,255,0.85)"/>
+                                <circle cx="74" cy="88" r="2" fill="rgba(255,255,255,0.85)"/>
+                            </svg>
+
+                            <!-- Orbit Nodes with icons & dotted rings -->
+                            <div class="absolute top-4 left-1/3 w-7 h-7 rounded-full bg-black border border-dotted border-white/70 flex items-center justify-center text-[10px] text-white shadow-lg">
+                                <i data-lucide="mail" class="w-3.5 h-3.5 text-white"></i>
+                            </div>
+                            <div class="absolute bottom-5 left-1/4 w-7 h-7 rounded-full bg-black border border-dotted border-white/70 flex items-center justify-center text-[10px] text-white shadow-lg">
+                                <i data-lucide="database" class="w-3.5 h-3.5 text-white"></i>
+                            </div>
+                            <div class="absolute top-1/3 right-8 w-7 h-7 rounded-full bg-black border border-dotted border-white/70 flex items-center justify-center text-[10px] text-white shadow-lg">
+                                <i data-lucide="file-text" class="w-3.5 h-3.5 text-white"></i>
+                            </div>
+
+                            <!-- Center Hub Node with dotted border halo -->
+                            <div class="relative z-10 w-12 h-12 rounded-full bg-gradient-to-tr from-white to-neutral-400 p-[1px] shadow-lg shadow-white/20">
+                                <div class="w-full h-full bg-black rounded-full flex items-center justify-center border border-dotted border-white/50">
+                                    <i data-lucide="cpu" class="w-5 h-5 text-white"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BENTO CARD 4: Cross-Platform Apps & Multi-Device Sync -->
+                    <div class="glass-card p-7 lg:p-8 flex flex-col justify-between group futuristic-reveal reveal-delay-4">
+                        <div class="scan-beam-overlay"></div>
+                        <!-- Top Content -->
+                        <div class="mb-6 relative z-10">
+                            <div class="w-10 h-10 rounded-xl bg-white/[0.06] border border-white/[0.18] flex items-center justify-center text-white mb-4 shadow-sm group-hover:border-white/40 transition-colors">
+                                <i data-lucide="monitor-smartphone" class="w-5 h-5 text-white"></i>
+                            </div>
+                            <h3 class="font-dot text-xl font-bold text-white mb-2 uppercase">Cross-Platform Web & Mobile Apps</h3>
+                            <p class="text-sm text-neutral-400 leading-relaxed">
+                                Seamless, synchronized applications that function across smartphones, tablets, and desktop workstations so your team stays productive anywhere.
+                            </p>
+                        </div>
+
+                        <!-- Visual Floating Glass Cards with Dot Matrix Sync Diagram -->
+                        <div class="glass-subcard relative w-full h-44 flex items-center justify-center p-4 overflow-hidden">
+                            <!-- SVG Dotted Sync Network Wireframe -->
+                            <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 300 176">
+                                <defs>
+                                    <pattern id="devices-dot-matrix" width="9" height="9" patternUnits="userSpaceOnUse">
+                                        <circle cx="4.5" cy="4.5" r="0.75" fill="rgba(255,255,255,0.14)"/>
+                                    </pattern>
+                                </defs>
+                                <rect width="100%" height="100%" fill="url(#devices-dot-matrix)" opacity="0.65"/>
+                                <!-- Dotted Connection Rays between devices -->
+                                <line x1="80" y1="65" x2="150" y2="92" stroke="rgba(255,255,255,0.35)" stroke-width="1.5" stroke-dasharray="1 5" stroke-linecap="round"/>
+                                <line x1="220" y1="65" x2="150" y2="92" stroke="rgba(255,255,255,0.35)" stroke-width="1.5" stroke-dasharray="1 5" stroke-linecap="round"/>
+                                <circle cx="115" cy="78" r="2" fill="#ffffff"/>
+                                <circle cx="185" cy="78" r="2" fill="#ffffff"/>
+                            </svg>
+
+                            <!-- Floating Card 1 (Tilted Back, Dotted Border) -->
+                            <div class="absolute -left-2 top-8 w-44 p-3 rounded-lg bg-white/[0.04] border border-dotted border-white/35 backdrop-blur-md transform -rotate-6 shadow-xl">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <div class="w-2 h-2 rounded-full bg-white"></div>
+                                    <span class="text-[10px] font-mono text-neutral-300">Cloud Sync</span>
+                                </div>
+                                <!-- Dot Sequence Data Strips -->
+                                <div class="flex items-center gap-1.5 mb-1.5">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-white/70"></span>
+                                    <span class="w-1.5 h-1.5 rounded-full bg-white/50"></span>
+                                    <span class="w-1.5 h-1.5 rounded-full bg-white/35"></span>
+                                    <span class="w-1.5 h-1.5 rounded-full bg-white/20"></span>
+                                    <span class="w-1.5 h-1.5 rounded-full bg-white/10"></span>
+                                </div>
+                                <div class="flex items-center gap-1.5">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-white/50"></span>
+                                    <span class="w-1.5 h-1.5 rounded-full bg-white/30"></span>
+                                    <span class="w-1.5 h-1.5 rounded-full bg-white/15"></span>
+                                </div>
+                            </div>
+
+                            <!-- Floating Card 2 (Front Accent with Dotted Border & Dot Matrix Indicator) -->
+                            <div class="glass-subcard relative z-10 w-48 p-4 transform hover:scale-105 transition-transform shadow-2xl border border-dotted border-white/50">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="flex items-center gap-2">
+                                        <i data-lucide="smartphone" class="w-4 h-4 text-white"></i>
+                                        <span class="text-xs font-bold text-white">Mobile Portal</span>
+                                    </div>
+                                    <span class="px-1.5 py-0.5 rounded text-[9px] font-mono bg-white/15 text-white border border-dotted border-white/40">Active</span>
+                                </div>
+                                <div class="text-[11px] text-neutral-300 mb-2">Real-time cross-device sync</div>
+                                <!-- Dot Matrix Telemetry Strip -->
+                                <div class="flex items-center justify-between pt-1.5 border-t border-dotted border-white/20">
+                                    <span class="text-[9px] font-mono text-neutral-400">PACKETS</span>
+                                    <div class="flex items-center gap-1">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+                                        <span class="w-1.5 h-1.5 rounded-full bg-white/80"></span>
+                                        <span class="w-1.5 h-1.5 rounded-full bg-white/50"></span>
+                                        <span class="w-1.5 h-1.5 rounded-full bg-white/25"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Floating Card 3 (Tilted Right, Dotted Border) -->
+                            <div class="absolute -right-2 top-6 w-40 p-3 rounded-lg bg-white/[0.04] border border-dotted border-white/35 backdrop-blur-md transform rotate-6 shadow-xl">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <i data-lucide="laptop" class="w-3.5 h-3.5 text-white"></i>
+                                    <span class="text-[10px] font-mono text-neutral-300">Workstation</span>
+                                </div>
+                                <!-- Dot Sequence Data Strips -->
+                                <div class="flex items-center gap-1.5">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-white/60"></span>
+                                    <span class="w-1.5 h-1.5 rounded-full bg-white/45"></span>
+                                    <span class="w-1.5 h-1.5 rounded-full bg-white/30"></span>
+                                    <span class="w-1.5 h-1.5 rounded-full bg-white/15"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ==================== NEW SECTION: INTERACTIVE WORKFLOW ARCHITECT (Adapted from Reference Screenshot) ==================== -->
+        <section id="architect" class="py-24 relative border-t border-white/[0.08] bg-black overflow-hidden">
+            <!-- Ambient Smoke / Topographic Wave Curves (Matches reference background) -->
+            <div class="absolute inset-0 pointer-events-none overflow-hidden -z-10 select-none">
+                <!-- SVG Silky Topographic Wave Ribbons -->
+                <svg class="absolute w-full h-full opacity-20" viewBox="0 0 1440 800" fill="none" preserveAspectRatio="none">
+                    <path d="M-100,200 C300,100 500,450 900,250 C1200,100 1350,300 1600,150" stroke="url(#waveGrad1)" stroke-width="1.5" stroke-dasharray="4 6"/>
+                    <path d="M-100,280 C250,220 600,500 950,320 C1250,180 1400,380 1600,220" stroke="url(#waveGrad1)" stroke-width="2"/>
+                    <path d="M-100,360 C200,340 550,560 1000,380 C1300,240 1450,420 1600,300" stroke="url(#waveGrad2)" stroke-width="1.5"/>
+                    <path d="M-100,450 C350,420 700,620 1050,440 C1350,320 1500,480 1600,380" stroke="url(#waveGrad2)" stroke-width="2.5"/>
+                    <path d="M-100,540 C400,500 800,680 1150,500 C1400,400 1550,550 1600,460" stroke="url(#waveGrad1)" stroke-width="1.5"/>
+                    <defs>
+                        <linearGradient id="waveGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
+                            <stop offset="30%" stop-color="#ffffff" stop-opacity="0.3"/>
+                            <stop offset="70%" stop-color="#ffffff" stop-opacity="0.5"/>
+                            <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+                        </linearGradient>
+                        <linearGradient id="waveGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
+                            <stop offset="40%" stop-color="#ffffff" stop-opacity="0.2"/>
+                            <stop offset="60%" stop-color="#ffffff" stop-opacity="0.4"/>
+                            <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <!-- Radial Ambient Vignette -->
+                <div class="absolute inset-0 bg-radial-glow opacity-30"></div>
+                <div class="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black"></div>
+            </div>
+
+            <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+                
+                <!-- Pill Badge (Matches reference "#1 Product of the Week") -->
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.15] text-[11px] font-mono text-neutral-300 uppercase tracking-widest mb-6 backdrop-blur-md">
+                    <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+                    <span>Interactive Solution Architect</span>
+                </div>
+
+                <!-- Headline in Dot Font (Matches reference "What's your next big idea?") -->
+                <h2 class="font-dot text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-4 uppercase">
+                    What's Your Next Big Idea?
+                </h2>
+
+                <!-- Subtitle -->
+                <p class="text-neutral-400 text-sm sm:text-base max-w-xl mx-auto leading-relaxed mb-10">
+                    Describe the manual bottleneck or custom software you need. Get an instant architecture blueprint, recommended tech stack, and timeline estimate.
+                </p>
+
+                <!-- Center Glassmorphic Prompt Console (Matches reference center box) -->
+                <div class="glass-card p-6 sm:p-8 text-left max-w-3xl mx-auto shadow-2xl relative mb-6">
+                    
+                    <!-- Top Dropdown Pill (Matches reference "Purpose ⌵") -->
+                    <div class="flex items-center justify-between mb-4 relative z-10">
+                        <div class="relative inline-block">
+                            <button type="button" onclick="togglePurposeDropdown()" id="purpose-btn" class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-black/60 border border-white/[0.15] text-xs font-semibold text-neutral-200 hover:text-white hover:border-white/30 transition-all">
+                                <span id="purpose-label">Purpose: Custom Web Platform</span>
+                                <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-neutral-400"></i>
+                            </button>
+                            <!-- Dropdown Menu -->
+                            <div id="purpose-menu" class="hidden absolute top-full left-0 mt-2 w-56 rounded-xl bg-[#0e0e12] border border-white/[0.15] shadow-2xl z-30 py-1.5 text-xs">
+                                <button onclick="selectPurpose('Custom Web Platform')" class="w-full text-left px-3.5 py-2 hover:bg-white/[0.08] text-neutral-200 hover:text-white transition-colors">🌐 Custom Web Platform</button>
+                                <button onclick="selectPurpose('Internal Business System')" class="w-full text-left px-3.5 py-2 hover:bg-white/[0.08] text-neutral-200 hover:text-white transition-colors">⚡ Internal Business System</button>
+                                <button onclick="selectPurpose('Workflow Automation Pipeline')" class="w-full text-left px-3.5 py-2 hover:bg-white/[0.08] text-neutral-200 hover:text-white transition-colors">⚙️ Workflow Automation Pipeline</button>
+                                <button onclick="selectPurpose('Cross-Platform Mobile App')" class="w-full text-left px-3.5 py-2 hover:bg-white/[0.08] text-neutral-200 hover:text-white transition-colors">📱 Cross-Platform Mobile App</button>
+                            </div>
+                        </div>
+                        <span class="text-[11px] font-mono text-neutral-500 hidden sm:inline">Press Tab or select a preset</span>
+                    </div>
+
+                    <!-- Main Textarea Input -->
+                    <div class="relative z-10 mb-4">
+                        <textarea id="architect-input" rows="3" 
+                            class="w-full bg-transparent border-none text-white placeholder-neutral-500 text-sm sm:text-base focus:outline-none focus:ring-0 resize-none font-normal leading-relaxed"
+                            placeholder="Try: Create an automated dispatch system that captures customer orders, reconciles inventory in PostgreSQL, and delivers instant notifications via Telegram and email..."></textarea>
+                    </div>
+
+                    <!-- Bottom Controls Toolbar inside Console Box (Matches reference) -->
+                    <div class="flex items-center justify-between pt-4 border-t border-white/[0.08] relative z-10">
+                        <!-- Left Tools -->
+                        <div class="flex items-center gap-3 text-neutral-400">
+                            <button type="button" onclick="attachDemoSpecs()" class="p-1.5 rounded-md hover:bg-white/[0.08] text-neutral-400 hover:text-white transition-colors" title="Attach Specifications">
+                                <i data-lucide="paperclip" class="w-4 h-4"></i>
+                            </button>
+                            <span class="text-xs font-mono text-neutral-500 flex items-center gap-1">
+                                <kbd class="px-1.5 py-0.5 rounded bg-white/[0.08] border border-white/[0.15] text-[10px] text-neutral-300 font-mono">⌘</kbd>
+                                <span class="hidden sm:inline">Auto-Scope</span>
+                            </span>
+                            <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/[0.1] text-xs font-mono text-neutral-300">
+                                <span id="days-counter">7</span>
+                                <span class="text-neutral-500">Days</span>
+                                <div class="flex flex-col -space-y-1 ml-1 text-neutral-500 cursor-pointer">
+                                    <span onclick="adjustDays(1)" class="hover:text-white text-[9px]">▲</span>
+                                    <span onclick="adjustDays(-1)" class="hover:text-white text-[9px]">▼</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Action Button (Matches reference "Generate" button) -->
+                        <div>
+                            <button type="button" onclick="generateArchitectureBlueprint()" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-black font-extrabold text-xs hover:bg-neutral-200 transition-all shadow-lg active:scale-95">
+                                <i data-lucide="sparkles" class="w-3.5 h-3.5 fill-current"></i>
+                                <span>Generate Blueprint</span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Quick Preset Tags (Matches reference "[ Web Research ] [ Web Scrap ] [ Import Notion ] [ Professional ]") -->
+                <div class="flex flex-wrap items-center justify-center gap-2.5 mb-8">
+                    <button onclick="applyPreset('admin-portal')" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.1] hover:border-white/30 text-neutral-300 hover:text-white text-xs font-medium transition-all">
+                        <i data-lucide="search" class="w-3.5 h-3.5 text-neutral-400"></i>
+                        <span>Admin Management Portal</span>
+                    </button>
+                    <button onclick="applyPreset('web-scraping')" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.1] hover:border-white/30 text-neutral-300 hover:text-white text-xs font-medium transition-all">
+                        <i data-lucide="globe" class="w-3.5 h-3.5 text-neutral-400"></i>
+                        <span>Web Scraping & ETL Bot</span>
+                    </button>
+                    <button onclick="applyPreset('auto-invoicing')" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.1] hover:border-white/30 text-neutral-300 hover:text-white text-xs font-medium transition-all">
+                        <i data-lucide="database" class="w-3.5 h-3.5 text-neutral-400"></i>
+                        <span>Invoice & CRM Sync</span>
+                    </button>
+                    <button onclick="applyPreset('mobile-app')" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.1] hover:border-white/30 text-neutral-300 hover:text-white text-xs font-medium transition-all">
+                        <i data-lucide="smartphone" class="w-3.5 h-3.5 text-neutral-400"></i>
+                        <span>Resident Citizen App</span>
+                    </button>
+                </div>
+
+                <!-- Live Generated Blueprint Output Panel (Revealed on generation) -->
+                <div id="blueprint-result" class="hidden glass-card p-6 sm:p-7 text-left max-w-3xl mx-auto shadow-2xl transition-all duration-300">
+                    <div class="flex items-center justify-between pb-4 border-b border-white/[0.08] mb-4">
+                        <div class="flex items-center gap-2.5">
+                            <span class="w-2 h-2 rounded-full bg-white animate-ping"></span>
+                            <h4 class="font-dot text-sm font-bold text-white uppercase tracking-wider">Generated System Architecture</h4>
+                        </div>
+                        <span id="bp-time" class="text-xs font-mono text-neutral-400">Estimated Delivery: 5-7 Days</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5 text-xs">
+                        <div class="glass-subcard p-3">
+                            <div class="text-[10px] font-mono uppercase text-neutral-400 mb-1">Recommended Stack</div>
+                            <div id="bp-stack" class="font-semibold text-white">Next.js 14 + FastAPI + PostgreSQL</div>
+                        </div>
+                        <div class="glass-subcard p-3">
+                            <div class="text-[10px] font-mono uppercase text-neutral-400 mb-1">Automation Flow</div>
+                            <div id="bp-flow" class="font-semibold text-white">Webhook ➔ Worker ➔ Sync Alert</div>
+                        </div>
+                        <div class="glass-subcard p-3">
+                            <div class="text-[10px] font-mono uppercase text-neutral-400 mb-1">Weekly Impact</div>
+                            <div id="bp-impact" class="font-semibold text-white">Saves ~18 hrs/week</div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-2">
+                        <p id="bp-summary" class="text-xs text-neutral-300 max-w-md leading-relaxed"></p>
+                        <a href="#contact" onclick="transferPromptToContact()" class="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-white text-black font-extrabold text-xs hover:bg-neutral-200 transition-all shadow-lg">
+                            <span>Request This Build</span>
+                            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ==================== SECTION: OPERATIONS CONSOLE (Centralized Glass Morphism) ==================== -->
+        <section id="console" class="py-24 relative border-t border-white/[0.08]">
+            <div class="max-w-5xl mx-auto px-6 text-center">
+                
+                <!-- Centralized Section Header -->
+                <div class="max-w-3xl mx-auto mb-16 futuristic-reveal">
+                    <div class="inline-block px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.12] text-[11px] font-mono uppercase tracking-wider text-neutral-300 mb-4">
+                        Centralized Control
+                    </div>
+                    <h2 data-scramble="true" class="font-dot text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-4 uppercase">
+                        All-in-One Operations & Automation Console
+                    </h2>
+                    <p class="text-neutral-400 text-sm sm:text-base leading-relaxed mb-8 max-w-2xl mx-auto">
+                        Consolidate disconnected spreadsheets, manual emails, and isolated databases into a single command center. Monitor background tasks, trigger automated jobs, and view end-to-end telemetry in real time.
+                    </p>
+                    <div class="flex items-center justify-center">
+                        <a href="#contact" class="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-white text-black font-bold text-xs uppercase tracking-wider hover:bg-neutral-200 transition-all shadow-xl active:scale-95">
+                            <span>Manage Your Workflows</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Centralized Interactive Dashboard Widget in Glass Morphism with Light Reflection -->
+                <div class="max-w-4xl mx-auto relative futuristic-reveal reveal-delay-2 text-left">
+                    <div class="scan-beam-overlay"></div>
+                    
+                    <!-- Base Dashboard Card -->
+                    <div class="glass-card p-6 md:p-8 relative">
+                            
+                            <!-- Dashboard Header with Time Filter Toggle -->
+                            <div class="flex items-center justify-between pb-5 border-b border-white/[0.08] mb-6 relative z-10">
+                                <div>
+                                    <div class="text-xs font-mono uppercase tracking-wider text-neutral-400 mb-1">System Throughput</div>
+                                    <h4 class="font-dot text-lg font-bold text-white uppercase">Execution Telemetry</h4>
+                                </div>
+                                <!-- Timeframe Toggle -->
+                                <div class="flex items-center p-1 rounded-lg bg-black/60 border border-white/[0.1] text-xs font-medium">
+                                    <button onclick="switchTimeframe('1d')" id="btn-tf-1d" class="px-2.5 py-1 rounded-md bg-white text-black font-bold transition-colors">1D</button>
+                                    <button onclick="switchTimeframe('7d')" id="btn-tf-7d" class="px-2.5 py-1 rounded-md text-neutral-400 hover:text-white transition-colors">7D</button>
+                                    <button onclick="switchTimeframe('30d')" id="btn-tf-30d" class="px-2.5 py-1 rounded-md text-neutral-400 hover:text-white transition-colors">30D</button>
+                                </div>
+                            </div>
+
+                            <!-- Area Chart Graphic (Monochrome Black & White Dot-Matrix Diagram) -->
+                            <div class="w-full h-36 mb-6 relative z-10">
+                                <svg class="w-full h-full overflow-visible" viewBox="0 0 500 120" preserveAspectRatio="none">
+                                    <defs>
+                                        <pattern id="console-chart-dots" width="8" height="8" patternUnits="userSpaceOnUse">
+                                            <circle cx="4" cy="4" r="0.75" fill="rgba(255,255,255,0.14)"/>
+                                        </pattern>
+                                        <linearGradient id="chartGlow" x1="0" y1="0" x2="0" y2="1">
+                                            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.25"/>
+                                            <stop offset="100%" stop-color="#ffffff" stop-opacity="0.0"/>
+                                        </linearGradient>
+                                    </defs>
+                                    <!-- Background Dot Grid -->
+                                    <rect width="500" height="120" fill="url(#console-chart-dots)"/>
+                                    <!-- Area Fill -->
+                                    <path id="chart-area" d="M0,100 Q60,30 130,70 T260,40 T380,80 T500,20 L500,120 L0,120 Z" fill="url(#chartGlow)" />
+                                    <!-- Dotted Line Path (Dot Sequence) -->
+                                    <path id="chart-line" d="M0,100 Q60,30 130,70 T260,40 T380,80 T500,20" fill="none" stroke="#ffffff" stroke-width="2.8" stroke-dasharray="1 6" stroke-linecap="round" />
+                                </svg>
+                                <div class="flex justify-between text-[11px] font-mono text-neutral-500 mt-2 px-1">
+                                    <span>00:00</span>
+                                    <span>06:00</span>
+                                    <span>12:00</span>
+                                    <span>18:00</span>
+                                    <span>Now</span>
+                                </div>
+                            </div>
+
+                            <!-- Floating Pipeline Runner Window (Glass Morphism with Top-Left reflection) -->
+                            <div class="glass-subcard relative z-10 w-full max-w-md mx-auto p-5 shadow-2xl">
+                                
+                                <!-- Window Header with [-] [x] controls -->
+                                <div class="flex items-center justify-between pb-3.5 border-b border-white/[0.08] mb-4">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-2.5 h-2.5 rounded-full bg-white animate-ping"></div>
+                                        <span class="text-xs font-bold text-white tracking-wide">Automated Pipeline Engine</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-neutral-500">
+                                        <span class="cursor-pointer hover:text-white">⎯</span>
+                                        <span class="cursor-pointer hover:text-white">✕</span>
+                                    </div>
+                                </div>
+
+                                <!-- Node Route Trigger -->
+                                <div class="flex items-center justify-between p-3 rounded-lg bg-black/50 border border-white/[0.08] mb-4">
+                                    <div class="flex items-center gap-2.5">
+                                        <div class="w-8 h-8 rounded-md bg-white/[0.08] flex items-center justify-center">
+                                            <i data-lucide="webhook" class="w-4 h-4 text-white"></i>
+                                        </div>
+                                        <div>
+                                            <div class="text-[10px] text-neutral-400 font-mono">SOURCE TRIGGER</div>
+                                            <div class="text-xs font-semibold text-white">Form / Client Webhook</div>
+                                        </div>
+                                    </div>
+                                    <i data-lucide="arrow-right" class="w-4 h-4 text-neutral-500"></i>
+                                    <div class="flex items-center gap-2.5">
+                                        <div class="w-8 h-8 rounded-md bg-white/[0.08] flex items-center justify-center">
+                                            <i data-lucide="database" class="w-4 h-4 text-white"></i>
+                                        </div>
+                                        <div>
+                                            <div class="text-[10px] text-neutral-400 font-mono">DESTINATION</div>
+                                            <div class="text-xs font-semibold text-white">Database & Auto Alert</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Execution Telemetry & Button -->
+                                <div class="space-y-3">
+                                    <div class="flex justify-between items-center text-xs">
+                                        <span class="text-neutral-400">Processed Events Today</span>
+                                        <span id="pipeline-count" class="font-mono font-bold text-white">6,240 events</span>
+                                    </div>
+                                    <div class="flex justify-between items-center text-xs">
+                                        <span class="text-neutral-400">Average Pipeline Runtime</span>
+                                        <span class="font-mono text-white font-semibold">0.42 seconds</span>
+                                    </div>
+
+                                    <button onclick="runPipelineSimulation()" id="simulate-btn" class="w-full mt-2 py-2.5 px-4 rounded-lg bg-white hover:bg-neutral-200 text-black font-extrabold text-xs transition-all flex items-center justify-center gap-2 shadow-lg active:scale-[0.98]">
+                                        <i data-lucide="play" class="w-3.5 h-3.5 fill-current"></i>
+                                        <span id="simulate-text">Simulate Pipeline Run</span>
+                                    </button>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+            </div>
+        </section>
+
+
+        <!-- ==================== SECTION: METRICS & IMPACT SHOWCASE (Centralized Glass Morphism) ==================== -->
+        <section id="impact" class="py-24 relative border-t border-white/[0.08] bg-black/40">
+            <div class="max-w-5xl mx-auto px-6 text-center">
+                
+                <!-- Centralized Section Header -->
+                <div class="max-w-3xl mx-auto mb-16 futuristic-reveal">
+                    <div class="inline-block px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.12] text-[11px] font-mono uppercase tracking-wider text-neutral-300 mb-4">
+                        Measurable Value
+                    </div>
+                    <h2 data-scramble="true" class="font-dot text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-4 uppercase">
+                        Measurable Speed. Zero Repetitive Friction.
+                    </h2>
+                    <p class="text-neutral-400 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto mb-8">
+                        Every organization has bottleneck tasks that drain time. I build bespoke software, systems, and automations that slot cleanly into your operations—saving hundreds of work-hours each month while eliminating data-entry errors.
+                    </p>
+                    <div class="flex items-center justify-center">
+                        <a href="#contact" class="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-white text-black font-bold text-xs uppercase tracking-wider hover:bg-neutral-200 transition-all shadow-xl active:scale-95">
+                            <span>Request a Custom Build</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 3 Centered KPI Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 max-w-4xl mx-auto mb-10 futuristic-reveal reveal-delay-1 text-center">
+                    <div class="glass-subcard p-6">
+                        <div class="font-dot text-3xl font-extrabold text-white mb-1.5">385+ hrs</div>
+                        <div class="text-xs font-semibold uppercase tracking-wider text-neutral-400 mb-1">Monthly Time Saved</div>
+                        <p class="text-[11px] text-neutral-500">Across active administrative & booking platforms</p>
+                    </div>
+                    <div class="glass-subcard p-6 border-white/25">
+                        <div class="font-dot text-3xl font-extrabold text-white mb-1.5">99.9%</div>
+                        <div class="text-xs font-semibold uppercase tracking-wider text-neutral-400 mb-1">Pipeline Reliability</div>
+                        <p class="text-[11px] text-neutral-500">Zero duplicate transactions or data dropouts</p>
+                    </div>
+                    <div class="glass-subcard p-6">
+                        <div class="font-dot text-3xl font-extrabold text-white mb-1.5">100%</div>
+                        <div class="text-xs font-semibold uppercase tracking-wider text-neutral-400 mb-1">Paperless Operations</div>
+                        <p class="text-[11px] text-neutral-500">Full transition to responsive cloud databases</p>
+                    </div>
+                </div>
+
+                <!-- Centered Deployed Solutions Table in Glass Morphism -->
+                <div class="max-w-4xl mx-auto futuristic-reveal reveal-delay-2 text-left">
+                    <div class="glass-card p-6 md:p-8 relative">
+                        <div class="scan-beam-overlay"></div>
+                        <div class="flex items-center justify-between pb-4 border-b border-white/[0.08] mb-4 relative z-10">
+                            <h4 class="font-dot font-bold text-white text-base uppercase">Deployed Solutions & Efficiency</h4>
+                            <span class="text-xs font-mono text-white bg-white/10 px-2.5 py-1 rounded-full border border-white/20">All Active</span>
+                        </div>
+
+                        <!-- Table container -->
+                        <div class="overflow-x-auto relative z-10">
+                            <table class="w-full text-left text-sm">
+                                <thead>
+                                    <tr class="text-[11px] font-mono uppercase tracking-wider text-neutral-400 border-b border-white/[0.08]">
+                                        <th class="pb-3 font-medium">System / Pipeline</th>
+                                        <th class="pb-3 font-medium text-center">Success Rate</th>
+                                        <th class="pb-3 font-medium text-right">Time Saved</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-white/[0.06] text-neutral-200">
+                                    <tr class="hover:bg-white/[0.04] transition-colors">
+                                        <td class="py-3.5 font-medium text-white flex items-center gap-2">
+                                            <div class="w-2 h-2 rounded-full bg-white"></div>
+                                            <span>LGU-OS Administration Portal</span>
+                                            <i data-lucide="external-link" class="w-3.5 h-3.5 text-neutral-500"></i>
+                                        </td>
+                                        <td class="py-3.5 text-center font-mono text-white font-bold">99.9%</td>
+                                        <td class="py-3.5 text-right font-mono font-bold text-white">85 hrs / mo</td>
+                                    </tr>
+                                    <tr class="hover:bg-white/[0.04] transition-colors">
+                                        <td class="py-3.5 font-medium text-white flex items-center gap-2">
+                                            <div class="w-2 h-2 rounded-full bg-white"></div>
+                                            <span>Barangay Citizen Registry & DRRM</span>
+                                            <i data-lucide="external-link" class="w-3.5 h-3.5 text-neutral-500"></i>
+                                        </td>
+                                        <td class="py-3.5 text-center font-mono text-white font-bold">99.8%</td>
+                                        <td class="py-3.5 text-right font-mono font-bold text-white">120 hrs / mo</td>
+                                    </tr>
+                                    <tr class="hover:bg-white/[0.04] transition-colors">
+                                        <td class="py-3.5 font-medium text-white flex items-center gap-2">
+                                            <div class="w-2 h-2 rounded-full bg-white"></div>
+                                            <span>Automated Invoice & Ledger Sync</span>
+                                            <i data-lucide="external-link" class="w-3.5 h-3.5 text-neutral-500"></i>
+                                        </td>
+                                        <td class="py-3.5 text-center font-mono text-white font-bold">100.0%</td>
+                                        <td class="py-3.5 text-right font-mono font-bold text-white">45 hrs / mo</td>
+                                    </tr>
+                                    <tr class="hover:bg-white/[0.04] transition-colors">
+                                        <td class="py-3.5 font-medium text-white flex items-center gap-2">
+                                            <div class="w-2 h-2 rounded-full bg-white"></div>
+                                            <span>Real-Time Queue & Booking Engine</span>
+                                            <i data-lucide="external-link" class="w-3.5 h-3.5 text-neutral-500"></i>
+                                        </td>
+                                        <td class="py-3.5 text-center font-mono text-white font-bold">99.9%</td>
+                                        <td class="py-3.5 text-right font-mono font-bold text-white">60 hrs / mo</td>
+                                    </tr>
+                                    <tr class="hover:bg-white/[0.04] transition-colors">
+                                        <td class="py-3.5 font-medium text-white flex items-center gap-2">
+                                            <div class="w-2 h-2 rounded-full bg-white"></div>
+                                            <span>Data Scraping & Extraction Pipeline</span>
+                                            <i data-lucide="external-link" class="w-3.5 h-3.5 text-neutral-500"></i>
+                                        </td>
+                                        <td class="py-3.5 text-center font-mono text-white font-bold">99.7%</td>
+                                        <td class="py-3.5 text-right font-mono font-bold text-white">75 hrs / mo</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ==================== FAQ SECTION (Centralized Glass Morphism Cards) ==================== -->
+        <section id="faq" class="py-24 relative border-t border-white/[0.08]">
+            <div class="max-w-5xl mx-auto px-6 text-center">
+                
+                <!-- Centralized Section Header -->
+                <div class="max-w-3xl mx-auto mb-16 futuristic-reveal">
+                    <div class="inline-block px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.12] text-[11px] font-mono uppercase tracking-wider text-neutral-300 mb-4">
+                        Common Inquiries
+                    </div>
+                    <h2 data-scramble="true" class="font-dot text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-4 uppercase">
+                        Have Questions? We've Got Answers.
+                    </h2>
+                    <p class="text-sm sm:text-base text-neutral-400 leading-relaxed max-w-2xl mx-auto mb-6">
+                        Curious about project delivery, automation maintenance, or system integrations? Here is straightforward information to help you plan your next build.
+                    </p>
+                    <a href="#contact" class="inline-flex items-center gap-2 text-xs font-semibold text-white hover:text-neutral-300 transition-colors">
+                        <span>Have a custom question? Reach out directly</span>
+                        <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                    </a>
+                </div>
+
+                <!-- FAQ 2-Column Grid in Glass Morphism -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mb-10 max-w-5xl mx-auto text-left" id="faq-container">
+                    
+                    <!-- Question 1 -->
+                    <div class="glass-card p-6 space-y-3 futuristic-reveal reveal-delay-1 relative">
+                        <div class="scan-beam-overlay"></div>
+                        <h3 class="font-heading text-lg font-bold text-white flex items-start gap-2.5 relative z-10">
+                            <span class="font-dot text-white text-sm font-bold">01.</span>
+                            <span>What types of websites, apps, and systems do you specialize in?</span>
+                        </h3>
+                        <p class="text-sm text-neutral-400 leading-relaxed pl-7 relative z-10">
+                            I build everything from customer-facing landing pages and web applications to complex internal business systems (e.g. resident databases, queue management, invoice reconcilers, and admin dashboards) tailored specifically to your operational needs.
+                        </p>
+                    </div>
+
+                    <!-- Question 2 -->
+                    <div class="glass-card p-6 space-y-3 futuristic-reveal reveal-delay-2 relative">
+                        <div class="scan-beam-overlay"></div>
+                        <h3 class="font-heading text-lg font-bold text-white flex items-start gap-2.5 relative z-10">
+                            <span class="font-dot text-white text-sm font-bold">02.</span>
+                            <span>How do your automations make work easier and faster?</span>
+                        </h3>
+                        <p class="text-sm text-neutral-400 leading-relaxed pl-7 relative z-10">
+                            Automations take over repetitive, error-prone tasks—like transferring data between spreadsheets, dispatching receipts, syncing customer orders, and generating periodic reports. They run silently 24/7, delivering instant updates without manual effort.
+                        </p>
+                    </div>
+
+                    <!-- Question 3 -->
+                    <div class="glass-card p-6 space-y-3 futuristic-reveal reveal-delay-3 relative">
+                        <div class="scan-beam-overlay"></div>
+                        <h3 class="font-heading text-lg font-bold text-white flex items-start gap-2.5 relative z-10">
+                            <span class="font-dot text-white text-sm font-bold">03.</span>
+                            <span>Can you integrate with our existing software and databases?</span>
+                        </h3>
+                        <p class="text-sm text-neutral-400 leading-relaxed pl-7 relative z-10">
+                            Yes. I work with REST APIs, webhooks, SQL/NoSQL databases, Google Workspace, Excel sheets, and messaging tools (Telegram, Discord, email) so you never have to replace tools that already work for your business.
+                        </p>
+                    </div>
+
+                    <!-- Question 4 -->
+                    <div class="glass-card p-6 space-y-3 futuristic-reveal reveal-delay-4 relative">
+                        <div class="scan-beam-overlay"></div>
+                        <h3 class="font-heading text-lg font-bold text-white flex items-start gap-2.5 relative z-10">
+                            <span class="font-dot text-white text-sm font-bold">04.</span>
+                            <span>How fast can we launch a working prototype or automated tool?</span>
+                        </h3>
+                        <p class="text-sm text-neutral-400 leading-relaxed pl-7 relative z-10">
+                            Most focused automations and pipeline scripts are delivered in 3 to 7 days. Full web platforms and internal systems typically launch within 2 to 4 weeks with iterative working demos shared at every milestone.
+                        </p>
+                    </div>
+
+                </div>
+
+                <!-- Navigation Arrows (Centered) -->
+                <div class="flex items-center justify-center gap-3">
+                    <button onclick="navigateFaq(-1)" class="w-10 h-10 rounded-full border border-white/[0.15] bg-white/[0.04] hover:bg-white hover:text-black text-white flex items-center justify-center transition-colors shadow-md" aria-label="Previous">
+                        <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                    </button>
+                    <button onclick="navigateFaq(1)" class="w-10 h-10 rounded-full border border-white/[0.15] bg-white/[0.04] hover:bg-white hover:text-black text-white flex items-center justify-center transition-colors shadow-md" aria-label="Next">
+                        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ==================== PRICING & ENGAGEMENT PLANS SECTION (Adapted from Reference Screenshot) ==================== -->
+        <section id="pricing" class="py-28 relative border-t border-white/[0.08] bg-black overflow-hidden">
+            
+            <!-- Giant Layered Backdrop Typography (Directly mirrors reference image background) -->
+            <div class="absolute top-2 sm:top-6 left-1/2 -translate-x-1/2 font-sans font-black text-[95px] sm:text-[180px] md:text-[240px] lg:text-[290px] text-white/[0.07] tracking-tighter select-none pointer-events-none -z-0 leading-none whitespace-nowrap">
+                Pricing
+            </div>
+
+            <div class="max-w-6xl mx-auto px-6 relative z-10">
+                
+                <!-- Section Header -->
+                <div class="text-center max-w-3xl mx-auto mb-16 futuristic-reveal">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.12] text-[11px] font-mono uppercase tracking-widest text-neutral-300 mb-4 backdrop-blur-md">
+                        <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+                        <span>Transparent Engagement Tiers</span>
+                    </div>
+                    <h2 data-scramble="true" class="font-dot text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-4 uppercase">
+                        Predictable Pricing for Serious Velocity
+                    </h2>
+                    <p class="text-neutral-400 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
+                        Whether you need a full-system audit, continuous automation monitoring, or dedicated engineering sprints, choose a tier built for speed and ROI.
+                    </p>
+                </div>
+
+                <!-- 3 Pricing Cards Grid (Exact structure from reference screenshot) -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto items-stretch">
+
+                    <!-- CARD 1: Free Plan -->
+                    <div class="glass-card p-8 flex flex-col justify-between group futuristic-reveal reveal-delay-1 relative min-h-[460px]">
+                        <!-- Top Diffuse Glow / Specular Sheen (Matches screenshot) -->
+                        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-4/5 h-20 bg-gradient-to-b from-white/[0.22] to-transparent rounded-full filter blur-xl pointer-events-none -z-0"></div>
+                        <div class="scan-beam-overlay"></div>
+
+                        <div class="relative z-10">
+                            <!-- Plan Name -->
+                            <h3 class="text-base font-semibold text-neutral-200 mb-3 tracking-wide">Free Plan</h3>
+                            
+                            <!-- Price with metallic gradient -->
+                            <div class="text-4xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-neutral-400 font-sans tracking-tight mb-6">
+                                ₱0<span class="text-2xl font-medium text-neutral-400"> / Free</span>
+                            </div>
+
+                            <!-- Thin Hairline Divider -->
+                            <div class="h-[1px] w-full bg-white/[0.1] my-6"></div>
+
+                            <!-- Feature List with Circular Checkmarks -->
+                            <ul class="space-y-4 text-xs sm:text-sm text-neutral-300">
+                                <li class="flex items-center gap-3">
+                                    <div class="w-5 h-5 rounded-full bg-white/10 border border-white/20 flex items-center justify-center shrink-0">
+                                        <i data-lucide="check" class="w-3 h-3 text-white"></i>
+                                    </div>
+                                    <span>Discovery & Workflow Audit</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <div class="w-5 h-5 rounded-full bg-white/10 border border-white/20 flex items-center justify-center shrink-0">
+                                        <i data-lucide="check" class="w-3 h-3 text-white"></i>
+                                    </div>
+                                    <span>1 Architecture Blueprint</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <div class="w-5 h-5 rounded-full bg-white/10 border border-white/20 flex items-center justify-center shrink-0">
+                                        <i data-lucide="check" class="w-3 h-3 text-white"></i>
+                                    </div>
+                                    <span>Tech Stack & DB Recommendations</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <div class="w-5 h-5 rounded-full bg-white/10 border border-white/20 flex items-center justify-center shrink-0">
+                                        <i data-lucide="check" class="w-3 h-3 text-white"></i>
+                                    </div>
+                                    <span>Delivery Timeline & Scope Map</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Bottom Pill CTA Button (Matches screenshot) -->
+                        <div class="pt-8 relative z-10">
+                            <button type="button" onclick="selectPricingPlan('Free Plan')" class="w-full py-3.5 px-6 rounded-full bg-black/90 hover:bg-white hover:text-black border border-white/25 text-white font-bold text-xs uppercase tracking-wider transition-all shadow-lg active:scale-95 flex items-center justify-center gap-2">
+                                <span>Start With Us</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- CARD 2: Standard Plan -->
+                    <div class="glass-card p-8 flex flex-col justify-between group futuristic-reveal reveal-delay-2 relative min-h-[460px] border-white/30">
+                        <!-- Top Diffuse Glow / Specular Sheen (Matches screenshot) -->
+                        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-4/5 h-24 bg-gradient-to-b from-white/[0.35] to-transparent rounded-full filter blur-xl pointer-events-none -z-0"></div>
+                        <div class="scan-beam-overlay"></div>
+
+                        <div class="relative z-10">
+                            <!-- Plan Name -->
+                            <div class="flex items-center justify-between mb-3">
+                                <h3 class="text-base font-semibold text-white tracking-wide">Standard Plan</h3>
+                                <span class="px-2 py-0.5 rounded-full bg-white/15 border border-white/30 text-[10px] font-mono text-white font-bold">POPULAR</span>
+                            </div>
+
+                            <!-- Price with metallic gradient -->
+                            <div class="text-4xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-neutral-400 font-sans tracking-tight mb-6">
+                                ₱1,499<span class="text-2xl font-medium text-neutral-400">/mo</span>
+                            </div>
+
+                            <!-- Thin Hairline Divider -->
+                            <div class="h-[1px] w-full bg-white/[0.1] my-6"></div>
+
+                            <!-- Feature List with Circular Checkmarks -->
+                            <ul class="space-y-4 text-xs sm:text-sm text-neutral-300">
+                                <li class="flex items-center gap-3">
+                                    <div class="w-5 h-5 rounded-full bg-white/10 border border-white/20 flex items-center justify-center shrink-0">
+                                        <i data-lucide="check" class="w-3 h-3 text-white"></i>
+                                    </div>
+                                    <span>Continuous Pipeline Monitoring</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <div class="w-5 h-5 rounded-full bg-white/10 border border-white/20 flex items-center justify-center shrink-0">
+                                        <i data-lucide="check" class="w-3 h-3 text-white"></i>
+                                    </div>
+                                    <span>Up to 2 Active Workflow Pipelines</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <div class="w-5 h-5 rounded-full bg-white/10 border border-white/20 flex items-center justify-center shrink-0">
+                                        <i data-lucide="check" class="w-3 h-3 text-white"></i>
+                                    </div>
+                                    <span>Automated Incident Alert System</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <div class="w-5 h-5 rounded-full bg-white/10 border border-white/20 flex items-center justify-center shrink-0">
+                                        <i data-lucide="check" class="w-3 h-3 text-white"></i>
+                                    </div>
+                                    <span>Weekly Database Health Checks</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Bottom Pill CTA Button (Matches screenshot) -->
+                        <div class="pt-8 relative z-10">
+                            <button type="button" onclick="selectPricingPlan('Standard Plan')" class="w-full py-3.5 px-6 rounded-full bg-white text-black hover:bg-neutral-200 border border-white text-black font-extrabold text-xs uppercase tracking-wider transition-all shadow-xl active:scale-95 flex items-center justify-center gap-2">
+                                <span>Start With Us</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- CARD 3: Exclusive Plan -->
+                    <div class="glass-card p-8 flex flex-col justify-between group futuristic-reveal reveal-delay-3 relative min-h-[460px]">
+                        <!-- Top Diffuse Glow / Specular Sheen (Matches screenshot) -->
+                        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-4/5 h-20 bg-gradient-to-b from-white/[0.25] to-transparent rounded-full filter blur-xl pointer-events-none -z-0"></div>
+                        <div class="scan-beam-overlay"></div>
+
+                        <div class="relative z-10">
+                            <!-- Plan Name -->
+                            <h3 class="text-base font-semibold text-neutral-200 mb-3 tracking-wide">Exclusive Plan</h3>
+
+                            <!-- Price with metallic gradient -->
+                            <div class="text-4xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-neutral-400 font-sans tracking-tight mb-6">
+                                ₱5,999<span class="text-2xl font-medium text-neutral-400">/mo</span>
+                            </div>
+
+                            <!-- Thin Hairline Divider -->
+                            <div class="h-[1px] w-full bg-white/[0.1] my-6"></div>
+
+                            <!-- Feature List with Circular Checkmarks -->
+                            <ul class="space-y-4 text-xs sm:text-sm text-neutral-300">
+                                <li class="flex items-center gap-3">
+                                    <div class="w-5 h-5 rounded-full bg-white/10 border border-white/20 flex items-center justify-center shrink-0">
+                                        <i data-lucide="check" class="w-3 h-3 text-white"></i>
+                                    </div>
+                                    <span>Unlimited Engineering Requests</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <div class="w-5 h-5 rounded-full bg-white/10 border border-white/20 flex items-center justify-center shrink-0">
+                                        <i data-lucide="check" class="w-3 h-3 text-white"></i>
+                                    </div>
+                                    <span>Full Web Systems & Mobile Apps</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <div class="w-5 h-5 rounded-full bg-white/10 border border-white/20 flex items-center justify-center shrink-0">
+                                        <i data-lucide="check" class="w-3 h-3 text-white"></i>
+                                    </div>
+                                    <span>High-Throughput Scraping & ETL</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <div class="w-5 h-5 rounded-full bg-white/10 border border-white/20 flex items-center justify-center shrink-0">
+                                        <i data-lucide="check" class="w-3 h-3 text-white"></i>
+                                    </div>
+                                    <span>Priority 24/7 Direct Comms (Slack)</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Bottom Pill CTA Button (Matches screenshot) -->
+                        <div class="pt-8 relative z-10">
+                            <button type="button" onclick="selectPricingPlan('Exclusive Plan')" class="w-full py-3.5 px-6 rounded-full bg-black/90 hover:bg-white hover:text-black border border-white/25 text-white font-bold text-xs uppercase tracking-wider transition-all shadow-lg active:scale-95 flex items-center justify-center gap-2">
+                                <span>Start With Us</span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ==================== CONTACT & CTA SECTION (Glass Morphism) ==================== -->
+        <section id="contact" class="py-20 relative border-t border-white/[0.08] bg-black">
+            <div class="max-w-4xl mx-auto px-6 text-center">
+                <div class="inline-block px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.12] text-[11px] font-mono uppercase tracking-wider text-neutral-300 mb-4">
+                    Ready to Speed Up Your Workflow?
+                </div>
+                <h2 class="font-dot text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-4 uppercase">
+                    Let's Build Something Fast & Reliable Together
+                </h2>
+                <p class="text-neutral-400 text-base sm:text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
+                    Have a manual process you want automated or an application idea you need built? Send me a message and I'll get back to you with a clear roadmap.
+                </p>
+
+                <!-- Direct Contact Card in Glass Morphism with Light Reflection -->
+                <div class="glass-card p-8 max-w-xl mx-auto text-left shadow-2xl relative">
+                    <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-4 relative z-10">
+                        <div>
+                            <label class="block text-xs font-semibold text-neutral-300 uppercase tracking-wider mb-2">Your Name</label>
+                            <input type="text" required placeholder="John Doe" class="w-full px-4 py-3 rounded-xl bg-black/70 border border-white/[0.15] text-white placeholder-neutral-500 focus:outline-none focus:border-white transition-colors text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-neutral-300 uppercase tracking-wider mb-2">Email Address</label>
+                            <input type="email" required placeholder="john@example.com" class="w-full px-4 py-3 rounded-xl bg-black/70 border border-white/[0.15] text-white placeholder-neutral-500 focus:outline-none focus:border-white transition-colors text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-neutral-300 uppercase tracking-wider mb-2">What do you want to build or automate?</label>
+                            <textarea rows="3" required placeholder="E.g., We need an internal dashboard and automated invoice sync between our orders and database..." class="w-full px-4 py-3 rounded-xl bg-black/70 border border-white/[0.15] text-white placeholder-neutral-500 focus:outline-none focus:border-white transition-colors text-sm"></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-3.5 rounded-xl bg-white text-black font-bold text-sm hover:bg-neutral-200 transition-all shadow-xl active:scale-[0.98] flex items-center justify-center gap-2">
+                            <span>Send Message</span>
+                            <i data-lucide="send" class="w-4 h-4"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- ==================== FOOTER (Centralized Black & White) ==================== -->
+    <footer class="border-t border-white/[0.08] bg-black pt-16 pb-12 relative z-10 text-neutral-400">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            
+            <!-- Top Footer Centered Brand & Newsletter -->
+            <div class="max-w-lg mx-auto space-y-4 mb-14 futuristic-reveal">
+                <!-- Brand with Dot Font -->
+                <div class="flex items-center justify-center gap-2.5">
+                    <div class="w-7 h-7 rounded-md bg-white/10 border border-white/20 p-[1px] flex items-center justify-center">
+                        <div class="w-full h-full bg-black rounded-[5px] flex items-center justify-center">
+                            <span class="font-dot font-black text-xs text-white">A</span>
+                        </div>
+                    </div>
+                    <span class="font-dot font-black text-lg text-white">AZAREL.</span>
+                </div>
+
+                <p class="text-sm text-neutral-400 leading-relaxed max-w-md mx-auto">
+                    Engineering high-impact websites, internal systems, mobile apps, and automations that eliminate busywork and accelerate velocity.
+                </p>
+
+                <!-- Newsletter / Quick Connect form (Centered) -->
+                <div class="pt-2">
+                    <div class="text-xs font-semibold text-neutral-300 mb-2.5">Stay Updated on Tech & Systems Insights</div>
+                    <form onsubmit="handleNewsletterSubmit(event)" class="flex items-center max-w-sm mx-auto shadow-lg">
+                        <input type="email" required placeholder="Enter Your Email" class="flex-1 px-4 py-2.5 rounded-l-full bg-white/[0.04] border border-white/[0.12] text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-white">
+                        <button type="submit" class="px-5 py-2.5 rounded-r-full bg-white text-black font-bold text-xs hover:bg-neutral-200 transition-colors">
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- 4 Link Columns (Centered Grid) -->
+            <div class="max-w-4xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-8 text-center sm:text-left pb-14 border-b border-white/[0.08] mb-8">
+                
+                <!-- Column 1: Services -->
+                <div>
+                    <h5 class="text-xs font-semibold text-white uppercase tracking-wider mb-4">Services</h5>
+                    <ul class="space-y-2.5 text-xs">
+                        <li><a href="#services" class="hover:text-white transition-colors">Custom Websites</a></li>
+                        <li><a href="#services" class="hover:text-white transition-colors">Internal Systems</a></li>
+                        <li><a href="#services" class="hover:text-white transition-colors">Workflow Automation</a></li>
+                        <li><a href="#services" class="hover:text-white transition-colors">Mobile Applications</a></li>
+                        <li><a href="#services" class="hover:text-white transition-colors">API & Webhooks</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 2: Solutions -->
+                <div>
+                    <h5 class="text-xs font-semibold text-white uppercase tracking-wider mb-4">Solutions</h5>
+                    <ul class="space-y-2.5 text-xs">
+                        <li><a href="#architect" class="hover:text-white transition-colors">Solution Architect</a></li>
+                        <li><a href="#impact" class="hover:text-white transition-colors">LGU-OS Platform</a></li>
+                        <li><a href="#impact" class="hover:text-white transition-colors">Citizen Registry</a></li>
+                        <li><a href="#impact" class="hover:text-white transition-colors">Queue Systems</a></li>
+                        <li><a href="#impact" class="hover:text-white transition-colors">Auto Invoicing</a></li>
+                        <li><a href="#impact" class="hover:text-white transition-colors">Data Extractors</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Technologies -->
+                <div>
+                    <h5 class="text-xs font-semibold text-white uppercase tracking-wider mb-4">Technologies</h5>
+                    <ul class="space-y-2.5 text-xs">
+                        <li><a href="#services" class="hover:text-white transition-colors">Next.js & React</a></li>
+                        <li><a href="#services" class="hover:text-white transition-colors">Python & FastAPI</a></li>
+                        <li><a href="#services" class="hover:text-white transition-colors">PostgreSQL & DBs</a></li>
+                        <li><a href="#services" class="hover:text-white transition-colors">Flutter & Mobile</a></li>
+                        <li><a href="#services" class="hover:text-white transition-colors">Docker & Cloud</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Connect -->
+                <div>
+                    <h5 class="text-xs font-semibold text-white uppercase tracking-wider mb-4">Connect</h5>
+                    <ul class="space-y-2.5 text-xs">
+                        <li><a href="#pricing" class="hover:text-white transition-colors">Pricing & Plans</a></li>
+                        <li><a href="#contact" class="hover:text-white transition-colors">Start Project</a></li>
+                        <li><a href="#faq" class="hover:text-white transition-colors">Project FAQs</a></li>
+                        <li><a href="https://github.com" target="_blank" rel="noopener" class="hover:text-white transition-colors">GitHub</a></li>
+                        <li><a href="https://linkedin.com" target="_blank" rel="noopener" class="hover:text-white transition-colors">LinkedIn</a></li>
+                        <li><a href="mailto:azarel@example.com" class="hover:text-white transition-colors">Email Me</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Bottom Footer Bar (Centered on Mobile & Desktop) -->
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+                <div>
+                    Copyright 2026 Azarel Clight J. Nadal. All Rights Reserved.
+                </div>
+
+                <!-- Social Icons in Monochrome -->
+                <div class="flex items-center gap-4 text-neutral-400">
+                    <a href="https://github.com" class="hover:text-white transition-colors" aria-label="GitHub">
+                        <i data-lucide="github" class="w-4 h-4"></i>
+                    </a>
+                    <a href="https://linkedin.com" class="hover:text-white transition-colors" aria-label="LinkedIn">
+                        <i data-lucide="linkedin" class="w-4 h-4"></i>
+                    </a>
+                    <a href="https://twitter.com" class="hover:text-white transition-colors" aria-label="Twitter">
+                        <i data-lucide="twitter" class="w-4 h-4"></i>
+                    </a>
+                    <a href="mailto:azarel@example.com" class="hover:text-white transition-colors" aria-label="Email">
+                        <i data-lucide="mail" class="w-4 h-4"></i>
+                    </a>
+                </div>
+
+                <!-- Terms / Privacy -->
+                <div class="flex items-center gap-4 text-neutral-500">
+                    <a href="#hero" class="hover:text-neutral-400 transition-colors">Back to top</a>
+                    <span>•</span>
+                    <a href="#" class="hover:text-neutral-400 transition-colors">Privacy Policy</a>
+                    <span>•</span>
+                    <a href="#" class="hover:text-neutral-400 transition-colors">Terms of Service</a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+
+    <!-- ==================== SCRIPTS & INTERACTIVE LOGIC ==================== -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // ==================== ANIMATED GARGANTUA BLACK HOLE CANVAS ====================
+        (function initBlackHoleCanvas() {
+            const canvas = document.getElementById('blackhole-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const heroSection = document.getElementById('hero');
+
+            let width = 0;
+            let height = 0;
+            let cx = 0;
+            let cy = 0;
+            let baseR = 0;
+            let mouseX = 0;
+            let mouseY = 0;
+            let currentMouseX = 0;
+            let currentMouseY = 0;
+
+            function resize() {
+                const rect = canvas.getBoundingClientRect();
+                const dpr = Math.min(window.devicePixelRatio || 1, 2);
+                width = rect.width;
+                height = rect.height;
+                canvas.width = width * dpr;
+                canvas.height = height * dpr;
+                ctx.scale(dpr, dpr);
+
+                cx = width * 0.5;
+                cy = height * 0.49;
+                baseR = Math.min(width, height) * 0.13;
+            }
+
+            window.addEventListener('resize', resize);
+            resize();
+
+            // Track mouse for subtle relativistic lensing shift
+            if (heroSection) {
+                heroSection.addEventListener('mousemove', (e) => {
+                    const rect = heroSection.getBoundingClientRect();
+                    mouseX = (e.clientX - rect.left - rect.width * 0.5) * 0.04;
+                    mouseY = (e.clientY - rect.top - rect.height * 0.5) * 0.04;
+                });
+                heroSection.addEventListener('mouseleave', () => {
+                    mouseX = 0;
+                    mouseY = 0;
+                });
+            }
+
+            // Create orbiting matter particles
+            const PARTICLE_COUNT = 180;
+            const particles = [];
+            for (let i = 0; i < PARTICLE_COUNT; i++) {
+                const rNorm = Math.pow(Math.random(), 0.8);
+                const r = baseR * 1.08 + rNorm * (baseR * 3.6);
+                particles.push({
+                    r: r,
+                    theta: Math.random() * Math.PI * 2,
+                    speed: (0.007 + (1 / Math.sqrt(r / baseR)) * 0.016),
+                    size: 0.8 + Math.random() * 1.8,
+                    baseAlpha: 0.25 + Math.random() * 0.7,
+                    wobble: (Math.random() - 0.5) * 4
+                });
+            }
+
+            // Infalling photon streaks
+            const streaks = [];
+            for (let i = 0; i < 14; i++) {
+                streaks.push({
+                    angle: Math.random() * Math.PI * 2,
+                    r: baseR * (2.2 + Math.random() * 2.5),
+                    speed: 0.8 + Math.random() * 1.5,
+                    length: 15 + Math.random() * 30,
+                    alpha: 0.15 + Math.random() * 0.4
+                });
+            }
+
+            let frame = 0;
+
+            function render() {
+                frame++;
+                ctx.clearRect(0, 0, width, height);
+
+                // Smooth mouse interpolation
+                currentMouseX += (mouseX - currentMouseX) * 0.06;
+                currentMouseY += (mouseY - currentMouseY) * 0.06;
+
+                const centerX = cx + currentMouseX;
+                const centerY = cy + currentMouseY;
+                const diskTilt = -0.11; // -6.3 degrees
+
+                ctx.save();
+                ctx.translate(centerX, centerY);
+                ctx.rotate(diskTilt);
+
+                // 1. Infalling Matter Streaks with Relativistic Scroll Velocity Boost
+                const scrollVel = window.currentScrollVelocity || 0;
+                const velBoost = Math.min(2.8, 1 + Math.abs(scrollVel) * 0.035);
+
+                ctx.lineWidth = 1;
+                for (let i = 0; i < streaks.length; i++) {
+                    const s = streaks[i];
+                    s.r -= s.speed * velBoost;
+                    s.angle += 0.02 * (baseR / s.r) * velBoost;
+                    if (s.r < baseR * 1.05) {
+                        s.r = baseR * (3 + Math.random() * 2);
+                        s.angle = Math.random() * Math.PI * 2;
+                    }
+                    const sx = Math.cos(s.angle) * s.r * 1.8;
+                    const sy = Math.sin(s.angle) * s.r * 0.35;
+                    const ex = Math.cos(s.angle + 0.04) * (s.r + s.length) * 1.8;
+                    const ey = Math.sin(s.angle + 0.04) * (s.r + s.length) * 0.35;
+
+                    ctx.strokeStyle = `rgba(255, 255, 255, ${s.alpha * 0.4})`;
+                    ctx.beginPath();
+                    ctx.moveTo(sx, sy);
+                    ctx.lineTo(ex, ey);
+                    ctx.stroke();
+                }
+
+                // 3. Render 3D Orbiting Matter Particles with Gravitational Lensing & Velocity Warp
+                for (let i = 0; i < particles.length; i++) {
+                    const p = particles[i];
+                    p.theta += p.speed * velBoost;
+
+                    const cosT = Math.cos(p.theta);
+                    const sinT = Math.sin(p.theta);
+
+                    let px = cosT * p.r * 1.85;
+                    let py = sinT * (p.r * 0.32) + p.wobble;
+                    let pAlpha = p.baseAlpha;
+                    let pSize = p.size;
+
+                    // Relativistic Beaming: Approaching (left side) is brighter & boosted
+                    if (px < 0) {
+                        pAlpha = Math.min(1, pAlpha * 1.45);
+                        pSize *= 1.15;
+                    } else {
+                        pAlpha *= 0.65;
+                    }
+
+                    // If particle is behind the black hole (sinT < 0), warp it upward over the gravitational lens!
+                    if (sinT < -0.15) {
+                        const warpFactor = Math.sqrt(Math.max(0, 1 - Math.pow(px / (p.r * 1.85), 2)));
+                        py = -warpFactor * (p.r * 0.95); // Bends over the top of the event horizon
+                        pAlpha *= 0.8;
+                    }
+
+                    // Render particle
+                    ctx.fillStyle = `rgba(255, 255, 255, ${pAlpha})`;
+                    ctx.beginPath();
+                    ctx.arc(px, py, pSize, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // Trailing filament on fast inner particles
+                    if (p.r < baseR * 1.6 && px < 0) {
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${pAlpha * 0.35})`;
+                        ctx.lineWidth = pSize * 0.7;
+                        ctx.beginPath();
+                        ctx.moveTo(px, py);
+                        ctx.lineTo(px + 12 * (p.speed * 40), py);
+                        ctx.stroke();
+                    }
+                }
+
+                // 4. Horizontal Accretion Disk Front Glowing Filament Streams
+                const streamTime = frame * 0.02;
+                ctx.lineWidth = 2;
+                for (let j = 0; j < 3; j++) {
+                    const yOffset = (j - 1) * 3;
+                    const streamAlpha = (Math.sin(streamTime + j) * 0.15 + 0.35);
+                    ctx.strokeStyle = `rgba(255, 255, 255, ${streamAlpha})`;
+                    ctx.beginPath();
+                    ctx.moveTo(-baseR * 3.8, yOffset);
+                    ctx.quadraticCurveTo(0, yOffset + Math.sin(streamTime * 2 + j) * 4, baseR * 3.8, yOffset);
+                    ctx.stroke();
+                }
+
+                ctx.restore();
+
+                requestAnimationFrame(render);
+            }
+
+            render();
+        })();
+
+        // Mobile Menu Toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+        if (mobileBtn && mobileMenu) {
+            mobileBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        }
+
+        // Toast Helper
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+            if (!toast || !toastMsg) return;
+
+            toastMsg.textContent = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3200);
+        }
+
+        // Simulated Pipeline Execution
+        let baseCount = 6240;
+        function runPipelineSimulation() {
+            const btn = document.getElementById('simulate-btn');
+            const btnText = document.getElementById('simulate-text');
+            const countEl = document.getElementById('pipeline-count');
+
+            if (!btn || !btnText) return;
+
+            btnText.textContent = 'Processing Pipeline...';
+            btn.classList.add('opacity-80', 'pointer-events-none');
+
+            setTimeout(() => {
+                baseCount += Math.floor(Math.random() * 15) + 5;
+                if (countEl) countEl.textContent = baseCount.toLocaleString() + ' events';
+                
+                btnText.textContent = 'Simulate Pipeline Run';
+                btn.classList.remove('opacity-80', 'pointer-events-none');
+                
+                showToast('Pipeline Synced: 100% events delivered in 0.38s');
+            }, 800);
+        }
+
+        // Timeframe Switcher
+        const chartPaths = {
+            '1d': {
+                line: 'M0,100 Q60,30 130,70 T260,40 T380,80 T500,20',
+                area: 'M0,100 Q60,30 130,70 T260,40 T380,80 T500,20 L500,120 L0,120 Z'
+            },
+            '7d': {
+                line: 'M0,80 Q70,95 150,45 T280,60 T390,30 T500,15',
+                area: 'M0,80 Q70,95 150,45 T280,60 T390,30 T500,15 L500,120 L0,120 Z'
+            },
+            '30d': {
+                line: 'M0,110 Q90,50 180,65 T310,25 T420,50 T500,10',
+                area: 'M0,110 Q90,50 180,65 T310,25 T420,50 T500,10 L500,120 L0,120 Z'
+            }
+        };
+
+        function switchTimeframe(tf) {
+            ['1d', '7d', '30d'].forEach(id => {
+                const btn = document.getElementById(`btn-tf-${id}`);
+                if (btn) {
+                    if (id === tf) {
+                        btn.className = 'px-2.5 py-1 rounded-md bg-white text-black font-bold transition-colors';
+                    } else {
+                        btn.className = 'px-2.5 py-1 rounded-md text-neutral-400 hover:text-white transition-colors';
+                    }
+                }
+            });
+
+            const line = document.getElementById('chart-line');
+            const area = document.getElementById('chart-area');
+            if (line && area && chartPaths[tf]) {
+                line.setAttribute('d', chartPaths[tf].line);
+                area.setAttribute('d', chartPaths[tf].area);
+            }
+        }
+
+        // FAQ Carousel Navigation
+        let currentFaqIndex = 0;
+        function navigateFaq(dir) {
+            const container = document.getElementById('faq-container');
+            if (!container) return;
+            const items = container.children;
+            currentFaqIndex = (currentFaqIndex + dir + items.length) % items.length;
+            
+            // Subtle flash highlight on current item
+            Array.from(items).forEach((item, idx) => {
+                if (idx === currentFaqIndex) {
+                    item.classList.add('border-white/50', 'bg-white/[0.08]');
+                    item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                } else {
+                    item.classList.remove('border-white/50', 'bg-white/[0.08]');
+                }
+            });
+        }
+
+        // ==================== WORKFLOW ARCHITECT CONSOLE LOGIC ====================
+        let currentDays = 7;
+        let selectedPurpose = 'Custom Web Platform';
+
+        const PRESET_DATA = {
+            'admin-portal': {
+                purpose: 'Custom Web Platform',
+                days: 10,
+                prompt: 'Build a multi-role administrative dashboard with real-time audit logs, resident profile management, role-based permissions, and automated document generation.',
+                stack: 'Next.js 14 + Tailwind + Supabase PostgreSQL + Docker',
+                flow: 'Auth Login ➔ Role Gate ➔ Data Table ➔ PDF Exporter',
+                impact: 'Saves ~24 manual hours / week',
+                summary: 'Complete central management portal with sub-second page loads, automated data validation, and automated PDF export.'
+            },
+            'web-scraping': {
+                purpose: 'Workflow Automation Pipeline',
+                days: 5,
+                prompt: 'Develop an automated web scraping & ETL pipeline that extracts market pricing daily, validates schema integrity, and syncs updates to PostgreSQL and Google Sheets.',
+                stack: 'Python + Playwright + FastAPI + PostgreSQL + Redis',
+                flow: 'Cron Trigger ➔ Headless Scraper ➔ Data Parser ➔ DB Commit',
+                impact: 'Saves ~15 manual hours / week',
+                summary: 'Zero-touch extraction bot running on background server with automated error alerts to Telegram and Discord.'
+            },
+            'auto-invoicing': {
+                purpose: 'Internal Business System',
+                days: 6,
+                prompt: 'Connect our order checkout webhook to auto-generate official receipt numbers, balance customer ledgers, and dispatch branded invoices via email.',
+                stack: 'Node.js / Express + PostgreSQL + SendGrid + Stripe Webhooks',
+                flow: 'Stripe Webhook ➔ Ledger Commit ➔ PDF Generator ➔ Email Dispatch',
+                impact: 'Saves ~18 manual hours / week',
+                summary: 'Fault-tolerant financial pipeline with retry queues, duplicate event prevention, and automated reconciliation.'
+            },
+            'mobile-app': {
+                purpose: 'Cross-Platform Mobile App',
+                days: 14,
+                prompt: 'Cross-platform mobile application for residents to file municipal requests, monitor real-time queue status, and receive push notifications for clearances.',
+                stack: 'Flutter / React Native + Firebase Auth + FastAPI + PostgreSQL',
+                flow: 'Mobile Submission ➔ Push Notification ➔ Admin Approval ➔ Status Update',
+                impact: 'Eliminates 100% of physical paper forms',
+                summary: 'Offline-first mobile application with instant push alerts, biometric login, and camera document scanning.'
+            }
+        };
+
+        function togglePurposeDropdown() {
+            const menu = document.getElementById('purpose-menu');
+            if (menu) menu.classList.toggle('hidden');
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            const btn = document.getElementById('purpose-btn');
+            const menu = document.getElementById('purpose-menu');
+            if (btn && menu && !btn.contains(e.target) && !menu.contains(e.target)) {
+                menu.classList.add('hidden');
+            }
+        });
+
+        function selectPurpose(purpose) {
+            selectedPurpose = purpose;
+            const label = document.getElementById('purpose-label');
+            if (label) label.textContent = 'Purpose: ' + purpose;
+            const menu = document.getElementById('purpose-menu');
+            if (menu) menu.classList.add('hidden');
+        }
+
+        function adjustDays(delta) {
+            currentDays = Math.max(2, Math.min(30, currentDays + delta));
+            const counter = document.getElementById('days-counter');
+            if (counter) counter.textContent = currentDays;
+        }
+
+        function applyPreset(key) {
+            const data = PRESET_DATA[key];
+            if (!data) return;
+
+            selectPurpose(data.purpose);
+            currentDays = data.days;
+            const counter = document.getElementById('days-counter');
+            if (counter) counter.textContent = currentDays;
+
+            const input = document.getElementById('architect-input');
+            if (input) input.value = data.prompt;
+
+            renderBlueprint(data);
+        }
+
+        function generateArchitectureBlueprint() {
+            const input = document.getElementById('architect-input');
+            const userPrompt = input ? input.value.trim() : '';
+
+            let data = {
+                purpose: selectedPurpose,
+                days: currentDays,
+                stack: 'Next.js 14 + Python FastAPI + PostgreSQL + Docker',
+                flow: 'Client Ingestion ➔ Background Worker ➔ Database Sync ➔ Automated Alert',
+                impact: 'Saves ~20 manual hours / week',
+                summary: userPrompt || 'Custom digital system engineered to remove operational bottlenecks and accelerate business velocity.'
+            };
+
+            renderBlueprint(data);
+        }
+
+        function renderBlueprint(data) {
+            const resultPanel = document.getElementById('blueprint-result');
+            const bpTime = document.getElementById('bp-time');
+            const bpStack = document.getElementById('bp-stack');
+            const bpFlow = document.getElementById('bp-flow');
+            const bpImpact = document.getElementById('bp-impact');
+            const bpSummary = document.getElementById('bp-summary');
+
+            if (!resultPanel) return;
+
+            if (bpTime) bpTime.textContent = `Estimated Delivery: ${data.days || currentDays} Business Days`;
+            if (bpStack) bpStack.textContent = data.stack || 'Next.js + FastAPI + PostgreSQL';
+            if (bpFlow) bpFlow.textContent = data.flow || 'Webhook ➔ Worker ➔ Sync Alert';
+            if (bpImpact) bpImpact.textContent = data.impact || 'Saves ~18 hrs/week';
+            if (bpSummary) bpSummary.textContent = data.summary || (data.prompt ? data.prompt : 'Custom system engineered for speed and stability.');
+
+            resultPanel.classList.remove('hidden');
+            resultPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            showToast('Architecture Blueprint Generated!');
+        }
+
+        function attachDemoSpecs() {
+            showToast('Specs Attached: System Architecture Baseline loaded');
+        }
+
+        function transferPromptToContact() {
+            const input = document.getElementById('architect-input');
+            const contactTextarea = document.querySelector('#contact-form textarea');
+            if (input && contactTextarea) {
+                contactTextarea.value = `[Architecture Request - ${selectedPurpose}]\n${input.value.trim() || 'Custom software / automation system'}`;
+            }
+        }
+
+        // Contact Form Submission Handler
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            showToast('Message sent! Azarel will get back to you shortly.');
+            e.target.reset();
+        }
+
+        // Newsletter Form Submission Handler
+        function handleNewsletterSubmit(e) {
+            e.preventDefault();
+            showToast('Subscribed! Thank you for connecting.');
+            e.target.reset();
+        }
+
+        // ==================== PRICING PLAN SELECTOR ====================
+        function selectPricingPlan(planName) {
+            const contactSection = document.getElementById('contact');
+            const contactTextarea = document.querySelector('#contact-form textarea');
+            if (contactTextarea) {
+                contactTextarea.value = `[Engagement Plan: ${planName}]\nHello Azarel, I'd like to get started with the ${planName} for our business systems / automation project.`;
+            }
+            if (contactSection) {
+                contactSection.scrollIntoView({ behavior: 'smooth' });
+            }
+            showToast(`Selected ${planName}. Ready to scope with Azarel!`);
+        }
+
+        // ==================== NAVIGATION SECTOR GLIDE ====================
+        function navigateToSector(targetId) {
+            const el = document.querySelector(targetId);
+            if (el) {
+                const navHeight = 70;
+                const elementPosition = el.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - navHeight;
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // ==================== FUTURISTIC SCROLL TELEMETRY & HUD SYSTEM ====================
+        (function initScrollTelemetry() {
+            const altitudeVal = document.getElementById('hud-altitude-val');
+            const vecyVal = document.getElementById('hud-vecy-val');
+            const warpStatus = document.getElementById('hud-warp-status');
+            const stateLabel = document.getElementById('hud-state-label');
+            const waypoints = document.querySelectorAll('.hud-node');
+            const telemetryTags = document.querySelectorAll('.telemetry-tag');
+            
+            let lastScrollY = window.scrollY;
+            let lastTime = performance.now();
+            let scrollVelocity = 0;
+            window.currentScrollVelocity = 0;
+
+            const sections = [
+                '#hero',
+                '#services',
+                '#architect',
+                '#console',
+                '#impact',
+                '#faq',
+                '#pricing',
+                '#contact'
+            ].map(id => ({ id, el: document.querySelector(id) })).filter(item => item.el !== null);
+
+            function updateScroll() {
+                const currentScrollY = window.scrollY;
+                const currentTime = performance.now();
+                const dt = Math.max(1, currentTime - lastTime);
+                
+                // Compute instantaneous scroll velocity
+                const rawVelocity = Math.abs(currentScrollY - lastScrollY) / (dt / 16.6);
+                scrollVelocity = scrollVelocity * 0.75 + rawVelocity * 0.25;
+                window.currentScrollVelocity = scrollVelocity;
+
+                const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollPercent = totalHeight > 0 ? Math.min(100, Math.max(0, (currentScrollY / totalHeight) * 100)) : 0;
+
+                // Update HUD telemetry values
+                if (altitudeVal) altitudeVal.textContent = scrollPercent.toFixed(1).padStart(4, '0') + '%';
+                if (vecyVal) vecyVal.textContent = Math.round(currentScrollY).toString().padStart(4, '0') + 'PX';
+
+                // Warp status reaction on rapid scrolling
+                if (scrollVelocity > 22) {
+                    if (warpStatus) warpStatus.className = 'w-2 h-2 rounded-full bg-white animate-ping shadow-[0_0_14px_#ffffff]';
+                    if (stateLabel) {
+                        stateLabel.textContent = 'WARP ⚡';
+                        stateLabel.className = 'text-[9px] uppercase px-1.5 py-0.5 rounded bg-white text-black font-extrabold';
+                    }
+                } else {
+                    if (warpStatus) warpStatus.className = 'w-2 h-2 rounded-full bg-white animate-pulse shadow-[0_0_8px_#ffffff]';
+                    if (stateLabel) {
+                        stateLabel.textContent = 'NOMINAL';
+                        stateLabel.className = 'text-[9px] uppercase px-1.5 py-0.5 rounded bg-white/10 text-white font-bold';
+                    }
+                }
+
+                // Update floating parallax telemetry markers
+                telemetryTags.forEach(tag => {
+                    const depth = parseFloat(tag.dataset.depth || '0.1');
+                    tag.style.transform = `translateY(${-(currentScrollY * depth)}px)`;
+                });
+
+                // Active sector waypoint calculation
+                const viewportMiddle = currentScrollY + window.innerHeight * 0.4;
+                let activeSectionId = sections[0]?.id || '#hero';
+
+                for (let i = 0; i < sections.length; i++) {
+                    const sec = sections[i];
+                    const top = sec.el.offsetTop;
+                    const height = sec.el.offsetHeight;
+                    if (viewportMiddle >= top && viewportMiddle < top + height) {
+                        activeSectionId = sec.id;
+                        break;
+                    }
+                }
+
+                waypoints.forEach(wp => {
+                    if (wp.getAttribute('data-target') === activeSectionId) {
+                        wp.classList.add('active');
+                    } else {
+                        wp.classList.remove('active');
+                    }
+                });
+
+                lastScrollY = currentScrollY;
+                lastTime = currentTime;
+
+                requestAnimationFrame(updateScroll);
+            }
+
+            requestAnimationFrame(updateScroll);
+        })();
+
+        // ==================== CYBERNETIC TEXT DECODER / SCRAMBLER ====================
+        (function initTextDecoder() {
+            const scrambleElements = document.querySelectorAll('[data-scramble="true"]');
+            const chars = '01ABCDEFGHIJKLMNOPQRSTUVWXYZ_#@!$%&<>/';
+
+            function scramble(element) {
+                if (element.dataset.scrambled === 'true') return;
+                element.dataset.scrambled = 'true';
+
+                const originalText = element.dataset.originalText || element.innerText.trim();
+                element.dataset.originalText = originalText;
+
+                let iteration = 0;
+                const totalIterations = 14;
+                const interval = setInterval(() => {
+                    element.innerText = originalText.split('').map((char, index) => {
+                        if (char === ' ' || char === '\n') return char;
+                        if (index < (iteration / totalIterations) * originalText.length) {
+                            return originalText[index];
+                        }
+                        return chars[Math.floor(Math.random() * chars.length)];
+                    }).join('');
+
+                    iteration++;
+                    if (iteration > totalIterations) {
+                        clearInterval(interval);
+                        element.innerText = originalText;
+                    }
+                }, 24);
+            }
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        scramble(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            scrambleElements.forEach(el => observer.observe(el));
+        })();
+
+        // ==================== 3D HOLOGRAPHIC SPATIAL REVEALS ====================
+        (function initHolographicObserver() {
+            const revealElements = document.querySelectorAll('.futuristic-reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                    }
+                });
+            }, {
+                threshold: 0.08,
+                rootMargin: '0px 0px -30px 0px'
+            });
+
+            revealElements.forEach(el => observer.observe(el));
+        })();
+
+        // ==================== PURE BLACK & WHITE HIGH-INTENSITY SECTION ENTRANCE GLITCH ====================
+        (function initCardScrollGlitch() {
+            // Select all primary interactive cards across every section
+            const allCards = Array.from(document.querySelectorAll('.glass-card, .glass-subcard')).filter(el => {
+                // If it's a subcard nested inside an already-glitching glass-card, let the parent glitch it
+                if (el.classList.contains('glass-subcard') && el.closest('.glass-card')) {
+                    return false;
+                }
+                return true;
+            });
+
+            if (!allCards.length) return;
+
+            let variantToggle = false;
+
+            function triggerCardGlitch(card) {
+                if (!card) return;
+
+                const addClass = variantToggle ? 'bw-glitch-a' : 'bw-glitch-b';
+                const removeClass = variantToggle ? 'bw-glitch-b' : 'bw-glitch-a';
+                variantToggle = !variantToggle;
+
+                card.classList.remove(removeClass);
+                card.classList.remove(addClass);
+                void card.offsetWidth; // Force instant animation restart
+                card.classList.add(addClass);
+
+                clearTimeout(card._glitchTimeout);
+                card._glitchTimeout = setTimeout(() => {
+                    card.classList.remove('bw-glitch-a', 'bw-glitch-b');
+                }, 350);
+            }
+
+            // Trigger glitch ONLY when entering viewport (scrolling to section)
+            const cardObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    const card = entry.target;
+                    if (entry.isIntersecting) {
+                        // Glitch only on entrance
+                        if (!card._hasGlitchEntered) {
+                            card._hasGlitchEntered = true;
+                            // Subtle stagger for cards entering within the same section
+                            const siblings = Array.from(card.parentElement ? card.parentElement.children : []);
+                            const siblingIndex = siblings.indexOf(card);
+                            const delay = Math.max(0, siblingIndex) * 45;
+
+                            setTimeout(() => {
+                                triggerCardGlitch(card);
+                            }, Math.min(delay, 200));
+                        }
+                    } else {
+                        // Reset when scrolled out of view so it can glitch on next re-entrance
+                        card._hasGlitchEntered = false;
+                        card.classList.remove('bw-glitch-a', 'bw-glitch-b');
+                    }
+                });
+            }, {
+                threshold: 0.12,
+                rootMargin: '0px 0px -40px 0px'
+            });
+
+            allCards.forEach(card => {
+                cardObserver.observe(card);
+
+                // Interactive mouse hover micro-burst
+                card.addEventListener('mouseenter', () => {
+                    triggerCardGlitch(card);
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

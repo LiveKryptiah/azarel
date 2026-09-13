@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engineering Resources & Vault — Azarel</title>
+    <!-- Google Fonts: Doto (Dot Matrix), Plus Jakarta Sans, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Doto:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            base: '#000000',
+                            surface: '#09090b',
+                            card: '#0e0e11',
+                            border: 'rgba(255, 255, 255, 0.1)',
+                            borderHover: 'rgba(255, 255, 255, 0.25)'
+                        }
+                    },
+                    fontFamily: {
+                        dot: ['"Doto"', '"DotGothic16"', 'monospace'],
+                        sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Dot Font Utility */
+        .font-dot {
+            font-family: 'Doto', 'DotGothic16', monospace;
+            font-feature-settings: "ss01" on, "ss02" on;
+        }
+
+        /* Subtle Background Monochrome Grid */
+        .bg-grid-pattern {
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* Radial Vignette Mask */
+        .mask-radial {
+            mask-image: radial-gradient(ellipse 80% 60% at 50% 15%, black 35%, transparent 100%);
+            -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 15%, black 35%, transparent 100%);
+        }
+
+        /* Monochrome Ambient Glow */
+        .hero-glow {
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 750px;
+            height: 480px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 45%, rgba(0, 0, 0, 0) 75%);
+            filter: blur(80px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Glassmorphism with Top-Left Light Reflection */
+        .glass-card {
+            position: relative;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%), rgba(12, 12, 14, 0.85);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            border-top: 1px solid rgba(255, 255, 255, 0.35);
+            border-left: 1px solid rgba(255, 255, 255, 0.22);
+            box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.9), 
+                        inset 1px 1px 0px rgba(255, 255, 255, 0.25);
+            border-radius: 1.25rem;
+            overflow: hidden;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Top-Left Light Sheen Reflection */
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 240px;
+            height: 240px;
+            background: radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.05) 45%, transparent 75%);
+            pointer-events: none;
+            border-radius: inherit;
+            z-index: 2;
+            transition: opacity 0.35s ease;
+        }
+
+        .glass-card:hover {
+            border-top-color: rgba(255, 255, 255, 0.6);
+            border-left-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 24px 60px -10px rgba(0, 0, 0, 0.95), 
+                        0 0 40px -10px rgba(255, 255, 255, 0.15),
+                        inset 1px 1px 0px rgba(255, 255, 255, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .glass-card:hover::before {
+            background: radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.32) 0%, rgba(255, 255, 255, 0.08) 50%, transparent 80%);
+        }
+
+        /* Subcard Glass Styling */
+        .glass-subcard {
+            position: relative;
+            background: rgba(18, 18, 22, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-top: 1px solid rgba(255, 255, 255, 0.25);
+            border-left: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.18);
+            overflow: hidden;
+            border-radius: 0.85rem;
+        }
+
+        /* Telemetry Code Box */
+        .telemetry-code {
+            background: rgba(0, 0, 0, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.8);
+        }
+
+        /* 3D Spatial Holographic Reveal Animation */
+        .futuristic-reveal {
+            opacity: 0;
+            transform: perspective(1200px) translateY(32px) scale(0.98);
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform, opacity;
+        }
+        .futuristic-reveal.revealed {
+            opacity: 1;
+            transform: perspective(1200px) translateY(0) scale(1);
+        }
+
+        /* Filter Button Active State */
+        .filter-btn.active {
+            background-color: #ffffff;
+            color: #000000;
+            font-weight: 700;
+            border-color: #ffffff;
+            box-shadow: 0 0 16px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Custom Scrollbars */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Toast Notification */
+        #toast {
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* ==================== PURE BLACK & WHITE CYBER CARD GLITCH ==================== */
+        @keyframes bw-card-tear-a {
+            0% { transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1); filter: brightness(1) contrast(1); }
+            15% { transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(-14px, 1.5px, 0) skewX(-3deg); filter: brightness(2) contrast(2.6); }
+            35% { transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(16px, -2px, 0) skewX(3.5deg); filter: brightness(0.5) contrast(2.2); }
+            55% { transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(-11px, 2px, 0) skewX(-2deg); filter: brightness(2.2) contrast(2.8); }
+            75% { transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(8px, -1px, 0) skewX(1.5deg); filter: brightness(0.8) contrast(1.6); }
+            100% { transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1); filter: brightness(1) contrast(1); }
+        }
+
+        @keyframes bw-card-tear-b {
+            0% { transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1); filter: brightness(1) contrast(1); }
+            15% { transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(15px, -2px, 0) skewX(3.2deg); filter: brightness(0.4) contrast(2.4); }
+            35% { transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(-16px, 1.5px, 0) skewX(-3.5deg); filter: brightness(2.4) contrast(3); }
+            55% { transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(10px, 2px, 0) skewX(2deg); filter: brightness(0.7) contrast(1.8); }
+            75% { transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(-7px, -1px, 0) skewX(-1.5deg); filter: brightness(1.7) contrast(1.5); }
+            100% { transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1); filter: brightness(1) contrast(1); }
+        }
+
+        @keyframes bw-inner-desync {
+            0% { transform: translate3d(0, 0, 0); }
+            20% { transform: translate3d(9px, -1px, 0); }
+            40% { transform: translate3d(-10px, 1.5px, 0); }
+            60% { transform: translate3d(6px, -1px, 0); }
+            80% { transform: translate3d(-4px, 1px, 0); }
+            100% { transform: translate3d(0, 0, 0); }
+        }
+
+        .bw-glitch-a, .bw-glitch-b {
+            position: relative !important;
+            border-color: #ffffff !important;
+            box-shadow: -10px 0 0 rgba(255, 255, 255, 0.85), 10px 0 0 rgba(255, 255, 255, 0.85), 0 0 35px rgba(255, 255, 255, 0.5) !important;
+            z-index: 35 !important;
+        }
+
+        .bw-glitch-a { animation: bw-card-tear-a 0.34s steps(3) both !important; }
+        .bw-glitch-b { animation: bw-card-tear-b 0.34s steps(3) both !important; }
+        .bw-glitch-a > *, .bw-glitch-b > * { animation: bw-inner-desync 0.34s steps(2) both !important; }
+    </style>
+</head>
+<body class="relative min-h-screen text-white antialiased selection:bg-white selection:text-black">
+
+    <!-- Global Background Elements -->
+    <div class="fixed inset-0 bg-grid-pattern mask-radial pointer-events-none z-0"></div>
+    <div class="hero-glow"></div>
+
+    <!-- Background Telemetry Layer -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden select-none">
+        <div class="absolute top-28 left-8 hidden lg:block text-[10px] font-mono text-white/20">
+            + [VAULT_STATUS: ONLINE] // 0x00FF
+        </div>
+        <div class="absolute top-1/3 right-12 hidden xl:block text-[10px] font-mono text-white/20">
+            [RESOURCES_REPOSITORIES] ➔ 8 ARTIFACTS
+        </div>
+        <div class="absolute top-2/3 left-10 hidden xl:block text-[10px] font-mono text-white/20">
+            + [LICENSE_SPEC: OPEN_MIT] // VERIFIED
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 pointer-events-none flex items-center gap-3 px-5 py-3.5 rounded-full bg-white text-black font-semibold text-sm shadow-2xl shadow-white/20">
+        <i data-lucide="check-circle-2" class="w-4 h-4 text-black"></i>
+        <span id="toast-message">Command copied to clipboard</span>
+    </div>
+
+    <!-- ==================== HEADER / NAVBAR ==================== -->
+    <header class="sticky top-0 z-40 w-full border-b border-white/[0.08] bg-black/85 backdrop-blur-xl">
+        <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+            <!-- Brand Logo with Dot Font -->
+            <a href="index.html" class="flex items-center gap-3 group">
+                <div class="w-8 h-8 rounded-lg bg-white/10 border border-white/20 p-[1px] flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
+                    <div class="w-full h-full bg-black rounded-[7px] flex items-center justify-center">
+                        <span class="font-dot font-black text-sm text-white tracking-widest">A</span>
+                    </div>
+                </div>
+                <span class="font-dot font-black text-xl tracking-wider text-white group-hover:text-neutral-300 transition-colors">
+                    AZAREL<span class="text-white">.</span>
+                </span>
+            </a>
+
+            <!-- Desktop Navigation: Cyber Glass Segmented Dock -->
+            <nav class="hidden lg:flex items-center gap-1 p-1 rounded-full bg-white/[0.04] border border-white/[0.1] backdrop-blur-xl shadow-[inset_0_1px_1px_rgba(255,255,255,0.12)]">
+                <a href="services.html" class="px-4 py-1.5 rounded-full text-xs font-medium text-neutral-400 hover:text-white hover:bg-white/[0.08] transition-all">
+                    Services
+                </a>
+                <a href="projects.html" class="px-4 py-1.5 rounded-full text-xs font-medium text-neutral-400 hover:text-white hover:bg-white/[0.08] transition-all">
+                    Projects
+                </a>
+                <a href="experiences.html" class="px-4 py-1.5 rounded-full text-xs font-medium text-neutral-400 hover:text-white hover:bg-white/[0.08] transition-all">
+                    Experiences
+                </a>
+                <a href="resources.html" class="px-4 py-1.5 rounded-full text-xs font-semibold text-white bg-white/[0.12] border border-white/20 shadow-[0_0_12px_rgba(255,255,255,0.1)] transition-all">
+                    Resources
+                </a>
+                <a href="recommendations.html" class="px-4 py-1.5 rounded-full text-xs font-medium text-neutral-400 hover:text-white hover:bg-white/[0.08] transition-all">
+                    Recommendations
+                </a>
+                <a href="pricing.html" class="px-4 py-1.5 rounded-full text-xs font-medium text-neutral-400 hover:text-white hover:bg-white/[0.08] transition-all">
+                    Pricing
+                </a>
+            </nav>
+
+            <!-- Right CTA Button: Start a Project -->
+            <div class="hidden sm:flex items-center gap-4">
+                <a href="contact.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-black text-xs xl:text-sm font-bold hover:bg-neutral-200 transition-all shadow-md active:scale-95">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                    <span>Start a Project</span>
+                </a>
+            </div>
+
+            <!-- Mobile Hamburger Toggle -->
+            <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg text-neutral-400 hover:text-white hover:bg-white/[0.08] transition-colors" aria-label="Toggle navigation">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobile-menu" class="hidden lg:hidden border-t border-white/[0.08] bg-black px-6 py-5 space-y-1.5">
+            <a href="services.html" class="mobile-nav-link block text-sm font-medium text-neutral-300 hover:text-white px-4 py-2.5 rounded-xl hover:bg-white/[0.05] transition-all">Services</a>
+            <a href="projects.html" class="mobile-nav-link block text-sm font-medium text-neutral-300 hover:text-white px-4 py-2.5 rounded-xl hover:bg-white/[0.05] transition-all">Projects</a>
+            <a href="experiences.html" class="mobile-nav-link block text-sm font-medium text-neutral-300 hover:text-white px-4 py-2.5 rounded-xl hover:bg-white/[0.05] transition-all">Experiences</a>
+            <a href="resources.html" class="mobile-nav-link block text-sm font-semibold text-white px-4 py-2.5 rounded-xl bg-white/[0.08] border border-white/[0.15]">Resources</a>
+            <a href="recommendations.html" class="mobile-nav-link block text-sm font-medium text-neutral-300 hover:text-white px-4 py-2.5 rounded-xl hover:bg-white/[0.05] transition-all">Recommendations</a>
+            <a href="pricing.html" class="mobile-nav-link block text-sm font-medium text-neutral-300 hover:text-white px-4 py-2.5 rounded-xl hover:bg-white/[0.05] transition-all">Pricing</a>
+            <div class="pt-3 border-t border-white/[0.08]">
+                <a href="contact.html" class="mobile-nav-link flex items-center justify-center gap-2 w-full px-5 py-3 rounded-full bg-white text-black text-sm font-bold hover:bg-neutral-200">
+                    <i data-lucide="sparkles" class="w-4 h-4"></i>
+                    <span>Start a Project</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative z-10">
+
+        <!-- ==================== CENTRALIZED DIRECTORY HEADER (NO REDUNDANT EYEBROW) ==================== -->
+        <section class="pt-8 pb-6 border-b border-white/[0.08] bg-black/40">
+            <div class="max-w-4xl mx-auto px-6 text-center">
+                <!-- Title in Dot Font (Original Large Scale) -->
+                <h1 data-scramble="true" class="font-dot text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white uppercase mb-3">
+                    Engineering Resources & Vault
+                </h1>
+                <!-- Concise Subtitle -->
+                <p class="text-xs sm:text-sm text-neutral-400 max-w-xl mx-auto font-mono">
+                    Production blueprints, CLI developer tools, system starter kits & architecture specs.
+                </p>
+            </div>
+        </section>
+
+        <!-- ==================== COMPACT STICKY FILTER & INSTANT SEARCH BAR ==================== -->
+        <section class="py-3 border-b border-white/[0.08] bg-black/85 sticky top-20 z-30 backdrop-blur-md">
+            <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-3">
+                
+                <!-- Category Filter Pills -->
+                <div class="flex items-center gap-2 flex-wrap justify-center md:justify-start">
+                    <button class="filter-btn active px-3.5 py-1 rounded-full text-xs font-mono border border-white/20 transition-all shrink-0 flex items-center gap-1.5" data-filter="all">
+                        <span>All Resources</span>
+                        <span id="resource-count-badge" class="text-[10px] bg-white/20 text-black px-1.5 py-0.2 rounded-full font-bold">8</span>
+                    </button>
+                    <button class="filter-btn px-3 py-1 rounded-full text-xs font-mono border border-white/10 text-neutral-400 hover:text-white hover:border-white/30 transition-all shrink-0 flex items-center gap-1.5" data-filter="architecture">
+                        <i data-lucide="layers" class="w-3 h-3"></i>
+                        <span>Architecture Specs</span>
+                    </button>
+                    <button class="filter-btn px-3 py-1 rounded-full text-xs font-mono border border-white/10 text-neutral-400 hover:text-white hover:border-white/30 transition-all shrink-0 flex items-center gap-1.5" data-filter="cli">
+                        <i data-lucide="terminal" class="w-3 h-3"></i>
+                        <span>CLI & Scripts</span>
+                    </button>
+                    <button class="filter-btn px-3 py-1 rounded-full text-xs font-mono border border-white/10 text-neutral-400 hover:text-white hover:border-white/30 transition-all shrink-0 flex items-center gap-1.5" data-filter="starter">
+                        <i data-lucide="box" class="w-3 h-3"></i>
+                        <span>Production Starters</span>
+                    </button>
+                    <button class="filter-btn px-3 py-1 rounded-full text-xs font-mono border border-white/10 text-neutral-400 hover:text-white hover:border-white/30 transition-all shrink-0 flex items-center gap-1.5" data-filter="database">
+                        <i data-lucide="database" class="w-3 h-3"></i>
+                        <span>Database & ETL</span>
+                    </button>
+                </div>
+
+                <!-- Instant Search Input -->
+                <div class="relative w-full md:w-64 shrink-0">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-neutral-400">
+                        <i data-lucide="search" class="w-3.5 h-3.5"></i>
+                    </div>
+                    <input type="text" id="resource-search" 
+                           placeholder="Search blueprints, tools..." 
+                           class="w-full pl-9 pr-4 py-1.5 rounded-full bg-white/[0.04] border border-white/15 text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-white focus:bg-white/[0.08] transition-all font-mono">
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==================== KEY REPOSITORY TELEMETRY RIBBON ==================== -->
+        <section class="pt-6 pb-2 border-b border-white/[0.06] bg-black/20">
+            <div class="max-w-5xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="glass-subcard p-4 text-center">
+                    <div class="text-[10px] font-mono text-neutral-400 uppercase tracking-wider">OPEN TOOLS</div>
+                    <div class="font-dot text-lg sm:text-xl font-bold text-white mt-1">8 ARTIFACTS</div>
+                    <div class="text-[11px] text-neutral-500 font-mono mt-0.5">Architecture & Code</div>
+                </div>
+                <div class="glass-subcard p-4 text-center">
+                    <div class="text-[10px] font-mono text-neutral-400 uppercase tracking-wider">LICENSE SPEC</div>
+                    <div class="font-dot text-lg sm:text-xl font-bold text-white mt-1">100% MIT</div>
+                    <div class="text-[11px] text-neutral-500 font-mono mt-0.5">Commercial Free</div>
+                </div>
+                <div class="glass-subcard p-4 text-center">
+                    <div class="text-[10px] font-mono text-neutral-400 uppercase tracking-wider">DOWNLOADS</div>
+                    <div class="font-dot text-lg sm:text-xl font-bold text-white mt-1">45,000+</div>
+                    <div class="text-[11px] text-neutral-500 font-mono mt-0.5">Global Engineers</div>
+                </div>
+                <div class="glass-subcard p-4 text-center">
+                    <div class="text-[10px] font-mono text-neutral-400 uppercase tracking-wider">DEPENDENCY LOAD</div>
+                    <div class="font-dot text-lg sm:text-xl font-bold text-white mt-1">ZERO BLOAT</div>
+                    <div class="text-[11px] text-neutral-500 font-mono mt-0.5">Sub-5ms Execution</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== RESOURCE CARDS REPOSITORY GRID ==================== -->
+        <section class="py-12 md:py-16 relative">
+            <div class="max-w-6xl mx-auto px-6">
+                
+                <div id="resource-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+
+                    <!-- ==================== RESOURCE 01 ==================== -->
+                    <div class="resource-card glass-card p-6 sm:p-7 flex flex-col justify-between futuristic-reveal" 
+                         data-category="architecture" 
+                         data-title="LGU-OS Distributed Ledger Architecture Core" 
+                         data-tags="Go PostgreSQL Docker Redis Distributed Architecture Ledger">
+                        
+                        <div>
+                            <!-- Header Metadata -->
+                            <div class="flex items-center justify-between border-b border-white/[0.08] pb-3 mb-4">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-6 h-6 rounded bg-white/10 flex items-center justify-center font-dot font-black text-xs text-white">01</span>
+                                    <span class="px-2 py-0.5 rounded text-[10px] font-mono tracking-wider bg-white/10 text-neutral-300 uppercase">
+                                        ARCHITECTURE SPEC
+                                    </span>
+                                </div>
+                                <span class="text-[11px] font-mono text-neutral-400">v2.1 // BLUEPRINT</span>
+                            </div>
+
+                            <!-- Title & Subtitle -->
+                            <h3 class="font-dot text-lg sm:text-xl font-bold text-white uppercase tracking-tight mb-2">
+                                LGU-OS Distributed Ledger Core
+                            </h3>
+                            <p class="text-xs sm:text-sm text-neutral-400 leading-relaxed mb-5 font-sans">
+                                Immutable append-only audit trail and civil transaction schema with multi-region Redis distributed lease locking. Eliminates double-issuance and guarantees zero transaction drop.
+                            </p>
+
+                            <!-- Quick Terminal Install Box -->
+                            <div class="telemetry-code rounded-lg p-3 mb-5 flex items-center justify-between gap-3 text-xs font-mono">
+                                <span class="text-neutral-300 truncate select-all">curl -sSL https://get.azarel.dev/lgu-core.sh | bash</span>
+                                <button class="copy-btn shrink-0 text-neutral-400 hover:text-white transition-colors" data-copy="curl -sSL https://get.azarel.dev/lgu-core.sh | bash" title="Copy Command">
+                                    <i data-lucide="copy" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+
+                            <!-- Tech Stack Pills -->
+                            <div class="flex flex-wrap gap-1.5 mb-6 text-[10px] font-mono">
+                                <span class="px-2 py-0.5 rounded bg-white/[0.06] border border-white/10 text-neutral-300">Go 1.22</span>
+                                <span class="px-2 py-0.5 rounded bg-white/[0.06] border border-white/10 text-neutral-300">PostgreSQL</span>
+                                <span class="px-2 py-0.5 rounded bg-white/[0.06] border border-white/10 text-neutral-300">Redis Cluster</span>
+                                <span class="px-2 py-0.5 rounded bg-white/[0.06] border border-white/10 text-neutral-300">Docker Compose</span>
+                            </div>
+                        </div>
+
+                        <!-- Card Action Buttons -->
+                        <div class="flex items-center justify-between pt-4 border-t border-white/[0.08] text-xs font-mono">
+                            <span class="text-neutral-500">4.2k clones // MIT</span>
+                            <button class="inspect-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white hover:text-black transition-all text-neutral-300"
+                                    data-id="01"
+                                    data-title="LGU-OS Distributed Ledger Core"
+                                    data-snippet="// Go distributed mutex snippet
+func (s *LedgerService) AcquirePermitLock(ctx context.Context, permitID string) (bool, error) {
+    lockKey := fmt.Sprintf(&quot;lock:permit:%s&quot;, permitID)
+    ok, err := s.redis.SetNX(ctx, lockKey, s.nodeID, 15*time.Second).Result()
+    if err != nil || !ok {
+        return false, ErrPermitCurrentlyAcquired
+    }
+    return true, nil
+}">
+                                <i data-lucide="code" class="w-3.5 h-3.5"></i>
+                                <span>Inspect Spec</span>
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <!-- ==================== RESOURCE 02 ==================== -->
+                    <div class="resource-card glass-card p-6 sm:p-7 flex flex-col justify-between futuristic-reveal" 
+                         data-category="cli" 
+                         data-title="GhostScrape-CLI Stealth Scraping Daemon" 
+                         data-tags="Python Playwright TLS JA3 Fingerprint Web Scraping Celery">
+                        
+                        <div>
+                            <!-- Header Metadata -->
+                            <div class="flex items-center justify-between border-b border-white/[0.08] pb-3 mb-4">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-6 h-6 rounded bg-white/10 flex items-center justify-center font-dot font-black text-xs text-white">02</span>
+                                    <span class="px-2 py-0.5 rounded text-[10px] font-mono tracking-wider bg-white/10 text-neutral-300 uppercase">
+                                        CLI & SCRIPTS
+                                    </span>
+                                </div>
+                                <span class="text-[11px] font-mono text-neutral-400">v3.4 // CLI TOOL</span>
+                            </div>
+
+                            <!-- Title & Subtitle -->
+                            <h3 class="font-dot text-lg sm:text-xl font-bold text-white uppercase tracking-tight mb-2">
+                                GhostScrape-CLI Stealth Engine
+                            </h3>
+                            <p class="text-xs sm:text-sm text-neutral-400 leading-relaxed mb-5 font-sans">
+                                Headless browser runner with automated canvas noise injection, TLS JA3/JA4 fingerprint rotation, and proxy health arbitration. 99.4% anti-bot bypass rate.
+                            </p>
+
+                            <!-- Quick Terminal Install Box -->
+                            <div class="telemetry-code rounded-lg p-3 mb-5 flex items-center justify-between gap-3 text-xs font-mono">
+                                <span class="text-neutral-300 truncate select-all">pip install ghostscrape-cli &amp;&amp; ghostscrape --help</span>
+                                <button class="copy-btn shrink-0 text-neutral-400 hover:text-white transition-colors" data-copy="pip install ghostscrape-cli && ghostscrape --help" title="Copy Command">
+                                    <i data-lucide="copy" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+
+                            <!-- Tech Stack Pills -->
+                            <div class="flex flex-wrap gap-1.5 mb-6 text-[10px] font-mono">
+                                <span class="px-2 py-0.5 rounded bg-white/[0.06] border border-white/10 text-neutral-300">Python 3.12</span>
+                                <span class="px-2 py-0.5 rounded bg-white/[0.06] border border-white/10 text-neutral-300">Playwright</span>
+                                <span class="px-2 py-0.5 rounded bg-white/[0.06] border border-white/10 text-neutral-300">TLS Client</span>
+                                <span class="px-2 py-0.5 rounded bg-white/[0.06] border border-white/10 text-neutral-300">Redis Queue</span>
+                            </div>
+                        </div>
+
+                        <!-- Card Action Buttons -->
+                        <div class="flex items-center justify-between pt-4 border-t border-white/[0.08] text-xs font-mono">
+                            <span class="text-neutral-500">8.9k installs // MIT</span>
+                            <button class="inspect-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white hover:text-black transition-all text-neutral-300"
+                                    data-id="02"
+                                    data-title="GhostScrape-CLI Stealth Engine"
+                                    data-snippet="# Python stealth configuration snippet
+from ghostscrape import StealthBrowser, FingerprintProfile
+
+profile = FingerprintProfile(
+    os_target=&quot;macos_sonoma&quot;,
+    browser_version=&quot;chrome_124&quot;,
+    canvas_noise_seed=0xFA48,
+    webrtc_policy=&quot;disable_non_proxied_udp&quot;
+)
+
+with StealthBrowser(profile) as session:
+    html = session.get(&quot;https://target-portal.com/data&quot;)
+    print(f&quot;[+] Status: {html.status_code} | Challenge Passed&quot;)">
+                                <i data-lucide="code" class="w-3.5 h-3.5"></i>
+                                <span>Inspect Spec</span>
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <!-- ==================== RESOURCE 03 ==================== -->
+                    <div class="resource-card glass-card p-6 sm:p-7 flex flex-col justify-between futuristic-reveal" 
+                         data-category="starter" 
+                         data-title="OfflineMesh-P2P Bluetooth Low Energy SDK" 
+                         data-tags="React Native Flutter SQLite BLE P2P Offline Mesh Disaster">
+                        
+                        <div>
+                            <!-- Header Metadata -->
+                            <div class="flex items-center justify-between border-b border-white/[0.08] pb-3 mb-4">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-6 h-6 rounded bg-white/10 flex items-center justify-center font-dot font-black text-xs text-white">03</span>
+                                    <span class="px-2 py-0.5 rounded text-[10px] font-mono tracking-wider bg-white/10 text-neutral-300 uppercase">
+                                        PRODUCTION STARTER
+                                    </span>
+                                </div>
+                                <span class="text-[11px] font-mono text-neutral-400">v1.8 // MOBILE SDK</span>
+                            </div>
+
+                            <!-- Title & Subtitle -->
+                            <h3 class="font-dot text-lg sm:text-xl font-bold text-white uppercase tracking-tight mb-2">
+                                OfflineMesh-P2P Mobile SDK
+                            </h3>
+                            <p class="text-xs sm:text-sm text-neutral-400 leading-relaxed mb-5 font-sans">
+                                Zero-infrastructure peer-to-peer survival network library for mobile. Encrypted SOS packets hop across civilian devices over BLE without cell towers or internet.
+                            </p>
+
+                            <!-- Quick Terminal Install Box -->
+                            <div class="telemetry-code rounded-lg p-3 mb-5 flex items-center justify-between gap-3 text-xs font-mono">
+                                <span class="text-neutral-300 truncate select-all">npx create-offlinemesh-app citizen-evac</span>
+                                <button class="copy-btn shrink-0 text-neutral-400 hover:text-white transition-colors" data-copy="npx create-offlinemesh-app citizen-evac" title="Copy Command">
+                                    <i data-lucide="copy" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+
+                            <!-- Tech Stack Pills -->
+                            <div class="flex flex-wrap gap-1.5 mb-6 text-[10px] font-mono">
+                                <span class="px-2 py-0.5 rounded bg-white/[0.06] border border-white/10 text-neutral-300">React Native</span>
+                                <span class="px-2 py-0.5 rounded bg-white/[0.06] border border-white/10 text-neutral-300">Flutter</span>
+                                <span class="px-2 py-0.5 rounded bg-white/[0.06] border border-white/10 text-neutral-300">WatermelonDB</span>
+                                <span class="px-2 py-0.5 rounded bg-white/[0.06] border border-white/10 text-neutral-300">BLE Mesh</span>
+                            </div>
+                        </div>
+
+                        <!-- Card Action Buttons -->
+                        <div class="flex items-center justify-between pt-4 border-t border-white/[0.08] text-xs font-mono">
+                            <span class="text-neutral-500">3.1k stars // Apache 2.0</span>
+                            <button class="inspect-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white hover:text-black transition-all text-neutral-300"
+                                    data-id="03"
+                                    data-title="OfflineMesh-P2P Mobile SDK"
+                                    data-snippet="// React Native BLE SOS dispatch snippet
+import { MeshRelay, PacketEncryption } from 'offlinemesh-core';
+
+export async function broadcastEmergencyBeacon(coords: Coordinates) {
+  const payload = PacketEncryption.seal({
+    timestamp: Date.now(),
+    lat: coords.latitude,
+    lng: coords.longitude,
+    urgency: 'HIGH'
+  });
+  
+  await MeshRelay.broadcastAdvert({
+    serviceUUID: '0000FA48-0000-1000-8000-00805F9B34FB',
+    data: payload,
+    hopLimit: 7
+  });
+}">
+                                <i data-lucide="code" class="w-3.5 h-3.5"></i>
+                                <span>Inspect Spec</span>
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <!-- ==================== RESOURCE 04 ==================== -->
+                    <div class="resource-card glass-card p-6 sm:p-7 flex flex-col justify-between futuristic-reveal" 
+                         data-category="database" 
+                         data-title="PgDeadlock-Sentinel Database Auditor" 
+                         data-tags="PostgreSQL SQL Query Optimization PGBouncer Database Indexes">
+                        
+                        <div>
+                            <!-- Header Metadata -->
+                            <div class="flex items-center justify-between border-b border-white/[0.08] pb-3 mb-4">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-6 h-6 rounded bg-white/10 flex items-center justify-center font-dot font-black text-xs text-white">04</span>
+                                    <span class="px-2 py-0.5 rounded text-[10px] font-mono tracking-wider bg-white/10 text-neutral-300 uppercase">
+                                        DATABASE & ETL
+                                    </span>
+                                </div>
+                                <span class="text-[11px] font-mono text-neutral-400">v1.2 // DB AUDITOR</span>
+                            </div>
+
+                            <!-- Title & Subtitle -->
+                            <h3 class="font-dot text-lg sm:text-xl font-bold text-white uppercase tracking-tight mb-2">
+                                PgDeadlock-Sentinel Auditor
+                            </h3>
+                            <p class="text-xs sm:text-sm text-neutral-400 leading-relaxed mb-5 font-sans">
+                                Autonomous database telemetry inspector. Analyzes `pg_stat_activity`, identifies blocking query locks, detects sequential scans, and auto-generates composite b-tree index migrations.
+                            </p>
+
+                            <!-- Quick Terminal Install Box -->
+                            <div class="telemetry-code rounded-lg p-3 mb-5 flex items-center justify-between gap-3 text-xs font-mono">
+                                <span class="text-neutral-300 truncate select-all">docker run --rm -it azarel/pg-sentinel --db-uri=$DATABASE_URL</span>
+                                <button class="copy-btn shrink-0 text-neutral-400 hover:text-white transition-colors" data-copy="docker run --rm -it azarel/pg-sentinel --db-uri=$DATABASE_URL" title="Copy Command">
+                                    <i data-lucide="copy" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+
+                            <!-- Tech Stack Pills -->
+                            <div class="flex flex-wrap gap-1.5 mb-6 text-[10px] font-mono">
+                                <span class="px-2 py-0.5 rounded bg-white/[0.06] border border-white/10 text-neutral-300">PostgreSQL 14-16</span>
+                                <span class="px-2 py-0.5 rounded bg-white/[0.06] border border-white/10 text-neutral-300">SQLAlchemy</span>
+                                <span class="px-2 py-0.5 rounded bg-white/[0.06] border border-white/10 text-neutral-300">Docker</span>
+                                <span class="px-2 py-0.5 rounded bg-white/[0.06] border border-white/10 text-neutral-300">PGBouncer</span>
+                            </div>
+                        </div>
+
+                        <!-- Card Action Buttons -->
+                        <div class="flex items-center justify-between pt-4 border-t border-white/[0.08] text-xs font-mono">
+                            <span class="text-neutral-500">5.6k pulls // MIT</span>
+                            <button class="inspect-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white hover:text-black transition-all text-neutral-300"
+                                    data-id="04"
+                                    data-title="PgDeadlock-Sentinel Auditor"
+                                    data-snippet="-- PostgreSQL Lock Diagnostic Query
+SELECT 
+    blocked_locks.pid AS blocked_pid,
+    blocking_locks.pid AS blocking_pid,
+    blocked_activity.query AS blocked_statement,
+    blocking_activity.query AS current_statement_in_blocking_process
+FROM pg_catalog.pg_locks blocked_locks
+JOIN pg_catalog.pg_stat_activity blocked_activity ON blocked_activity.pid = blocked_locks.pid
+JOIN pg_catalog.pg_locks blocking_locks 
+    ON blocking_locks.locktype = blocked_locks.locktype
+    AND blocking_locks.database IS NOT DISTINCT FROM blocked_locks.database
+JOIN pg_catalog.pg_stat_activity blocking_activity ON blocking_activity.pid = blocked_locks.pid
+WHERE NOT blocked_locks.granted;">
+                                <i data-lucide="code" class="w-3.5 h-3.5"></i>
+                                <span>Inspect Spec</span>
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <!-- ==================== RESOURCE 05 ==================== -->
+                    <div class="resource-card glass-card p-6 sm:p-7 flex flex-col justify-between futuristic-reveal" 
+                         data-category="starter" 
+                         data-title="FastAPI-Microstack Production Microservices Scaffold" 
+                         data-tags="Python FastAPI Pydantic Redis Docker Microservices Alembic">
+                        
+                        <div>
+                            <!-- Header Metadata -->
+                            <div class="flex items-center justify-between border-b border-white/[0.08] pb-3 mb-4">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-6 h-6 rounded bg-white/10 flex items-center justify-center font-dot font-black text-xs text-white">05</span>
+                                    <span class="px-2 py-0.5 rounded text-[10px] font-mono tracking-wider bg-white/10 text-neutral-300 uppercase">
+                                        PRODUCTION STARTER
+                                    </span>
+                                </div>
+                                <span class="text-[11px] font-mono text-neutral-400">v4.0 // BACKEND</span>
+                            </div>
+
+                            <!-- Title & Subtitle -->
+                            <h3 class="font-dot text-lg sm:text-xl font-bold text-white uppercase tracking-tight mb-2">
+                                FastAPI-Microstack Backend Starter
+                            </h3>
+                            <p class="text-xs sm:text-sm text-neutral-400 leading-relaxed mb-5 font-sans">
+                                Zero-boilerplate backend template with Redis sliding-window rate limiters, asymmetric JWT authentication, asynchronous SQLAlchemy 2.0 ORM, and automated OpenAPI contract docs.
+                            </p>
+
+                            <!-- Quick Terminal Install Box -->
+                            <div class="telemetry-code rounded-lg p-3 mb-5 flex items-center justify-between gap-3 text-xs font-mono">
+                                <span class="text-neutral-300 truncate select-all">git clone https://github.com/azarel/fastapi-microstack</span>
+                                <button class="copy-btn shrink-0 text-neutral-400 hover:text-white transition-colors" data-copy="git clone https://github.com/azarel/fastapi-microstack" title="Copy Command">
+                                    <i data-lucide="copy" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+
+                            <!-- Tech Stack Pills -->
+                            <div class="flex flex-wrap gap-1.5 mb-6 text-[10px] font-mono">
+                                <span class="px-2 py-0.5 rounded bg-white/[0.06] border border-white/10 text-neutral-300">FastAPI</span>
+                                <span class="px-2 py-0.5 rounded bg-white/[0.06] border border-white/10 text-neutral-300">Python 3.12</span>
+                                <span class="px-2 py-0.5 rounded bg-white/[0.06] border border-white/10 text-neutral-300">Alembic</span>
+                                <span class="px-2 py-0.5 rounded bg-white/[0.06] border border-white/10 text-neutral-300">PostgreSQL</span>
+                            </div>
+                        </div>
+
+                        <!-- Card Action Buttons -->
+                        <div class="flex items-center justify-between pt-4 border-t border-white/[0.08] text-xs font-mono">
+                            <span class="text-neutral-500">14.2k clones // MIT</span>
+                            <button class="inspect-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white hover:text-black transition-all text-neutral-300"
+                                    data-id="05"
+                                    data-title="FastAPI-Microstack Backend Starter"
+                                    data-snippet="# Sliding window rate limit middleware
+from fastapi import Request, HTTPException
+import time
+
+async def sliding_window_rate_limit(request: Request, client_ip: str, limit: int = 120):
+    now = time.time()
+    key = f&quot;ratelimit:{client_ip}&quot;
+    pipeline = redis_conn.pipeline()
+    pipeline.zremrangebyscore(key, 0, now - 60)
+    pipeline.zadd(key, {str(now): now})
+    pipeline.zcard(key)
+    pipeline.expire(key, 60)
+    results = await pipeline.execute()
+    if results[2] > limit:
+        raise HTTPException(status_code=429, detail=&quot;Rate limit exceeded&quot;)">
+                                <i data-lucide="code" class="w-3.5 h-3.5"></i>
+                                <span>Inspect Spec</span>
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <!-- ==================== RESOURCE 06 ==================== -->
+                    <div class="resource-card glass-card p-6 sm:p-7 flex flex-col justify-between futuristic-reveal" 
+                         data-category="starter" 
+                         data-title="Next14-Glassmorphism Pure Cyber UI Kit" 
+                         data-tags="Next.js React Tailwind CSS Dot Matrix UI Kit Glitch Shader">
+                        
+                        <div>
+                            <!-- Header Metadata -->
+                            <div class="flex items-center justify-between border-b border-white/[0.08] pb-3 mb-4">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-6 h-6 rounded bg-white/10 flex items-center justify-center font-dot font-black text-xs text-white">06</span>
+                                    <span class="px-2 py-0.5 rounded text-[10px] font-mono tracking-wider bg-white/10 text-neutral-300 uppercase">
+                                        PRODUCTION STARTER
+                                    </span>
+                                </div>
+                                <span class="text-[11px] font-mono text-neutral-400">v2.0 // UI KIT</span>
+                            </div>
+
+                            <!-- Title & Subtitle -->
+                            <h3 class="font-dot text-lg sm:text-xl font-bold text-white uppercase tracking-tight mb-2">
+                                Next14 Cyber Glass UI Primitives
+                            </h3>
+                            <p class="text-xs sm:text-sm text-neutral-400 leading-relaxed mb-5 font-sans">
+                                Monochromatic component library featuring Dot Matrix display headers, specular glass card reflections, segmented floating capsule docks, and black-and-white glitch shaders.
+                            </p>
+
+                            <!-- Quick Terminal Install Box -->
+                            <div class="telemetry-code rounded-lg p-3 mb-5 flex items-center justify-between gap-3 text-xs font-mono">
+                                <span class="text-neutral-300 truncate select-all">npx create-cyber-glass-ui azarel-portfolio</span>
+                                <button class="copy-btn shrink-0 text-neutral-400 hover:text-white transition-colors" data-copy="npx create-cyber-glass-ui azarel-portfolio" title="Copy Command">
+                                    <i data-lucide="copy" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+
+                            <!-- Tech Stack Pills -->
+                            <div class="flex flex-wrap gap-1.5 mb-6 text-[10px] font-mono">
+                                <span class="px-2 py-0.5 rounded bg-white/[0.06] border border-white/10 text-neutral-300">Next.js 14</span>
+                                <span class="px-2 py-0.5 rounded bg-white/[0.06] border border-white/10 text-neutral-300">Tailwind CSS</span>
+                                <span class="px-2 py-0.5 rounded bg-white/[0.06] border border-white/10 text-neutral-300">Lucide</span>
+                                <span class="px-2 py-0.5 rounded bg-white/[0.06] border border-white/10 text-neutral-300">Framer Motion</span>
+                            </div>
+                        </div>
+
+                        <!-- Card Action Buttons -->
+                        <div class="flex items-center justify-between pt-4 border-t border-white/[0.08] text-xs font-mono">
+                            <span class="text-neutral-500">6.7k downloads // MIT</span>
+                            <button class="inspect-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white hover:text-black transition-all text-neutral-300"
+                                    data-id="06"
+                                    data-title="Next14 Cyber Glass UI Primitives"
+                                    data-snippet="// Cyber Segmented Capsule Dock Component
+export function SegmentedCapsuleDock({ items, activeIndex }) {
+  return (
+    <nav className=&quot;flex items-center gap-1 p-1 rounded-full bg-white/[0.04] border border-white/[0.1] backdrop-blur-xl shadow-[inset_0_1px_1px_rgba(255,255,255,0.12)]&quot;>
+      {items.map((item, idx) => (
+        <a key={item.href} href={item.href} className={
+          idx === activeIndex
+            ? &quot;px-4 py-1.5 rounded-full text-xs font-semibold text-white bg-white/[0.12] border border-white/20 shadow-[0_0_12px_rgba(255,255,255,0.1)]&quot;
+            : &quot;px-4 py-1.5 rounded-full text-xs font-medium text-neutral-400 hover:text-white hover:bg-white/[0.08]&quot;
+        }>
+          {item.label}
+        </a>
+      ))}
+    </nav>
+  );
+}">
+                                <i data-lucide="code" class="w-3.5 h-3.5"></i>
+                                <span>Inspect Spec</span>
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <!-- ==================== RESOURCE 07 ==================== -->
+                    <div class="resource-card glass-card p-6 sm:p-7 flex flex-col justify-between futuristic-reveal" 
+                         data-category="database" 
+                         data-title="DuckDB-Streamline Parquet Ingestion Pipeline" 
+                         data-tags="DuckDB PyArrow Parquet Data ETL Python Polars">
+                        
+                        <div>
+                            <!-- Header Metadata -->
+                            <div class="flex items-center justify-between border-b border-white/[0.08] pb-3 mb-4">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-6 h-6 rounded bg-white/10 flex items-center justify-center font-dot font-black text-xs text-white">07</span>
+                                    <span class="px-2 py-0.5 rounded text-[10px] font-mono tracking-wider bg-white/10 text-neutral-300 uppercase">
+                                        DATABASE & ETL
+                                    </span>
+                                </div>
+                                <span class="text-[11px] font-mono text-neutral-400">v2.5 // DATA PIPELINE</span>
+                            </div>
+
+                            <!-- Title & Subtitle -->
+                            <h3 class="font-dot text-lg sm:text-xl font-bold text-white uppercase tracking-tight mb-2">
+                                DuckDB-Streamline Parquet Pipeline
+                            </h3>
+                            <p class="text-xs sm:text-sm text-neutral-400 leading-relaxed mb-5 font-sans">
+                                High-throughput column-vector ETL daemon. Parses 10M+ daily unstructured JSON entries directly into Snappy-compressed partitioned Parquet files in under 4 seconds without memory spills.
+                            </p>
+
+                            <!-- Quick Terminal Install Box -->
+                            <div class="telemetry-code rounded-lg p-3 mb-5 flex items-center justify-between gap-3 text-xs font-mono">
+                                <span class="text-neutral-300 truncate select-all">curl -sSL https://get.azarel.dev/streamline.py -o etl.py</span>
+                                <button class="copy-btn shrink-0 text-neutral-400 hover:text-white transition-colors" data-copy="curl -sSL https://get.azarel.dev/streamline.py -o etl.py" title="Copy Command">
+                                    <i data-lucide="copy" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+
+                            <!-- Tech Stack Pills -->
+                            <div class="flex flex-wrap gap-1.5 mb-6 text-[10px] font-mono">
+                                <span class="px-2 py-0.5 rounded bg-white/[0.06] border border-white/10 text-neutral-300">DuckDB</span>
+                                <span class="px-2 py-0.5 rounded bg-white/[0.06] border border-white/10 text-neutral-300">PyArrow</span>
+                                <span class="px-2 py-0.5 rounded bg-white/[0.06] border border-white/10 text-neutral-300">Snappy Parquet</span>
+                                <span class="px-2 py-0.5 rounded bg-white/[0.06] border border-white/10 text-neutral-300">Python 3.12</span>
+                            </div>
+                        </div>
+
+                        <!-- Card Action Buttons -->
+                        <div class="flex items-center justify-between pt-4 border-t border-white/[0.08] text-xs font-mono">
+                            <span class="text-neutral-500">2.8k downloads // MIT</span>
+                            <button class="inspect-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white hover:text-black transition-all text-neutral-300"
+                                    data-id="07"
+                                    data-title="DuckDB-Streamline Parquet Pipeline"
+                                    data-snippet="# DuckDB streaming JSON to partitioned Parquet
+import duckdb
+
+con = duckdb.connect()
+con.execute(&quot;&quot;&quot;
+    COPY (
+        SELECT 
+            transaction_id,
+            account_ref,
+            amount_php,
+            timestamp::TIMESTAMPTZ AS event_time,
+            strftime(event_time, '%Y-%m') AS partition_month
+        FROM read_json_auto('s3://raw-ledger-stream/*.json.gz')
+    ) TO 's3://lakehouse/curated/ledger/' (
+        FORMAT PARQUET,
+        PARTITION_BY (partition_month),
+        COMPRESSION 'snappy',
+        ROW_GROUP_SIZE 100000
+    );
+&quot;&quot;&quot;)
+print(&quot;[+] 10M records compiled into Parquet partition.&quot;)">
+                                <i data-lucide="code" class="w-3.5 h-3.5"></i>
+                                <span>Inspect Spec</span>
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <!-- ==================== RESOURCE 08 ==================== -->
+                    <div class="resource-card glass-card p-6 sm:p-7 flex flex-col justify-between futuristic-reveal" 
+                         data-category="architecture" 
+                         data-title="Zero-Trust Multi-Tier Cloud VPC Blueprint" 
+                         data-tags="Terraform Cloudflare AWS Linux VPC Zero Trust Architecture">
+                        
+                        <div>
+                            <!-- Header Metadata -->
+                            <div class="flex items-center justify-between border-b border-white/[0.08] pb-3 mb-4">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-6 h-6 rounded bg-white/10 flex items-center justify-center font-dot font-black text-xs text-white">08</span>
+                                    <span class="px-2 py-0.5 rounded text-[10px] font-mono tracking-wider bg-white/10 text-neutral-300 uppercase">
+                                        ARCHITECTURE SPEC
+                                    </span>
+                                </div>
+                                <span class="text-[11px] font-mono text-neutral-400">v1.5 // INFRA BLUEPRINT</span>
+                            </div>
+
+                            <!-- Title & Subtitle -->
+                            <h3 class="font-dot text-lg sm:text-xl font-bold text-white uppercase tracking-tight mb-2">
+                                Zero-Trust Multi-Tier VPC Blueprint
+                            </h3>
+                            <p class="text-xs sm:text-sm text-neutral-400 leading-relaxed mb-5 font-sans">
+                                Production Terraform modules provisioning multi-tier isolated VPCs with Cloudflare Zero-Trust edge tunnels, private DB subnets without public IPs, and mutual TLS ingress.
+                            </p>
+
+                            <!-- Quick Terminal Install Box -->
+                            <div class="telemetry-code rounded-lg p-3 mb-5 flex items-center justify-between gap-3 text-xs font-mono">
+                                <span class="text-neutral-300 truncate select-all">terraform init &amp;&amp; terraform plan -var-file=prod.tfvars</span>
+                                <button class="copy-btn shrink-0 text-neutral-400 hover:text-white transition-colors" data-copy="terraform init && terraform plan -var-file=prod.tfvars" title="Copy Command">
+                                    <i data-lucide="copy" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+
+                            <!-- Tech Stack Pills -->
+                            <div class="flex flex-wrap gap-1.5 mb-6 text-[10px] font-mono">
+                                <span class="px-2 py-0.5 rounded bg-white/[0.06] border border-white/10 text-neutral-300">Terraform</span>
+                                <span class="px-2 py-0.5 rounded bg-white/[0.06] border border-white/10 text-neutral-300">Cloudflare Zero-Trust</span>
+                                <span class="px-2 py-0.5 rounded bg-white/[0.06] border border-white/10 text-neutral-300">AWS / Linux</span>
+                                <span class="px-2 py-0.5 rounded bg-white/[0.06] border border-white/10 text-neutral-300">HCL</span>
+                            </div>
+                        </div>
+
+                        <!-- Card Action Buttons -->
+                        <div class="flex items-center justify-between pt-4 border-t border-white/[0.08] text-xs font-mono">
+                            <span class="text-neutral-500">3.9k clones // MIT</span>
+                            <button class="inspect-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white hover:text-black transition-all text-neutral-300"
+                                    data-id="08"
+                                    data-title="Zero-Trust Multi-Tier VPC Blueprint"
+                                    data-snippet="# Terraform Cloudflare Tunnel zero-ingress rule
+resource &quot;cloudflare_tunnel_config&quot; &quot;zero_trust_ingress&quot; {
+  account_id = var.cloudflare_account_id
+  tunnel_id  = cloudflare_tunnel.core_vpc.id
+
+  config {
+    ingress_rule {
+      hostname = &quot;api-internal.azarel.dev&quot;
+      service  = &quot;http://10.0.2.45:8000&quot;
+      origin_request {
+        connect_timeout = &quot;10s&quot;
+        no_tls_verify   = false
+      }
+    }
+    ingress_rule {
+      service = &quot;http_status:404&quot;
+    }
+  }
+}">
+                                <i data-lucide="code" class="w-3.5 h-3.5"></i>
+                                <span>Inspect Spec</span>
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Empty State (Hidden by default) -->
+                <div id="empty-state" class="hidden text-center py-16">
+                    <div class="w-12 h-12 rounded-full bg-white/10 border border-white/20 flex items-center justify-center mx-auto mb-4 text-neutral-400">
+                        <i data-lucide="search-x" class="w-6 h-6"></i>
+                    </div>
+                    <div class="font-dot text-lg font-bold uppercase text-white mb-1">No Artifacts Found</div>
+                    <div class="text-xs font-mono text-neutral-400">Try adjusting your keyword query or switching filter categories.</div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==================== PRODUCTION ARCHITECTURE CALLOUT ==================== -->
+        <section class="py-16 border-t border-white/[0.08] bg-black/60">
+            <div class="max-w-4xl mx-auto px-6 text-center">
+                <div class="glass-card p-8 sm:p-12 relative overflow-hidden">
+                    <h2 class="font-dot text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white mb-4 uppercase">
+                        NEED A BESPOKE INTERNAL TOOL OR ARCHITECTURE BLUEPRINT?
+                    </h2>
+                    <p class="text-xs sm:text-sm text-neutral-400 max-w-xl mx-auto font-sans leading-relaxed mb-8">
+                        I design custom CLI tools, data extraction engines, and distributed cloud foundations tailored specifically to your engineering team's exact requirements.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <a href="contact.html" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-white text-black font-bold text-xs uppercase tracking-wider hover:bg-neutral-200 transition-all shadow-lg active:scale-95">
+                            <i data-lucide="sparkles" class="w-4 h-4"></i>
+                            <span>Commission Custom Build</span>
+                        </a>
+                        <a href="pricing.html" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-white/10 text-white font-mono text-xs uppercase tracking-wider hover:bg-white/20 border border-white/20 transition-all">
+                            <span>View Monthly Plans</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==================== INTERACTIVE CODE INSPECTION MODAL ==================== -->
+    <div id="resource-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xl opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="glass-card w-full max-w-3xl max-h-[90vh] flex flex-col overflow-hidden border border-white/20 shadow-2xl">
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between px-6 py-4 border-b border-white/[0.08] bg-white/[0.02]">
+                <div class="flex items-center gap-3">
+                    <i data-lucide="terminal" class="w-4 h-4 text-white"></i>
+                    <h3 id="modal-title" class="font-dot text-base sm:text-lg font-bold text-white uppercase tracking-tight">
+                        Resource Specification
+                    </h3>
+                </div>
+                <button id="modal-close" class="p-1.5 rounded-lg text-neutral-400 hover:text-white hover:bg-white/10 transition-colors">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <!-- Modal Code Body -->
+            <div class="p-6 overflow-y-auto font-mono text-xs text-neutral-300 bg-black/90">
+                <div class="flex items-center justify-between pb-2 mb-3 border-b border-white/10 text-[11px] text-neutral-500">
+                    <span>SOURCE SNIPPET // SPECIFICATION PREVIEW</span>
+                    <button id="modal-copy-btn" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-white/10 text-white hover:bg-white/20 transition-colors">
+                        <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                        <span>Copy Snippet</span>
+                    </button>
+                </div>
+                <pre class="overflow-x-auto p-4 rounded-lg bg-black/60 border border-white/10 text-neutral-200 leading-relaxed font-mono whitespace-pre"><code id="modal-code"></code></pre>
+            </div>
+            <!-- Modal Footer -->
+            <div class="flex items-center justify-between px-6 py-3.5 border-t border-white/[0.08] bg-white/[0.02] text-xs font-mono text-neutral-400">
+                <span>Verified Spec // MIT Open Source</span>
+                <button id="modal-close-btn" class="px-4 py-1.5 rounded-full bg-white text-black font-bold hover:bg-neutral-200 transition-colors">
+                    Close Preview
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== CENTRALIZED BRAND FOOTER ==================== -->
+    <footer class="border-t border-white/[0.08] bg-black/90 py-16 relative z-10">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            
+            <!-- Brand Mark -->
+            <div class="flex items-center justify-center gap-3 mb-6">
+                <div class="w-9 h-9 rounded-lg bg-white/10 border border-white/20 p-[1px] flex items-center justify-center shadow-lg">
+                    <div class="w-full h-full bg-black rounded-[7px] flex items-center justify-center">
+                        <span class="font-dot font-black text-sm text-white tracking-widest">A</span>
+                    </div>
+                </div>
+                <span class="font-dot font-black text-2xl tracking-wider text-white">AZAREL<span class="text-white">.</span></span>
+            </div>
+
+            <!-- Mission Statement -->
+            <p class="text-xs sm:text-sm text-neutral-400 max-w-md mx-auto leading-relaxed mb-8 font-sans">
+                Engineering high-throughput backends, fault-tolerant municipal distributed systems, and real-time offline mobile architectures.
+            </p>
+
+            <!-- Centered Navigation Links -->
+            <div class="flex flex-wrap items-center justify-center gap-6 sm:gap-8 text-xs font-mono text-neutral-400 mb-10">
+                <a href="services.html" class="hover:text-white transition-colors">Services</a>
+                <a href="projects.html" class="hover:text-white transition-colors">Projects</a>
+                <a href="experiences.html" class="hover:text-white transition-colors">Experiences</a>
+                <a href="resources.html" class="text-white font-bold transition-colors">Resources</a>
+                <a href="recommendations.html" class="hover:text-white transition-colors">Recommendations</a>
+                <a href="pricing.html" class="hover:text-white transition-colors">Pricing</a>
+                <a href="contact.html" class="hover:text-white transition-colors">Contact</a>
+            </div>
+
+            <!-- Bottom Copyright -->
+            <div class="text-[11px] font-mono text-neutral-600 border-t border-white/[0.06] pt-8">
+                &copy; 2026 AZAREL. ALL ARCHITECTURAL BLUEPRINTS &amp; CODE VAULTS PRESERVED.
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- ==================== LOGIC SCRIPTS ==================== -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Mobile Hamburger Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        // Toast Notification System
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+            if (toast && toastMsg) {
+                toastMsg.textContent = message;
+                toast.classList.remove('translate-y-24', 'opacity-0', 'pointer-events-none');
+                toast.classList.add('translate-y-0', 'opacity-100');
+                setTimeout(() => {
+                    toast.classList.remove('translate-y-0', 'opacity-100');
+                    toast.classList.add('translate-y-24', 'opacity-0', 'pointer-events-none');
+                }, 2600);
+            }
+        }
+
+        // Copy-to-Clipboard Buttons
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const cmd = btn.getAttribute('data-copy');
+                if (cmd) {
+                    navigator.clipboard.writeText(cmd).then(() => {
+                        showToast('Command copied: ' + cmd.slice(0, 30) + '...');
+                    }).catch(() => {
+                        showToast('Copied to clipboard');
+                    });
+                }
+            });
+        });
+
+        // Filter and Search System
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const resourceCards = document.querySelectorAll('.resource-card');
+        const searchInput = document.getElementById('resource-search');
+        const emptyState = document.getElementById('empty-state');
+        const countBadge = document.getElementById('resource-count-badge');
+
+        let currentFilter = 'all';
+        let currentSearch = '';
+
+        function updateResourceView() {
+            let visibleCount = 0;
+            const searchLower = currentSearch.toLowerCase().trim();
+
+            resourceCards.forEach(card => {
+                const category = card.getAttribute('data-category');
+                const title = (card.getAttribute('data-title') || '').toLowerCase();
+                const tags = (card.getAttribute('data-tags') || '').toLowerCase();
+                const text = card.textContent.toLowerCase();
+
+                const matchesFilter = currentFilter === 'all' || category === currentFilter;
+                const matchesSearch = !searchLower || title.includes(searchLower) || tags.includes(searchLower) || text.includes(searchLower);
+
+                if (matchesFilter && matchesSearch) {
+                    card.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            if (countBadge) {
+                countBadge.textContent = visibleCount;
+            }
+
+            if (emptyState) {
+                if (visibleCount === 0) {
+                    emptyState.classList.remove('hidden');
+                } else {
+                    emptyState.classList.add('hidden');
+                }
+            }
+        }
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentFilter = btn.getAttribute('data-filter');
+                updateResourceView();
+            });
+        });
+
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                currentSearch = e.target.value;
+                updateResourceView();
+            });
+        }
+
+        // Inspection Code Modal
+        const modal = document.getElementById('resource-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalCode = document.getElementById('modal-code');
+        const modalClose = document.getElementById('modal-close');
+        const modalCloseBtn = document.getElementById('modal-close-btn');
+        const modalCopyBtn = document.getElementById('modal-copy-btn');
+
+        function openModal(title, snippet) {
+            if (!modal) return;
+            modalTitle.textContent = title;
+            modalCode.textContent = snippet;
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.classList.add('opacity-100');
+        }
+
+        function closeModal() {
+            if (!modal) return;
+            modal.classList.remove('opacity-100');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+        }
+
+        document.querySelectorAll('.inspect-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const title = btn.getAttribute('data-title');
+                const snippet = btn.getAttribute('data-snippet');
+                openModal(title, snippet);
+            });
+        });
+
+        if (modalClose) modalClose.addEventListener('click', closeModal);
+        if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
+        if (modal) {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
+            });
+        }
+        if (modalCopyBtn) {
+            modalCopyBtn.addEventListener('click', () => {
+                if (modalCode && modalCode.textContent) {
+                    navigator.clipboard.writeText(modalCode.textContent).then(() => {
+                        showToast('Snippet copied to clipboard');
+                    });
+                }
+            });
+        }
+
+        // 3D Spatial Holographic Reveal Observer
+        (function initHolographicObserver() {
+            const revealElements = document.querySelectorAll('.futuristic-reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                    }
+                });
+            }, {
+                threshold: 0.08,
+                rootMargin: '0px 0px -30px 0px'
+            });
+
+            revealElements.forEach(el => observer.observe(el));
+        })();
+
+        // Section Entrance Glitch Engine
+        (function initCardScrollGlitch() {
+            const allCards = Array.from(document.querySelectorAll('.glass-card'));
+            if (!allCards.length) return;
+
+            let variantToggle = false;
+
+            function triggerCardGlitch(card) {
+                if (!card) return;
+                const addClass = variantToggle ? 'bw-glitch-a' : 'bw-glitch-b';
+                const removeClass = variantToggle ? 'bw-glitch-b' : 'bw-glitch-a';
+                variantToggle = !variantToggle;
+
+                card.classList.remove(removeClass);
+                card.classList.remove(addClass);
+                void card.offsetWidth;
+                card.classList.add(addClass);
+
+                clearTimeout(card._glitchTimeout);
+                card._glitchTimeout = setTimeout(() => {
+                    card.classList.remove('bw-glitch-a', 'bw-glitch-b');
+                }, 350);
+            }
+
+            const cardObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    const card = entry.target;
+                    if (entry.isIntersecting) {
+                        if (!card._hasGlitchEntered) {
+                            card._hasGlitchEntered = true;
+                            triggerCardGlitch(card);
+                        }
+                    } else {
+                        card._hasGlitchEntered = false;
+                        card.classList.remove('bw-glitch-a', 'bw-glitch-b');
+                    }
+                });
+            }, {
+                threshold: 0.12,
+                rootMargin: '0px 0px -40px 0px'
+            });
+
+            allCards.forEach(card => {
+                cardObserver.observe(card);
+                card.addEventListener('mouseenter', () => triggerCardGlitch(card));
+            });
+        })();
+    </script>
+</body>
+</html>

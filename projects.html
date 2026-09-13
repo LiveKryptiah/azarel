@@ -1,0 +1,1662 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects — Azarel • Websites • Systems • Apps • Automations</title>
+    <meta name="description" content="Explore Azarel's production project archive: high-throughput systems, custom automation bots, offline-first mobile apps, and edge-rendered web platforms.">
+
+    <!-- Google Fonts: Doto (Dot Matrix), DotGothic16, Plus Jakarta Sans, Space Grotesk, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Doto:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            base: '#000000',
+                            surface: '#09090b',
+                            surfaceAlt: '#121215',
+                            card: '#0e0e11',
+                            border: 'rgba(255, 255, 255, 0.1)',
+                            borderHover: 'rgba(255, 255, 255, 0.25)',
+                            muted: '#a1a1aa',
+                            subtle: '#71717a'
+                        }
+                    },
+                    fontFamily: {
+                        dot: ['"Doto"', '"DotGothic16"', 'monospace'],
+                        sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
+                        heading: ['"Space Grotesk"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Strict Black & White Theme */
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::selection {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        /* Dot Font Utility */
+        .font-dot {
+            font-family: 'Doto', 'DotGothic16', monospace;
+            font-feature-settings: "ss01" on, "ss02" on;
+        }
+
+        /* Subtle Background Monochrome Grid */
+        .bg-grid-pattern {
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* Radial Vignette Mask */
+        .mask-radial {
+            mask-image: radial-gradient(ellipse 80% 60% at 50% 15%, black 35%, transparent 100%);
+            -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 15%, black 35%, transparent 100%);
+        }
+
+        /* Monochrome Ambient Glow */
+        .hero-glow {
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 750px;
+            height: 480px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 45%, rgba(0, 0, 0, 0) 75%);
+            filter: blur(80px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Glassmorphism with Top-Left Light Reflection */
+        .glass-card {
+            position: relative;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%), rgba(12, 12, 14, 0.85);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            border-top: 1px solid rgba(255, 255, 255, 0.35);
+            border-left: 1px solid rgba(255, 255, 255, 0.22);
+            box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.9), 
+                        inset 1px 1px 0px rgba(255, 255, 255, 0.25);
+            border-radius: 1.25rem;
+            overflow: hidden;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Top-Left Light Sheen Reflection */
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 260px;
+            height: 260px;
+            background: radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.05) 45%, transparent 75%);
+            pointer-events: none;
+            border-radius: inherit;
+            z-index: 2;
+            transition: opacity 0.35s ease;
+        }
+
+        .glass-card:hover {
+            border-top-color: rgba(255, 255, 255, 0.6);
+            border-left-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 24px 60px -10px rgba(0, 0, 0, 0.95), 
+                        0 0 40px -10px rgba(255, 255, 255, 0.15),
+                        inset 1px 1px 0px rgba(255, 255, 255, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .glass-card:hover::before {
+            background: radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.32) 0%, rgba(255, 255, 255, 0.08) 50%, transparent 80%);
+        }
+
+        /* Subcard Glass Styling */
+        .glass-subcard {
+            position: relative;
+            background: rgba(18, 18, 22, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-top: 1px solid rgba(255, 255, 255, 0.25);
+            border-left: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.18);
+            overflow: hidden;
+            border-radius: 0.85rem;
+        }
+
+        /* 3D Spatial Holographic Reveal Animation */
+        .futuristic-reveal {
+            opacity: 0;
+            transform: perspective(1200px) translateY(32px) scale(0.98);
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform, opacity;
+        }
+        .futuristic-reveal.revealed {
+            opacity: 1;
+            transform: perspective(1200px) translateY(0) scale(1);
+        }
+
+        /* Custom Scrollbars */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        /* ==================== PURE BLACK & WHITE HIGH-INTENSITY ENTRANCE GLITCH ==================== */
+        @keyframes bw-card-tear-a {
+            0% {
+                transform: perspective(1200px) translateY(0) scale(1) translate3d(0, 0, 0) skewX(0deg);
+                filter: brightness(1) contrast(1);
+            }
+            15% {
+                transform: perspective(1200px) translateY(0) scale(1) translate3d(-14px, 1.5px, 0) skewX(-3deg);
+                filter: brightness(2) contrast(2.6);
+            }
+            35% {
+                transform: perspective(1200px) translateY(0) scale(1) translate3d(16px, -2px, 0) skewX(3.5deg);
+                filter: brightness(0.5) contrast(2.2);
+            }
+            55% {
+                transform: perspective(1200px) translateY(0) scale(1) translate3d(-11px, 2px, 0) skewX(-2deg);
+                filter: brightness(2.2) contrast(2.8);
+            }
+            75% {
+                transform: perspective(1200px) translateY(0) scale(1) translate3d(8px, -1px, 0) skewX(1.5deg);
+                filter: brightness(0.8) contrast(1.6);
+            }
+            90% {
+                transform: perspective(1200px) translateY(0) scale(1) translate3d(-3px, 1px, 0) skewX(-0.8deg);
+                filter: brightness(1.3) contrast(1.2);
+            }
+            100% {
+                transform: perspective(1200px) translateY(0) scale(1) translate3d(0, 0, 0) skewX(0deg);
+                filter: brightness(1) contrast(1);
+            }
+        }
+
+        @keyframes bw-card-tear-b {
+            0% {
+                transform: perspective(1200px) translateY(0) scale(1) translate3d(0, 0, 0) skewX(0deg);
+                filter: brightness(1) contrast(1);
+            }
+            15% {
+                transform: perspective(1200px) translateY(0) scale(1) translate3d(15px, -2px, 0) skewX(3.2deg);
+                filter: brightness(0.4) contrast(2.4);
+            }
+            35% {
+                transform: perspective(1200px) translateY(0) scale(1) translate3d(-16px, 1.5px, 0) skewX(-3.5deg);
+                filter: brightness(2.4) contrast(3);
+            }
+            55% {
+                transform: perspective(1200px) translateY(0) scale(1) translate3d(10px, 2px, 0) skewX(2deg);
+                filter: brightness(0.7) contrast(1.8);
+            }
+            75% {
+                transform: perspective(1200px) translateY(0) scale(1) translate3d(-7px, -1px, 0) skewX(-1.5deg);
+                filter: brightness(1.7) contrast(1.5);
+            }
+            90% {
+                transform: perspective(1200px) translateY(0) scale(1) translate3d(4px, 1px, 0) skewX(0.8deg);
+                filter: brightness(1.1) contrast(1.2);
+            }
+            100% {
+                transform: perspective(1200px) translateY(0) scale(1) translate3d(0, 0, 0) skewX(0deg);
+                filter: brightness(1) contrast(1);
+            }
+        }
+
+        @keyframes bw-inner-desync {
+            0% { transform: translate3d(0, 0, 0); }
+            20% { transform: translate3d(9px, -1px, 0); }
+            40% { transform: translate3d(-10px, 1.5px, 0); }
+            60% { transform: translate3d(6px, -1px, 0); }
+            80% { transform: translate3d(-4px, 1px, 0); }
+            100% { transform: translate3d(0, 0, 0); }
+        }
+
+        @keyframes bw-slice-tear-upper {
+            0% { clip-path: inset(8% 0 72% 0); transform: translate3d(-22px, 0, 0); opacity: 0.95; }
+            25% { clip-path: inset(42% 0 32% 0); transform: translate3d(24px, 0, 0); opacity: 1; }
+            50% { clip-path: inset(14% 0 78% 0); transform: translate3d(-26px, 0, 0); opacity: 0.95; }
+            75% { clip-path: inset(68% 0 12% 0); transform: translate3d(18px, 0, 0); opacity: 1; }
+            100% { clip-path: inset(0 0 0 0); transform: translate3d(0, 0, 0); opacity: 0; }
+        }
+
+        @keyframes bw-slice-tear-lower {
+            0% { clip-path: inset(58% 0 18% 0); transform: translate3d(22px, 0, 0); opacity: 0.95; }
+            25% { clip-path: inset(18% 0 62% 0); transform: translate3d(-24px, 0, 0); opacity: 1; }
+            50% { clip-path: inset(78% 0 6% 0); transform: translate3d(20px, 0, 0); opacity: 0.95; }
+            75% { clip-path: inset(34% 0 46% 0); transform: translate3d(-18px, 0, 0); opacity: 0.9; }
+            100% { clip-path: inset(0 0 0 0); transform: translate3d(0, 0, 0); opacity: 0; }
+        }
+
+        .bw-glitch-a,
+        .bw-glitch-b {
+            position: relative !important;
+            border-color: #ffffff !important;
+            box-shadow: 
+                -10px 0 0 rgba(255, 255, 255, 0.85),
+                10px 0 0 rgba(255, 255, 255, 0.85),
+                0 0 35px rgba(255, 255, 255, 0.5),
+                inset 0 0 25px rgba(255, 255, 255, 0.35) !important;
+            z-index: 35 !important;
+        }
+
+        .bw-glitch-a { animation: bw-card-tear-a 0.34s steps(3) both !important; }
+        .bw-glitch-b { animation: bw-card-tear-b 0.34s steps(3) both !important; }
+
+        .bw-glitch-a > *,
+        .bw-glitch-b > * {
+            animation: bw-inner-desync 0.34s steps(2) both !important;
+        }
+
+        .bw-glitch-a::before,
+        .bw-glitch-b::before {
+            content: '' !important;
+            position: absolute !important;
+            inset: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            pointer-events: none !important;
+            z-index: 60 !important;
+            border-radius: inherit !important;
+            backdrop-filter: invert(1) contrast(2.5) brightness(1.4) !important;
+            -webkit-backdrop-filter: invert(1) contrast(2.5) brightness(1.4) !important;
+            background: rgba(255, 255, 255, 0.18) !important;
+            animation: bw-slice-tear-lower 0.34s steps(2, start) both !important;
+        }
+
+        .bw-glitch-a::after,
+        .bw-glitch-b::after {
+            content: '' !important;
+            position: absolute !important;
+            inset: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            pointer-events: none !important;
+            z-index: 61 !important;
+            border-radius: inherit !important;
+            backdrop-filter: invert(1) contrast(2.8) brightness(1.6) !important;
+            -webkit-backdrop-filter: invert(1) contrast(2.8) brightness(1.6) !important;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(255, 255, 255, 0.45) 0px,
+                rgba(255, 255, 255, 0.45) 2px,
+                rgba(0, 0, 0, 0.7) 2px,
+                rgba(0, 0, 0, 0.7) 4px
+            ) !important;
+            animation: bw-slice-tear-upper 0.34s steps(2, start) both !important;
+        }
+
+        /* Filter Tab Active States */
+        .filter-btn.active {
+            background-color: #ffffff;
+            color: #000000;
+            border-color: #ffffff;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Code/Terminal Styling */
+        .telemetry-code {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(0, 0, 0, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+    </style>
+</head>
+<body class="relative min-h-screen text-white antialiased selection:bg-white selection:text-black">
+
+    <!-- Global Background Elements -->
+    <div class="fixed inset-0 bg-grid-pattern mask-radial pointer-events-none z-0"></div>
+    <div class="hero-glow"></div>
+
+    <!-- Background Telemetry Tags -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden select-none">
+        <div class="absolute top-28 left-8 hidden lg:block text-[10px] font-mono text-white/20">
+            + [ARCHIVE: 08 DEPLOYED] // 2024-2026
+        </div>
+        <div class="absolute top-1/3 right-12 hidden xl:block text-[10px] font-mono text-white/20">
+            [SYS_INTEGRITY] ➔ VERIFIED
+        </div>
+        <div class="absolute top-2/3 left-10 hidden xl:block text-[10px] font-mono text-white/20">
+            + [DISCIPLINE: FULL_SPECTRUM] // 0x4B20
+        </div>
+        <div class="absolute bottom-24 right-24 hidden lg:block text-[10px] font-mono text-white/20">
+            STATUS: PRODUCTION READY // 0xFF
+        </div>
+    </div>
+
+    <!-- ==================== HEADER / NAVBAR ==================== -->
+    <header class="sticky top-0 z-40 w-full border-b border-white/[0.08] bg-black/85 backdrop-blur-xl">
+        <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+            <!-- Brand Logo with Dot Font -->
+            <a href="index.html" class="flex items-center gap-3 group">
+                <div class="w-8 h-8 rounded-lg bg-white/10 border border-white/20 p-[1px] flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
+                    <div class="w-full h-full bg-black rounded-[7px] flex items-center justify-center">
+                        <span class="font-dot font-black text-sm text-white tracking-widest">A</span>
+                    </div>
+                </div>
+                <span class="font-dot font-black text-xl tracking-wider text-white group-hover:text-neutral-300 transition-colors">
+                    AZAREL<span class="text-white">.</span>
+                </span>
+            </a>
+
+            <!-- Desktop Navigation: Cyber Glass Segmented Dock -->
+            <nav class="hidden lg:flex items-center gap-1 p-1 rounded-full bg-white/[0.04] border border-white/[0.1] backdrop-blur-xl shadow-[inset_0_1px_1px_rgba(255,255,255,0.12)]">
+                <a href="services.html" class="px-4 py-1.5 rounded-full text-xs font-medium text-neutral-400 hover:text-white hover:bg-white/[0.08] transition-all">
+                    Services
+                </a>
+                <a href="projects.html" class="px-4 py-1.5 rounded-full text-xs font-semibold text-white bg-white/[0.12] border border-white/20 shadow-[0_0_12px_rgba(255,255,255,0.1)] transition-all">
+                    Projects
+                </a>
+                <a href="experiences.html" class="px-4 py-1.5 rounded-full text-xs font-medium text-neutral-400 hover:text-white hover:bg-white/[0.08] transition-all">
+                    Experiences
+                </a>
+                <a href="resources.html" class="px-4 py-1.5 rounded-full text-xs font-medium text-neutral-400 hover:text-white hover:bg-white/[0.08] transition-all">
+                    Resources
+                </a>
+                <a href="recommendations.html" class="px-4 py-1.5 rounded-full text-xs font-medium text-neutral-400 hover:text-white hover:bg-white/[0.08] transition-all">
+                    Recommendations
+                </a>
+                <a href="pricing.html" class="px-4 py-1.5 rounded-full text-xs font-medium text-neutral-400 hover:text-white hover:bg-white/[0.08] transition-all">
+                    Pricing
+                </a>
+            </nav>
+
+            <!-- Right CTA Button: Start a Project -->
+            <div class="hidden sm:flex items-center gap-4">
+                <a href="contact.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-black text-xs xl:text-sm font-bold hover:bg-neutral-200 transition-all shadow-md active:scale-95">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                    <span>Start a Project</span>
+                </a>
+            </div>
+
+            <!-- Mobile Hamburger Toggle -->
+            <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg text-neutral-400 hover:text-white hover:bg-white/[0.08] transition-colors" aria-label="Toggle navigation">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobile-menu" class="hidden lg:hidden border-t border-white/[0.08] bg-black px-6 py-5 space-y-1.5">
+            <a href="services.html" class="mobile-nav-link block text-sm font-medium text-neutral-300 hover:text-white px-4 py-2.5 rounded-xl hover:bg-white/[0.05] transition-all">Services</a>
+            <a href="projects.html" class="mobile-nav-link block text-sm font-semibold text-white px-4 py-2.5 rounded-xl bg-white/[0.08] border border-white/[0.15]">Projects</a>
+            <a href="experiences.html" class="mobile-nav-link block text-sm font-medium text-neutral-300 hover:text-white px-4 py-2.5 rounded-xl hover:bg-white/[0.05] transition-all">Experiences</a>
+            <a href="resources.html" class="mobile-nav-link block text-sm font-medium text-neutral-300 hover:text-white px-4 py-2.5 rounded-xl hover:bg-white/[0.05] transition-all">Resources</a>
+            <a href="recommendations.html" class="mobile-nav-link block text-sm font-medium text-neutral-300 hover:text-white px-4 py-2.5 rounded-xl hover:bg-white/[0.05] transition-all">Recommendations</a>
+            <a href="pricing.html" class="mobile-nav-link block text-sm font-medium text-neutral-300 hover:text-white px-4 py-2.5 rounded-xl hover:bg-white/[0.05] transition-all">Pricing</a>
+            <div class="pt-3 border-t border-white/[0.08]">
+                <a href="contact.html" class="mobile-nav-link flex items-center justify-center gap-2 w-full px-5 py-3 rounded-full bg-white text-black text-sm font-bold hover:bg-neutral-200">
+                    <i data-lucide="sparkles" class="w-4 h-4"></i>
+                    <span>Start a Project</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative z-10">
+
+        <!-- ==================== ARCHIVE DIRECTORY HEADER ==================== -->
+        <section class="pt-8 pb-6 border-b border-white/[0.08] bg-black/40">
+            <div class="max-w-4xl mx-auto px-6 text-center">
+                <!-- Title in Dot Font (Original Large Size) -->
+                <h1 data-scramble="true" class="font-dot text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white uppercase mb-3">
+                    Production Systems & Deployments
+                </h1>
+                <!-- Concise Subtitle -->
+                <p class="text-xs sm:text-sm text-neutral-400 max-w-xl mx-auto font-mono">
+                    High-impact websites, distributed systems, offline mobile apps & ETL automations.
+                </p>
+            </div>
+        </section>
+
+        <!-- ==================== COMPACT STICKY CATEGORY FILTER & SEARCH BAR ==================== -->
+        <section class="py-2.5 border-b border-white/[0.08] bg-black/85 sticky top-20 z-30 backdrop-blur-md">
+            <div class="max-w-5xl mx-auto px-6 flex flex-col md:flex-row items-center justify-center gap-3">
+                
+                <!-- Category Filter Buttons -->
+                <div class="flex items-center justify-center gap-1.5 overflow-x-auto w-full md:w-auto pb-0.5 md:pb-0 scrollbar-none">
+                    <button class="filter-btn active px-3.5 py-1 rounded-full text-xs font-mono border border-white/20 transition-all shrink-0 flex items-center gap-1.5" data-filter="all">
+                        <span>All Builds</span>
+                        <span class="text-[10px] bg-white/20 text-black px-1.5 py-0.2 rounded-full font-bold">8</span>
+                    </button>
+                    <button class="filter-btn px-3 py-1 rounded-full text-xs font-mono border border-white/10 text-neutral-400 hover:text-white hover:border-white/30 transition-all shrink-0 flex items-center gap-1.5" data-filter="website">
+                        <i data-lucide="globe" class="w-3 h-3"></i>
+                        <span>Websites</span>
+                        <span class="text-[10px] bg-white/10 text-neutral-300 px-1.5 py-0.2 rounded-full font-bold">2</span>
+                    </button>
+                    <button class="filter-btn px-3 py-1 rounded-full text-xs font-mono border border-white/10 text-neutral-400 hover:text-white hover:border-white/30 transition-all shrink-0 flex items-center gap-1.5" data-filter="app">
+                        <i data-lucide="smartphone" class="w-3 h-3"></i>
+                        <span>Apps</span>
+                        <span class="text-[10px] bg-white/10 text-neutral-300 px-1.5 py-0.2 rounded-full font-bold">2</span>
+                    </button>
+                    <button class="filter-btn px-3 py-1 rounded-full text-xs font-mono border border-white/10 text-neutral-400 hover:text-white hover:border-white/30 transition-all shrink-0 flex items-center gap-1.5" data-filter="system">
+                        <i data-lucide="server" class="w-3 h-3"></i>
+                        <span>Systems</span>
+                        <span class="text-[10px] bg-white/10 text-neutral-300 px-1.5 py-0.2 rounded-full font-bold">2</span>
+                    </button>
+                    <button class="filter-btn px-3 py-1 rounded-full text-xs font-mono border border-white/10 text-neutral-400 hover:text-white hover:border-white/30 transition-all shrink-0 flex items-center gap-1.5" data-filter="automation">
+                        <i data-lucide="cpu" class="w-3 h-3"></i>
+                        <span>Automations</span>
+                        <span class="text-[10px] bg-white/10 text-neutral-300 px-1.5 py-0.2 rounded-full font-bold">2</span>
+                    </button>
+                </div>
+
+                <!-- Instant Search / Filter Input -->
+                <div class="relative w-full md:w-56 shrink-0">
+                    <i data-lucide="search" class="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400"></i>
+                    <input 
+                        id="project-search" 
+                        type="text" 
+                        placeholder="Filter by name or tech..." 
+                        class="w-full bg-white/[0.04] border border-white/[0.12] rounded-full pl-8 pr-3 py-1 text-xs text-white placeholder:text-neutral-500 focus:outline-none focus:border-white focus:ring-1 focus:ring-white transition-all font-mono"
+                    >
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==================== PROJECTS GRID ==================== -->
+        <section class="pt-6 pb-16">
+            <div class="max-w-6xl mx-auto px-6">
+
+                <!-- Results Counter (Compact Centered) -->
+                <div class="flex items-center justify-center gap-6 mb-6 text-xs font-mono text-neutral-400 border-b border-white/[0.06] pb-3">
+                    <div class="flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 bg-white rounded-full"></span>
+                        <span>SHOWING: <span id="active-category-label" class="text-white font-bold">ALL ARCHIVES</span></span>
+                    </div>
+                    <span class="text-neutral-600">•</span>
+                    <div>
+                        <span id="filtered-count" class="text-white font-bold">8</span> OF 8 DEPLOYMENTS
+                    </div>
+                </div>
+
+                <!-- Cards Grid -->
+                <div id="projects-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+                    <!-- ==================== 01. SYSTEM: LGU-OS ==================== -->
+                    <article class="project-card glass-card p-6 md:p-8 flex flex-col justify-between futuristic-reveal" data-category="system" data-tags="golang postgresql docker redis tailwind municipal enterprise system">
+                        <div>
+                            <!-- Header Meta -->
+                            <div class="flex items-start justify-between gap-4 mb-4">
+                                <div class="flex items-center gap-2.5">
+                                    <span class="w-7 h-7 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center font-dot font-black text-xs text-white">01</span>
+                                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono tracking-wider bg-white/10 border border-white/20 text-neutral-200 uppercase">
+                                        SYSTEM
+                                    </span>
+                                </div>
+                                <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-400">
+                                    <span class="w-2 h-2 rounded-full bg-white"></span>
+                                    <span>PRODUCTION LIVE</span>
+                                </div>
+                            </div>
+
+                            <!-- Title & Subtitle -->
+                            <h2 class="font-dot text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
+                                LGU-OS — Municipal Cloud & Civil Operations Core
+                            </h2>
+                            <p class="text-xs sm:text-sm text-neutral-400 leading-relaxed mb-6 font-sans">
+                                Distributed civil administration portal unifying municipal property tax processing, digital civil registry issuance, business permitting, and automated land parcel GIS records into an encrypted government operating hub.
+                            </p>
+
+                            <!-- Interactive Telemetry Mockup Box -->
+                            <div class="telemetry-code rounded-xl p-4 mb-6 text-xs text-neutral-300 font-mono space-y-2">
+                                <div class="flex items-center justify-between border-b border-white/10 pb-2 text-[11px] text-neutral-400">
+                                    <span class="flex items-center gap-1.5"><i data-lucide="terminal" class="w-3.5 h-3.5"></i> daemon@lgu-node-01:~#</span>
+                                    <span class="text-white">99.98% SLA</span>
+                                </div>
+                                <div class="grid grid-cols-3 gap-2 pt-1 text-center">
+                                    <div class="p-2 rounded bg-white/[0.03] border border-white/5">
+                                        <div class="text-[10px] text-neutral-400">CITIZENS SERVED</div>
+                                        <div class="font-dot text-sm font-bold text-white mt-0.5">42,850+</div>
+                                    </div>
+                                    <div class="p-2 rounded bg-white/[0.03] border border-white/5">
+                                        <div class="text-[10px] text-neutral-400">QUERY LATENCY</div>
+                                        <div class="font-dot text-sm font-bold text-white mt-0.5">&lt; 118ms</div>
+                                    </div>
+                                    <div class="p-2 rounded bg-white/[0.03] border border-white/5">
+                                        <div class="text-[10px] text-neutral-400">AUDIT HASHES</div>
+                                        <div class="font-dot text-sm font-bold text-white mt-0.5">SHA-256</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Key Engineering Highlights -->
+                            <ul class="space-y-2 mb-6 text-xs text-neutral-300 font-sans">
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 text-white shrink-0 mt-0.5"></i>
+                                    <span>High-throughput multi-tenant role-based access control (RBAC) with cryptographic audit logs.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 text-white shrink-0 mt-0.5"></i>
+                                    <span>Automated queue prioritization eliminating 85% of citizen in-person waiting queue times.</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <!-- Tech Stack Pills -->
+                            <div class="flex flex-wrap gap-1.5 mb-6 pt-4 border-t border-white/[0.08]">
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Golang</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">PostgreSQL</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Docker</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Redis</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Tailwind</span>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="flex items-center gap-3">
+                                <button onclick="openSpecModal('lgu-os')" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white text-black text-xs font-bold hover:bg-neutral-200 transition-all">
+                                    <i data-lucide="info" class="w-3.5 h-3.5"></i>
+                                    <span>Inspect System Specs</span>
+                                </button>
+                                <a href="contact.html" class="px-3 py-2.5 rounded-xl bg-white/[0.05] hover:bg-white/10 border border-white/10 text-white text-xs font-mono transition-all flex items-center justify-center" title="Request Architecture Walkthrough">
+                                    <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ==================== 02. SYSTEM: SENTINEL TELEMETRY DAEMON ==================== -->
+                    <article class="project-card glass-card p-6 md:p-8 flex flex-col justify-between futuristic-reveal" data-category="system" data-tags="rust timescaledb prometheus grafana ebpf daemon telemetry system">
+                        <div>
+                            <!-- Header Meta -->
+                            <div class="flex items-start justify-between gap-4 mb-4">
+                                <div class="flex items-center gap-2.5">
+                                    <span class="w-7 h-7 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center font-dot font-black text-xs text-white">02</span>
+                                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono tracking-wider bg-white/10 border border-white/20 text-neutral-200 uppercase">
+                                        SYSTEM
+                                    </span>
+                                </div>
+                                <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-400">
+                                    <span class="w-2 h-2 rounded-full bg-white"></span>
+                                    <span>DAEMON ACTIVE</span>
+                                </div>
+                            </div>
+
+                            <!-- Title & Subtitle -->
+                            <h2 class="font-dot text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
+                                Sentinel — Edge Infrastructure Daemon & eBPF Telemetry
+                            </h2>
+                            <p class="text-xs sm:text-sm text-neutral-400 leading-relaxed mb-6 font-sans">
+                                Distributed node monitor engineered in Rust for kernel-level socket inspection, hardware performance anomalies, and instant failover execution across multi-region server clusters.
+                            </p>
+
+                            <!-- Interactive Telemetry Mockup Box -->
+                            <div class="telemetry-code rounded-xl p-4 mb-6 text-xs text-neutral-300 font-mono space-y-2">
+                                <div class="flex items-center justify-between border-b border-white/10 pb-2 text-[11px] text-neutral-400">
+                                    <span class="flex items-center gap-1.5"><i data-lucide="cpu" class="w-3.5 h-3.5"></i> sentinel-node-cluster.local</span>
+                                    <span class="text-white font-mono">0.04% CPU</span>
+                                </div>
+                                <div class="grid grid-cols-3 gap-2 pt-1 text-center">
+                                    <div class="p-2 rounded bg-white/[0.03] border border-white/5">
+                                        <div class="text-[10px] text-neutral-400">EVENT STREAM</div>
+                                        <div class="font-dot text-sm font-bold text-white mt-0.5">500k/sec</div>
+                                    </div>
+                                    <div class="p-2 rounded bg-white/[0.03] border border-white/5">
+                                        <div class="text-[10px] text-neutral-400">ALERT DISPATCH</div>
+                                        <div class="font-dot text-sm font-bold text-white mt-0.5">&lt; 0.8ms</div>
+                                    </div>
+                                    <div class="p-2 rounded bg-white/[0.03] border border-white/5">
+                                        <div class="text-[10px] text-neutral-400">MEM OVERHEAD</div>
+                                        <div class="font-dot text-sm font-bold text-white mt-0.5">4.2 MB</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Key Engineering Highlights -->
+                            <ul class="space-y-2 mb-6 text-xs text-neutral-300 font-sans">
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 text-white shrink-0 mt-0.5"></i>
+                                    <span>Kernel eBPF tracepoints capture packet drops without touching application memory.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 text-white shrink-0 mt-0.5"></i>
+                                    <span>Encrypted peer-to-peer heartbeat mesh with automated DNS failover triggers.</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <!-- Tech Stack Pills -->
+                            <div class="flex flex-wrap gap-1.5 mb-6 pt-4 border-t border-white/[0.08]">
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Rust</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">eBPF</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">TimescaleDB</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Prometheus</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Grafana</span>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="flex items-center gap-3">
+                                <button onclick="openSpecModal('sentinel')" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white text-black text-xs font-bold hover:bg-neutral-200 transition-all">
+                                    <i data-lucide="info" class="w-3.5 h-3.5"></i>
+                                    <span>Inspect System Specs</span>
+                                </button>
+                                <a href="contact.html" class="px-3 py-2.5 rounded-xl bg-white/[0.05] hover:bg-white/10 border border-white/10 text-white text-xs font-mono transition-all flex items-center justify-center" title="Request Architecture Walkthrough">
+                                    <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ==================== 03. AUTOMATION: APEX ETL MESH ==================== -->
+                    <article class="project-card glass-card p-6 md:p-8 flex flex-col justify-between futuristic-reveal" data-category="automation" data-tags="python playwright celery redis duckdb etl web scraper automation">
+                        <div>
+                            <!-- Header Meta -->
+                            <div class="flex items-start justify-between gap-4 mb-4">
+                                <div class="flex items-center gap-2.5">
+                                    <span class="w-7 h-7 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center font-dot font-black text-xs text-white">03</span>
+                                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono tracking-wider bg-white/10 border border-white/20 text-neutral-200 uppercase">
+                                        AUTOMATION
+                                    </span>
+                                </div>
+                                <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-400">
+                                    <span class="w-2 h-2 rounded-full bg-white"></span>
+                                    <span>MESH PIPELINE RUNNING</span>
+                                </div>
+                            </div>
+
+                            <!-- Title & Subtitle -->
+                            <h2 class="font-dot text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
+                                Apex — Headless Scraping & Web Intelligence Mesh
+                            </h2>
+                            <p class="text-xs sm:text-sm text-neutral-400 leading-relaxed mb-6 font-sans">
+                                Resilient distributed crawling cluster with dynamic TLS fingerprint spoofing, adaptive anti-bot bypassing, and live streaming ETL ingestion into analytical columnar data stores.
+                            </p>
+
+                            <!-- Interactive Telemetry Mockup Box -->
+                            <div class="telemetry-code rounded-xl p-4 mb-6 text-xs text-neutral-300 font-mono space-y-2">
+                                <div class="flex items-center justify-between border-b border-white/10 pb-2 text-[11px] text-neutral-400">
+                                    <span class="flex items-center gap-1.5"><i data-lucide="layers" class="w-3.5 h-3.5"></i> worker_pool: 32 headless instances</span>
+                                    <span class="text-white">99.4% BYPASS</span>
+                                </div>
+                                <div class="grid grid-cols-3 gap-2 pt-1 text-center">
+                                    <div class="p-2 rounded bg-white/[0.03] border border-white/5">
+                                        <div class="text-[10px] text-neutral-400">INGEST DAILY</div>
+                                        <div class="font-dot text-sm font-bold text-white mt-0.5">2.4M items</div>
+                                    </div>
+                                    <div class="p-2 rounded bg-white/[0.03] border border-white/5">
+                                        <div class="text-[10px] text-neutral-400">TRANSFORM TIME</div>
+                                        <div class="font-dot text-sm font-bold text-white mt-0.5">0.02s/batch</div>
+                                    </div>
+                                    <div class="p-2 rounded bg-white/[0.03] border border-white/5">
+                                        <div class="text-[10px] text-neutral-400">PROXY ROTATE</div>
+                                        <div class="font-dot text-sm font-bold text-white mt-0.5">Adaptive</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Key Engineering Highlights -->
+                            <ul class="space-y-2 mb-6 text-xs text-neutral-300 font-sans">
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 text-white shrink-0 mt-0.5"></i>
+                                    <span>Automated CAPTCHA token solver and browser canvas noise injection for 99.4% bypass.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 text-white shrink-0 mt-0.5"></i>
+                                    <span>Dead-letter recovery queues with automatic schema mutation warnings.</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <!-- Tech Stack Pills -->
+                            <div class="flex flex-wrap gap-1.5 mb-6 pt-4 border-t border-white/[0.08]">
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Python</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Playwright</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Celery</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Redis</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">DuckDB</span>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="flex items-center gap-3">
+                                <button onclick="openSpecModal('apex')" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white text-black text-xs font-bold hover:bg-neutral-200 transition-all">
+                                    <i data-lucide="info" class="w-3.5 h-3.5"></i>
+                                    <span>Inspect System Specs</span>
+                                </button>
+                                <a href="contact.html" class="px-3 py-2.5 rounded-xl bg-white/[0.05] hover:bg-white/10 border border-white/10 text-white text-xs font-mono transition-all flex items-center justify-center" title="Request Architecture Walkthrough">
+                                    <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ==================== 04. AUTOMATION: LEDGERFLOW ==================== -->
+                    <article class="project-card glass-card p-6 md:p-8 flex flex-col justify-between futuristic-reveal" data-category="automation" data-tags="nodejs typescript fastify stripe postgresql webhook ledger automation">
+                        <div>
+                            <!-- Header Meta -->
+                            <div class="flex items-start justify-between gap-4 mb-4">
+                                <div class="flex items-center gap-2.5">
+                                    <span class="w-7 h-7 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center font-dot font-black text-xs text-white">04</span>
+                                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono tracking-wider bg-white/10 border border-white/20 text-neutral-200 uppercase">
+                                        AUTOMATION
+                                    </span>
+                                </div>
+                                <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-400">
+                                    <span class="w-2 h-2 rounded-full bg-white"></span>
+                                    <span>RECONCILING 24/7</span>
+                                </div>
+                            </div>
+
+                            <!-- Title & Subtitle -->
+                            <h2 class="font-dot text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
+                                LedgerFlow — Multi-Currency Webhook Reconciliation Suite
+                            </h2>
+                            <p class="text-xs sm:text-sm text-neutral-400 leading-relaxed mb-6 font-sans">
+                                Idempotent webhook ingest and double-entry financial reconciliation engine synchronizing Stripe, PayPal, and banking APIs with zero discrepancy.
+                            </p>
+
+                            <!-- Interactive Telemetry Mockup Box -->
+                            <div class="telemetry-code rounded-xl p-4 mb-6 text-xs text-neutral-300 font-mono space-y-2">
+                                <div class="flex items-center justify-between border-b border-white/10 pb-2 text-[11px] text-neutral-400">
+                                    <span class="flex items-center gap-1.5"><i data-lucide="zap" class="w-3.5 h-3.5"></i> webhook_ingress: 12,000 req/min</span>
+                                    <span class="text-white">0 ERRORS</span>
+                                </div>
+                                <div class="grid grid-cols-3 gap-2 pt-1 text-center">
+                                    <div class="p-2 rounded bg-white/[0.03] border border-white/5">
+                                        <div class="text-[10px] text-neutral-400">RECONCILED</div>
+                                        <div class="font-dot text-sm font-bold text-white mt-0.5">$4.2M USD</div>
+                                    </div>
+                                    <div class="p-2 rounded bg-white/[0.03] border border-white/5">
+                                        <div class="text-[10px] text-neutral-400">IDEMPOTENCY</div>
+                                        <div class="font-dot text-sm font-bold text-white mt-0.5">100% Lock</div>
+                                    </div>
+                                    <div class="p-2 rounded bg-white/[0.03] border border-white/5">
+                                        <div class="text-[10px] text-neutral-400">DISPUTE LAG</div>
+                                        <div class="font-dot text-sm font-bold text-white mt-0.5">&lt; 350ms</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Key Engineering Highlights -->
+                            <ul class="space-y-2 mb-6 text-xs text-neutral-300 font-sans">
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 text-white shrink-0 mt-0.5"></i>
+                                    <span>Distributed atomic Redis locks preventing double-credit and concurrent retry exploits.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 text-white shrink-0 mt-0.5"></i>
+                                    <span>Real-time ops alerts dispatched straight to Discord/Slack with transaction replay tools.</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <!-- Tech Stack Pills -->
+                            <div class="flex flex-wrap gap-1.5 mb-6 pt-4 border-t border-white/[0.08]">
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Node.js</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">TypeScript</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Fastify</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">PostgreSQL</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Stripe API</span>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="flex items-center gap-3">
+                                <button onclick="openSpecModal('ledgerflow')" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white text-black text-xs font-bold hover:bg-neutral-200 transition-all">
+                                    <i data-lucide="info" class="w-3.5 h-3.5"></i>
+                                    <span>Inspect System Specs</span>
+                                </button>
+                                <a href="contact.html" class="px-3 py-2.5 rounded-xl bg-white/[0.05] hover:bg-white/10 border border-white/10 text-white text-xs font-mono transition-all flex items-center justify-center" title="Request Architecture Walkthrough">
+                                    <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ==================== 05. APP: CITIZEN DRRM SYNC ==================== -->
+                    <article class="project-card glass-card p-6 md:p-8 flex flex-col justify-between futuristic-reveal" data-category="app" data-tags="react native sqlite watermelon tailwind mobile offline mesh app">
+                        <div>
+                            <!-- Header Meta -->
+                            <div class="flex items-start justify-between gap-4 mb-4">
+                                <div class="flex items-center gap-2.5">
+                                    <span class="w-7 h-7 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center font-dot font-black text-xs text-white">05</span>
+                                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono tracking-wider bg-white/10 border border-white/20 text-neutral-200 uppercase">
+                                        APP
+                                    </span>
+                                </div>
+                                <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-400">
+                                    <span class="w-2 h-2 rounded-full bg-white"></span>
+                                    <span>OFFLINE VERIFIED</span>
+                                </div>
+                            </div>
+
+                            <!-- Title & Subtitle -->
+                            <h2 class="font-dot text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
+                                Citizen DRRM Sync — Offline Evacuation & Disaster App
+                            </h2>
+                            <p class="text-xs sm:text-sm text-neutral-400 leading-relaxed mb-6 font-sans">
+                                Mission-critical mobile application allowing citizens and first responders to locate shelters, beacon emergency SOS alerts, and sync family safety status across peer-to-peer Bluetooth mesh without mobile data.
+                            </p>
+
+                            <!-- Interactive Telemetry Mockup Box -->
+                            <div class="telemetry-code rounded-xl p-4 mb-6 text-xs text-neutral-300 font-mono space-y-2">
+                                <div class="flex items-center justify-between border-b border-white/10 pb-2 text-[11px] text-neutral-400">
+                                    <span class="flex items-center gap-1.5"><i data-lucide="radio" class="w-3.5 h-3.5"></i> ble_mesh: 18 local nodes nearby</span>
+                                    <span class="text-white">STANDALONE</span>
+                                </div>
+                                <div class="grid grid-cols-3 gap-2 pt-1 text-center">
+                                    <div class="p-2 rounded bg-white/[0.03] border border-white/5">
+                                        <div class="text-[10px] text-neutral-400">BUNDLE SIZE</div>
+                                        <div class="font-dot text-sm font-bold text-white mt-0.5">2.8 MB</div>
+                                    </div>
+                                    <div class="p-2 rounded bg-white/[0.03] border border-white/5">
+                                        <div class="text-[10px] text-neutral-400">LOCAL DB</div>
+                                        <div class="font-dot text-sm font-bold text-white mt-0.5">WatermelonDB</div>
+                                    </div>
+                                    <div class="p-2 rounded bg-white/[0.03] border border-white/5">
+                                        <div class="text-[10px] text-neutral-400">MAP STORAGE</div>
+                                        <div class="font-dot text-sm font-bold text-white mt-0.5">Vector MBTiles</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Key Engineering Highlights -->
+                            <ul class="space-y-2 mb-6 text-xs text-neutral-300 font-sans">
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 text-white shrink-0 mt-0.5"></i>
+                                    <span>Full offline vector map routing with offline turn-by-turn shelter navigation.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 text-white shrink-0 mt-0.5"></i>
+                                    <span>Audio strobe frequency beacon for search-and-rescue canine & sonar identification.</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <!-- Tech Stack Pills -->
+                            <div class="flex flex-wrap gap-1.5 mb-6 pt-4 border-t border-white/[0.08]">
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">React Native</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">WatermelonDB</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">SQLite</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Tailwind</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">MapLibre</span>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="flex items-center gap-3">
+                                <button onclick="openSpecModal('drrm')" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white text-black text-xs font-bold hover:bg-neutral-200 transition-all">
+                                    <i data-lucide="info" class="w-3.5 h-3.5"></i>
+                                    <span>Inspect System Specs</span>
+                                </button>
+                                <a href="contact.html" class="px-3 py-2.5 rounded-xl bg-white/[0.05] hover:bg-white/10 border border-white/10 text-white text-xs font-mono transition-all flex items-center justify-center" title="Request Architecture Walkthrough">
+                                    <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ==================== 06. APP: FLEETPULSE TELEMATICS ==================== -->
+                    <article class="project-card glass-card p-6 md:p-8 flex flex-col justify-between futuristic-reveal" data-category="app" data-tags="flutter dart websockets googlemaps firebase mobile fleet app">
+                        <div>
+                            <!-- Header Meta -->
+                            <div class="flex items-start justify-between gap-4 mb-4">
+                                <div class="flex items-center gap-2.5">
+                                    <span class="w-7 h-7 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center font-dot font-black text-xs text-white">06</span>
+                                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono tracking-wider bg-white/10 border border-white/20 text-neutral-200 uppercase">
+                                        APP
+                                    </span>
+                                </div>
+                                <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-400">
+                                    <span class="w-2 h-2 rounded-full bg-white"></span>
+                                    <span>DISPATCH CONNECTED</span>
+                                </div>
+                            </div>
+
+                            <!-- Title & Subtitle -->
+                            <h2 class="font-dot text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
+                                FleetPulse — Dynamic Fleet Telematics & Dispatch App
+                            </h2>
+                            <p class="text-xs sm:text-sm text-neutral-400 leading-relaxed mb-6 font-sans">
+                                Cross-platform driver and dispatcher mobile suite providing 1-second GPS breadcrumb sync, automated multi-stop route re-ordering, and biometric digital proof of delivery.
+                            </p>
+
+                            <!-- Interactive Telemetry Mockup Box -->
+                            <div class="telemetry-code rounded-xl p-4 mb-6 text-xs text-neutral-300 font-mono space-y-2">
+                                <div class="flex items-center justify-between border-b border-white/10 pb-2 text-[11px] text-neutral-400">
+                                    <span class="flex items-center gap-1.5"><i data-lucide="navigation" class="w-3.5 h-3.5"></i> fleet_live: 184 trucks tracking</span>
+                                    <span class="text-white">-15% FUEL</span>
+                                </div>
+                                <div class="grid grid-cols-3 gap-2 pt-1 text-center">
+                                    <div class="p-2 rounded bg-white/[0.03] border border-white/5">
+                                        <div class="text-[10px] text-neutral-400">ACTIVE TRUCKS</div>
+                                        <div class="font-dot text-sm font-bold text-white mt-0.5">184 Fleet</div>
+                                    </div>
+                                    <div class="p-2 rounded bg-white/[0.03] border border-white/5">
+                                        <div class="text-[10px] text-neutral-400">GPS ACCURACY</div>
+                                        <div class="font-dot text-sm font-bold text-white mt-0.5">1.2m radius</div>
+                                    </div>
+                                    <div class="p-2 rounded bg-white/[0.03] border border-white/5">
+                                        <div class="text-[10px] text-neutral-400">E-POD PROOF</div>
+                                        <div class="font-dot text-sm font-bold text-white mt-0.5">100% Digital</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Key Engineering Highlights -->
+                            <ul class="space-y-2 mb-6 text-xs text-neutral-300 font-sans">
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 text-white shrink-0 mt-0.5"></i>
+                                    <span>Real-time polygon geofence detection sending automated ETA alerts to waiting warehouses.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 text-white shrink-0 mt-0.5"></i>
+                                    <span>Adaptive packet batching reducing mobile data consumption by 72% on long hauls.</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <!-- Tech Stack Pills -->
+                            <div class="flex flex-wrap gap-1.5 mb-6 pt-4 border-t border-white/[0.08]">
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Flutter</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Dart</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">WebSockets</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Google Maps SDK</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Firebase</span>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="flex items-center gap-3">
+                                <button onclick="openSpecModal('fleetpulse')" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white text-black text-xs font-bold hover:bg-neutral-200 transition-all">
+                                    <i data-lucide="info" class="w-3.5 h-3.5"></i>
+                                    <span>Inspect System Specs</span>
+                                </button>
+                                <a href="contact.html" class="px-3 py-2.5 rounded-xl bg-white/[0.05] hover:bg-white/10 border border-white/10 text-white text-xs font-mono transition-all flex items-center justify-center" title="Request Architecture Walkthrough">
+                                    <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ==================== 07. WEBSITE: QUANTUM VAULT ==================== -->
+                    <article class="project-card glass-card p-6 md:p-8 flex flex-col justify-between futuristic-reveal" data-category="website" data-tags="nextjs typescript tailwind framer supabase zero-trust web website">
+                        <div>
+                            <!-- Header Meta -->
+                            <div class="flex items-start justify-between gap-4 mb-4">
+                                <div class="flex items-center gap-2.5">
+                                    <span class="w-7 h-7 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center font-dot font-black text-xs text-white">07</span>
+                                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono tracking-wider bg-white/10 border border-white/20 text-neutral-200 uppercase">
+                                        WEBSITE
+                                    </span>
+                                </div>
+                                <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-400">
+                                    <span class="w-2 h-2 rounded-full bg-white"></span>
+                                    <span>100/100 LIGHTHOUSE</span>
+                                </div>
+                            </div>
+
+                            <!-- Title & Subtitle -->
+                            <h2 class="font-dot text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
+                                Quantum Vault — Zero-Trust Security & Key Management Portal
+                            </h2>
+                            <p class="text-xs sm:text-sm text-neutral-400 leading-relaxed mb-6 font-sans">
+                                High-performance client-side encrypted web portal designed for enterprise security officers to audit cryptographic key rotations, hardware tokens, and zero-trust perimeter policies.
+                            </p>
+
+                            <!-- Interactive Telemetry Mockup Box -->
+                            <div class="telemetry-code rounded-xl p-4 mb-6 text-xs text-neutral-300 font-mono space-y-2">
+                                <div class="flex items-center justify-between border-b border-white/10 pb-2 text-[11px] text-neutral-400">
+                                    <span class="flex items-center gap-1.5"><i data-lucide="shield-check" class="w-3.5 h-3.5"></i> security_posture: ZERO-TRUST</span>
+                                    <span class="text-white">100/100 PERF</span>
+                                </div>
+                                <div class="grid grid-cols-3 gap-2 pt-1 text-center">
+                                    <div class="p-2 rounded bg-white/[0.03] border border-white/5">
+                                        <div class="text-[10px] text-neutral-400">FIRST PAINT</div>
+                                        <div class="font-dot text-sm font-bold text-white mt-0.5">0.38s FCP</div>
+                                    </div>
+                                    <div class="p-2 rounded bg-white/[0.03] border border-white/5">
+                                        <div class="text-[10px] text-neutral-400">ENCRYPTION</div>
+                                        <div class="font-dot text-sm font-bold text-white mt-0.5">AES-GCM-256</div>
+                                    </div>
+                                    <div class="p-2 rounded bg-white/[0.03] border border-white/5">
+                                        <div class="text-[10px] text-neutral-400">AUTH STANDARD</div>
+                                        <div class="font-dot text-sm font-bold text-white mt-0.5">WebAuthn FIDO2</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Key Engineering Highlights -->
+                            <ul class="space-y-2 mb-6 text-xs text-neutral-300 font-sans">
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 text-white shrink-0 mt-0.5"></i>
+                                    <span>WebAuthn hardware key biometric login with zero plain-text secrets reaching the server.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 text-white shrink-0 mt-0.5"></i>
+                                    <span>Full cyber glass aesthetics with micro-interactions optimized for zero layout shift (CLS: 0).</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <!-- Tech Stack Pills -->
+                            <div class="flex flex-wrap gap-1.5 mb-6 pt-4 border-t border-white/[0.08]">
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Next.js 14</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">TypeScript</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Tailwind CSS</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Framer Motion</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Supabase</span>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="flex items-center gap-3">
+                                <button onclick="openSpecModal('quantum')" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white text-black text-xs font-bold hover:bg-neutral-200 transition-all">
+                                    <i data-lucide="info" class="w-3.5 h-3.5"></i>
+                                    <span>Inspect System Specs</span>
+                                </button>
+                                <a href="contact.html" class="px-3 py-2.5 rounded-xl bg-white/[0.05] hover:bg-white/10 border border-white/10 text-white text-xs font-mono transition-all flex items-center justify-center" title="Request Architecture Walkthrough">
+                                    <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ==================== 08. WEBSITE: OMNICOMMERCE ==================== -->
+                    <article class="project-card glass-card p-6 md:p-8 flex flex-col justify-between futuristic-reveal" data-category="website" data-tags="astro vue shopify cloudflare ecommerce web website">
+                        <div>
+                            <!-- Header Meta -->
+                            <div class="flex items-start justify-between gap-4 mb-4">
+                                <div class="flex items-center gap-2.5">
+                                    <span class="w-7 h-7 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center font-dot font-black text-xs text-white">08</span>
+                                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono tracking-wider bg-white/10 border border-white/20 text-neutral-200 uppercase">
+                                        WEBSITE
+                                    </span>
+                                </div>
+                                <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-400">
+                                    <span class="w-2 h-2 rounded-full bg-white"></span>
+                                    <span>EDGE ACCELERATED</span>
+                                </div>
+                            </div>
+
+                            <!-- Title & Subtitle -->
+                            <h2 class="font-dot text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
+                                OmniCommerce — Ultra-Fast Headless Storefront & Checkout
+                            </h2>
+                            <p class="text-xs sm:text-sm text-neutral-400 leading-relaxed mb-6 font-sans">
+                                Edge-rendered headless commerce frontend connected to Shopify Storefront API via Cloudflare Workers, achieving instantaneous sub-200ms global page transitions.
+                            </p>
+
+                            <!-- Interactive Telemetry Mockup Box -->
+                            <div class="telemetry-code rounded-xl p-4 mb-6 text-xs text-neutral-300 font-mono space-y-2">
+                                <div class="flex items-center justify-between border-b border-white/10 pb-2 text-[11px] text-neutral-400">
+                                    <span class="flex items-center gap-1.5"><i data-lucide="shopping-bag" class="w-3.5 h-3.5"></i> edge_cdn: Cloudflare Global Workers</span>
+                                    <span class="text-white">+3.8x CONV</span>
+                                </div>
+                                <div class="grid grid-cols-3 gap-2 pt-1 text-center">
+                                    <div class="p-2 rounded bg-white/[0.03] border border-white/5">
+                                        <div class="text-[10px] text-neutral-400">GLOBAL TTFB</div>
+                                        <div class="font-dot text-sm font-bold text-white mt-0.5">180ms</div>
+                                    </div>
+                                    <div class="p-2 rounded bg-white/[0.03] border border-white/5">
+                                        <div class="text-[10px] text-neutral-400">CART MUTATION</div>
+                                        <div class="font-dot text-sm font-bold text-white mt-0.5">Optimistic</div>
+                                    </div>
+                                    <div class="p-2 rounded bg-white/[0.03] border border-white/5">
+                                        <div class="text-[10px] text-neutral-400">IMAGE COMPRESS</div>
+                                        <div class="font-dot text-sm font-bold text-white mt-0.5">AVIF / WebP</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Key Engineering Highlights -->
+                            <ul class="space-y-2 mb-6 text-xs text-neutral-300 font-sans">
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 text-white shrink-0 mt-0.5"></i>
+                                    <span>Optimistic client state UI allowing shoppers to checkout in 2 clicks without screen flashes.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 text-white shrink-0 mt-0.5"></i>
+                                    <span>Dynamic localized multi-currency conversion with automatic geo-IP routing.</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <!-- Tech Stack Pills -->
+                            <div class="flex flex-wrap gap-1.5 mb-6 pt-4 border-t border-white/[0.08]">
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Astro</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Vue 3</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Shopify API</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Cloudflare Workers</span>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/[0.1] text-neutral-300">Tailwind</span>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="flex items-center gap-3">
+                                <button onclick="openSpecModal('omni')" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white text-black text-xs font-bold hover:bg-neutral-200 transition-all">
+                                    <i data-lucide="info" class="w-3.5 h-3.5"></i>
+                                    <span>Inspect System Specs</span>
+                                </button>
+                                <a href="contact.html" class="px-3 py-2.5 rounded-xl bg-white/[0.05] hover:bg-white/10 border border-white/10 text-white text-xs font-mono transition-all flex items-center justify-center" title="Request Architecture Walkthrough">
+                                    <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+
+                <!-- Empty State (Hidden by default) -->
+                <div id="no-results-message" class="hidden text-center py-20 border border-white/10 rounded-2xl bg-white/[0.02]">
+                    <i data-lucide="terminal" class="w-10 h-10 text-neutral-500 mx-auto mb-3"></i>
+                    <h3 class="font-dot text-lg font-bold text-white mb-1">NO MATCHING DEPLOYMENTS FOUND</h3>
+                    <p class="text-xs text-neutral-400 font-mono">Try adjusting your search query or reset the discipline filter.</p>
+                    <button onclick="resetFilters()" class="mt-4 px-4 py-2 rounded-full bg-white text-black text-xs font-bold hover:bg-neutral-200">
+                        Reset All Filters
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==================== PRODUCTION ARCHITECTURE FOOTER CALLOUT ==================== -->
+        <section class="py-16 border-t border-white/[0.08] bg-black/60">
+            <div class="max-w-5xl mx-auto px-6">
+                <div class="glass-card p-8 sm:p-12 text-center relative overflow-hidden">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.06] border border-white/[0.15] text-[10px] font-mono uppercase tracking-widest text-neutral-300 mb-4">
+                        <span>NEED A CUSTOM TAILORED BUILD?</span>
+                    </div>
+                    <h2 class="font-dot text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white mb-4">
+                        HAVE A HIGH-IMPACT SYSTEM IN MIND?
+                    </h2>
+                    <p class="text-xs sm:text-sm text-neutral-400 max-w-xl mx-auto font-sans leading-relaxed mb-8">
+                        Whether you need a high-scale public platform, an offline field app, or an autonomous backend pipeline, I build production software with high reliability and zero downtime.
+                    </p>
+                    <div class="flex flex-wrap items-center justify-center gap-4">
+                        <a href="contact.html" class="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-white text-black font-bold text-sm hover:bg-neutral-200 transition-all shadow-xl active:scale-95">
+                            <i data-lucide="sparkles" class="w-4 h-4"></i>
+                            <span>Initiate Engineering Brief</span>
+                        </a>
+                        <a href="services.html" class="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-white/[0.06] border border-white/20 text-white font-mono text-xs hover:bg-white/10 transition-all">
+                            <span>View All 06 Core Services</span>
+                            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==================== INTERACTIVE SYSTEM SPEC MODAL ==================== -->
+    <div id="project-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-xl transition-opacity duration-300">
+        <div class="relative w-full max-w-3xl glass-card border border-white/25 max-h-[90vh] flex flex-col shadow-2xl">
+            <!-- Modal Header -->
+            <div class="p-6 border-b border-white/[0.1] flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <span id="modal-discipline-badge" class="px-2.5 py-0.5 rounded-full text-[10px] font-mono tracking-wider bg-white/10 border border-white/20 text-neutral-200 uppercase">
+                        SYSTEM
+                    </span>
+                    <h3 id="modal-title" class="font-dot text-lg sm:text-xl font-bold text-white tracking-tight">
+                        Specification Detail
+                    </h3>
+                </div>
+                <button onclick="closeSpecModal()" class="p-1.5 rounded-lg text-neutral-400 hover:text-white hover:bg-white/10 transition-colors" aria-label="Close modal">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <!-- Modal Content (Scrollable) -->
+            <div id="modal-body" class="p-6 overflow-y-auto space-y-6 text-xs sm:text-sm text-neutral-300 font-sans">
+                <!-- Dynamically Populated by JS -->
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="p-4 sm:p-6 border-t border-white/[0.1] bg-black/40 flex items-center justify-between gap-4">
+                <span class="text-[11px] font-mono text-neutral-400">PRESS ESC TO DISMISS</span>
+                <div class="flex items-center gap-3">
+                    <button onclick="closeSpecModal()" class="px-4 py-2 rounded-xl text-xs font-mono text-neutral-300 hover:text-white hover:bg-white/10 transition-all">
+                        Close
+                    </button>
+                    <a href="contact.html" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white text-black text-xs font-bold hover:bg-neutral-200 transition-all">
+                        <span>Deploy Similar System</span>
+                        <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="border-t border-white/[0.08] bg-black py-12 relative z-10 text-xs font-mono text-neutral-500">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-3">
+                <span class="font-dot font-black text-sm text-white tracking-widest">AZAREL</span>
+                <span>// DIGITAL SYSTEMS & AUTOMATIONS</span>
+            </div>
+            <div class="flex items-center gap-6">
+                <a href="index.html" class="hover:text-white transition-colors">Home</a>
+                <a href="services.html" class="hover:text-white transition-colors">Services</a>
+                <a href="projects.html" class="text-white font-bold transition-colors">Projects</a>
+                <a href="experiences.html" class="hover:text-white transition-colors">Experiences</a>
+                <a href="contact.html" class="hover:text-white transition-colors">Contact</a>
+            </div>
+            <div>
+                © 2026 AZAREL. ALL RIGHTS RESERVED.
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== JAVASCRIPT LOGIC ==================== -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Mobile Hamburger Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        // Project Specifications Database
+        const projectSpecs = {
+            'lgu-os': {
+                title: 'LGU-OS — Municipal Cloud & Civil Operations Engine',
+                discipline: 'DISTRIBUTED SYSTEM',
+                metrics: '42,850+ Citizens Served • < 118ms Latency • 99.98% SLA',
+                overview: 'LGU-OS was architected to replace outdated, manual paper-based local government processing with an immutable, high-throughput civil administration portal.',
+                architecture: 'Built using Golang for microservice speed and type safety, paired with a clustered PostgreSQL instance featuring row-level encryption. Redis handles ephemeral citizen queue token generation, while Docker containers ensure rapid deployment across government server nodes.',
+                challenges: 'Navigating unstable local power grids and network dropouts required designing a local WAL (Write-Ahead Logging) sync cache that guarantees civil registry transactions never duplicate or corrupt during sudden outages.',
+                deliverables: [
+                    'Multi-Tenant Municipal Property Tax Assessment Engine',
+                    'Cryptographic Barcode Issuance for Civil Registry Documents',
+                    'Real-Time Citizen Queue Management with SMS Pings',
+                    'Auditable Land Parcel GIS & Ownership Registry'
+                ],
+                stack: ['Golang', 'PostgreSQL', 'Docker', 'Redis', 'Tailwind CSS']
+            },
+            'sentinel': {
+                title: 'Sentinel — Infrastructure Telemetry & Daemon Sentinel',
+                discipline: 'SYSTEMS INFRASTRUCTURE',
+                metrics: '500,000 events/sec • < 0.8ms Dispatch • 4.2 MB RAM',
+                overview: 'A zero-overhead Linux daemon engineered in Rust that taps into kernel-level eBPF tracepoints to observe network socket degradation, memory leaks, and malicious binary execution.',
+                architecture: 'Compiled directly to bare-metal binaries with zero garbage collection pauses. Emits high-frequency telemetry metrics into TimescaleDB time-series storage and triggers automated DNS traffic rerouting before hardware failures manifest.',
+                challenges: 'Achieving sub-millisecond anomaly detection without utilizing more than 0.5% of host CPU required writing ring-buffer memory handlers and lock-free concurrency queues.',
+                deliverables: [
+                    'eBPF Socket Snooping & Drop Detection Engine',
+                    'Encrypted Peer-to-Peer Heartbeat Mesh',
+                    'Sub-Millisecond Automated DNS Failover Trigger',
+                    'Prometheus & Grafana Exporter Daemon'
+                ],
+                stack: ['Rust', 'eBPF', 'TimescaleDB', 'Prometheus', 'Grafana API']
+            },
+            'apex': {
+                title: 'Apex — Headless Scraping & Web Intelligence Mesh',
+                discipline: 'AUTONOMOUS PIPELINE',
+                metrics: '2.4M records/day • 99.4% Bypass Rate • 0.02s Transform',
+                overview: 'A distributed web intelligence cluster engineered to scrape, normalize, and extract millions of data records daily across hostile web environments with aggressive anti-bot defenses.',
+                architecture: 'Powered by Python Playwright running in headless container clusters, orchestrated via Celery and Redis. Scraping workers rotate dynamic residential IP pools, emulate authentic human biometric mouse curvatures, and pipe sanitized payloads directly into DuckDB.',
+                challenges: 'Evading multi-layered Cloudflare Turnstile, PerimeterX, and Akamai challenges required building dynamic canvas noise injection and TLS client hello fingerprint spoofing.',
+                deliverables: [
+                    'Adaptive Anti-Bot & Fingerprint Spoofing Subsystem',
+                    'Dynamic DOM Mutation Fallback Parser',
+                    'Distributed Celery Task Queue with Auto-Healing',
+                    'Live Columnar Data Warehouse Ingestion (DuckDB/S3)'
+                ],
+                stack: ['Python', 'Playwright', 'Celery', 'Redis', 'DuckDB']
+            },
+            'ledgerflow': {
+                title: 'LedgerFlow — Webhook & Financial Reconciliation Suite',
+                discipline: 'FINANCIAL AUTOMATION',
+                metrics: '$4.2M Reconciled • 100% Idempotency • < 350ms Dispute Alert',
+                overview: 'High-velocity transaction ingestion pipeline designed to balance multi-currency balances across international payment gateways, eliminating charge discrepancies.',
+                architecture: 'Engineered in TypeScript on Node.js using Fastify for ultra-low overhead. Employs Redis Redlock distributed locking to guarantee idempotency across concurrent incoming webhook bursts.',
+                challenges: 'Preventing race conditions where multiple webhooks from different payment providers report contradictory dispute states simultaneously.',
+                deliverables: [
+                    'Idempotent Event Ingestion Gateway (Stripe, PayPal, Adyen)',
+                    'Automated Double-Entry Ledger Bookkeeper',
+                    'Automated Forex Currency Real-Time Normalizer',
+                    'Dispute Early Warning System with Slack/Discord Hooks'
+                ],
+                stack: ['Node.js', 'TypeScript', 'Fastify', 'PostgreSQL', 'Stripe API']
+            },
+            'drrm': {
+                title: 'Citizen DRRM Sync — Offline Evacuation & Disaster App',
+                discipline: 'MOBILE APPLICATION',
+                metrics: '100% Offline Capable • P2P BLE Mesh • 2.8 MB Bundle',
+                overview: 'A life-saving mobile app built for disaster risk reduction, enabling citizens to navigate evacuation routes and communicate during catastrophic telecom infrastructure collapse.',
+                architecture: 'Developed with React Native and powered by WatermelonDB on SQLite. Houses pre-rendered offline vector map tiles and establishes local peer-to-peer Bluetooth Low Energy mesh clusters.',
+                challenges: 'Keeping battery consumption minimal while broadcasting peer-to-peer survival beacons continuously in emergency blackout scenarios.',
+                deliverables: [
+                    'Offline Vector Map Navigation with Shelter Capacities',
+                    'Peer-to-Peer Bluetooth Mesh SOS Relay',
+                    'Digital Triage & Medical Questionnaire Form',
+                    'Acoustic Strobe Emergency Beacon'
+                ],
+                stack: ['React Native', 'WatermelonDB', 'SQLite', 'Tailwind', 'MapLibre']
+            },
+            'fleetpulse': {
+                title: 'FleetPulse — Dynamic Fleet Telematics & Dispatch App',
+                discipline: 'MOBILE APPLICATION',
+                metrics: '184 Active Trucks • 15% Fuel Saved • 1-Sec GPS Latency',
+                overview: 'Cross-platform dispatch companion providing delivery drivers and dispatchers with instant telemetry, automated multi-stop route re-ordering, and digital proof of delivery.',
+                architecture: 'Built using Flutter and Dart, synchronizing live vehicle location telemetry via resilient WebSockets with automated fallback to exponential backoff HTTP polling.',
+                challenges: 'Managing intermittent mobile signal across mountainous terrain without dropping telemetry coordinates.',
+                deliverables: [
+                    'Live Geofence Boundary Alerts with Estimated Arrival Times',
+                    'Dynamic Waypoint Re-Ordering Based on Road Incidents',
+                    'Biometric Electronic Proof of Delivery (e-POD)',
+                    'Driver Performance & Fuel Burn Telemetry Dashboard'
+                ],
+                stack: ['Flutter', 'Dart', 'WebSockets', 'Google Maps SDK', 'Firebase']
+            },
+            'quantum': {
+                title: 'Quantum Vault — Zero-Trust Security & Key Management Portal',
+                discipline: 'WEB PLATFORM',
+                metrics: '100/100 Lighthouse • 0.38s FCP • AES-GCM-256 Client Encrypted',
+                overview: 'Ultra-fast, zero-knowledge web dashboard for enterprise infrastructure administrators to rotate cryptographic keys, hardware security modules, and access permissions.',
+                architecture: 'Next.js 14 App Router paired with Tailwind CSS and Framer Motion. Zero plain-text secrets ever touch the network; all key decryption takes place in the client WebCrypto API.',
+                challenges: 'Balancing intense cryptographic client operations with smooth 60fps glassmorphic animations and zero cumulative layout shift (CLS: 0).',
+                deliverables: [
+                    'WebAuthn FIDO2 Biometric Hardware Key Authentication',
+                    'Zero-Knowledge Client-Side AES-256 Vault Decryption',
+                    'Real-Time Security Posture Incident Stream',
+                    'Sub-400ms First Contentful Paint Global Benchmark'
+                ],
+                stack: ['Next.js 14', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Supabase']
+            },
+            'omni': {
+                title: 'OmniCommerce — Ultra-Fast Headless Storefront & Checkout',
+                discipline: 'WEB PLATFORM',
+                metrics: '+3.8x Conversion • 180ms TTFB • Zero Layout Shift',
+                overview: 'Headless e-commerce architecture designed for ultra-hyped product drops and luxury brands requiring instantaneous load speeds and zero checkout friction.',
+                architecture: 'Built using Astro with island architecture for Vue 3 interactive cart elements. Edge-rendered across Cloudflare Workers directly against the Shopify Storefront GraphQL API.',
+                challenges: 'Achieving sub-200ms global TTFB while handling explosive flash-sale checkout spikes of 10,000+ simultaneous checkouts without cart drops.',
+                deliverables: [
+                    'Edge-Rendered SSR with Cloudflare Workers Cache Invalidation',
+                    'Optimistic Cart Mutations with Zero Page Reloads',
+                    'Automatic Geo-IP Currency & Tax Conversion',
+                    'High-DPI Responsive Image Pipeline with AVIF/WebP'
+                ],
+                stack: ['Astro', 'Vue 3', 'Shopify API', 'Cloudflare Workers', 'Tailwind']
+            }
+        };
+
+        // Open Modal Function
+        function openSpecModal(key) {
+            const spec = projectSpecs[key];
+            if (!spec) return;
+
+            const modal = document.getElementById('project-modal');
+            const title = document.getElementById('modal-title');
+            const badge = document.getElementById('modal-discipline-badge');
+            const body = document.getElementById('modal-body');
+
+            title.textContent = spec.title;
+            badge.textContent = spec.discipline;
+
+            body.innerHTML = `
+                <div>
+                    <h4 class="text-xs font-mono text-white/50 uppercase tracking-widest mb-1">KEY PERFORMANCE METRICS</h4>
+                    <div class="p-3 rounded-xl bg-white/[0.04] border border-white/10 font-mono text-xs text-white">
+                        ${spec.metrics}
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-mono text-white/50 uppercase tracking-widest mb-2">SYSTEM OVERVIEW</h4>
+                    <p class="text-neutral-300 leading-relaxed font-sans">${spec.overview}</p>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-mono text-white/50 uppercase tracking-widest mb-2">ARCHITECTURE & ENGINEERING</h4>
+                    <p class="text-neutral-300 leading-relaxed font-sans">${spec.architecture}</p>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-mono text-white/50 uppercase tracking-widest mb-2">KEY CHALLENGES SOLVED</h4>
+                    <p class="text-neutral-300 leading-relaxed font-sans">${spec.challenges}</p>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-mono text-white/50 uppercase tracking-widest mb-2">PRODUCTION DELIVERABLES</h4>
+                    <ul class="space-y-1.5">
+                        ${spec.deliverables.map(d => `
+                            <li class="flex items-start gap-2 text-xs">
+                                <span class="w-1.5 h-1.5 rounded-full bg-white mt-1.5 shrink-0"></span>
+                                <span>${d}</span>
+                            </li>
+                        `).join('')}
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-mono text-white/50 uppercase tracking-widest mb-2">DEPLOYMENT STACK</h4>
+                    <div class="flex flex-wrap gap-1.5">
+                        ${spec.stack.map(s => `
+                            <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/10 border border-white/20 text-white">${s}</span>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            lucide.createIcons();
+        }
+
+        // Close Modal Function
+        function closeSpecModal() {
+            const modal = document.getElementById('project-modal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        // ESC key and backdrop click listener for modal
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeSpecModal();
+        });
+        document.getElementById('project-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'project-modal') closeSpecModal();
+        });
+
+        // Filter and Search Logic
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+        const searchInput = document.getElementById('project-search');
+        const filteredCount = document.getElementById('filtered-count');
+        const activeCategoryLabel = document.getElementById('active-category-label');
+        const noResultsMessage = document.getElementById('no-results-message');
+
+        let currentFilter = 'all';
+        let searchQuery = '';
+
+        function updateProjectDisplay() {
+            let visibleCount = 0;
+
+            projectCards.forEach(card => {
+                const category = card.getAttribute('data-category');
+                const tags = card.getAttribute('data-tags') || '';
+                const title = card.querySelector('h2') ? card.querySelector('h2').textContent.toLowerCase() : '';
+                const desc = card.querySelector('p') ? card.querySelector('p').textContent.toLowerCase() : '';
+
+                const matchesFilter = (currentFilter === 'all' || category === currentFilter);
+                const matchesSearch = !searchQuery || 
+                                      tags.toLowerCase().includes(searchQuery) || 
+                                      title.includes(searchQuery) || 
+                                      desc.includes(searchQuery);
+
+                if (matchesFilter && matchesSearch) {
+                    card.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            filteredCount.textContent = visibleCount;
+            if (visibleCount === 0) {
+                noResultsMessage.classList.remove('hidden');
+            } else {
+                noResultsMessage.classList.add('hidden');
+            }
+        }
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentFilter = btn.getAttribute('data-filter');
+
+                if (currentFilter === 'all') activeCategoryLabel.textContent = 'ALL ARCHIVES';
+                else if (currentFilter === 'website') activeCategoryLabel.textContent = 'WEBSITES ONLY';
+                else if (currentFilter === 'app') activeCategoryLabel.textContent = 'APPS ONLY';
+                else if (currentFilter === 'system') activeCategoryLabel.textContent = 'SYSTEMS ONLY';
+                else if (currentFilter === 'automation') activeCategoryLabel.textContent = 'AUTOMATIONS ONLY';
+
+                updateProjectDisplay();
+            });
+        });
+
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                searchQuery = e.target.value.trim().toLowerCase();
+                updateProjectDisplay();
+            });
+        }
+
+        function resetFilters() {
+            currentFilter = 'all';
+            searchQuery = '';
+            if (searchInput) searchInput.value = '';
+            filterBtns.forEach(b => {
+                if (b.getAttribute('data-filter') === 'all') b.classList.add('active');
+                else b.classList.remove('active');
+            });
+            activeCategoryLabel.textContent = 'ALL ARCHIVES';
+            updateProjectDisplay();
+        }
+
+        // 3D Spatial Holographic Reveal Observer
+        (function initHolographicObserver() {
+            const revealElements = document.querySelectorAll('.futuristic-reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                    }
+                });
+            }, {
+                threshold: 0.08,
+                rootMargin: '0px 0px -30px 0px'
+            });
+
+            revealElements.forEach(el => observer.observe(el));
+        })();
+
+        // ==================== PURE BLACK & WHITE HIGH-INTENSITY SECTION ENTRANCE GLITCH ====================
+        (function initCardScrollGlitch() {
+            const allCards = Array.from(document.querySelectorAll('.glass-card, .glass-subcard')).filter(el => {
+                if (el.classList.contains('glass-subcard') && el.closest('.glass-card')) {
+                    return false;
+                }
+                return true;
+            });
+
+            if (!allCards.length) return;
+
+            let variantToggle = false;
+
+            function triggerCardGlitch(card) {
+                if (!card) return;
+
+                const addClass = variantToggle ? 'bw-glitch-a' : 'bw-glitch-b';
+                const removeClass = variantToggle ? 'bw-glitch-b' : 'bw-glitch-a';
+                variantToggle = !variantToggle;
+
+                card.classList.remove(removeClass);
+                card.classList.remove(addClass);
+                void card.offsetWidth;
+                card.classList.add(addClass);
+
+                clearTimeout(card._glitchTimeout);
+                card._glitchTimeout = setTimeout(() => {
+                    card.classList.remove('bw-glitch-a', 'bw-glitch-b');
+                }, 350);
+            }
+
+            // Trigger glitch ONLY when entering viewport (scrolling to section)
+            const cardObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    const card = entry.target;
+                    if (entry.isIntersecting) {
+                        // Glitch only on entrance
+                        if (!card._hasGlitchEntered) {
+                            card._hasGlitchEntered = true;
+                            const siblings = Array.from(card.parentElement ? card.parentElement.children : []);
+                            const siblingIndex = siblings.indexOf(card);
+                            const delay = Math.max(0, siblingIndex) * 45;
+
+                            setTimeout(() => {
+                                triggerCardGlitch(card);
+                            }, Math.min(delay, 200));
+                        }
+                    } else {
+                        // Reset when scrolled out of view so it can glitch on next re-entrance
+                        card._hasGlitchEntered = false;
+                        card.classList.remove('bw-glitch-a', 'bw-glitch-b');
+                    }
+                });
+            }, {
+                threshold: 0.12,
+                rootMargin: '0px 0px -40px 0px'
+            });
+
+            allCards.forEach(card => {
+                cardObserver.observe(card);
+
+                // Interactive mouse hover micro-burst
+                card.addEventListener('mouseenter', () => {
+                    triggerCardGlitch(card);
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

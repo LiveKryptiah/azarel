@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services — Azarel • Websites • Systems • Apps • Automations</title>
+    <meta name="description" content="Explore Azarel's digital engineering services: high-speed web platforms, enterprise automation pipelines, cross-platform apps, data security, and custom ETL scraping bots.">
+
+    <!-- Google Fonts: Doto (Dot Matrix), DotGothic16, Plus Jakarta Sans, Space Grotesk, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Doto:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            base: '#000000',
+                            surface: '#09090b',
+                            surfaceAlt: '#121215',
+                            card: '#0e0e11',
+                            border: 'rgba(255, 255, 255, 0.1)',
+                            borderHover: 'rgba(255, 255, 255, 0.25)',
+                            muted: '#a1a1aa',
+                            subtle: '#71717a'
+                        }
+                    },
+                    fontFamily: {
+                        dot: ['"Doto"', '"DotGothic16"', 'monospace'],
+                        sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
+                        heading: ['"Space Grotesk"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Strict Black & White Theme */
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::selection {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        /* Dot Font Utility */
+        .font-dot {
+            font-family: 'Doto', 'DotGothic16', monospace;
+            font-feature-settings: "ss01" on, "ss02" on;
+        }
+
+        /* Subtle Background Monochrome Grid */
+        .bg-grid-pattern {
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* Radial Vignette Mask */
+        .mask-radial {
+            mask-image: radial-gradient(ellipse 80% 60% at 50% 15%, black 35%, transparent 100%);
+            -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 15%, black 35%, transparent 100%);
+        }
+
+        /* Monochrome Ambient Glow */
+        .hero-glow {
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 750px;
+            height: 480px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 45%, rgba(0, 0, 0, 0) 75%);
+            filter: blur(80px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Glassmorphism with Top-Left Light Reflection */
+        .glass-card {
+            position: relative;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%), rgba(12, 12, 14, 0.8);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            border-top: 1px solid rgba(255, 255, 255, 0.35);
+            border-left: 1px solid rgba(255, 255, 255, 0.22);
+            box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.9), 
+                        inset 1px 1px 0px rgba(255, 255, 255, 0.25);
+            border-radius: 1.25rem;
+            overflow: hidden;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Top-Left Light Sheen Reflection */
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 240px;
+            height: 240px;
+            background: radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.05) 45%, transparent 75%);
+            pointer-events: none;
+            border-radius: inherit;
+            z-index: 2;
+            transition: opacity 0.35s ease;
+        }
+
+        .glass-card:hover {
+            border-top-color: rgba(255, 255, 255, 0.6);
+            border-left-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 24px 60px -10px rgba(0, 0, 0, 0.95), 
+                        0 0 40px -10px rgba(255, 255, 255, 0.15),
+                        inset 1px 1px 0px rgba(255, 255, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .glass-card:hover::before {
+            background: radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.32) 0%, rgba(255, 255, 255, 0.08) 50%, transparent 80%);
+        }
+
+        /* Smaller Sub-Card Glass Morph with Top-Left Specular Highlight */
+        .glass-subcard {
+            position: relative;
+            background: rgba(18, 18, 22, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-top: 1px solid rgba(255, 255, 255, 0.25);
+            border-left: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.18);
+            overflow: hidden;
+            border-radius: 0.85rem;
+        }
+
+        .glass-subcard::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 140px;
+            height: 140px;
+            background: radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.16) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* 3D Spatial Holographic Reveal Animation */
+        .futuristic-reveal {
+            opacity: 0;
+            transform: perspective(1200px) translateY(42px) rotateX(6deg) scale(0.97);
+            transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform, opacity;
+        }
+        .futuristic-reveal.revealed {
+            opacity: 1;
+            transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1);
+        }
+        .reveal-delay-1 { transition-delay: 80ms; }
+        .reveal-delay-2 { transition-delay: 160ms; }
+        .reveal-delay-3 { transition-delay: 240ms; }
+        .reveal-delay-4 { transition-delay: 320ms; }
+
+        /* Custom Scrollbars */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Toast notification */
+        #toast {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        /* ==================== PURE BLACK & WHITE HIGH-INTENSITY CYBER CARD GLITCH ==================== */
+        @keyframes bw-card-tear-a {
+            0% {
+                transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(0, 0, 0) skewX(0deg);
+                filter: brightness(1) contrast(1);
+            }
+            15% {
+                transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(-14px, 1.5px, 0) skewX(-3deg);
+                filter: brightness(2) contrast(2.6);
+            }
+            35% {
+                transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(16px, -2px, 0) skewX(3.5deg);
+                filter: brightness(0.5) contrast(2.2);
+            }
+            55% {
+                transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(-11px, 2px, 0) skewX(-2deg);
+                filter: brightness(2.2) contrast(2.8);
+            }
+            75% {
+                transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(8px, -1px, 0) skewX(1.5deg);
+                filter: brightness(0.8) contrast(1.6);
+            }
+            90% {
+                transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(-3px, 1px, 0) skewX(-0.8deg);
+                filter: brightness(1.3) contrast(1.2);
+            }
+            100% {
+                transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(0, 0, 0) skewX(0deg);
+                filter: brightness(1) contrast(1);
+            }
+        }
+
+        @keyframes bw-card-tear-b {
+            0% {
+                transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(0, 0, 0) skewX(0deg);
+                filter: brightness(1) contrast(1);
+            }
+            15% {
+                transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(15px, -2px, 0) skewX(3.2deg);
+                filter: brightness(0.4) contrast(2.4);
+            }
+            35% {
+                transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(-16px, 1.5px, 0) skewX(-3.5deg);
+                filter: brightness(2.4) contrast(3);
+            }
+            55% {
+                transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(10px, 2px, 0) skewX(2deg);
+                filter: brightness(0.7) contrast(1.8);
+            }
+            75% {
+                transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(-7px, -1px, 0) skewX(-1.5deg);
+                filter: brightness(1.7) contrast(1.5);
+            }
+            90% {
+                transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(4px, 1px, 0) skewX(0.8deg);
+                filter: brightness(1.1) contrast(1.2);
+            }
+            100% {
+                transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1) translate3d(0, 0, 0) skewX(0deg);
+                filter: brightness(1) contrast(1);
+            }
+        }
+
+        /* Content Desynchronization Jitter inside Glitching Cards */
+        @keyframes bw-inner-desync {
+            0% { transform: translate3d(0, 0, 0); }
+            20% { transform: translate3d(9px, -1px, 0); }
+            40% { transform: translate3d(-10px, 1.5px, 0); }
+            60% { transform: translate3d(6px, -1px, 0); }
+            80% { transform: translate3d(-4px, 1px, 0); }
+            100% { transform: translate3d(0, 0, 0); }
+        }
+
+        /* Upper Horizontal Negative Inversion Tear Slice */
+        @keyframes bw-slice-tear-upper {
+            0% {
+                clip-path: inset(8% 0 72% 0);
+                transform: translate3d(-22px, 0, 0);
+                opacity: 0.95;
+            }
+            25% {
+                clip-path: inset(42% 0 32% 0);
+                transform: translate3d(24px, 0, 0);
+                opacity: 1;
+            }
+            50% {
+                clip-path: inset(14% 0 78% 0);
+                transform: translate3d(-26px, 0, 0);
+                opacity: 0.95;
+            }
+            75% {
+                clip-path: inset(68% 0 12% 0);
+                transform: translate3d(18px, 0, 0);
+                opacity: 1;
+            }
+            100% {
+                clip-path: inset(0 0 0 0);
+                transform: translate3d(0, 0, 0);
+                opacity: 0;
+            }
+        }
+
+        /* Lower Horizontal Negative Inversion Tear Slice */
+        @keyframes bw-slice-tear-lower {
+            0% {
+                clip-path: inset(58% 0 18% 0);
+                transform: translate3d(22px, 0, 0);
+                opacity: 0.95;
+            }
+            25% {
+                clip-path: inset(18% 0 62% 0);
+                transform: translate3d(-24px, 0, 0);
+                opacity: 1;
+            }
+            50% {
+                clip-path: inset(78% 0 6% 0);
+                transform: translate3d(20px, 0, 0);
+                opacity: 0.95;
+            }
+            75% {
+                clip-path: inset(34% 0 46% 0);
+                transform: translate3d(-18px, 0, 0);
+                opacity: 0.9;
+            }
+            100% {
+                clip-path: inset(0 0 0 0);
+                transform: translate3d(0, 0, 0);
+                opacity: 0;
+            }
+        }
+
+        /* Active Glitch State Classes */
+        .bw-glitch-a,
+        .bw-glitch-b {
+            position: relative !important;
+            border-color: #ffffff !important;
+            box-shadow: 
+                -10px 0 0 rgba(255, 255, 255, 0.85),
+                10px 0 0 rgba(255, 255, 255, 0.85),
+                0 0 35px rgba(255, 255, 255, 0.5),
+                inset 0 0 25px rgba(255, 255, 255, 0.35) !important;
+            z-index: 35 !important;
+        }
+
+        .bw-glitch-a {
+            animation: bw-card-tear-a 0.34s steps(3) both !important;
+        }
+
+        .bw-glitch-b {
+            animation: bw-card-tear-b 0.34s steps(3) both !important;
+        }
+
+        .bw-glitch-a > *,
+        .bw-glitch-b > * {
+            animation: bw-inner-desync 0.34s steps(2) both !important;
+        }
+
+        /* Dual-Band Black & White Negative Inversion Slices & CRT Scanlines */
+        .bw-glitch-a::before,
+        .bw-glitch-b::before {
+            content: '' !important;
+            position: absolute !important;
+            inset: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            pointer-events: none !important;
+            z-index: 60 !important;
+            border-radius: inherit !important;
+            backdrop-filter: invert(1) contrast(2.5) brightness(1.4) !important;
+            -webkit-backdrop-filter: invert(1) contrast(2.5) brightness(1.4) !important;
+            background: rgba(255, 255, 255, 0.18) !important;
+            animation: bw-slice-tear-lower 0.34s steps(2, start) both !important;
+        }
+
+        .bw-glitch-a::after,
+        .bw-glitch-b::after {
+            content: '' !important;
+            position: absolute !important;
+            inset: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            pointer-events: none !important;
+            z-index: 61 !important;
+            border-radius: inherit !important;
+            backdrop-filter: invert(1) contrast(2.8) brightness(1.6) !important;
+            -webkit-backdrop-filter: invert(1) contrast(2.8) brightness(1.6) !important;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(255, 255, 255, 0.45) 0px,
+                rgba(255, 255, 255, 0.45) 2px,
+                rgba(0, 0, 0, 0.7) 2px,
+                rgba(0, 0, 0, 0.7) 4px
+            ) !important;
+            animation: bw-slice-tear-upper 0.34s steps(2, start) both !important;
+        }
+    </style>
+</head>
+<body class="relative min-h-screen text-white antialiased selection:bg-white selection:text-black">
+
+    <!-- Global Background Elements -->
+    <div class="fixed inset-0 bg-grid-pattern mask-radial pointer-events-none z-0"></div>
+    <div class="hero-glow"></div>
+
+    <!-- Floating Background Parallax Telemetry Layer -->
+    <div id="parallax-telemetry-layer" class="fixed inset-0 pointer-events-none z-0 overflow-hidden select-none">
+        <div class="telemetry-tag absolute top-28 left-8 hidden lg:block text-[10px] font-mono text-white/20">
+            + [SRV_MOD: ACTIVE] // 120HZ
+        </div>
+        <div class="telemetry-tag absolute top-1/3 right-12 hidden xl:block text-[10px] font-mono text-white/20">
+            [SYS_CAPACITY] ➔ 99.9% UPTIME
+        </div>
+        <div class="telemetry-tag absolute top-2/3 left-10 hidden xl:block text-[10px] font-mono text-white/20">
+            + [ETL_PIPELINE: STREAM] // 0xFA48
+        </div>
+        <div class="telemetry-tag absolute bottom-24 right-24 hidden lg:block text-[10px] font-mono text-white/20">
+            DISPATCH: READY // 0x00FF
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 pointer-events-none flex items-center gap-3 px-5 py-3.5 rounded-full bg-white text-black font-semibold text-sm shadow-2xl shadow-white/20">
+        <i data-lucide="check-circle-2" class="w-4 h-4 text-black"></i>
+        <span id="toast-message">Service scoped successfully</span>
+    </div>
+
+    <!-- ==================== HEADER / NAVBAR ==================== -->
+    <header class="sticky top-0 z-40 w-full border-b border-white/[0.08] bg-black/85 backdrop-blur-xl">
+        <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+            <!-- Brand Logo with Dot Font -->
+            <a href="index.html" class="flex items-center gap-3 group">
+                <div class="w-8 h-8 rounded-lg bg-white/10 border border-white/20 p-[1px] flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
+                    <div class="w-full h-full bg-black rounded-[7px] flex items-center justify-center">
+                        <span class="font-dot font-black text-sm text-white tracking-widest">A</span>
+                    </div>
+                </div>
+                <span class="font-dot font-black text-xl tracking-wider text-white group-hover:text-neutral-300 transition-colors">
+                    AZAREL<span class="text-white">.</span>
+                </span>
+            </a>
+
+            <!-- Desktop Navigation: Cyber Glass Segmented Dock -->
+            <nav class="hidden lg:flex items-center gap-1 p-1 rounded-full bg-white/[0.04] border border-white/[0.1] backdrop-blur-xl shadow-[inset_0_1px_1px_rgba(255,255,255,0.12)]">
+                <a href="services.html" class="px-4 py-1.5 rounded-full text-xs font-semibold text-white bg-white/[0.12] border border-white/20 shadow-[0_0_12px_rgba(255,255,255,0.1)] transition-all">
+                    Services
+                </a>
+                <a href="projects.html" class="px-4 py-1.5 rounded-full text-xs font-medium text-neutral-400 hover:text-white hover:bg-white/[0.08] transition-all">
+                    Projects
+                </a>
+                <a href="experiences.html" class="px-4 py-1.5 rounded-full text-xs font-medium text-neutral-400 hover:text-white hover:bg-white/[0.08] transition-all">
+                    Experiences
+                </a>
+                <a href="resources.html" class="px-4 py-1.5 rounded-full text-xs font-medium text-neutral-400 hover:text-white hover:bg-white/[0.08] transition-all">
+                    Resources
+                </a>
+                <a href="recommendations.html" class="px-4 py-1.5 rounded-full text-xs font-medium text-neutral-400 hover:text-white hover:bg-white/[0.08] transition-all">
+                    Recommendations
+                </a>
+                <a href="pricing.html" class="px-4 py-1.5 rounded-full text-xs font-medium text-neutral-400 hover:text-white hover:bg-white/[0.08] transition-all">
+                    Pricing
+                </a>
+            </nav>
+
+            <!-- Right CTA Button: Start a Project -->
+            <div class="hidden sm:flex items-center gap-4">
+                <a href="contact.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-black text-xs xl:text-sm font-bold hover:bg-neutral-200 transition-all shadow-md active:scale-95">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                    <span>Start a Project</span>
+                </a>
+            </div>
+
+            <!-- Mobile Hamburger Toggle -->
+            <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg text-neutral-400 hover:text-white hover:bg-white/[0.08] transition-colors" aria-label="Toggle navigation">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobile-menu" class="hidden lg:hidden border-t border-white/[0.08] bg-black px-6 py-5 space-y-1.5">
+            <a href="services.html" class="mobile-nav-link block text-sm font-semibold text-white px-4 py-2.5 rounded-xl bg-white/[0.08] border border-white/[0.15]">Services</a>
+            <a href="projects.html" class="mobile-nav-link block text-sm font-medium text-neutral-300 hover:text-white px-4 py-2.5 rounded-xl hover:bg-white/[0.05] transition-all">Projects</a>
+            <a href="experiences.html" class="mobile-nav-link block text-sm font-medium text-neutral-300 hover:text-white px-4 py-2.5 rounded-xl hover:bg-white/[0.05] transition-all">Experiences</a>
+            <a href="resources.html" class="mobile-nav-link block text-sm font-medium text-neutral-300 hover:text-white px-4 py-2.5 rounded-xl hover:bg-white/[0.05] transition-all">Resources</a>
+            <a href="recommendations.html" class="mobile-nav-link block text-sm font-medium text-neutral-300 hover:text-white px-4 py-2.5 rounded-xl hover:bg-white/[0.05] transition-all">Recommendations</a>
+            <a href="pricing.html" class="mobile-nav-link block text-sm font-medium text-neutral-300 hover:text-white px-4 py-2.5 rounded-xl hover:bg-white/[0.05] transition-all">Pricing</a>
+            <div class="pt-3 border-t border-white/[0.08]">
+                <a href="contact.html" class="mobile-nav-link flex items-center justify-center gap-2 w-full px-5 py-3 rounded-full bg-white text-black text-sm font-bold hover:bg-neutral-200">
+                    <i data-lucide="sparkles" class="w-4 h-4"></i>
+                    <span>Start a Project</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative z-10">
+
+        <!-- ==================== SERVICES DIRECTORY HEADER ==================== -->
+        <section class="pt-8 pb-6 border-b border-white/[0.08] bg-black/40">
+            <div class="max-w-4xl mx-auto px-6 text-center">
+                <!-- Title in Dot Font (Original Large Size) -->
+                <h1 data-scramble="true" class="font-dot text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white uppercase mb-3">
+                    Core Services & Capabilities
+                </h1>
+                <!-- Concise Subtitle -->
+                <p class="text-xs sm:text-sm text-neutral-400 max-w-xl mx-auto font-mono">
+                    High-speed web platforms, backend daemons, mobile apps & automated pipelines.
+                </p>
+            </div>
+        </section>
+
+        <!-- ==================== COMPACT SERVICE FILTER BAR ==================== -->
+        <section class="py-2.5 border-b border-white/[0.08] bg-black/85 sticky top-20 z-30 backdrop-blur-md">
+            <div class="max-w-5xl mx-auto px-6 flex items-center justify-center gap-3 flex-wrap">
+                <div class="flex items-center justify-center gap-2 overflow-x-auto no-scrollbar py-0.5">
+                    <button onclick="filterServices('all')" id="filter-all" class="service-filter-btn px-3.5 py-1 rounded-full bg-white text-black text-xs font-bold transition-all shadow-sm">
+                        All Services (6)
+                    </button>
+                    <button onclick="filterServices('web')" id="filter-web" class="service-filter-btn px-3.5 py-1 rounded-full bg-white/[0.04] border border-white/[0.1] text-neutral-300 hover:text-white hover:border-white/30 text-xs font-medium transition-all">
+                        Web & Systems
+                    </button>
+                    <button onclick="filterServices('automation')" id="filter-automation" class="service-filter-btn px-3.5 py-1 rounded-full bg-white/[0.04] border border-white/[0.1] text-neutral-300 hover:text-white hover:border-white/30 text-xs font-medium transition-all">
+                        Automation & ETL
+                    </button>
+                    <button onclick="filterServices('mobile')" id="filter-mobile" class="service-filter-btn px-3.5 py-1 rounded-full bg-white/[0.04] border border-white/[0.1] text-neutral-300 hover:text-white hover:border-white/30 text-xs font-medium transition-all">
+                        Mobile & Apps
+                    </button>
+                    <button onclick="filterServices('security')" id="filter-security" class="service-filter-btn px-3.5 py-1 rounded-full bg-white/[0.04] border border-white/[0.1] text-neutral-300 hover:text-white hover:border-white/30 text-xs font-medium transition-all">
+                        Security & DBs
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== DETAILED SERVICES BENTO GRID ==================== -->
+        <section class="pt-6 pb-16 relative">
+            <div class="max-w-5xl mx-auto px-6">
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="services-container">
+
+                    <!-- SERVICE 01: High-Speed Web & Internal Systems -->
+                    <div class="glass-card p-7 lg:p-8 flex flex-col justify-between futuristic-reveal service-card" data-category="web">
+                        <div class="relative z-10 mb-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="w-10 h-10 rounded-xl bg-white/[0.06] border border-white/[0.18] flex items-center justify-center text-white shadow-sm">
+                                    <i data-lucide="layout" class="w-5 h-5 text-white"></i>
+                                </div>
+                                <span class="text-xs font-mono uppercase tracking-wider text-neutral-400 px-2.5 py-1 rounded-md bg-white/[0.05] border border-white/[0.1]">
+                                    01 // WEB_CORE
+                                </span>
+                            </div>
+
+                            <h3 class="font-dot text-xl font-bold text-white mb-2 uppercase">
+                                Custom Web Platforms & Internal Systems
+                            </h3>
+                            <p class="text-sm text-neutral-400 leading-relaxed mb-6">
+                                Enterprise-grade web applications designed for maximum performance, real-time telemetry, and scalable concurrency. I eliminate clunky off-the-shelf software with purpose-built administrative portals.
+                            </p>
+
+                            <!-- Deliverables List -->
+                            <div class="space-y-2.5 mb-6 text-xs text-neutral-300">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-4 h-4 rounded-full bg-white/10 border border-white/25 flex items-center justify-center shrink-0">
+                                        <i data-lucide="check" class="w-2.5 h-2.5 text-white"></i>
+                                    </div>
+                                    <span>Sub-second response times with Next.js 14 SSR & Edge caching</span>
+                                </div>
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-4 h-4 rounded-full bg-white/10 border border-white/25 flex items-center justify-center shrink-0">
+                                        <i data-lucide="check" class="w-2.5 h-2.5 text-white"></i>
+                                    </div>
+                                    <span>Role-Based Access Control (RBAC) with detailed audit logs</span>
+                                </div>
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-4 h-4 rounded-full bg-white/10 border border-white/25 flex items-center justify-center shrink-0">
+                                        <i data-lucide="check" class="w-2.5 h-2.5 text-white"></i>
+                                    </div>
+                                    <span>Automated reporting & one-click PDF / Excel data exports</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Visual Widget: Dot-Matrix Sparkline Chart -->
+                        <div class="glass-subcard p-4 relative z-10 mb-6">
+                            <div class="flex items-center justify-between mb-2 text-xs">
+                                <span class="font-medium text-neutral-300">Response Benchmark</span>
+                                <span class="font-mono text-white font-bold">24.6 ms (P99)</span>
+                            </div>
+                            <svg class="w-full h-10 overflow-visible" viewBox="0 0 100 30">
+                                <defs>
+                                    <pattern id="dot-s1" width="5" height="5" patternUnits="userSpaceOnUse">
+                                        <circle cx="2.5" cy="2.5" r="0.6" fill="rgba(255,255,255,0.15)"/>
+                                    </pattern>
+                                </defs>
+                                <rect width="100" height="30" fill="url(#dot-s1)"/>
+                                <path d="M0,24 Q25,18 45,12 T80,14 T100,6" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="1 3.5" stroke-linecap="round"/>
+                                <circle cx="0" cy="24" r="1.8" fill="#ffffff"/>
+                                <circle cx="25" cy="18" r="1.8" fill="#ffffff"/>
+                                <circle cx="45" cy="12" r="2.2" fill="#ffffff"/>
+                                <circle cx="70" cy="14" r="1.8" fill="#ffffff"/>
+                                <circle cx="100" cy="6" r="2.5" fill="#ffffff"/>
+                            </svg>
+                        </div>
+
+                        <!-- Tech Stack & Action Footer -->
+                        <div class="pt-4 border-t border-white/[0.08] flex items-center justify-between relative z-10">
+                            <div class="flex flex-wrap gap-1.5 text-[10px] font-mono text-neutral-400">
+                                <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.08]">Next.js</span>
+                                <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.08]">FastAPI</span>
+                                <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.08]">PostgreSQL</span>
+                            </div>
+                            <a href="contact.html?service=web" class="inline-flex items-center gap-1 text-xs font-bold text-white hover:text-neutral-300">
+                                <span>Scope Build</span>
+                                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- SERVICE 02: Workflow Automation & ETL Pipelines -->
+                    <div class="glass-card p-7 lg:p-8 flex flex-col justify-between futuristic-reveal reveal-delay-1 service-card" data-category="automation">
+                        <div class="relative z-10 mb-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="w-10 h-10 rounded-xl bg-white/[0.06] border border-white/[0.18] flex items-center justify-center text-white shadow-sm">
+                                    <i data-lucide="cpu" class="w-5 h-5 text-white"></i>
+                                </div>
+                                <span class="text-xs font-mono uppercase tracking-wider text-neutral-400 px-2.5 py-1 rounded-md bg-white/[0.05] border border-white/[0.1]">
+                                    02 // AUTO_FLOW
+                                </span>
+                            </div>
+
+                            <h3 class="font-dot text-xl font-bold text-white mb-2 uppercase">
+                                Workflow Automation & Real-Time ETL
+                            </h3>
+                            <p class="text-sm text-neutral-400 leading-relaxed mb-6">
+                                Zero-touch background automation pipelines that ingest webhooks, execute business logic, transform structured data, and dispatch alerts to your team automatically.
+                            </p>
+
+                            <!-- Deliverables List -->
+                            <div class="space-y-2.5 mb-6 text-xs text-neutral-300">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-4 h-4 rounded-full bg-white/10 border border-white/25 flex items-center justify-center shrink-0">
+                                        <i data-lucide="check" class="w-2.5 h-2.5 text-white"></i>
+                                    </div>
+                                    <span>Eliminates 100% of repetitive copy-paste spreadsheet work</span>
+                                </div>
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-4 h-4 rounded-full bg-white/10 border border-white/25 flex items-center justify-center shrink-0">
+                                        <i data-lucide="check" class="w-2.5 h-2.5 text-white"></i>
+                                    </div>
+                                    <span>Automated invoicing, receipt generation & ledger reconciliation</span>
+                                </div>
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-4 h-4 rounded-full bg-white/10 border border-white/25 flex items-center justify-center shrink-0">
+                                        <i data-lucide="check" class="w-2.5 h-2.5 text-white"></i>
+                                    </div>
+                                    <span>Instant push notifications via Telegram, Discord, and Email</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Visual Widget: Dot-Matrix Flow Tracker -->
+                        <div class="glass-subcard p-4 relative z-10 mb-6">
+                            <div class="flex items-center justify-between text-xs font-mono text-neutral-300">
+                                <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span> INGEST</span>
+                                <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-neutral-500"></i>
+                                <span>QUEUE &amp; PARSE</span>
+                                <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-neutral-500"></i>
+                                <span class="text-white font-bold">COMMIT</span>
+                            </div>
+                        </div>
+
+                        <!-- Tech Stack & Action Footer -->
+                        <div class="pt-4 border-t border-white/[0.08] flex items-center justify-between relative z-10">
+                            <div class="flex flex-wrap gap-1.5 text-[10px] font-mono text-neutral-400">
+                                <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.08]">Python</span>
+                                <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.08]">Redis</span>
+                                <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.08]">Docker</span>
+                            </div>
+                            <a href="contact.html?service=automation" class="inline-flex items-center gap-1 text-xs font-bold text-white hover:text-neutral-300">
+                                <span>Scope Build</span>
+                                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- SERVICE 03: Cross-Platform Mobile Applications -->
+                    <div class="glass-card p-7 lg:p-8 flex flex-col justify-between futuristic-reveal reveal-delay-2 service-card" data-category="mobile">
+                        <div class="relative z-10 mb-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="w-10 h-10 rounded-xl bg-white/[0.06] border border-white/[0.18] flex items-center justify-center text-white shadow-sm">
+                                    <i data-lucide="smartphone" class="w-5 h-5 text-white"></i>
+                                </div>
+                                <span class="text-xs font-mono uppercase tracking-wider text-neutral-400 px-2.5 py-1 rounded-md bg-white/[0.05] border border-white/[0.1]">
+                                    03 // APP_SYNC
+                                </span>
+                            </div>
+
+                            <h3 class="font-dot text-xl font-bold text-white mb-2 uppercase">
+                                Cross-Platform Mobile & Offline Sync
+                            </h3>
+                            <p class="text-sm text-neutral-400 leading-relaxed mb-6">
+                                Native-feel cross-platform mobile apps for iOS and Android with local SQLite caching, seamless cloud synchronization, push alerts, and camera integration.
+                            </p>
+
+                            <!-- Deliverables List -->
+                            <div class="space-y-2.5 mb-6 text-xs text-neutral-300">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-4 h-4 rounded-full bg-white/10 border border-white/25 flex items-center justify-center shrink-0">
+                                        <i data-lucide="check" class="w-2.5 h-2.5 text-white"></i>
+                                    </div>
+                                    <span>Single unified codebase for iOS, Android, and Desktop</span>
+                                </div>
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-4 h-4 rounded-full bg-white/10 border border-white/25 flex items-center justify-center shrink-0">
+                                        <i data-lucide="check" class="w-2.5 h-2.5 text-white"></i>
+                                    </div>
+                                    <span>Offline-first functionality with automatic delta sync on reconnect</span>
+                                </div>
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-4 h-4 rounded-full bg-white/10 border border-white/25 flex items-center justify-center shrink-0">
+                                        <i data-lucide="check" class="w-2.5 h-2.5 text-white"></i>
+                                    </div>
+                                    <span>Biometric authentication & hardware barcode / QR code scanning</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Visual Widget: Dot-Matrix Device Constellation -->
+                        <div class="glass-subcard p-4 relative z-10 mb-6 flex items-center justify-between text-xs font-mono text-neutral-400">
+                            <span class="text-white font-bold">iOS / ANDROID</span>
+                            <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+                            <span>OFFLINE CACHE</span>
+                            <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+                            <span class="text-white font-bold">CLOUD SYNC</span>
+                        </div>
+
+                        <!-- Tech Stack & Action Footer -->
+                        <div class="pt-4 border-t border-white/[0.08] flex items-center justify-between relative z-10">
+                            <div class="flex flex-wrap gap-1.5 text-[10px] font-mono text-neutral-400">
+                                <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.08]">Flutter</span>
+                                <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.08]">React Native</span>
+                                <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.08]">SQLite</span>
+                            </div>
+                            <a href="contact.html?service=mobile" class="inline-flex items-center gap-1 text-xs font-bold text-white hover:text-neutral-300">
+                                <span>Scope Build</span>
+                                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- SERVICE 04: Data Security, Resilient Architecture & DBs -->
+                    <div class="glass-card p-7 lg:p-8 flex flex-col justify-between futuristic-reveal reveal-delay-3 service-card" data-category="security">
+                        <div class="relative z-10 mb-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="w-10 h-10 rounded-xl bg-white/[0.06] border border-white/[0.18] flex items-center justify-center text-white shadow-sm">
+                                    <i data-lucide="shield-check" class="w-5 h-5 text-white"></i>
+                                </div>
+                                <span class="text-xs font-mono uppercase tracking-wider text-neutral-400 px-2.5 py-1 rounded-md bg-white/[0.05] border border-white/[0.1]">
+                                    04 // SEC_ARCH
+                                </span>
+                            </div>
+
+                            <h3 class="font-dot text-xl font-bold text-white mb-2 uppercase">
+                                Data Security, Fault Tolerance & Relational DBs
+                            </h3>
+                            <p class="text-sm text-neutral-400 leading-relaxed mb-6">
+                                Resilient system architectures designed to survive hardware failures, network anomalies, and spikes. Hardened database configurations with continuous automated backups.
+                            </p>
+
+                            <!-- Deliverables List -->
+                            <div class="space-y-2.5 mb-6 text-xs text-neutral-300">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-4 h-4 rounded-full bg-white/10 border border-white/25 flex items-center justify-center shrink-0">
+                                        <i data-lucide="check" class="w-2.5 h-2.5 text-white"></i>
+                                    </div>
+                                    <span>Encrypted secrets storage & end-to-end SSL/TLS certificates</span>
+                                </div>
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-4 h-4 rounded-full bg-white/10 border border-white/25 flex items-center justify-center shrink-0">
+                                        <i data-lucide="check" class="w-2.5 h-2.5 text-white"></i>
+                                    </div>
+                                    <span>Automated snapshot backups with point-in-time recovery</span>
+                                </div>
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-4 h-4 rounded-full bg-white/10 border border-white/25 flex items-center justify-center shrink-0">
+                                        <i data-lucide="check" class="w-2.5 h-2.5 text-white"></i>
+                                    </div>
+                                    <span>Query optimization & index tuning for sub-10ms data lookup</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Visual Widget: Dot-Matrix Security Status -->
+                        <div class="glass-subcard p-4 relative z-10 mb-6 flex items-center justify-between text-xs">
+                            <span class="font-mono text-neutral-400">STATUS: 100% ENCRYPTED</span>
+                            <span class="font-mono text-white font-bold bg-white/15 px-2 py-0.5 rounded border border-white/20">SHA-256</span>
+                        </div>
+
+                        <!-- Tech Stack & Action Footer -->
+                        <div class="pt-4 border-t border-white/[0.08] flex items-center justify-between relative z-10">
+                            <div class="flex flex-wrap gap-1.5 text-[10px] font-mono text-neutral-400">
+                                <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.08]">PostgreSQL</span>
+                                <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.08]">Linux</span>
+                                <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.08]">Cloudflare</span>
+                            </div>
+                            <a href="contact.html?service=security" class="inline-flex items-center gap-1 text-xs font-bold text-white hover:text-neutral-300">
+                                <span>Scope Build</span>
+                                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- SERVICE 05: Web Scraping Bots & Market Intelligence -->
+                    <div class="glass-card p-7 lg:p-8 flex flex-col justify-between futuristic-reveal service-card" data-category="automation">
+                        <div class="relative z-10 mb-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="w-10 h-10 rounded-xl bg-white/[0.06] border border-white/[0.18] flex items-center justify-center text-white shadow-sm">
+                                    <i data-lucide="globe" class="w-5 h-5 text-white"></i>
+                                </div>
+                                <span class="text-xs font-mono uppercase tracking-wider text-neutral-400 px-2.5 py-1 rounded-md bg-white/[0.05] border border-white/[0.1]">
+                                    05 // DATA_BOT
+                                </span>
+                            </div>
+
+                            <h3 class="font-dot text-xl font-bold text-white mb-2 uppercase">
+                                Web Scraping Bots & Market Intelligence ETL
+                            </h3>
+                            <p class="text-sm text-neutral-400 leading-relaxed mb-6">
+                                Resilient headless crawlers that bypass anti-bot blocks, parse dynamic JavaScript pages, structure raw HTML data, and sync clean datasets into PostgreSQL or Google Sheets.
+                            </p>
+
+                            <!-- Deliverables List -->
+                            <div class="space-y-2.5 mb-6 text-xs text-neutral-300">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-4 h-4 rounded-full bg-white/10 border border-white/25 flex items-center justify-center shrink-0">
+                                        <i data-lucide="check" class="w-2.5 h-2.5 text-white"></i>
+                                    </div>
+                                    <span>Headless browser automation with Playwright and Puppeteer</span>
+                                </div>
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-4 h-4 rounded-full bg-white/10 border border-white/25 flex items-center justify-center shrink-0">
+                                        <i data-lucide="check" class="w-2.5 h-2.5 text-white"></i>
+                                    </div>
+                                    <span>Smart proxy rotation and captcha avoidance systems</span>
+                                </div>
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-4 h-4 rounded-full bg-white/10 border border-white/25 flex items-center justify-center shrink-0">
+                                        <i data-lucide="check" class="w-2.5 h-2.5 text-white"></i>
+                                    </div>
+                                    <span>Daily scheduled runs with schema validation and drop alerts</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Visual Widget: Dot-Matrix Extraction Counter -->
+                        <div class="glass-subcard p-4 relative z-10 mb-6 flex items-center justify-between text-xs">
+                            <span class="font-mono text-neutral-400">EXTRACTION THROUGHPUT</span>
+                            <span class="font-mono text-white font-bold">14,200 records / hr</span>
+                        </div>
+
+                        <!-- Tech Stack & Action Footer -->
+                        <div class="pt-4 border-t border-white/[0.08] flex items-center justify-between relative z-10">
+                            <div class="flex flex-wrap gap-1.5 text-[10px] font-mono text-neutral-400">
+                                <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.08]">Playwright</span>
+                                <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.08]">Python</span>
+                                <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.08]">Pandas</span>
+                            </div>
+                            <a href="contact.html?service=scraping" class="inline-flex items-center gap-1 text-xs font-bold text-white hover:text-neutral-300">
+                                <span>Scope Build</span>
+                                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- SERVICE 06: Database Architecture & High-Performance Optimization -->
+                    <div class="glass-card p-7 lg:p-8 flex flex-col justify-between futuristic-reveal reveal-delay-1 service-card" data-category="security">
+                        <div class="relative z-10 mb-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="w-10 h-10 rounded-xl bg-white/[0.06] border border-white/[0.18] flex items-center justify-center text-white shadow-sm">
+                                    <i data-lucide="database" class="w-5 h-5 text-white"></i>
+                                </div>
+                                <span class="text-xs font-mono uppercase tracking-wider text-neutral-400 px-2.5 py-1 rounded-md bg-white/[0.05] border border-white/[0.1]">
+                                    06 // DB_PERF
+                                </span>
+                            </div>
+
+                            <h3 class="font-dot text-xl font-bold text-white mb-2 uppercase">
+                                Database Architecture & Query Optimization
+                            </h3>
+                            <p class="text-sm text-neutral-400 leading-relaxed mb-6">
+                                Eliminate slow page loads and database locks. I refactor data schemas, configure Redis caching, tune PostgreSQL connection pools, and design relational databases that handle peak loads.
+                            </p>
+
+                            <!-- Deliverables List -->
+                            <div class="space-y-2.5 mb-6 text-xs text-neutral-300">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-4 h-4 rounded-full bg-white/10 border border-white/25 flex items-center justify-center shrink-0">
+                                        <i data-lucide="check" class="w-2.5 h-2.5 text-white"></i>
+                                    </div>
+                                    <span>Relational schema normalization & foreign key constraint auditing</span>
+                                </div>
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-4 h-4 rounded-full bg-white/10 border border-white/25 flex items-center justify-center shrink-0">
+                                        <i data-lucide="check" class="w-2.5 h-2.5 text-white"></i>
+                                    </div>
+                                    <span>Multi-layer Redis in-memory cache for high-frequency queries</span>
+                                </div>
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-4 h-4 rounded-full bg-white/10 border border-white/25 flex items-center justify-center shrink-0">
+                                        <i data-lucide="check" class="w-2.5 h-2.5 text-white"></i>
+                                    </div>
+                                    <span>Zero-downtime database schema migrations</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Visual Widget: Dot-Matrix Performance Metrics -->
+                        <div class="glass-subcard p-4 relative z-10 mb-6 flex items-center justify-between text-xs font-mono">
+                            <span class="text-neutral-400">QUERY LATENCY REDUCTION</span>
+                            <span class="text-white font-bold">-78% EXEC_TIME</span>
+                        </div>
+
+                        <!-- Tech Stack & Action Footer -->
+                        <div class="pt-4 border-t border-white/[0.08] flex items-center justify-between relative z-10">
+                            <div class="flex flex-wrap gap-1.5 text-[10px] font-mono text-neutral-400">
+                                <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.08]">PostgreSQL</span>
+                                <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.08]">Redis</span>
+                                <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.08]">Supabase</span>
+                            </div>
+                            <a href="contact.html?service=database" class="inline-flex items-center gap-1 text-xs font-bold text-white hover:text-neutral-300">
+                                <span>Scope Build</span>
+                                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==================== 4-STEP DELIVERY TIMELINE ==================== -->
+        <section class="py-20 border-t border-white/[0.08] bg-black/40 relative">
+            <div class="max-w-5xl mx-auto px-6 text-center">
+                <div class="max-w-2xl mx-auto mb-16 futuristic-reveal">
+                    <div class="inline-block px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.12] text-[11px] font-mono uppercase tracking-wider text-neutral-300 mb-4">
+                        Structured Execution
+                    </div>
+                    <h2 class="font-dot text-3xl sm:text-4xl font-extrabold text-white uppercase mb-3">
+                        How We Engineer Your Solution
+                    </h2>
+                    <p class="text-neutral-400 text-sm sm:text-base leading-relaxed">
+                        A transparent, phased delivery methodology with zero guesswork.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 text-left">
+                    <!-- Step 1 -->
+                    <div class="glass-card p-6 futuristic-reveal reveal-delay-1">
+                        <div class="text-xs font-mono text-white/50 mb-3">PHASE // 01</div>
+                        <h4 class="font-dot font-bold text-base text-white uppercase mb-2">Discovery & Blueprint</h4>
+                        <p class="text-xs text-neutral-400 leading-relaxed mb-4">
+                            We audit manual bottlenecks, select the optimal tech stack, and deliver an exact system architecture diagram.
+                        </p>
+                        <span class="text-[10px] font-mono text-white bg-white/10 px-2 py-0.5 rounded border border-white/20">1 - 2 Days</span>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="glass-card p-6 futuristic-reveal reveal-delay-2">
+                        <div class="text-xs font-mono text-white/50 mb-3">PHASE // 02</div>
+                        <h4 class="font-dot font-bold text-base text-white uppercase mb-2">Core Engineering Sprint</h4>
+                        <p class="text-xs text-neutral-400 leading-relaxed mb-4">
+                            Rapid construction of APIs, database schemas, web interfaces, and webhook pipeline workers.
+                        </p>
+                        <span class="text-[10px] font-mono text-white bg-white/10 px-2 py-0.5 rounded border border-white/20">3 - 7 Days</span>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="glass-card p-6 futuristic-reveal reveal-delay-3">
+                        <div class="text-xs font-mono text-white/50 mb-3">PHASE // 03</div>
+                        <h4 class="font-dot font-bold text-base text-white uppercase mb-2">Stress Test & Security QA</h4>
+                        <p class="text-xs text-neutral-400 leading-relaxed mb-4">
+                            Validation against edge cases, load spikes, credential exposure, and network retry handling.
+                        </p>
+                        <span class="text-[10px] font-mono text-white bg-white/10 px-2 py-0.5 rounded border border-white/20">2 Days</span>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="glass-card p-6 futuristic-reveal reveal-delay-4">
+                        <div class="text-xs font-mono text-white/50 mb-3">PHASE // 04</div>
+                        <h4 class="font-dot font-bold text-base text-white uppercase mb-2">Deploy & Telemetry</h4>
+                        <p class="text-xs text-neutral-400 leading-relaxed mb-4">
+                            Production deployment with live error alerting, uptime monitoring, and full developer documentation.
+                        </p>
+                        <span class="text-[10px] font-mono text-white bg-white/10 px-2 py-0.5 rounded border border-white/20">Go-Live</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== CALL TO ACTION SECTION ==================== -->
+        <section class="py-24 border-t border-white/[0.08] text-center relative overflow-hidden">
+            <div class="max-w-4xl mx-auto px-6 futuristic-reveal">
+                <div class="glass-card p-10 sm:p-14 relative overflow-hidden">
+                    <div class="relative z-10 max-w-2xl mx-auto">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.06] border border-white/[0.15] text-[11px] font-mono uppercase text-white mb-4">
+                            <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+                            Ready To Eliminate Friction?
+                        </div>
+                        <h2 class="font-dot text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white uppercase mb-4 tracking-tight">
+                            Let's Build Something Fast &amp; Reliable Together
+                        </h2>
+                        <p class="text-neutral-400 text-sm sm:text-base leading-relaxed mb-8">
+                            Have an operational bottleneck or new application you need built? Send over your requirements for a free architecture review and timeline scope.
+                        </p>
+                        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                            <a href="contact.html" class="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-white text-black text-xs font-extrabold uppercase tracking-wider hover:bg-neutral-200 transition-all shadow-xl active:scale-95 w-full sm:w-auto">
+                                <i data-lucide="sparkles" class="w-4 h-4 fill-current"></i>
+                                <span>Start a Project</span>
+                            </a>
+                            <a href="pricing.html" class="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-black/70 text-white text-xs font-bold uppercase tracking-wider border border-white/20 hover:border-white/50 transition-all shadow-md active:scale-95 w-full sm:w-auto">
+                                <span>View Monthly Plans</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==================== FOOTER (Centralized Black & White) ==================== -->
+    <footer class="border-t border-white/[0.08] bg-black pt-16 pb-12 relative z-10 text-neutral-400">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            
+            <!-- Top Footer Centered Brand & Newsletter -->
+            <div class="max-w-lg mx-auto space-y-4 mb-14 futuristic-reveal">
+                <!-- Brand with Dot Font -->
+                <div class="flex items-center justify-center gap-2.5">
+                    <div class="w-7 h-7 rounded-md bg-white/10 border border-white/20 p-[1px] flex items-center justify-center">
+                        <div class="w-full h-full bg-black rounded-[5px] flex items-center justify-center">
+                            <span class="font-dot font-black text-xs text-white">A</span>
+                        </div>
+                    </div>
+                    <span class="font-dot font-black text-lg text-white">AZAREL.</span>
+                </div>
+
+                <p class="text-sm text-neutral-400 leading-relaxed max-w-md mx-auto">
+                    Engineering high-impact websites, internal systems, mobile apps, and automations that eliminate busywork and accelerate velocity.
+                </p>
+
+                <!-- Newsletter / Quick Connect form (Centered) -->
+                <div class="pt-2">
+                    <div class="text-xs font-semibold text-neutral-300 mb-2.5">Stay Updated on Tech &amp; Systems Insights</div>
+                    <form onsubmit="handleNewsletterSubmit(event)" class="flex items-center max-w-sm mx-auto shadow-lg">
+                        <input type="email" required placeholder="Enter Your Email" class="flex-1 px-4 py-2.5 rounded-l-full bg-white/[0.04] border border-white/[0.12] text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-white">
+                        <button type="submit" class="px-5 py-2.5 rounded-r-full bg-white text-black font-bold text-xs hover:bg-neutral-200 transition-colors">
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- 4 Link Columns (Centered Grid) -->
+            <div class="max-w-4xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-8 text-center sm:text-left pb-14 border-b border-white/[0.08] mb-8">
+                
+                <!-- Column 1: Services -->
+                <div>
+                    <h5 class="text-xs font-semibold text-white uppercase tracking-wider mb-4">Services</h5>
+                    <ul class="space-y-2.5 text-xs">
+                        <li><a href="services.html" class="hover:text-white transition-colors text-white font-semibold">All Services</a></li>
+                        <li><a href="services.html" class="hover:text-white transition-colors">Custom Websites</a></li>
+                        <li><a href="services.html" class="hover:text-white transition-colors">Internal Systems</a></li>
+                        <li><a href="services.html" class="hover:text-white transition-colors">Workflow Automation</a></li>
+                        <li><a href="services.html" class="hover:text-white transition-colors">Mobile Applications</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 2: Solutions -->
+                <div>
+                    <h5 class="text-xs font-semibold text-white uppercase tracking-wider mb-4">Solutions</h5>
+                    <ul class="space-y-2.5 text-xs">
+                        <li><a href="index.html#architect" class="hover:text-white transition-colors">Solution Architect</a></li>
+                        <li><a href="index.html#impact" class="hover:text-white transition-colors">LGU-OS Platform</a></li>
+                        <li><a href="index.html#impact" class="hover:text-white transition-colors">Citizen Registry</a></li>
+                        <li><a href="index.html#console" class="hover:text-white transition-colors">Operations Console</a></li>
+                        <li><a href="index.html#faq" class="hover:text-white transition-colors">FAQ Answers</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Technologies -->
+                <div>
+                    <h5 class="text-xs font-semibold text-white uppercase tracking-wider mb-4">Technologies</h5>
+                    <ul class="space-y-2.5 text-xs">
+                        <li><span class="text-neutral-400">Next.js 14 &amp; React</span></li>
+                        <li><span class="text-neutral-400">Python &amp; FastAPI</span></li>
+                        <li><span class="text-neutral-400">PostgreSQL &amp; Redis</span></li>
+                        <li><span class="text-neutral-400">Flutter &amp; Mobile</span></li>
+                        <li><span class="text-neutral-400">Docker &amp; Linux</span></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Connect -->
+                <div>
+                    <h5 class="text-xs font-semibold text-white uppercase tracking-wider mb-4">Connect</h5>
+                    <ul class="space-y-2.5 text-xs">
+                        <li><a href="pricing.html" class="hover:text-white transition-colors">Pricing &amp; Plans</a></li>
+                        <li><a href="contact.html" class="hover:text-white transition-colors">Start Project</a></li>
+                        <li><a href="https://github.com" target="_blank" rel="noopener" class="hover:text-white transition-colors">GitHub</a></li>
+                        <li><a href="https://linkedin.com" target="_blank" rel="noopener" class="hover:text-white transition-colors">LinkedIn</a></li>
+                        <li><a href="mailto:azarel@example.com" class="hover:text-white transition-colors">Email Azarel</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Bottom Footer Bar (Centered on Mobile & Desktop) -->
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+                <div>
+                    Copyright &copy; 2026 Azarel Clight J. Nadal. All Rights Reserved.
+                </div>
+
+                <!-- Social Icons in Monochrome -->
+                <div class="flex items-center gap-4 text-neutral-400">
+                    <a href="https://github.com" class="hover:text-white transition-colors" aria-label="GitHub">
+                        <i data-lucide="github" class="w-4 h-4"></i>
+                    </a>
+                    <a href="https://linkedin.com" class="hover:text-white transition-colors" aria-label="LinkedIn">
+                        <i data-lucide="linkedin" class="w-4 h-4"></i>
+                    </a>
+                    <a href="https://twitter.com" class="hover:text-white transition-colors" aria-label="Twitter">
+                        <i data-lucide="twitter" class="w-4 h-4"></i>
+                    </a>
+                    <a href="mailto:azarel@example.com" class="hover:text-white transition-colors" aria-label="Email">
+                        <i data-lucide="mail" class="w-4 h-4"></i>
+                    </a>
+                </div>
+
+                <!-- Terms / Privacy -->
+                <div class="flex items-center gap-4 text-neutral-500">
+                    <a href="index.html" class="hover:text-neutral-400 transition-colors">Home</a>
+                    <span>&bull;</span>
+                    <a href="#" class="hover:text-neutral-400 transition-colors">Privacy Policy</a>
+                    <span>&bull;</span>
+                    <a href="#" class="hover:text-neutral-400 transition-colors">Terms of Service</a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script>
+        // Initialize Lucide Icons
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+
+        // Mobile Menu Toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+        if (mobileBtn && mobileMenu) {
+            mobileBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        }
+
+        // Toast Helper
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+            if (!toast || !toastMsg) return;
+
+            toastMsg.textContent = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3200);
+        }
+
+        // Newsletter Form Handler
+        function handleNewsletterSubmit(e) {
+            e.preventDefault();
+            showToast('Subscribed! Thank you for connecting.');
+            e.target.reset();
+        }
+
+        // Service Filter Tabs Handler
+        function filterServices(category) {
+            const cards = document.querySelectorAll('.service-card');
+            const buttons = document.querySelectorAll('.service-filter-btn');
+
+            buttons.forEach(btn => {
+                btn.className = 'service-filter-btn px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.1] text-neutral-300 hover:text-white hover:border-white/30 text-xs font-medium transition-all';
+            });
+
+            const activeBtn = document.getElementById(`filter-${category}`);
+            if (activeBtn) {
+                activeBtn.className = 'service-filter-btn px-4 py-1.5 rounded-full bg-white text-black text-xs font-bold transition-all shadow-sm';
+            }
+
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // 3D Spatial Holographic Reveal Observer
+        (function initHolographicObserver() {
+            const revealElements = document.querySelectorAll('.futuristic-reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                    }
+                });
+            }, {
+                threshold: 0.08,
+                rootMargin: '0px 0px -30px 0px'
+            });
+
+            revealElements.forEach(el => observer.observe(el));
+        })();
+
+        // ==================== PURE BLACK & WHITE HIGH-INTENSITY SECTION ENTRANCE GLITCH ====================
+        (function initCardScrollGlitch() {
+            const allCards = Array.from(document.querySelectorAll('.glass-card, .glass-subcard')).filter(el => {
+                if (el.classList.contains('glass-subcard') && el.closest('.glass-card')) {
+                    return false;
+                }
+                return true;
+            });
+
+            if (!allCards.length) return;
+
+            let variantToggle = false;
+
+            function triggerCardGlitch(card) {
+                if (!card) return;
+
+                const addClass = variantToggle ? 'bw-glitch-a' : 'bw-glitch-b';
+                const removeClass = variantToggle ? 'bw-glitch-b' : 'bw-glitch-a';
+                variantToggle = !variantToggle;
+
+                card.classList.remove(removeClass);
+                card.classList.remove(addClass);
+                void card.offsetWidth;
+                card.classList.add(addClass);
+
+                clearTimeout(card._glitchTimeout);
+                card._glitchTimeout = setTimeout(() => {
+                    card.classList.remove('bw-glitch-a', 'bw-glitch-b');
+                }, 350);
+            }
+
+            // Trigger glitch ONLY when entering viewport (scrolling to section)
+            const cardObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    const card = entry.target;
+                    if (entry.isIntersecting) {
+                        // Glitch only on entrance
+                        if (!card._hasGlitchEntered) {
+                            card._hasGlitchEntered = true;
+                            const siblings = Array.from(card.parentElement ? card.parentElement.children : []);
+                            const siblingIndex = siblings.indexOf(card);
+                            const delay = Math.max(0, siblingIndex) * 45;
+
+                            setTimeout(() => {
+                                triggerCardGlitch(card);
+                            }, Math.min(delay, 200));
+                        }
+                    } else {
+                        // Reset when scrolled out of view so it can glitch on next re-entrance
+                        card._hasGlitchEntered = false;
+                        card.classList.remove('bw-glitch-a', 'bw-glitch-b');
+                    }
+                });
+            }, {
+                threshold: 0.12,
+                rootMargin: '0px 0px -40px 0px'
+            });
+
+            allCards.forEach(card => {
+                cardObserver.observe(card);
+
+                // Interactive mouse hover micro-burst
+                card.addEventListener('mouseenter', () => {
+                    triggerCardGlitch(card);
+                });
+            });
+        })();
+    </script>
+</body>
+</html>
