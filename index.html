@@ -1110,7 +1110,7 @@
                             <span>•</span>
                             <div>LATENCY: <span class="text-neutral-300 font-bold">0.4ms</span></div>
                             <span>•</span>
-                            <div>EDGE NODES: <span class="text-neutral-300 font-bold">12 ACTIVE</span></div>
+                            <div>PROJECTS: <span class="text-neutral-300 font-bold">12 DEPLOYED</span></div>
                         </div>
                     </div>
 
@@ -3217,7 +3217,7 @@
             });
         })();
 
-        // ==================== 3D MODERN DOTTED CYBER GLOBE ENGINE (Uniform Halftone Matrix) ====================
+                // ==================== 3D MODERN DOTTED CYBER GLOBE ENGINE (Uniform Halftone Matrix & Project Pins) ====================
         (function init3DGlobeCanvas() {
             const canvas = document.getElementById('globe-3d-canvas');
             if (!canvas) return;
@@ -3232,14 +3232,19 @@
             let cx = 0;
             let cy = 0;
 
-            // Globe Orientation: Tilted perspective matching reference screenshot
-            let rotY = 0.72; // Longitude angle showing Americas, Atlantic & Europe
-            let rotX = 0.35; // Latitude axial tilt (~20 degrees)
-            let velY = 0.0028; // Elegant continuous rotation speed
+            // Globe Orientation: Tilted perspective showing APAC / global projects by default
+            let rotY = 1.95; // Longitude initial angle highlighting Asia-Pacific & active deployments
+            let rotX = 0.28; // Latitude axial tilt (~16 degrees)
+            let velY = 0.0024; // Elegant continuous rotation speed
             let velX = 0;
             let isDragging = false;
+            let dragDistance = 0;
             let prevMouseX = 0;
             let prevMouseY = 0;
+
+            let mouseCanvasX = -9999;
+            let mouseCanvasY = -9999;
+            let hoveredProject = null;
 
             function resize() {
                 const rect = canvas.getBoundingClientRect();
@@ -3258,9 +3263,10 @@
             window.addEventListener('resize', resize);
             resize();
 
-            // Interactive Drag Controls
+            // Interactive Drag Controls & Hit Detection
             canvas.addEventListener('mousedown', (e) => {
                 isDragging = true;
+                dragDistance = 0;
                 prevMouseX = e.clientX;
                 prevMouseY = e.clientY;
                 velY = 0;
@@ -3269,26 +3275,49 @@
             });
 
             window.addEventListener('mousemove', (e) => {
-                if (!isDragging) return;
-                const dx = e.clientX - prevMouseX;
-                const dy = e.clientY - prevMouseY;
-                prevMouseX = e.clientX;
-                prevMouseY = e.clientY;
+                const rect = canvas.getBoundingClientRect();
+                mouseCanvasX = e.clientX - rect.left;
+                mouseCanvasY = e.clientY - rect.top;
 
-                rotY += dx * 0.0055;
-                rotX += dy * 0.0055;
-                rotX = Math.max(-1.15, Math.min(1.15, rotX));
+                if (isDragging) {
+                    const dx = e.clientX - prevMouseX;
+                    const dy = e.clientY - prevMouseY;
+                    dragDistance += Math.abs(dx) + Math.abs(dy);
+                    prevMouseX = e.clientX;
+                    prevMouseY = e.clientY;
 
-                velY = dx * 0.0018;
-                velX = dy * 0.0018;
+                    rotY += dx * 0.0055;
+                    rotX += dy * 0.0055;
+                    rotX = Math.max(-1.15, Math.min(1.15, rotX));
+
+                    velY = dx * 0.0018;
+                    velX = dy * 0.0018;
+                }
             });
 
-            window.addEventListener('mouseup', () => { isDragging = false; });
+            window.addEventListener('mouseup', () => {
+                if (isDragging && dragDistance < 6 && hoveredProject) {
+                    if (hoveredProject.url) {
+                        window.open(hoveredProject.url, '_blank');
+                    } else {
+                        window.location.href = 'projects.html';
+                    }
+                }
+                isDragging = false;
+            });
+
+            canvas.addEventListener('mouseleave', () => {
+                mouseCanvasX = -9999;
+                mouseCanvasY = -9999;
+                hoveredProject = null;
+                if (!isDragging) canvas.style.cursor = 'grab';
+            });
 
             // Touch Support for Mobile
             canvas.addEventListener('touchstart', (e) => {
                 if (e.touches.length === 1) {
                     isDragging = true;
+                    dragDistance = 0;
                     prevMouseX = e.touches[0].clientX;
                     prevMouseY = e.touches[0].clientY;
                     velY = 0;
@@ -3301,6 +3330,7 @@
                 if (!isDragging || e.touches.length !== 1) return;
                 const dx = e.touches[0].clientX - prevMouseX;
                 const dy = e.touches[0].clientY - prevMouseY;
+                dragDistance += Math.abs(dx) + Math.abs(dy);
                 prevMouseX = e.touches[0].clientX;
                 prevMouseY = e.touches[0].clientY;
 
@@ -3385,21 +3415,25 @@
                 }
             }
 
-            // Telemetry Edge Cluster Pins
-            const edgeNodes = [
-                { name: 'TOKYO', lat: 35.67, lon: 139.65 },
-                { name: 'MANILA', lat: 14.60, lon: 120.98 },
-                { name: 'SINGAPORE', lat: 1.35, lon: 103.82 },
-                { name: 'FRANKFURT', lat: 50.11, lon: 8.68 },
-                { name: 'LONDON', lat: 51.51, lon: -0.13 },
-                { name: 'NEW YORK', lat: 40.71, lon: -74.01 },
-                { name: 'SAN FRANCISCO', lat: 37.77, lon: -122.42 },
-                { name: 'SYDNEY', lat: -33.87, lon: 151.21 }
-            ].map(node => {
-                const latRad = (node.lat * Math.PI) / 180;
-                const lonRad = (node.lon * Math.PI) / 180;
+            // Real Projects Array from projects.html mapped to geographic locations
+            const projectLocations = [
+                { name: 'TaxMap Alpha', tag: 'GIS CADASTRAL', url: 'https://taxmap-alpha.vercel.app/', spec: 'taxmap', lat: 16.03, lon: 120.33 },
+                { name: 'LGU Operations OS', tag: 'CIVIL CORE', url: 'https://lgu-green.vercel.app/', spec: 'lgu-web', lat: 14.60, lon: 120.98 },
+                { name: 'DiWA Wire', tag: 'GOV WIRE', url: 'https://diwa-rho.vercel.app/', spec: 'diwa', lat: 13.62, lon: 123.19 },
+                { name: 'OpenFlow Work OS', tag: 'WORK OS', url: 'https://open-flow-roan.vercel.app/', spec: 'openflow', lat: 1.35, lon: 103.82 },
+                { name: 'School OS', tag: 'ACADEMIC PORTAL', url: 'https://school-dash-94jv.vercel.app/', spec: 'schooldash', lat: 10.31, lon: 123.89 },
+                { name: 'Azarel Platform', tag: 'EDGE HQ', url: 'https://azarel.vercel.app/', spec: 'azarel-core', lat: 35.68, lon: 139.69 },
+                { name: 'Citizen DRRM Sync', tag: 'OFFLINE GIS APP', url: '', spec: 'drrm', lat: 11.24, lon: 125.00 },
+                { name: 'FleetPulse Telematics', tag: 'GPS FLEET', url: '', spec: 'fleetpulse', lat: 15.18, lon: 120.55 },
+                { name: 'Sentinel Telemetry', tag: 'LINUX DAEMON', url: '', spec: 'sentinel', lat: 50.11, lon: 8.68 },
+                { name: 'Quantum Vault', tag: 'ZK CRYPTO', url: '', spec: 'quantum', lat: 51.51, lon: -0.13 },
+                { name: 'Apex Scraping Mesh', tag: 'ETL MESH', url: '', spec: 'apex', lat: 38.89, lon: -77.03 },
+                { name: 'LedgerFlow OS', tag: 'FINTECH WEBHOOK', url: '', spec: 'ledgerflow', lat: 40.71, lon: -74.01 }
+            ].map(proj => {
+                const latRad = (proj.lat * Math.PI) / 180;
+                const lonRad = (proj.lon * Math.PI) / 180;
                 return {
-                    ...node,
+                    ...proj,
                     x: Math.cos(latRad) * Math.sin(lonRad),
                     y: Math.sin(latRad),
                     z: Math.cos(latRad) * Math.cos(lonRad)
@@ -3432,6 +3466,143 @@
                 };
             }
 
+            // Helper to draw rounded rectangles
+            function drawRoundedRect(ctx, x, y, w, h, r) {
+                ctx.beginPath();
+                ctx.moveTo(x + r, y);
+                ctx.arcTo(x + w, y, x + w, y + h, r);
+                ctx.arcTo(x + w, y + h, x, y + h, r);
+                ctx.arcTo(x, y + h, x, y, r);
+                ctx.arcTo(x, y, x + w, y, r);
+                ctx.closePath();
+            }
+
+            // Draw a Modern Cyber Location Pin Icon
+            function drawLocationPin(ctx, p, isHovered, pingPhase, index) {
+                const depthFactor = Math.max(0, Math.min(1, (p.pz + radius * 0.1) / (radius * 1.1)));
+                const s = Math.max(0.75, Math.min(1.3, 0.75 + depthFactor * 0.45));
+                const D = 13.5 * s;
+                const R = 6.0 * s;
+                const phi = Math.acos(Math.min(0.99, R / D));
+                const px = p.px;
+                const py = p.py;
+
+                // 1. Surface Contact Ground Shadow
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+                ctx.beginPath();
+                ctx.ellipse(px, py + 1, 4 * s, 1.4 * s, 0, 0, Math.PI * 2);
+                ctx.fill();
+
+                // 2. Radiating Pulse Wave at Tip
+                const pingR = (3 + Math.sin(pingPhase + index * 0.6) * 5.5) * s;
+                const pingAlpha = Math.max(0, 0.75 - (pingR / (8.5 * s))) * depthFactor;
+                if (pingAlpha > 0.02) {
+                    ctx.strokeStyle = `rgba(255, 255, 255, ${pingAlpha})`;
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.arc(px, py, pingR, 0, Math.PI * 2);
+                    ctx.stroke();
+                }
+
+                // 3. Location Pin Teardrop Shape
+                ctx.save();
+                if (isHovered) {
+                    ctx.shadowColor = 'rgba(255, 255, 255, 0.7)';
+                    ctx.shadowBlur = 12;
+                }
+
+                ctx.beginPath();
+                ctx.moveTo(px, py); // Needle tip anchored precisely to globe coordinate
+                // Counterclockwise arc over top of the circular head
+                ctx.arc(px, py - D, R, Math.PI * 0.5 - phi, Math.PI * 0.5 + phi, true);
+                ctx.closePath();
+
+                // Pin Body Fill & Stroke (Crisp White with Dark Contrast)
+                ctx.fillStyle = isHovered ? '#ffffff' : `rgba(245, 245, 245, ${0.85 + depthFactor * 0.15})`;
+                ctx.fill();
+                ctx.strokeStyle = '#000000';
+                ctx.lineWidth = isHovered ? 1.5 : 1;
+                ctx.stroke();
+
+                // 4. Center Aperture / Hole of the Pin Icon
+                ctx.beginPath();
+                ctx.arc(px, py - D, R * 0.42, 0, Math.PI * 2);
+                ctx.fillStyle = '#000000';
+                ctx.fill();
+
+                ctx.restore();
+
+                // 5. Default Compact Label (when not hovered)
+                if (!isHovered) {
+                    const labelAlpha = Math.max(0.2, Math.min(0.9, p.pz / radius));
+                    ctx.font = '600 9px "JetBrains Mono", monospace';
+                    ctx.fillStyle = `rgba(255, 255, 255, ${labelAlpha * 0.85})`;
+                    ctx.fillText(p.name, px + R + 5, py - D + 3);
+                }
+            }
+
+            // Draw Interactive Cyber Tooltip Card for Hovered Project
+            function drawHoverTooltip(ctx, p) {
+                const s = Math.max(0.75, Math.min(1.3, 0.75 + (p.pz / radius) * 0.45));
+                const D = 13.5 * s;
+                const R = 6.0 * s;
+                const px = p.px;
+                const py = p.py;
+
+                const topY = py - D - R - 8;
+
+                ctx.font = 'bold 11px "JetBrains Mono", monospace';
+                const titleWidth = ctx.measureText(p.name).width;
+                const actionText = p.url ? `${p.tag} • LIVE ↗` : `${p.tag} • SPEC ↗`;
+                ctx.font = '8px "JetBrains Mono", monospace';
+                const tagWidth = ctx.measureText(actionText).width;
+
+                const cardWidth = Math.max(titleWidth, tagWidth) + 24;
+                const cardHeight = 36;
+                const cardX = Math.max(12, Math.min(width - cardWidth - 12, px - cardWidth * 0.5));
+                const cardY = Math.max(12, topY - cardHeight);
+
+                ctx.save();
+                // Card Drop Shadow
+                ctx.shadowColor = 'rgba(0, 0, 0, 0.8)';
+                ctx.shadowBlur = 14;
+
+                // Card Background
+                ctx.fillStyle = 'rgba(8, 8, 10, 0.95)';
+                drawRoundedRect(ctx, cardX, cardY, cardWidth, cardHeight, 6);
+                ctx.fill();
+
+                // Card Border
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+                ctx.lineWidth = 1;
+                drawRoundedRect(ctx, cardX, cardY, cardWidth, cardHeight, 6);
+                ctx.stroke();
+
+                // Pointer Arrow to Pin
+                ctx.beginPath();
+                ctx.moveTo(px - 4, cardY + cardHeight);
+                ctx.lineTo(px + 4, cardY + cardHeight);
+                ctx.lineTo(px, cardY + cardHeight + 4);
+                ctx.closePath();
+                ctx.fillStyle = 'rgba(8, 8, 10, 0.95)';
+                ctx.fill();
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+
+                ctx.restore();
+
+                // Text: Tag & Status
+                ctx.font = '8px "JetBrains Mono", monospace';
+                ctx.fillStyle = 'rgba(200, 200, 200, 0.85)';
+                ctx.fillText(actionText, cardX + 12, cardY + 14);
+
+                // Text: Project Name
+                ctx.font = 'bold 11px "JetBrains Mono", monospace';
+                ctx.fillStyle = '#ffffff';
+                ctx.fillText(p.name, cardX + 12, cardY + 28);
+            }
+
             let pingPhase = 0;
 
             function render() {
@@ -3440,7 +3611,7 @@
                 // Apply continuous inertial rotation
                 if (!isDragging) {
                     rotY += velY;
-                    velY = velY * 0.96 + 0.0028 * 0.04;
+                    velY = velY * 0.96 + 0.0024 * 0.04;
                     rotX += velX;
                     velX *= 0.94;
                 }
@@ -3555,34 +3726,49 @@
                     }
                 }
 
-                // 6. Draw Edge Node Telemetry Pins & Radiating Signal Waves
-                edgeNodes.forEach(node => {
-                    const p = project(node.x, node.y, node.z);
-
-                    if (p.pz > radius * 0.1) {
-                        const depthFactor = p.pz / radius;
-                        const pingRadius = 3 + Math.sin(pingPhase) * 6;
-                        const pingAlpha = Math.max(0, 0.9 - (pingRadius / 9));
-
-                        // Radiating Wave Ring
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${pingAlpha * depthFactor})`;
-                        ctx.lineWidth = 1.2;
-                        ctx.beginPath();
-                        ctx.arc(p.px, p.py, pingRadius, 0, Math.PI * 2);
-                        ctx.stroke();
-
-                        // Core Node Dot
-                        ctx.fillStyle = '#ffffff';
-                        ctx.beginPath();
-                        ctx.arc(p.px, p.py, 2.5, 0, Math.PI * 2);
-                        ctx.fill();
-
-                        // Pin Label
-                        ctx.font = '9px "JetBrains Mono", monospace';
-                        ctx.fillStyle = `rgba(255, 255, 255, ${0.75 * depthFactor})`;
-                        ctx.fillText(node.name, p.px + 7, p.py + 3);
+                // 6. Project & Sort Real Projects by Camera Depth
+                const projectedProjects = [];
+                for (let i = 0; i < projectLocations.length; i++) {
+                    const proj = projectLocations[i];
+                    const p = project(proj.x, proj.y, proj.z);
+                    if (p.pz > -radius * 0.05) {
+                        projectedProjects.push({ ...proj, ...p, index: i });
                     }
+                }
+
+                // Sort ascending by pz so nearest pins render on top
+                projectedProjects.sort((a, b) => a.pz - b.pz);
+
+                // Hit-testing for Hover State
+                hoveredProject = null;
+                if (!isDragging && mouseCanvasX > -1000) {
+                    for (let i = projectedProjects.length - 1; i >= 0; i--) {
+                        const p = projectedProjects[i];
+                        if (p.pz > radius * 0.08) {
+                            const s = Math.max(0.75, Math.min(1.3, 0.75 + (p.pz / radius) * 0.45));
+                            const D = 13.5 * s;
+                            // Check distance to pin head / body
+                            const dist = Math.hypot(mouseCanvasX - p.px, mouseCanvasY - (p.py - D * 0.6));
+                            if (dist < 18 * s) {
+                                hoveredProject = p;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                canvas.style.cursor = isDragging ? 'grabbing' : (hoveredProject ? 'pointer' : 'grab');
+
+                // Draw Real Projects as Location Pin Icons
+                projectedProjects.forEach(p => {
+                    const isHov = hoveredProject && (hoveredProject.name === p.name);
+                    drawLocationPin(ctx, p, isHov, pingPhase, p.index);
                 });
+
+                // If a project is hovered, draw its tooltip card on top of everything
+                if (hoveredProject) {
+                    drawHoverTooltip(ctx, hoveredProject);
+                }
 
                 requestAnimationFrame(render);
             }
